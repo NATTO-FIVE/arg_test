@@ -52,8 +52,7 @@
     modalContent.style.overflowY = "auto";
     modalContent.style.whiteSpace = "pre-wrap";
     modalContent.style.color = "#e4f2ff";
-    // padding はここで最小限に（上4px）
-    modalContent.style.padding = "4px 22px 22px 22px";
+    modalContent.style.padding = "10px 22px 22px 22px";  // 上も普通の余白だけ
 
     // 背景クリックで閉じる
     modal.addEventListener("click", (e) => {
@@ -91,30 +90,26 @@
         const titleEl = div.querySelector(".doc-title");
         titleEl.addEventListener("click", () => {
           modalContent.innerHTML = `
-            <div
-              id="modalCloseBtn"
-              style="
-                position:absolute;
-                top:4px;
-                right:12px;
-                font-size:24px;
-                cursor:pointer;
-                color:#3aa7ff;
-                border:1px solid lime;
-              "
-            >&times;</div>
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              margin:0 0 12px 0;
+            ">
+              <h2 style="margin:0;">${doc.title}</h2>
+              <div
+                id="modalCloseBtn"
+                style="
+                  font-size:24px;
+                  cursor:pointer;
+                  color:#3aa7ff;
+                "
+              >&times;</div>
+            </div>
 
-            <h2 style="
-            margin:4px 0 14px 0; 
-            border:2px solid yellow;
-            ">${doc.title}</h2>
-            
-            <div style="border:2px solid red;">${doc.body}</div>
+            <div>${doc.body}</div>
           `;
-        
-          // modalContent自体に枠線
-          modalContent.style.border = "1px solid yellow";
-          
+
           const innerClose = modalContent.querySelector("#modalCloseBtn");
           innerClose.addEventListener("click", () => {
             modal.style.display = "none";
