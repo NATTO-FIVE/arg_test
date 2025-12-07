@@ -111,7 +111,10 @@
             
             <div style="border:2px solid red;">${doc.body}</div>
           `;
-
+        
+          // modalContent自体に枠線
+          modalContent.style.border = "1px solid cyan";
+          
           const innerClose = modalContent.querySelector("#modalCloseBtn");
           innerClose.addEventListener("click", () => {
             modal.style.display = "none";
