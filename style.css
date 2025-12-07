@@ -48,4 +48,15 @@ h1 {
   margin: 4px 0;
 }
 
+.doc-title {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #a8d8ff;
+}
+
+.doc-title:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 
