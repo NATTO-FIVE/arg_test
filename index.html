@@ -15,11 +15,50 @@
     <div id="results"></div>
   </div>
 
-  <script src="docs.js"></script>
+   <script src="docs.js"></script>
   <script>
     const input  = document.getElementById('query');
     const btn    = document.getElementById('searchBtn');
     const result = document.getElementById('results');
+
+    function renderHits(hits) {
+      result.innerHTML = "";
+
+      if (hits.length === 0) {
+        result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
+        return;
+      }
+
+      hits.forEach(doc => {
+        const div = document.createElement('div');
+        div.className = "hit";
+
+        const snippet = doc.body.trim().slice(0, 80) + "…";
+
+        // タイトルをクリックで全文を開く
+        div.innerHTML = `
+          <h2 class="doc-title">${doc.title}</h2>
+          <p class="snippet">${snippet}</p>
+          <div class="full-body" style="display:none; white-space:pre-wrap; margin-top:8px;">
+            ${doc.body}
+          </div>
+        `;
+
+        // クリックで全文表示のON/OFF
+        const titleEl = div.querySelector(".doc-title");
+        const fullEl  = div.querySelector(".full-body");
+
+        titleEl.addEventListener("click", () => {
+          if (fullEl.style.display === "none") {
+            fullEl.style.display = "block";
+          } else {
+            fullEl.style.display = "none";
+          }
+        });
+
+        result.appendChild(div);
+      });
+    }
 
     function search() {
       const q = input.value.trim();
@@ -34,23 +73,7 @@
         doc.body.toLowerCase().includes(lowerQ)
       );
 
-      if (hits.length === 0) {
-        result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
-        return;
-      }
-
-      hits.forEach(doc => {
-        const div = document.createElement('div');
-        div.className = "hit";
-
-        const snippet = doc.body.trim().slice(0, 80) + "…";
-
-        div.innerHTML = `
-          <h2>${doc.title}</h2>
-          <p>${snippet}</p>
-        `;
-        result.appendChild(div);
-      });
+      renderHits(hits);
     }
 
     btn.addEventListener('click', search);
@@ -58,5 +81,8 @@
       if (e.key === 'Enter') search();
     });
   </script>
+</body>
+</html>
+
 </body>
 </html>
