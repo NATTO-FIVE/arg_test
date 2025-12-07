@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>内部記録検索端末</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal">
+    <h1>内部記録検索端末</h1>
+
+    <input id="query" type="text" placeholder="キーワードを入力" autofocus>
+    <button id="searchBtn">SEARCH</button>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="docs.js"></script>
+  <script>
+    const input  = document.getElementById('query');
+    const btn    = document.getElementById('searchBtn');
+    const result = document.getElementById('results');
+
+    function search() {
+      const q = input.value.trim();
+      result.innerHTML = "";
+
+      if (!q) return;
+
+      const lowerQ = q.toLowerCase();
+
+      const hits = DOCS.filter(doc =>
+        doc.title.toLowerCase().includes(lowerQ) ||
+        doc.body.toLowerCase().includes(lowerQ)
+      );
+
+      if (hits.length === 0) {
+        result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
+        return;
+      }
+
+      hits.forEach(doc => {
+        const div = document.createElement('div');
+        div.className = "hit";
+
+        const snippet = doc.body.trim().slice(0, 80) + "…";
+
+        div.innerHTML = `
+          <h2>${doc.title}</h2>
+          <p>${snippet}</p>
+        `;
+        result.appendChild(div);
+      });
+    }
+
+    btn.addEventListener('click', search);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') search();
+    });
+  </script>
+</body>
+</html>
