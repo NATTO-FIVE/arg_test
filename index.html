@@ -90,10 +90,19 @@
         const titleEl = div.querySelector(".doc-title");
         titleEl.addEventListener("click", () => {
           modalContent.innerHTML = `
-            <div style="position:absolute; top:8px; right:12px; font-size:28px; cursor:pointer; color:#3aa7ff;" id="modalCloseBtn">&times;</div>
-            <h2 style="margin-top:40px;">${doc.title}</h2>
-            ${doc.body}
-          `;
+              <div style="
+                position:absolute;
+                top:8px;
+                right:12px;
+                font-size:28px;
+                cursor:pointer;
+                color:#3aa7ff;
+              " id="modalCloseBtn">&times;</div>
+            
+              <h2 style="margin-top:8px 0 16px 0;">${doc.title}</h2>
+              ${doc.body}
+            `;
+
 
           const innerClose = modalContent.querySelector("#modalCloseBtn");
           innerClose.addEventListener("click", () => {
