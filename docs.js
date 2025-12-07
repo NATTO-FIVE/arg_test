@@ -1,6 +1,5 @@
 // docs.js
-// 各ドキュメントに「keywords」を持たせる。
-// 検索は title / body ではなく、この keywords だけを対象にする。
+// 検索対象データ（keywords付き）
 const DOCS = [
   {
     id: "report-001",
