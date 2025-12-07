@@ -15,10 +15,10 @@
     <div id="results"></div>
   </div>
 
-  <!-- ▼ 先に docs.js を読み込む（ここが超重要） -->
+  <!-- ▼ docs.js を先に読み込む -->
   <script src="docs.js"></script>
 
-  <!-- ▼ メインスクリプト（DOCSは docs.js から取る） -->
+  <!-- ▼ メインスクリプト -->
   <script>
     const input  = document.getElementById('query');
     const btn    = document.getElementById('searchBtn');
@@ -46,13 +46,14 @@
     modalContent.style.position = "relative";
     modalContent.style.background = "#0c1525";
     modalContent.style.border = "1px solid #3aa7ff";
-    modalContent.style.padding = "8px";
     modalContent.style.maxWidth = "700px";
     modalContent.style.width = "100%";
     modalContent.style.maxHeight = "80%";
     modalContent.style.overflowY = "auto";
     modalContent.style.whiteSpace = "pre-wrap";
     modalContent.style.color = "#e4f2ff";
+    // padding はここで最小限に（上4px）
+    modalContent.style.padding = "4px 22px 22px 22px";
 
     // 背景クリックで閉じる
     modal.addEventListener("click", (e) => {
@@ -89,23 +90,22 @@
         // タイトルクリックでモーダルオープン
         const titleEl = div.querySelector(".doc-title");
         titleEl.addEventListener("click", () => {
-         modalContent.innerHTML = `
-            <div style="
-              position:absolute;
-              top:8px;
-              right:12px;
-              font-size:28px;
-              cursor:pointer;
-              color:#3aa7ff;
-            " id="modalCloseBtn">&times;</div>
-          
-            <h2 style="margin:8px 0 16px 0;">${doc.title}</h2>
-            ${doc.body}
+          modalContent.innerHTML = `
+            <div
+              id="modalCloseBtn"
+              style="
+                position:absolute;
+                top:4px;
+                right:12px;
+                font-size:24px;
+                cursor:pointer;
+                color:#3aa7ff;
+              "
+            >&times;</div>
+
+            <h2 style="margin:4px 0 14px 0;">${doc.title}</h2>
+            <div>${doc.body}</div>
           `;
-          
-          modalContent.style.padding = "8px 20px 20px 20px"; 
-
-
 
           const innerClose = modalContent.querySelector("#modalCloseBtn");
           innerClose.addEventListener("click", () => {
