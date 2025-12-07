@@ -15,72 +15,106 @@
     <div id="results"></div>
   </div>
 
-   <script src="docs.js"></script>
-  <script>
-    const input  = document.getElementById('query');
-    const btn    = document.getElementById('searchBtn');
-    const result = document.getElementById('results');
+<script src="docs.js"></script>
+<script>
+  const input  = document.getElementById('query');
+  const btn    = document.getElementById('searchBtn');
+  const result = document.getElementById('results');
 
-    function renderHits(hits) {
-      result.innerHTML = "";
+  // ------- モーダル要素を作成 -------
+  const modal = document.createElement("div");
+  modal.id = "modal";
+  modal.style.display = "none";
+  modal.style.position = "fixed";
+  modal.style.top = "0";
+  modal.style.left = "0";
+  modal.style.width = "100%";
+  modal.style.height = "100%";
+  modal.style.background = "rgba(0,0,0,0.6)";
+  modal.style.backdropFilter = "blur(3px)";
+  modal.style.justifyContent = "center";
+  modal.style.alignItems = "center";
+  modal.style.padding = "20px";
+  modal.style.zIndex = "1000";
 
-      if (hits.length === 0) {
-        result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
-        return;
-      }
+  const modalContent = document.createElement("div");
+  modalContent.style.background = "#0c1525";
+  modalContent.style.border = "1px solid #3aa7ff";
+  modalContent.style.padding = "20px";
+  modalContent.style.maxWidth = "700px";
+  modalContent.style.width = "100%";
+  modalContent.style.maxHeight = "80%";
+  modalContent.style.overflowY = "auto";
+  modalContent.style.whiteSpace = "pre-wrap";
+  modalContent.style.color = "#e4f2ff";
+  modal.appendChild(modalContent);
 
-      hits.forEach(doc => {
-        const div = document.createElement('div');
-        div.className = "hit";
+  // 閉じる処理（背景クリックで閉じる）
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
-        const snippet = doc.body.trim().slice(0, 80) + "…";
+  document.body.appendChild(modal);
 
-        // タイトルをクリックで全文を開く
-        div.innerHTML = `
-          <h2 class="doc-title">${doc.title}</h2>
-          <p class="snippet">${snippet}</p>
-          <div class="full-body" style="display:none; white-space:pre-wrap; margin-top:8px;">
-            ${doc.body}
-          </div>
+  // ------- ヒット結果の描画 -------
+  function renderHits(hits) {
+    result.innerHTML = "";
+
+    if (hits.length === 0) {
+      result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
+      return;
+    }
+
+    hits.forEach(doc => {
+      const div = document.createElement('div');
+      div.className = "hit";
+
+      const snippet = doc.body.trim().slice(0, 80) + "…";
+
+      div.innerHTML = `
+        <h2 class="doc-title">${doc.title}</h2>
+        <p class="snippet">${snippet}</p>
+      `;
+
+      // タイトルクリック → モーダル開く
+      const titleEl = div.querySelector(".doc-title");
+      titleEl.addEventListener("click", () => {
+        modalContent.innerHTML = `
+          <h2 style="margin-top:0;">${doc.title}</h2>
+          ${doc.body}
         `;
-
-        // クリックで全文表示のON/OFF
-        const titleEl = div.querySelector(".doc-title");
-        const fullEl  = div.querySelector(".full-body");
-
-        titleEl.addEventListener("click", () => {
-          if (fullEl.style.display === "none") {
-            fullEl.style.display = "block";
-          } else {
-            fullEl.style.display = "none";
-          }
-        });
-
-        result.appendChild(div);
+        modal.style.display = "flex";
       });
-    }
 
-    function search() {
-      const q = input.value.trim();
-      result.innerHTML = "";
-
-      if (!q) return;
-
-      const lowerQ = q.toLowerCase();
-
-      const hits = DOCS.filter(doc =>
-        doc.title.toLowerCase().includes(lowerQ) ||
-        doc.body.toLowerCase().includes(lowerQ)
-      );
-
-      renderHits(hits);
-    }
-
-    btn.addEventListener('click', search);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') search();
+      result.appendChild(div);
     });
-  </script>
+  }
+
+  // ------- 検索処理 -------
+  function search() {
+    const q = input.value.trim();
+    result.innerHTML = "";
+
+    if (!q) return;
+
+    const lowerQ = q.toLowerCase();
+
+    const hits = DOCS.filter(doc =>
+      doc.title.toLowerCase().includes(lowerQ) ||
+      doc.body.toLowerCase().includes(lowerQ)
+    );
+
+    renderHits(hits);
+  }
+
+  btn.addEventListener('click', search);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') search();
+  });
+</script>
+
 </body>
 </html>
 
