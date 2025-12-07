@@ -54,6 +54,13 @@
     modalContent.style.whiteSpace = "pre-wrap";
     modalContent.style.color = "#e4f2ff";
 
+    /* ▼ 背景クリックで閉じる */
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
     /* ▼ 閉じるボタン（×） */
     const closeBtn = document.createElement("div");
     closeBtn.innerHTML = "&times;";
@@ -104,7 +111,6 @@
             ${doc.body}
           `;
 
-          // モーダル内の × に再度イベント付与
           const innerClose = modalContent.querySelector("#modalCloseBtn");
           innerClose.addEventListener("click", () => {
             modal.style.display = "none";
@@ -118,7 +124,7 @@
     }
 
     /* ======================
-         検索処理
+         検索処理（keywordsのみ）
     ====================== */
     function search() {
       const q = input.value.trim();
@@ -129,8 +135,8 @@
       const lowerQ = q.toLowerCase();
 
       const hits = DOCS.filter(doc =>
-        doc.title.toLowerCase().includes(lowerQ) ||
-        doc.body.toLowerCase().includes(lowerQ)
+        Array.isArray(doc.keywords) &&
+        doc.keywords.some(k => k.toLowerCase().includes(lowerQ))
       );
 
       renderHits(hits);
