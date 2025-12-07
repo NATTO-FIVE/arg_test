@@ -39,3 +39,13 @@ h1 {
   font-size: 16px;
   margin: 0 0 4px;
 }
+.doc-title {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.snippet {
+  margin: 4px 0;
+}
+
+
