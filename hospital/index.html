@@ -78,68 +78,82 @@
 
 <!-- ヘッダー -->
 <header class="site-header">
-  <div class="container">
-    <div class="header-inner">
-      <div class="logo-area">
-        <div class="logo-mark"></div>
-        <div>
-          <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiba General Hospital</div>
-        </div>
-      </div>
+  <div class="container header-inner">
 
-      <!-- スマホ用ハンバーガー -->
-      <button class="nav-toggle" type="button" aria-label="メニューを開閉">
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-      </button>
-
-      <div class="header-right">
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" data-nav="home">ホーム</a></li>
-            <li><a href="director.html" data-nav="director">院長挨拶</a></li>
-            <li><a href="doctors.html" data-nav="doctors">医師紹介</a></li>
-
-            <li class="has-sub">
-              <a href="departments.html" data-nav="departments">診療科</a>
-              <ul class="sub-menu">
-                <li><a href="neurosurgery.html">脳神経外科</a></li>
-                <li><a href="psychiatry.html">精神内科</a></li>
-                <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
-              </ul>
-            </li>
-
-            <li><a href="research_center.html" data-nav="sleep-center">翠波睡眠研究センター</a></li>
-            <li><a href="about.html" data-nav="about">病院案内</a></li>
-            <li><a href="recruit.html" data-nav="recruit">採用情報</a></li>
-          </ul>
-        </nav>
-
-        <form
-          class="header-search-form"
-          action="../search.html"
-          method="get"
-        >
-          <label for="q" class="visually-hidden">検索キーワード</label>
-          <input
-            id="q"
-            name="q"
-            type="search"
-            placeholder="外来名 / 検査名"
-            autocomplete="off"
-          >
-          <button type="submit">検索</button>
-        </form>
+    <!-- ロゴ -->
+    <div class="logo-area">
+      <div class="logo-mark"></div>
+      <div>
+        <div class="logo-text-main">翠波総合病院</div>
+        <div class="logo-text-sub">Suiba General Hospital</div>
       </div>
     </div>
 
-    <p class="header-search-note">
-      ※診療科名・検査名などで検索できます。
-    </p>
+    <!-- ハンバーガー（スマホ） -->
+    <button class="nav-toggle" id="navToggle">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+
+    <!-- 右側メニュー -->
+    <div class="header-right">
+
+      <!-- ナビゲーション -->
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="director.html">院長挨拶</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+
+          <li class="has-sub">
+            <a href="#">診療科</a>
+            <ul class="sub-menu">
+              <li><a href="neuro.html">脳神経外科</a></li>
+              <li><a href="mental.html">精神内科</a></li>
+              <li><a href="insomnia.html">特殊外来科</a></li>
+            </ul>
+          </li>
+
+          <li><a href="research_center.html">翠波睡眠研究センター</a></li>
+          <li><a href="guide.html">病院案内</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </nav>
+
+      <!-- 検索フォーム -->
+      <form class="header-search-form" action="../search.html" method="get">
+        <label for="q" class="visually-hidden">検索キーワード</label>
+        <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
+        <button type="submit">検索</button>
+        <div class="header-search-note">※診療科名・検査名などで検索できます</div>
+      </form>
+    </div>
+
   </div>
 </header>
+
+<script>
+  // ハンバーガー開閉
+  const navToggle = document.getElementById("navToggle");
+  const siteHeader = document.querySelector(".site-header");
+  const mainNav = document.getElementById("mainNav");
+
+  navToggle.addEventListener("click", () => {
+    siteHeader.classList.toggle("nav-open");
+  });
+
+  // スマホで診療科タップ時のサブメニュー開閉
+  document.querySelectorAll(".has-sub > a").forEach(a => {
+    a.addEventListener("click", e => {
+      if (window.innerWidth <= 900) {
+        e.preventDefault();
+        a.parentElement.classList.toggle("sub-open");
+      }
+    });
+  });
+</script>
+
 
 
 <!-- メイン -->
