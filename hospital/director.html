@@ -63,19 +63,19 @@
 
       <!-- 右側：ナビ＋検索 -->
       <div class="header-right">
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html">ホーム</a></li>
-            <li><a href="director.html">院長挨拶</a></li>
-            <li><a href="doctors.html">医師紹介</a></li>
-            <li><a href="neuro.html">脳神経外科</a></li>
-            <li><a href="mental.html">精神内科</a></li>
-            <li><a href="insomnia.html">特殊外来科</a></li>
-            <li><a href="research_center.html">翠波睡眠研究センター</a></li>
-            <li><a href="guide.html">病院案内</a></li>
-            <li><a href="recruit.html">採用情報</a></li>
-          </ul>
-        </nav>
+       <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="director.html">院長挨拶</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+          <li><a href="neuro.html">脳神経外科</a></li>
+          <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
+          <li><a href="research_center.html">翠波睡眠研究センター</a></li>
+          <li><a href="guide.html">病院案内</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </nav>
+
 
         <form class="header-search-form" action="../search.html" method="get">
           <label for="q" class="visually-hidden">検索キーワード</label>
@@ -91,30 +91,6 @@
     </p>
   </div>
 </header>
-
-
-<script>
-  // ハンバーガー開閉
-  const navToggle = document.getElementById("navToggle");
-  const siteHeader = document.querySelector(".site-header");
-  const mainNav = document.getElementById("mainNav");
-
-  navToggle.addEventListener("click", () => {
-    siteHeader.classList.toggle("nav-open");
-  });
-
-  // スマホで診療科タップ時のサブメニュー開閉
-  document.querySelectorAll(".has-sub > a").forEach(a => {
-    a.addEventListener("click", e => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        a.parentElement.classList.toggle("sub-open");
-      }
-    });
-  });
-</script>
-
-
 
   <!-- メイン -->
   <main>
@@ -170,6 +146,7 @@
     const header = document.querySelector('.site-header');
     const toggle = document.querySelector('.nav-toggle');
 
+    // ハンバーガー開閉
     if (toggle && header) {
       toggle.addEventListener('click', () => {
         header.classList.toggle('nav-open');
@@ -182,6 +159,9 @@
     if (current) current.classList.add('highlight');
   })();
 </script>
+</body>
+</html>
+
 
 
   
