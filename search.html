@@ -8,115 +8,173 @@
 <body>
   <div class="terminal">
     <h1>内部記録検索端末</h1>
-
     <input id="query" type="text" placeholder="キーワードを入力" autofocus>
     <button id="searchBtn">SEARCH</button>
-
     <div id="results"></div>
   </div>
 
 <script>
-  // 検索欄・ボタン・結果エリア
+  // ======================
+  // 要素参照
+  // ======================
   const input  = document.getElementById('query');
   const btn    = document.getElementById('searchBtn');
   const result = document.getElementById('results');
 
-  //  GAS の exec URL
-//  const API_URL = "https://script.google.com/macros/s/AKfycbzIH0umiGa1lpoQQvOc8D7u3ed0QXRdguQVt59ClRJdQqoGCnGjM0uaj1MS20-BdxdGFg/exec";
-  const API_URL = "https://script.google.com/macros/s/AKfycbx4R4D-XZDhWp6auqLgYKsf5bLmMtiHskUqmiStLKx2bMizxRB8-7KSNUM_XQ0D4XpQ/exec";
-　  // 病院サイトからの検索：?q= の値を初期入力＆自動検索
-  document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(location.search);
-    const qParam = (params.get('q') || "").trim();
-    if (!qParam) return;
+  // JSON DB のパス
+  const DB_URL = "data/index.json";
 
-    input.value = qParam;  // 病院側から来たキーワードをセット
-    search();              // そのまま検索実行
-  });
+  // 読み込んだDBを保持
+  let DB = null;
+  let dbLoaded = false;
+  let dbLoadError = false;
 
-  
   // ======================
-  // 検索実行処理（GAS に問い合わせ）
+  // DB読み込み
   // ======================
-  async function search() {
-    const q = input.value.trim();
-    result.innerHTML = "";
-
-    if (!q) return;
-
+  async function loadDB() {
+    if (dbLoaded || dbLoadError) return; // 一度試行したら再度fetchしない
     try {
-      const res  = await fetch(API_URL + "?key=" + encodeURIComponent(q));
-      const data = await res.json();
-
-      if (data.error) {
-        // エラー種別でメッセージ分けてもよい
-        result.innerHTML = "<p>該当データは見つかりませんでした。</p>";
-        return;
-      }
-
-      // data = { title, body } を1件として描画
-      renderDoc(data);
-
+      const res = await fetch(DB_URL, { cache: "no-cache" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      DB = await res.json();
+      dbLoaded = true;
     } catch (e) {
-      console.error(e);
-      result.innerHTML = "<p>通信エラーが発生しました。</p>";
+      console.error("DB読み込みエラー:", e);
+      dbLoadError = true;
+      result.innerHTML = "<p>検索データの読み込みに失敗しました。</p>";
     }
   }
 
   // ======================
-  // 1件分の結果を表示
-  // タイトルクリックで新しいタブを開く
+  // 検索ロジック
   // ======================
-  function renderDoc(doc) {
+  async function search() {
+    const q = (input.value || "").trim().toLowerCase();
     result.innerHTML = "";
 
-    const div = document.createElement("div");
-    div.className = "hit";
+    if (!q) {
+      return;
+    }
 
-    // 冒頭だけ抜き出してスニペットにする
-    const snippet = doc.body.trim().slice(0, 80) + "…";
+    // DBがまだなら読み込み
+    if (!dbLoaded && !dbLoadError) {
+      await loadDB();
+    }
+    if (dbLoadError || !DB) {
+      result.innerHTML = "<p>検索データの読み込みに失敗しました。</p>";
+      return;
+    }
 
-    div.innerHTML = `
-      <h2 class="doc-title" style="cursor:pointer; text-decoration:underline;">
-        ${doc.title}
-      </h2>
-      <p class="snippet">${snippet}</p>
-    `;
-
-    // タイトルをクリックしたら新タブで全文表示
-    const titleEl = div.querySelector(".doc-title");
-    titleEl.addEventListener("click", () => {
-      const win = window.open("", "_blank");
-      if (!win) return; // ポップアップブロック対策
-
-      win.document.write(`
-        <!doctype html>
-        <html lang="ja">
-        <head>
-          <meta charset="UTF-8">
-          <title>${doc.title}</title>
-        </head>
-        <body style="white-space:pre-wrap; background:#0c1525; color:#e4f2ff; font-family:monospace; padding:20px;">
-          <h2>${doc.title}</h2>
-          ${doc.body}
-        </body>
-        </html>
-      `);
-      win.document.close();
+    // マッチするエントリを抽出
+    const hits = DB.filter(item => {
+      if (!Array.isArray(item.keys)) return false;
+      return item.keys.some(k => {
+        if (!k) return false;
+        return q.includes(String(k).toLowerCase());
+      });
     });
 
-    result.appendChild(div);
+    if (hits.length === 0) {
+      result.innerHTML = `<p>「${escapeHtml(q)}」に一致するデータは見つかりませんでした。</p>`;
+      return;
+    }
+
+    // 検索結果を描画
+    renderHits(hits, q);
   }
+
+  // ======================
+  // 結果描画
+  // ======================
+  function renderHits(hits, q) {
+    const escQ = escapeHtml(q);
+    const html = [];
+
+    html.push(`<h2>「${escQ}」の検索結果 (${hits.length}件)</h2>`);
+    html.push("<ul class=\"hit-list\">");
+
+    hits.forEach(doc => {
+      const title   = escapeHtml(doc.title || "（無題）");
+      const snippet = escapeHtml((doc.snippet || "").toString());
+      const file    = doc.file || "";
+      const type    = doc.type || "";
+
+      let typeLabel = "";
+      if (type === "log")  typeLabel = "[内部記録]";
+      if (type === "site") typeLabel = "[院内サイト]";
+      if (type === "other") typeLabel = "[その他]";
+
+      html.push(`
+        <li class="hit">
+          <h3 class="doc-title"
+              data-file="${encodeHtmlAttr(file)}"
+              style="cursor:pointer; text-decoration:underline;">
+            ${typeLabel ? `<span class="hit-type">${typeLabel}</span> ` : ""}${title}
+          </h3>
+          <p class="snippet">${snippet}</p>
+        </li>
+      `);
+    });
+
+    html.push("</ul>");
+    result.innerHTML = html.join("");
+
+    // クリックで file を新タブで開く
+    document.querySelectorAll(".doc-title").forEach(el => {
+      el.addEventListener("click", () => {
+        const file = el.getAttribute("data-file");
+        if (!file) return;
+        window.open(file, "_blank");
+      });
+    });
+  }
+
+  // ======================
+  // ユーティリティ：エスケープ
+  // ======================
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function encodeHtmlAttr(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  // ======================
+  // 初期処理：?q= を拾って自動検索
+  // ======================
+  document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(location.search);
+    const qParam = (params.get("q") || "").trim();
+    if (qParam) {
+      input.value = qParam;
+      await search();
+    }
+  });
 
   // ======================
   // イベント設定
   // ======================
-  btn.addEventListener("click", search);
+  btn.addEventListener("click", () => {
+    search();
+  });
+
   input.addEventListener("keydown", e => {
-    if (e.key === "Enter") search();
+    if (e.key === "Enter") {
+      search();
+    }
   });
 </script>
-
-  
 </body>
 </html>
