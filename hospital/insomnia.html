@@ -40,9 +40,10 @@
 <body>
 
   <!-- ヘッダー -->
-  <header class="site-header">
+<header class="site-header">
   <div class="container">
     <div class="header-inner">
+      <!-- ロゴ -->
       <div class="logo-area">
         <div class="logo-mark"></div>
         <div>
@@ -52,57 +53,43 @@
       </div>
 
       <!-- スマホ用ハンバーガー -->
-      <button class="nav-toggle" type="button" aria-label="メニューを開閉">
+      <button class="nav-toggle" type="button" aria-label="メニュー">
         <span class="nav-toggle-line"></span>
         <span class="nav-toggle-line"></span>
         <span class="nav-toggle-line"></span>
       </button>
 
+      <!-- 右側：ナビ＋検索 -->
       <div class="header-right">
         <nav class="main-nav">
           <ul>
-            <li><a href="index.html" data-nav="home">ホーム</a></li>
-            <li><a href="director.html" data-nav="director">院長挨拶</a></li>
-            <li><a href="doctors.html" data-nav="doctors">医師紹介</a></li>
-
-            <li class="has-sub">
-              <a href="departments.html" data-nav="departments">診療科</a>
-              <ul class="sub-menu">
-                <li><a href="neurosurgery.html">脳神経外科</a></li>
-                <li><a href="psychiatry.html">精神内科</a></li>
-                <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
-              </ul>
-            </li>
-
-            <li><a href="research_center.html" data-nav="sleep-center">翠波睡眠研究センター</a></li>
-            <li><a href="about.html" data-nav="about">病院案内</a></li>
-            <li><a href="recruit.html" data-nav="recruit">採用情報</a></li>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="neuro.html">脳神経外科</a></li>
+            <li><a href="mental.html">精神内科</a></li>
+            <li><a href="insomnia.html">特殊外来科</a></li>
+            <li><a href="research_center.html">翠波睡眠研究センター</a></li>
+            <li><a href="guide.html">病院案内</a></li>
+            <li><a href="recruit.html">採用情報</a></li>
           </ul>
         </nav>
 
-        <form
-          class="header-search-form"
-          action="../search.html"
-          method="get"
-        >
+        <form class="header-search-form" action="../search.html" method="get">
           <label for="q" class="visually-hidden">検索キーワード</label>
-          <input
-            id="q"
-            name="q"
-            type="search"
-            placeholder="外来名 / 検査名"
-            autocomplete="off"
-          >
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
           <button type="submit">検索</button>
         </form>
       </div>
     </div>
 
+    <!-- 注意書きはヘッダーの一番下に独立させる -->
     <p class="header-search-note">
       ※診療科名・検査名などで検索できます。
     </p>
   </div>
 </header>
+
 
 
   <!-- メインコンテンツ -->
@@ -175,12 +162,10 @@
     </div>
   </footer>
 
-<!--スマホ用-->
-  <script>
+<script>
   (function () {
     const header = document.querySelector('.site-header');
     const toggle = document.querySelector('.nav-toggle');
-    const subParents = document.querySelectorAll('.main-nav .has-sub > a');
 
     if (toggle && header) {
       toggle.addEventListener('click', () => {
@@ -188,27 +173,13 @@
       });
     }
 
-    // スマホ時：診療科（サブメニュー）をタップで開閉
-    subParents.forEach(a => {
-      a.addEventListener('click', e => {
-        if (window.matchMedia('(max-width: 900px)').matches) {
-          e.preventDefault(); // departments.html には飛ばさない
-          const li = a.parentElement;
-          li.classList.toggle('sub-open');
-        }
-      });
-    });
-
-    // ついでに、現在ページのメニューを強調できるように
-    const path = location.pathname.split('/').pop();
-    const current = document.querySelector(
-      '.main-nav a[href="' + path + '"]'
-    );
-    if (current) {
-      current.classList.add('highlight');
-    }
+    // 現在ページのリンクをハイライト
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
   })();
 </script>
+
 
   
 </body>
