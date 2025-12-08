@@ -1,76 +1,607 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>□□総合医療センター</title>
+  <title>□□総合病院｜公式サイト</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="□□総合病院は地域に根ざした高度医療を提供する総合病院です。外来・入院・検査・健康診断など、お気軽にご相談ください。">
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin:0; }
+    :root {
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --accent: #2f6fb1;
+      --accent-soft: #e4eef8;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --border: #d1d5db;
+      --danger-soft: #fff5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
     header {
-      background:#f5f5f5;
-      padding:12px 20px;
-      border-bottom:1px solid #ddd;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    header h1 {
-      margin:0;
-      font-size:1.4rem;
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
     }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 30%, #9bd4ff, #2f6fb1);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
     nav a {
-      margin-right:16px;
-      text-decoration:none;
-      color:#0066cc;
-      font-size:0.95rem;
+      color: var(--text);
     }
+
+    nav a.highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     main {
-      max-width:900px;
-      margin:20px auto;
-      padding:0 16px 40px;
+      padding: 24px 0 40px;
     }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-main {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    .hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-copy {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-size: 11px;
+    }
+
+    .badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #c1d7f2;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: #ffffff;
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    .btn span.icon {
+      font-size: 14px;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .hero-side-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-side-body {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .notice-list {
+      font-size: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px dashed var(--border);
+    }
+
+    .notice-list li {
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      gap: 8px;
+    }
+
+    .notice-date {
+      white-space: nowrap;
+      color: var(--muted);
+    }
+
+    .notice-label {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px solid #f97373;
+      color: #b91c1c;
+      background: var(--danger-soft);
+      margin-right: 4px;
+    }
+
+    .notice-text {
+      flex: 1;
+    }
+
+    .search-section {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .search-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .search-panel {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+    }
+
+    .search-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .search-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .search-form input[type="search"] {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .search-form button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .search-help {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .search-help strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ★ ARG用の“内部接続”ヒント表記（普通の利用者にはただの説明文に見える） */
+    .search-bridge-note {
+      margin-top: 10px;
+      font-size: 10px;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 6px;
+    }
+
+    .links-panel {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 18px 18px 10px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .links-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .link-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .link-list li {
+      padding: 4px 0;
+    }
+
+    .link-list a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .link-list .pill {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #c1d7f2;
+    }
+
     footer {
-      font-size:0.8rem;
-      color:#777;
-      border-top:1px solid #eee;
-      padding:10px 16px;
-      text-align:center;
+      border-top: 1px solid var(--border);
+      padding: 16px 0 24px;
+      background: #ffffff;
+      margin-top: 32px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      color: var(--muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>□□総合医療センター</h1>
-    <nav>
-      <a href="index.html">トップ</a>
-      <a href="about.html">当院について</a>
-      <a href="departments.html">診療科案内</a>
-      <a href="special.html">特殊外来科</a>
-      <a href="faq.html">よくある質問</a>
-    </nav>
+    <div class="container header-inner">
+      <div class="logo-area">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">□□総合病院</div>
+          <div class="logo-text-sub">Regional Medical Center</div>
+        </div>
+      </div>
+      <nav aria-label="メインメニュー">
+        <ul>
+          <li><a href="#">外来案内</a></li>
+          <li><a href="#">入院・面会</a></li>
+          <li><a href="#">医師紹介</a></li>
+          <li><a href="insomnia.html" class="highlight">特殊外来科</a></li>
+          <li><a href="#">アクセス</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <h2>ごあいさつ</h2>
-    <p>
-      □□総合医療センターは、地域の皆さまの健康を支える中核病院として、
-      一般診療から高度専門医療まで幅広い医療サービスを提供しています。
-    </p>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-main">
+        <h1 id="hero-title" class="hero-title">地域とともに歩む、24時間体制の総合病院</h1>
+        <p class="hero-sub">Outpatient / Inpatient / Emergency / Sleep &amp; Neurology Center</p>
+        <p class="hero-copy">
+          □□総合病院は、急性期医療から慢性期・在宅まで切れ目のない医療提供体制を整えています。<br>
+          はじめての方も、かかりつけ医がおられる方も、まずは「診療科をさがす」からご覧ください。
+        </p>
+        <div class="hero-badges">
+          <span class="badge">救急指定病院</span>
+          <span class="badge">地域災害拠点</span>
+          <span class="badge">睡眠医療センター併設</span>
+        </div>
+        <div class="hero-links">
+          <a href="#search-section" class="btn btn-primary">
+            <span class="icon">🔎</span><span>診療科・キーワードから探す</span>
+          </a>
+          <a href="insomnia.html" class="btn btn-outline">
+            <span class="icon">🌙</span><span>眠りに関するご相談（特殊外来科）</span>
+          </a>
+        </div>
+        <p class="hero-note">
+          ※当院を初めて受診される方は、かかりつけ医・紹介状の有無にかかわらず外来受付までお問い合わせください。
+        </p>
+      </div>
 
-    <h2>お知らせ</h2>
-    <ul>
-      <li>202X年X月X日　外来診療時間一部変更のお知らせ</li>
-      <li>202X年X月X日　インフルエンザ予防接種のご案内</li>
-      <li>202X年X月X日　特殊外来科 開設のお知らせ</li>
-    </ul>
+      <aside class="hero-side" aria-label="お知らせ">
+        <div class="hero-side-title">お知らせ</div>
+        <p class="hero-side-body">
+          外来担当医表や面会制限など、最新のお知らせはこちらからご確認ください。
+        </p>
+        <ul class="notice-list">
+          <li>
+            <span class="notice-date">2025-11-28</span>
+            <span class="notice-text">
+              <span class="notice-label">外来</span>年末年始（12/29〜1/3）の外来診療体制について
+            </span>
+          </li>
+          <li>
+            <span class="notice-date">2025-10-12</span>
+            <span class="notice-text">
+              <span class="notice-label">お知らせ</span>面会時間一部制限のお知らせ（感染症流行に伴う対応）
+            </span>
+          </li>
+          <li>
+            <span class="notice-date">2025-09-01</span>
+            <span class="notice-text">
+              <span class="notice-label">外来</span>「睡眠医療センター」開設のご案内
+            </span>
+          </li>
+        </ul>
+      </aside>
+    </section>
 
-    <h2>診療のご案内</h2>
-    <p>
-      一般外来のほか、専門性の高い診療を行う<strong>特殊外来科</strong>を設置しています。<br>
-      詳細は <a href="special.html">特殊外来科のページ</a> をご覧ください。
-    </p>
+    <section id="search-section" class="search-section" aria-labelledby="search-title">
+      <div class="search-panel">
+        <h2 id="search-title" class="search-title">診療科・キーワード検索</h2>
+        <p class="search-sub">
+          診療科名・症状名・医師名などを入力してください。該当するページやご案内を表示します。
+        </p>
+
+        <!--
+          ★ ARG用フックポイント
+          - 内部調査端末（Detective_Tools.html）側から、このフォームに値を投げ込む想定。
+          - JSで書き換える場合を考えて、id/nameを固定しておく。
+        -->
+        <form
+          id="hospital-search-form"
+          class="search-form"
+          action="search.html"
+          method="get"
+        >
+          <label for="q" class="visually-hidden">検索キーワード</label>
+          <input
+            id="q"
+            name="q"
+            type="search"
+            placeholder="例： 不眠 / 頭痛 / 6.2hz / DS-187"
+            autocomplete="off"
+          >
+          <button type="submit">検索</button>
+        </form>
+
+        <p class="search-help">
+          入力例：
+          <strong>「不眠」</strong>・<strong>「睡眠外来」</strong>・<strong>「脳波」</strong>・<strong>「観察棟」</strong> など
+        </p>
+
+        <p class="search-bridge-note">
+          ※一部の端末環境では、院内ネットワークからのみ参照可能な結果が表示される場合があります。
+          <!-- ↑ 探偵事務所の「特殊ネットワーク接続」を匂わせる一文 -->
+        </p>
+      </div>
+
+      <aside class="links-panel" aria-label="よく見られているページ">
+        <div class="links-panel-title">よく見られているページ</div>
+        <ul class="link-list">
+          <li>
+            <a href="insomnia.html">
+              <span class="pill">特殊外来科</span>
+              <span>眠りに関する専門外来のご案内</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pill">睡眠医療センター</span>
+              <span>検査入院・終夜睡眠ポリグラフについて</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pill">外来担当表</span>
+              <span>診療担当医スケジュール</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="pill">初めての方へ</span>
+              <span>紹介状・保険証・各種書類について</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </section>
   </main>
 
   <footer>
-    &copy; □□総合医療センター<br>
-    このサイトはARGゲームの一部です。
+    <div class="container footer-inner">
+      <div>
+        © □□総合病院　All rights reserved.
+      </div>
+      <div class="footer-nav">
+        <a href="#">サイトポリシー</a>
+        <span>｜</span>
+        <a href="#">個人情報保護方針</a>
+        <span>｜</span>
+        <a href="#">お問い合わせ</a>
+      </div>
+    </div>
   </footer>
+
+  <!--
+    ★ 将来の拡張用：探偵事務所の内部端末から、この関数を叩いて検索を連動させる、など。
+    <script>
+      function setHospitalSearchQuery(value) {
+        const input = document.getElementById('q');
+        if (!input) return;
+        input.value = value;
+        // 必要なら自動送信も可能：
+        // document.getElementById('hospital-search-form').submit();
+      }
+    </script>
+  -->
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      © □□総合病院　All rights reserved.
+    </div>
+    <div class="footer-nav">
+      <a href="#">サイトポリシー</a>
+      <span>｜</span>
+      <a href="#">個人情報保護方針</a>
+      <span>｜</span>
+      <a href="#">お問い合わせ</a>
+    </div>
+  </div>
+
+  <!-- ★ ARG注意書き：一般の人が見ても安心するように -->
+  <div style="
+    text-align: center;
+    font-size: 10px;
+    color: #6b7280;
+    padding-top: 6px;
+    padding-bottom: 12px;
+  ">
+    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。
+    <br>実在の病院・団体・医療行為とは一切関係ありません。
+  </div>
+</footer>
+
+
+  
 </body>
 </html>
