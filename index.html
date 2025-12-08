@@ -52,21 +52,24 @@
       });
     }
 
-    function search() {
-      const q = input.value.trim();
-      result.innerHTML = "";
-      if (!q) return;
+function search() {
+  const q = input.value.trim();
+  result.innerHTML = "";
+  if (!q) return;
 
-      const lowerQ = q.toLowerCase();
+  // 正規化関数（前後スペース削除＋小文字化）
+  const normalize = (s) => s.trim().toLowerCase();
 
-      const hits = DOCS.filter(doc =>
-        Array.isArray(doc.keywords) &&
-        doc.keywords.some(k => k.toLowerCase() === lowerQ)
-      );
+  const nq = normalize(q);
 
+  const hits = DOCS.filter(doc =>
+    Array.isArray(doc.keywords) &&
+    doc.keywords.some(k => normalize(k) === nq)
+  );
 
-      renderHits(hits);
-    }
+  renderHits(hits);
+}
+
 
     btn.addEventListener('click', search);
     input.addEventListener('keydown', e => {
