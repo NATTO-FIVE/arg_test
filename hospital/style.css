@@ -128,6 +128,48 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
 }
 
+/* ▼ 診療科ドロップダウン */
+
+.main-nav li.has-sub {
+  position: relative;
+}
+
+.main-nav li.has-sub > a::after {
+  content: "▾";
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.main-nav .sub-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  display: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  z-index: 30;
+}
+
+.main-nav .sub-menu li a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* クリックで sub-open が付いたときだけ表示 */
+.main-nav li.has-sub.sub-open > .sub-menu {
+  display: block;
+}
+/* ▲ 診療科ドロップダウン */
+
+
 /* 検索 */
 
 .header-search-form {
@@ -191,6 +233,20 @@ a:hover { text-decoration: underline; }
     flex-direction: column;
     gap: 8px;
   }
+
+    /* スマホではサブメニューを下に展開する */
+  .main-nav .sub-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding-left: 16px;
+  }
+
+  .main-nav li.has-sub.sub-open > .sub-menu {
+    display: block;
+  }
+
+  
 
   .header-search-form {
     width: 100%;
