@@ -264,7 +264,7 @@ a:hover { text-decoration: underline; }
 
 /* ===== メイン・トップ用など（今までのを軽く） ===== */
 
-main { padding: 24px 0 40px; }
+main { padding-top: 0; }
 
 .page-main {
   max-width: 1120px;
