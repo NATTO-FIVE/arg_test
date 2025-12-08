@@ -19,8 +19,12 @@
   <script>
     // URLパラメータを取得する
     const params = new URLSearchParams(location.search);
-    const id = params.get("id");
-
+    const h = params.get("h");
+    
+    let id = "";
+    try {
+      id = atob(h); // Base64 デコード
+    } catch (e) {}
     const doc = DOCS.find(d => d.id === id);
 
     if (!doc) {
