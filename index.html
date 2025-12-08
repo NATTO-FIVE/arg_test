@@ -60,8 +60,10 @@
       const lowerQ = q.toLowerCase();
 
       const hits = DOCS.filter(doc =>
-        doc.keywords.some(k => k.toLowerCase().includes(lowerQ))
+        Array.isArray(doc.keywords) &&
+        doc.keywords.some(k => k.toLowerCase() === lowerQ)
       );
+
 
       renderHits(hits);
     }
