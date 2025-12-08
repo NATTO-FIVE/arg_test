@@ -244,6 +244,7 @@
     const header = document.querySelector('.site-header');
     const toggle = document.querySelector('.nav-toggle');
 
+    // ハンバーガー開閉
     if (toggle && header) {
       toggle.addEventListener('click', () => {
         header.classList.toggle('nav-open');
@@ -254,8 +255,33 @@
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
+
+    // ▼ 診療科（has-sub）クリックでサブメニュー固定表示
+    const subParents = document.querySelectorAll('.main-nav li.has-sub > a');
+
+    subParents.forEach(a => {
+      a.addEventListener('click', e => {
+        // 常にクリックで開閉したいので、リンク遷移は止める
+        e.preventDefault();
+
+        const li = a.parentElement;
+        const isOpen = li.classList.contains('sub-open');
+
+        // 他のサブメニューがあれば閉じる
+        document.querySelectorAll('.main-nav li.has-sub')
+          .forEach(item => item.classList.remove('sub-open'));
+
+        // 元が閉じていたときだけ開く（トグル動作）
+        if (!isOpen) {
+          li.classList.add('sub-open');
+        }
+      });
+    });
+
+    // ▲ 診療科クリック制御
   })();
 </script>
+
 
 
   
