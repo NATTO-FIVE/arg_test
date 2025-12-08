@@ -3,183 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <title>翠波総合病院｜公式サイト</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="翠波総合病院は地域に根ざした高度医療を提供する総合病院です。外来・入院・検査・健康診断など、お気軽にご相談ください。">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .page-main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
 
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .dept-card {
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .dept-card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .news-section {
+      margin-top: 40px;
+    }
+
+    .news-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .news-list li {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px dashed var(--border);
+      padding: 10px 0;
+      font-size: 14px;
+    }
+
+    .news-date {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .footer-warning {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+  </style>
 </head>
+
 <body>
-  <header>
-    <div class="container header-inner">
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
       <div class="logo-area">
         <div class="logo-mark"></div>
         <div>
           <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiba Regional Medical Center</div>
+          <div class="logo-text-sub">Suiba General Hospital</div>
         </div>
       </div>
 
+      <!-- スマホ用ハンバーガー -->
+      <button class="nav-toggle" type="button" aria-label="メニューを開閉">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
       <div class="header-right">
-        <nav aria-label="メインメニュー">
+        <nav class="main-nav">
           <ul>
-            <li><a href="#">外来案内</a></li>
-            <li><a href="#">入院・面会</a></li>
-            <li><a href="#">医師紹介</a></li>
-            <li><a href="insomnia.html">特殊外来科</a></li>
-            <li><a href="#">アクセス</a></li>
+            <li><a href="index.html" data-nav="home">ホーム</a></li>
+            <li><a href="director.html" data-nav="director">院長挨拶</a></li>
+            <li><a href="doctors.html" data-nav="doctors">医師紹介</a></li>
+
+            <li class="has-sub">
+              <a href="departments.html" data-nav="departments">診療科</a>
+              <ul class="sub-menu">
+                <li><a href="neurosurgery.html">脳神経外科</a></li>
+                <li><a href="psychiatry.html">精神内科</a></li>
+                <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
+              </ul>
+            </li>
+
+            <li><a href="research_center.html" data-nav="sleep-center">翠波睡眠研究センター</a></li>
+            <li><a href="about.html" data-nav="about">病院案内</a></li>
+            <li><a href="recruit.html" data-nav="recruit">採用情報</a></li>
           </ul>
         </nav>
 
-        <!-- ★ 全ページ共通の検索欄（ARG連携ポイント） -->
-        <div>
-          <form
-            id="hospital-search-form"
-            class="header-search-form"
-            action="../search.html"
-            method="get"
+        <form
+          class="header-search-form"
+          action="../search.html"
+          method="get"
+        >
+          <label for="q" class="visually-hidden">検索キーワード</label>
+          <input
+            id="q"
+            name="q"
+            type="search"
+            placeholder="外来名 / 検査名"
+            autocomplete="off"
           >
-            <label for="q" class="visually-hidden">検索キーワード</label>
-            <input
-              id="q"
-              name="q"
-              type="search"
-              placeholder="不眠 / 頭痛 / 睡眠"
-              autocomplete="off"
-            >
-            <button type="submit">検索</button>
-          </form>
-          <div class="header-search-note">
-            一部の端末では院内ネットワーク専用の結果が表示される場合があります。
-          </div>
-        </div>
+          <button type="submit">検索</button>
+        </form>
       </div>
     </div>
-  </header>
 
-  <main class="container">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-main">
-        <h1 id="hero-title" class="hero-title">地域とともに歩む、24時間体制の総合病院</h1>
-        <p class="hero-sub">Outpatient / Inpatient / Emergency / Sleep &amp; Neurology Center</p>
-        <p class="hero-copy">
-          翠波総合病院は、急性期医療から慢性期・在宅まで切れ目のない医療提供体制を整えています。<br>
-          はじめての方も、かかりつけ医がおられる方も、まずは上部メニューから目的のページをご覧ください。
+    <p class="header-search-note">
+      ※診療科名・検査名などで検索できます。
+    </p>
+  </div>
+</header>
+
+
+<!-- メイン -->
+<main>
+  <div class="page-main">
+
+    <h1 class="hero-title">地域に寄り添う医療を。</h1>
+    <p class="hero-sub">
+      翠波総合病院は、地域の皆さまが安心して医療を受けられる環境づくりを目指しています。
+      各診療科の専門医と連携し、総合的な医療を提供します。
+    </p>
+
+    <!-- 診療科のカード -->
+    <div class="dept-grid">
+
+      <div class="dept-card">
+        <h3>特殊外来科（睡眠外来）</h3>
+        <p>
+          不眠・睡眠の質・睡眠リズムに関するお悩みに専門医が対応します。
+          必要に応じて睡眠研究センターと連携し、より精密な検査をご案内します。
         </p>
-        <div class="hero-badges">
-          <span class="badge">救急指定病院</span>
-          <span class="badge">地域災害拠点</span>
-          <span class="badge">睡眠医療センター併設</span>
-        </div>
-        <div class="hero-links">
-          <!-- 青い「診療科・キーワードから探す」ボタンは削除 -->
-          <a href="insomnia.html" class="btn btn-outline">
-            <span class="icon">🌙</span><span>眠りに関するご相談（特殊外来科）</span>
-          </a>
-        </div>
-        <p class="hero-note">
-          ※当院を初めて受診される方は、かかりつけ医・紹介状の有無にかかわらず外来受付までお問い合わせください。
-        </p>
+        <p><a href="insomnia.html">詳細はこちら →</a></p>
       </div>
 
-      <aside class="hero-side" aria-label="お知らせ">
-        <div class="hero-side-title">お知らせ</div>
-        <p class="hero-side-body">
-          外来担当医表や面会制限など、最新のお知らせはこちらからご確認ください。
+      <div class="dept-card">
+        <h3>翠波睡眠研究センター</h3>
+        <p>
+          夜間脳波検査（PSG）や睡眠行動モニタリングなど、専門性の高い検査を行う施設です。
         </p>
-        <ul class="notice-list">
-          <li>
-            <span class="notice-date">2025-11-28</span>
-            <span class="notice-text">
-              <span class="notice-label">外来</span>年末年始（12/29〜1/3）の外来診療体制について
-            </span>
-          </li>
-          <li>
-            <span class="notice-date">2025-10-12</span>
-            <span class="notice-text">
-              <span class="notice-label">お知らせ</span>面会時間一部制限のお知らせ（感染症流行に伴う対応）
-            </span>
-          </li>
-          <li>
-            <span class="notice-date">2025-09-01</span>
-            <span class="notice-text">
-              <span class="notice-label">外来</span>「睡眠医療センター」開設のご案内
-            </span>
-          </li>
-        </ul>
-      </aside>
-    </section>
-
-    <section class="links-section" aria-label="よく見られているページ">
-      <div class="links-panel">
-        <div class="links-panel-title">よく見られているページ</div>
-        <ul class="link-list">
-          <li>
-            <a href="insomnia.html">
-              <span class="pill">特殊外来科</span>
-              <span>眠りに関する専門外来のご案内</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="pill">睡眠医療センター</span>
-              <span>検査入院・終夜睡眠ポリグラフについて</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="pill">外来担当表</span>
-              <span>診療担当医スケジュール</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="pill">初めての方へ</span>
-              <span>紹介状・保険証・各種書類について</span>
-            </a>
-          </li>
-        </ul>
+        <p><a href="research_center.html">センター案内 →</a></p>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        © 翠波総合病院　All rights reserved.
+      <div class="dept-card">
+        <h3>院長挨拶</h3>
+        <p>
+          当院の院長・百目島ミキより、地域医療への取り組みと当院の理念についてご挨拶いたします。
+        </p>
+        <p><a href="director.html">メッセージを見る →</a></p>
       </div>
+
+    </div>
+
+    <!-- お知らせ -->
+    <div class="news-section">
+      <h2>お知らせ</h2>
+      <ul class="news-list">
+        <li>
+          <div class="news-date">2025/01/10</div>
+          <div>翠波睡眠研究センターに新しい検査機器が導入されました。</div>
+        </li>
+        <li>
+          <div class="news-date">2024/12/25</div>
+          <div>年末年始の診療体制について掲載しました。</div>
+        </li>
+        <li>
+          <div class="news-date">2024/11/08</div>
+          <div>インフルエンザ予防接種を開始しました。</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<!-- フッター -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>© 翠波総合病院</div>
       <div class="footer-nav">
-        <a href="#">サイトポリシー</a>
-        <span>｜</span>
-        <a href="#">個人情報保護方針</a>
-        <span>｜</span>
-        <a href="#">お問い合わせ</a>
+        <span class="footer-warning">
+          ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。  
+          実在の病院・団体・医療行為とは一切関係ありません。
+        </span>
       </div>
     </div>
+  </div>
+</footer>
 
-    <!-- ★ ARG注意書き：一般の人が見ても安心するように -->
-    <div style="
-      text-align: center;
-      font-size: 10px;
-      color: #6b7280;
-      padding-top: 6px;
-      padding-bottom: 12px;
-    ">
-      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。<br>
-      実在の病院・団体・医療行為とは一切関係ありません。
-    </div>
-  </footer>
 
-  <!-- 探偵事務所側から検索欄を操作するためのフック -->
-  <!--
-  <script>
-    function setHospitalSearchQuery(value) {
-      const input = document.getElementById('q');
-      if (!input) return;
-      input.value = value;
-      // 必要なら自動送信：
-      // document.getElementById('hospital-search-form').submit();
+<script>
+  (function () {
+    const header = document.querySelector('.site-header');
+    const toggle = document.querySelector('.nav-toggle');
+    const subParents = document.querySelectorAll('.main-nav .has-sub > a');
+
+    if (toggle && header) {
+      toggle.addEventListener('click', () => {
+        header.classList.toggle('nav-open');
+      });
     }
-  </script>
-  -->
+
+    // スマホ時：診療科（サブメニュー）をタップで開閉
+    subParents.forEach(a => {
+      a.addEventListener('click', e => {
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          e.preventDefault(); // departments.html には飛ばさない
+          const li = a.parentElement;
+          li.classList.toggle('sub-open');
+        }
+      });
+    });
+
+    // ついでに、現在ページのメニューを強調できるように
+    const path = location.pathname.split('/').pop();
+    const current = document.querySelector(
+      '.main-nav a[href="' + path + '"]'
+    );
+    if (current) {
+      current.classList.add('highlight');
+    }
+  })();
+</script>
+
+  
 </body>
 </html>
