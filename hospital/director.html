@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>院長挨拶｜翠波総合病院</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-main {
+      max-width: 880px;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+      line-height: 1.8;
+    }
+    .director-profile {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .director-photo {
+      width: 180px;
+      height: 220px;
+      background: #e2e8f0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .director-info h2 {
+      margin-top: 0;
+      font-size: 18px;
+      border-left: 6px solid var(--accent);
+      padding-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-area">
+          <div class="logo-mark"></div>
+          <div>
+            <div class="logo-text-main">翠波総合病院</div>
+            <div class="logo-text-sub">Suiba General Hospital</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <nav>
+            <ul>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="insomnia.html">特殊外来科</a></li>
+              <li><a href="research_center.html">翠波睡眠研究センター</a></li>
+              <li><a href="director.html" class="highlight">院長挨拶</a></li>
+            </ul>
+          </nav>
+
+          <form
+            class="header-search-form"
+            action="../search.html"
+            method="get"
+          >
+            <label for="q" class="visually-hidden">検索キーワード</label>
+            <input
+              id="q"
+              name="q"
+              type="search"
+              placeholder="睡眠 / 外来"
+              autocomplete="off"
+            >
+            <button type="submit">検索</button>
+          </form>
+        </div>
+      </div>
+
+      <p class="header-search-note">
+        ※診療に関するキーワードで検索できます。
+      </p>
+    </div>
+  </header>
+
+  <!-- メイン -->
+  <main>
+    <div class="page-main">
+
+      <h1>院長挨拶</h1>
+
+      <div class="director-profile">
+        <div class="director-photo">
+          院長写真<br>（ダミー）
+        </div>
+
+        <div class="director-info">
+          <h2>院長　百目島 ミキ（どめしま みき）</h2>
+          <p>
+            翠波総合病院のホームページをご覧いただき、誠にありがとうございます。
+            当院は地域の皆さまに寄り添い、安心して医療を受けていただける体制づくりを大切にしてまいりました。
+          </p>
+          <p>
+            医療技術の進歩は目覚ましいものがありますが、その中心にいるのは常に“人”です。
+            患者さま一人ひとりの不安に寄り添い、必要な情報を丁寧にお伝えし、納得いただいたうえで治療を進めることを
+            当院では最も重要と考えています。
+          </p>
+          <p>
+            また、近年増加している生活習慣病や心身のストレスによる疾患に対しても、
+            各専門科が緊密に連携しながら総合的な診療を提供しています。
+            地域医療の拠点として、皆さまの健康を守る存在であり続けることが当院の使命です。
+          </p>
+          <p>
+            これからもより良い医療環境を整え、安心して通える病院づくりに努めてまいります。
+            どうぞよろしくお願い申し上げます。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 翠波総合病院</div>
+        <div class="footer-nav">
+          <span>※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
