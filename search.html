@@ -21,9 +21,20 @@
   const btn    = document.getElementById('searchBtn');
   const result = document.getElementById('results');
 
-  // ★ここを自分の GAS の exec URL に置き換える
+  //  GAS の exec URL
   const API_URL = "https://script.google.com/macros/s/AKfycbzIH0umiGa1lpoQQvOc8D7u3ed0QXRdguQVt59ClRJdQqoGCnGjM0uaj1MS20-BdxdGFg/exec";
 
+　  // 病院サイトからの検索：?q= の値を初期入力＆自動検索
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(location.search);
+    const qParam = (params.get('q') || "").trim();
+    if (!qParam) return;
+
+    input.value = qParam;  // 病院側から来たキーワードをセット
+    search();              // そのまま検索実行
+  });
+
+  
   // ======================
   // 検索実行処理（GAS に問い合わせ）
   // ======================
