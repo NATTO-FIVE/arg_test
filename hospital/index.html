@@ -56,25 +56,27 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 0;
+      padding: 16px 0;
+      gap: 16px;
     }
 
     .logo-area {
       display: flex;
       align-items: center;
       gap: 8px;
+      min-width: 0;
     }
 
     .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       background: radial-gradient(circle at 30% 30%, #9bd4ff, #2f6fb1);
     }
 
     .logo-text-main {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 19px;
     }
 
     .logo-text-sub {
@@ -82,22 +84,88 @@
       color: var(--muted);
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
     nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 18px;
-      font-size: 14px;
+      gap: 20px;
+      font-size: 15px;
     }
 
     nav a {
       color: var(--text);
+      white-space: nowrap;
     }
 
     nav a.highlight {
       color: var(--accent);
       font-weight: 600;
+    }
+
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 180px;
+    }
+
+    .header-search-form input[type="search"] {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      width: 180px;
+    }
+
+    .header-search-form button {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .header-search-note {
+      font-size: 9px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .header-search-form {
+        width: 100%;
+      }
+      .header-search-form input[type="search"] {
+        flex: 1;
+        width: auto;
+      }
+      .header-search-note {
+        text-align: left;
+      }
     }
 
     main {
@@ -179,12 +247,6 @@
       color: var(--accent);
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
     .btn-outline {
       border-color: var(--border);
       background: #ffffff;
@@ -254,80 +316,8 @@
       flex: 1;
     }
 
-    .search-section {
+    .links-section {
       margin-top: 28px;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 24px;
-    }
-
-    @media (max-width: 768px) {
-      .search-section {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .search-panel {
-      background: var(--panel);
-      border-radius: 16px;
-      padding: 18px 18px 16px;
-      border: 1px solid var(--border);
-    }
-
-    .search-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .search-sub {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .search-form {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .search-form input[type="search"] {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 14px;
-    }
-
-    .search-form button {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: #ffffff;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .search-help {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .search-help strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ★ ARG用の“内部接続”ヒント表記（普通の利用者にはただの説明文に見える） */
-    .search-bridge-note {
-      margin-top: 10px;
-      font-size: 10px;
-      color: var(--muted);
-      border-top: 1px dashed var(--border);
-      padding-top: 6px;
     }
 
     .links-panel {
@@ -371,7 +361,7 @@
 
     footer {
       border-top: 1px solid var(--border);
-      padding: 16px 0 24px;
+      padding: 16px 0 0;
       background: #ffffff;
       margin-top: 32px;
     }
@@ -395,6 +385,18 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
+    /* 視覚的には隠すがスクリーンリーダー用 */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
   </style>
 </head>
 <body>
@@ -404,18 +406,44 @@
         <div class="logo-mark"></div>
         <div>
           <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiha Regional Medical Center</div>
+          <div class="logo-text-sub">Suiba Regional Medical Center</div>
         </div>
       </div>
-      <nav aria-label="メインメニュー">
-        <ul>
-          <li><a href="#">外来案内</a></li>
-          <li><a href="#">入院・面会</a></li>
-          <li><a href="#">医師紹介</a></li>
-          <li><a href="insomnia.html" class="highlight">特殊外来科</a></li>
-          <li><a href="#">アクセス</a></li>
-        </ul>
-      </nav>
+
+      <div class="header-right">
+        <nav aria-label="メインメニュー">
+          <ul>
+            <li><a href="#">外来案内</a></li>
+            <li><a href="#">入院・面会</a></li>
+            <li><a href="#">医師紹介</a></li>
+            <li><a href="insomnia.html" class="highlight">特殊外来科</a></li>
+            <li><a href="#">アクセス</a></li>
+          </ul>
+        </nav>
+
+        <!-- ★ 全ページ共通の検索欄（ARG連携ポイント） -->
+        <div>
+          <form
+            id="hospital-search-form"
+            class="header-search-form"
+            action="search.html"
+            method="get"
+          >
+            <label for="q" class="visually-hidden">検索キーワード</label>
+            <input
+              id="q"
+              name="q"
+              type="search"
+              placeholder="不眠 / 頭痛 / 6.2hz / DS-187"
+              autocomplete="off"
+            >
+            <button type="submit">検索</button>
+          </form>
+          <div class="header-search-note">
+            一部の端末では院内ネットワーク専用の結果が表示される場合があります。
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -426,7 +454,7 @@
         <p class="hero-sub">Outpatient / Inpatient / Emergency / Sleep &amp; Neurology Center</p>
         <p class="hero-copy">
           翠波総合病院は、急性期医療から慢性期・在宅まで切れ目のない医療提供体制を整えています。<br>
-          はじめての方も、かかりつけ医がおられる方も、まずは「診療科をさがす」からご覧ください。
+          はじめての方も、かかりつけ医がおられる方も、まずは上部メニューから目的のページをご覧ください。
         </p>
         <div class="hero-badges">
           <span class="badge">救急指定病院</span>
@@ -434,9 +462,7 @@
           <span class="badge">睡眠医療センター併設</span>
         </div>
         <div class="hero-links">
-          <a href="#search-section" class="btn btn-primary">
-            <span class="icon">🔎</span><span>診療科・キーワードから探す</span>
-          </a>
+          <!-- 青い「診療科・キーワードから探す」ボタンは削除 -->
           <a href="insomnia.html" class="btn btn-outline">
             <span class="icon">🌙</span><span>眠りに関するご相談（特殊外来科）</span>
           </a>
@@ -474,47 +500,8 @@
       </aside>
     </section>
 
-    <section id="search-section" class="search-section" aria-labelledby="search-title">
-      <div class="search-panel">
-        <h2 id="search-title" class="search-title">診療科・キーワード検索</h2>
-        <p class="search-sub">
-          診療科名・症状名・医師名などを入力してください。該当するページやご案内を表示します。
-        </p>
-
-        <!--
-          ★ ARG用フックポイント
-          - 内部調査端末（Detective_Tools.html）側から、このフォームに値を投げ込む想定。
-          - JSで書き換える場合を考えて、id/nameを固定しておく。
-        -->
-        <form
-          id="hospital-search-form"
-          class="search-form"
-          action="search.html"
-          method="get"
-        >
-          <label for="q" class="visually-hidden">検索キーワード</label>
-          <input
-            id="q"
-            name="q"
-            type="search"
-            placeholder="例： 不眠 / 頭痛 / 6.2hz / DS-187"
-            autocomplete="off"
-          >
-          <button type="submit">検索</button>
-        </form>
-
-        <p class="search-help">
-          入力例：
-          <strong>「不眠」</strong>・<strong>「睡眠外来」</strong>・<strong>「脳波」</strong>・<strong>「観察棟」</strong> など
-        </p>
-
-        <p class="search-bridge-note">
-          ※一部の端末環境では、院内ネットワークからのみ参照可能な結果が表示される場合があります。
-          <!-- ↑ 探偵事務所の「特殊ネットワーク接続」を匂わせる一文 -->
-        </p>
-      </div>
-
-      <aside class="links-panel" aria-label="よく見られているページ">
+    <section class="links-section" aria-label="よく見られているページ">
+      <div class="links-panel">
         <div class="links-panel-title">よく見られているページ</div>
         <ul class="link-list">
           <li>
@@ -542,52 +529,48 @@
             </a>
           </li>
         </ul>
-      </aside>
+      </div>
     </section>
   </main>
 
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        © 翠波総合病院　All rights reserved.
+      </div>
+      <div class="footer-nav">
+        <a href="#">サイトポリシー</a>
+        <span>｜</span>
+        <a href="#">個人情報保護方針</a>
+        <span>｜</span>
+        <a href="#">お問い合わせ</a>
+      </div>
+    </div>
 
+    <!-- ★ ARG注意書き：一般の人が見ても安心するように -->
+    <div style="
+      text-align: center;
+      font-size: 10px;
+      color: #6b7280;
+      padding-top: 6px;
+      padding-bottom: 12px;
+    ">
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。<br>
+      実在の病院・団体・医療行為とは一切関係ありません。
+    </div>
+  </footer>
+
+  <!-- 探偵事務所側から検索欄を操作するためのフック -->
   <!--
-    ★ 将来の拡張用：探偵事務所の内部端末から、この関数を叩いて検索を連動させる、など。
-    <script>
-      function setHospitalSearchQuery(value) {
-        const input = document.getElementById('q');
-        if (!input) return;
-        input.value = value;
-        // 必要なら自動送信も可能：
-        // document.getElementById('hospital-search-form').submit();
-      }
-    </script>
+  <script>
+    function setHospitalSearchQuery(value) {
+      const input = document.getElementById('q');
+      if (!input) return;
+      input.value = value;
+      // 必要なら自動送信：
+      // document.getElementById('hospital-search-form').submit();
+    }
+  </script>
   -->
-
-<footer>
-  <div class="container footer-inner">
-    <div>
-      © 翠波総合病院　All rights reserved.
-    </div>
-    <div class="footer-nav">
-      <a href="#">サイトポリシー</a>
-      <span>｜</span>
-      <a href="#">個人情報保護方針</a>
-      <span>｜</span>
-      <a href="#">お問い合わせ</a>
-    </div>
-  </div>
-
-  <!-- ★ ARG注意書き：一般の人が見ても安心するように -->
-  <div style="
-    text-align: center;
-    font-size: 10px;
-    color: #6b7280;
-    padding-top: 6px;
-    padding-bottom: 12px;
-  ">
-    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。
-    <br>実在の病院・団体・医療行為とは一切関係ありません。
-  </div>
-</footer>
-
-
-  
 </body>
 </html>
