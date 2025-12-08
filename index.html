@@ -15,58 +15,13 @@
     <div id="results"></div>
   </div>
 
-  <!-- ▼ docs.js を先に読み込む -->
   <script src="docs.js"></script>
 
-  <!-- ▼ メインスクリプト -->
   <script>
     const input  = document.getElementById('query');
     const btn    = document.getElementById('searchBtn');
     const result = document.getElementById('results');
 
-    // ======================
-    // モーダルの作成
-    // ======================
-    const modal = document.createElement("div");
-    modal.id = "modal";
-    modal.style.display = "none";
-    modal.style.position = "fixed";
-    modal.style.top = "0";
-    modal.style.left = "0";
-    modal.style.width = "100%";
-    modal.style.height = "100%";
-    modal.style.background = "rgba(0,0,0,0.6)";
-    modal.style.backdropFilter = "blur(3px)";
-    modal.style.justifyContent = "center";
-    modal.style.alignItems = "center";
-    modal.style.padding = "20px";
-    modal.style.zIndex = "1000";
-
-    const modalContent = document.createElement("div");
-    modalContent.style.position = "relative";
-    modalContent.style.background = "#0c1525";
-    modalContent.style.border = "1px solid #3aa7ff";
-    modalContent.style.maxWidth = "700px";
-    modalContent.style.width = "100%";
-    modalContent.style.maxHeight = "80%";
-    modalContent.style.overflowY = "auto";
-    modalContent.style.whiteSpace = "pre-wrap";
-    modalContent.style.color = "#e4f2ff";
-    modalContent.style.padding = "10px 22px 22px 22px";  // 上も普通の余白だけ
-
-    // 背景クリックで閉じる
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-
-    // ======================
-    // ヒット結果の描画
-    // ======================
     function renderHits(hits) {
       result.innerHTML = "";
 
@@ -82,59 +37,28 @@
         const snippet = doc.body.trim().slice(0, 80) + "…";
 
         div.innerHTML = `
-          <h2 class="doc-title">${doc.title}</h2>
+          <h2 class="doc-title" data-id="${doc.id}">${doc.title}</h2>
           <p class="snippet">${snippet}</p>
         `;
 
-        // タイトルクリックでモーダルオープン
-        const titleEl = div.querySelector(".doc-title");
-        titleEl.addEventListener("click", () => {
-          modalContent.innerHTML = `
-            <div style="
-              display:flex;
-              justify-content:space-between;
-              align-items:center;
-              margin:0 0 12px 0;
-            ">
-              <h2 style="margin:0;">${doc.title}</h2>
-              <div
-                id="modalCloseBtn"
-                style="
-                  font-size:24px;
-                  cursor:pointer;
-                  color:#3aa7ff;
-                "
-              >&times;</div>
-            </div>
-
-            <div>${doc.body}</div>
-          `;
-
-          const innerClose = modalContent.querySelector("#modalCloseBtn");
-          innerClose.addEventListener("click", () => {
-            modal.style.display = "none";
-          });
-
-          modal.style.display = "flex";
+        // ▼ 新しいタブで開く
+        div.querySelector(".doc-title").addEventListener("click", (e) => {
+          const id = e.target.getAttribute("data-id");
+          window.open(`record.html?id=${id}`, "_blank");
         });
 
         result.appendChild(div);
       });
     }
 
-    // ======================
-    // 検索処理（keywordsのみ）
-    // ======================
     function search() {
       const q = input.value.trim();
       result.innerHTML = "";
-
       if (!q) return;
 
       const lowerQ = q.toLowerCase();
 
       const hits = DOCS.filter(doc =>
-        Array.isArray(doc.keywords) &&
         doc.keywords.some(k => k.toLowerCase().includes(lowerQ))
       );
 
