@@ -44,7 +44,8 @@
         // ▼ 新しいタブで開く
         div.querySelector(".doc-title").addEventListener("click", (e) => {
           const id = e.target.getAttribute("data-id");
-          window.open(`record.html?id=${id}`, "_blank");
+          const h = btoa(id); // Base64 エンコード
+          window.open(`record.html?h=${h}`, "_blank");
         });
 
         result.appendChild(div);
