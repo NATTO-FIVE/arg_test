@@ -1,1 +1,35 @@
 
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>文書ビューア</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="record">
+    <a href="index.html" style="color:#3aa7ff;">← 戻る</a>
+    <h1 id="title"></h1>
+    <pre id="body" style="white-space:pre-wrap;"></pre>
+  </div>
+
+  <script src="docs.js"></script>
+
+  <script>
+    // URLパラメータを取得する
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+
+    const doc = DOCS.find(d => d.id === id);
+
+    if (!doc) {
+      document.getElementById("title").innerText = "文書が見つかりません";
+    } else {
+      document.getElementById("title").innerText = doc.title;
+      document.getElementById("body").innerText  = doc.body.trim();
+    }
+  </script>
+
+</body>
+</html>
