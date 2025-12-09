@@ -26,90 +26,99 @@
     </div>
   </div>
 
-  <script>
+ <script>
     // 即時実行関数で全体をラップし、return 文を有効にする
     (function() {
-      const params = new URLSearchParams(location.search);
-      const h = params.get("h");
+        const params = new URLSearchParams(location.search);
+        // URLパラメータ 'h' (Base64エンコードされたIDを想定)
+        const h = params.get("h");
 
-      const titleElement = document.getElementById("title");
-      const bodyElement = document.getElementById("body");
-      const pathElement = document.getElementById("access-path");
-      const statusLight = document.getElementById("status-light");
-      
-      let decodedKey = "";
-      try {
-        // Base64 デコード (ファイルパス)
-        decodedKey = atob(h);
-        pathElement.innerText = decodedKey; // デコードしたキーを表示
-      } catch (e) {
-        titleElement.innerText = "文書の読み込みエラー: 無効なキー";
-        statusLight.className = 'status-light'; 
-        return; 
-      }
-      
-      // ===============================================
-      // logs/*.txt ファイルパスの場合、fetch で内容を取得
-      // ===============================================
+        const titleElement = document.getElementById("title");
+        const bodyElement = document.getElementById("body");
+        // const pathElement = document.getElementById("access-path"); // HTMLに存在しないため、ここでは定義削除
+        const statusLight = document.getElementById("status-light");
+        
+        // Base64 デコード (ここではログのIDとして使用)
+        let recordId = ""; 
+        try {
+            recordId = atob(h);
+            // パス表示ロジックは削除
+        } catch (e) {
+            titleElement.innerText = "文書の読み込みエラー: 無効なキー";
+            statusLight.className = 'status-light'; 
+            return; 
+        }
 
-      if (decodedKey.startsWith('logs/') && decodedKey.endsWith('.txt')) {
-        const logFileName = decodedKey.split('/')[1];
-        titleElement.innerText = `データ転送中... (ファイル: ${logFileName})`;
+        // --- データ読み込みのメイン関数 ---
+        async function fetchRecordData(id) {
+            // 1. /data/index.json を読み込み
+            const indexResponse = await fetch('/data/index.json');
+            if (!indexResponse.ok) {
+                throw new Error(`目録ファイルが見つかりません: /data/index.json`);
+            }
+            const indexData = await indexResponse.json();
 
-        const fetchPath = decodedKey; // logs/ランダム名.txt
+            // 2. ID で該当レコードを検索 (index.json内のIDフィールドと照合を仮定)
+            // ※ IDフィールド名はシステムの設計に依存
+            const record = indexData.find(item => item.id === id); 
+            if (!record) {
+                throw new Error(`記録 ID: ${id} は目録に存在しません`);
+            }
+            
+            // 3. ログファイルの内容を読み込み
+            // record.file は logs/XXXXXX.txt のパスを保持
+            const logResponse = await fetch(record.file); 
+            if (!logResponse.ok) {
+                throw new Error(`HTTP ERROR ${logResponse.status}: ${logResponse.statusText || 'ログファイルが見つかりません'}`);
+            }
+            const logContent = await logResponse.text();
+
+            return { title: record.title, content: logContent };
+        }
+        // --- データ読み込み関数 終了 ---
+
+
+        // ===============================================
+        // 実行ロジック
+        // ===============================================
+        
+        // ログファイルのパスチェックは不要になったため、処理を統合
+
+        titleElement.innerText = `データ転送中... (記録ID: ${recordId})`;
         
         // 0.5秒の遅延を設けて、読み込み演出と非同期処理の確実性を高める
         setTimeout(() => {
-            
-          fetch(fetchPath)
-            .then(response => {
-              if (!response.ok) {
-                // 404 (Not Found) などのエラーをここでキャッチ
-                throw new Error(`HTTP ERROR ${response.status}: ${response.statusText || 'ファイルが見つかりません (404)'}`);
-              }
-              return response.text();
-            })
-            .then(data => {
-              // 成功
-              statusLight.className = 'status-light ok';
-              
-              const trimmedData = data.trim();
+            fetchRecordData(recordId)
+                .then(data => {
+                    // 成功
+                    statusLight.className = 'status-light ok';
+                    
+                    const trimmedData = data.content.trim();
 
-              if (!trimmedData) {
-                  titleElement.innerText = "記録が存在しないか、データが破損しています";
-                  bodyElement.innerText = "ファイルは存在しますが、内容は空です。";
-                  return;
-              }
+                    if (!trimmedData) {
+                        titleElement.innerText = "記録が存在しないか、データが破損しています";
+                        bodyElement.innerText = "ファイルは存在しますが、内容は空です。";
+                        return;
+                    }
 
-              // ★ ファイル内容を本文に設定
-              bodyElement.innerText = trimmedData;
+                    // ★ 修正箇所: /data/index.json から取得した title を表示
+                    titleElement.innerText = `内部記録: ${data.title}`; 
+                    
+                    // ファイル内容を本文に設定
+                    bodyElement.innerText = trimmedData;
 
-              // タイトル設定 (本文の最初の行を利用)
-              const firstLine = trimmedData.split('\n')[0];
-              if (firstLine.startsWith('[source')) {
-                titleElement.innerText = firstLine.replace(/\\s*【/, '').replace(/】\s*$/, '').trim();
-              } else {
-                titleElement.innerText = `内部記録（ファイル名: ${logFileName}）`;
-              }
-            })
-            .catch(e => {
-              // 失敗時に詳細なエラーを画面に表示
-              statusLight.className = 'status-light';
-              titleElement.innerText = "接続断 / アクセス失敗";
-              bodyElement.innerText = `【FATAL ERROR】\n\nパス試行: ${fetchPath}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
-              console.error("ARG Fetch Error:", e); 
-            });
+                    // 以前のファイル内容からタイトルを取得するロジックは不要なため削除
+                })
+                .catch(e => {
+                    // 失敗時に詳細なエラーを画面に表示
+                    statusLight.className = 'status-light';
+                    titleElement.innerText = "接続断 / アクセス失敗";
+                    bodyElement.innerText = `【FATAL ERROR】\n\n記録ID試行: ${recordId}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
+                    console.error("ARG Fetch Error:", e); 
+                });
         }, 500);
-        
-        return; 
-      }
 
-      // ===============================================
-      // 3. .txt パスではなかった場合
-      // ===============================================
-      statusLight.className = 'status-light';
-      titleElement.innerText = "文書が見つかりません";
     })(); // 即時実行
-  </script>
+</script>
 </body>
 </html>
