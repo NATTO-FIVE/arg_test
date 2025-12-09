@@ -51,7 +51,6 @@
       // ===============================================
       // logs/*.txt ファイルパスの場合、fetch で内容を取得
       // ===============================================
-      // docs.js の文書がなくなったため、この if ブロックにすべて集約されます。
 
       if (decodedKey.startsWith('logs/') && decodedKey.endsWith('.txt')) {
         const logFileName = decodedKey.split('/')[1];
