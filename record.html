@@ -26,10 +26,8 @@
     </div>
   </div>
 
-  <script src="docs.js"></script>
-
   <script>
-    // ★ 即時実行関数で全体をラップし、return 文を有効にする
+    // 即時実行関数で全体をラップし、return 文を有効にする
     (function() {
       const params = new URLSearchParams(location.search);
       const h = params.get("h");
@@ -41,7 +39,7 @@
       
       let decodedKey = "";
       try {
-        // Base64 デコード (ファイルパスまたは DOCS ID)
+        // Base64 デコード (ファイルパス)
         decodedKey = atob(h);
         pathElement.innerText = decodedKey; // デコードしたキーを表示
       } catch (e) {
@@ -49,23 +47,11 @@
         statusLight.className = 'status-light'; 
         return; 
       }
-
+      
       // ===============================================
-      // 1. docs.js 内の ID (r001, s105 など) として検索
+      // logs/*.txt ファイルパスの場合、fetch で内容を取得
       // ===============================================
-      // docs.jsを削除する場合、このブロック全体を削除してください。
-      const doc = DOCS.find(d => d.id === decodedKey);
-
-      if (doc) {
-        titleElement.innerText = doc.title;
-        bodyElement.innerText = doc.body.trim();
-        statusLight.className = 'status-light ok'; 
-        return; 
-      }
-
-      // ===============================================
-      // 2. .txt ファイルパスの場合、fetch で内容を取得
-      // ===============================================
+      // docs.js の文書がなくなったため、この if ブロックにすべて集約されます。
 
       if (decodedKey.startsWith('logs/') && decodedKey.endsWith('.txt')) {
         const logFileName = decodedKey.split('/')[1];
@@ -79,7 +65,7 @@
           fetch(fetchPath)
             .then(response => {
               if (!response.ok) {
-                // 404 (Not Found) や 500 などのエラーをここでキャッチ
+                // 404 (Not Found) などのエラーをここでキャッチ
                 throw new Error(`HTTP ERROR ${response.status}: ${response.statusText || 'ファイルが見つかりません (404)'}`);
               }
               return response.text();
@@ -120,7 +106,7 @@
       }
 
       // ===============================================
-      // 3. どちらでもなかった場合
+      // 3. .txt パスではなかった場合
       // ===============================================
       statusLight.className = 'status-light';
       titleElement.innerText = "文書が見つかりません";
