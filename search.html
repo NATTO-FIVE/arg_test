@@ -35,6 +35,7 @@
   async function loadDB() {
     if (dbLoaded || dbLoadError) return; // 一度試行したら再度fetchしない
     try {
+      // データのキャッシュを防ぐために no-cache を使用
       const res = await fetch(DB_URL, { cache: "no-cache" });
       if (!res.ok) throw new Error("HTTP " + res.status);
       DB = await res.json();
@@ -47,7 +48,7 @@
   }
 
   // ======================
-  // 検索ロジック
+  // 検索ロジック (【ここを修正】)
   // ======================
   async function search() {
     const q = (input.value || "").trim().toLowerCase();
@@ -71,7 +72,9 @@
       if (!Array.isArray(item.keys)) return false;
       return item.keys.some(k => {
         if (!k) return false;
-        return q.includes(String(k).toLowerCase());
+        // 修正: キーワード k の中にクエリ q が含まれているかをチェックする
+        // 以前のロジック (q.includes(k)) では、クエリがキーワードより短い場合に失敗していた
+        return String(k).toLowerCase().includes(q); 
       });
     });
 
@@ -84,8 +87,8 @@
     renderHits(hits, q);
   }
 
-// ======================
-  // 結果描画 (renderHits 関数を修正)
+  // ======================
+  // 結果描画 (【ここを修正】Base64処理を再導入)
   // ======================
   function renderHits(hits, q) {
     const escQ = escapeHtml(q);
@@ -99,22 +102,23 @@
       const snippet = escapeHtml((doc.snippet || "").toString());
       const file    = doc.file || "";
       const type    = doc.type || "";
-      const id      = doc.id || "";
+      const id      = doc.id || ""; 
 
       let typeLabel = "";
       if (type === "log")  typeLabel = "[内部記録]";
       if (type === "site") typeLabel = "[院内サイト]";
       if (type === "other") typeLabel = "[その他]";
-
+      
       let dataAttr = "";
-      if (type === "log" && file.endsWith('.txt')) {
-        // 【重要】logs/*.txtの場合: 実際のファイルパスを Base64 エンコードして data-h に設定
-        dataAttr = `data-h="${btoa(file)}"`; 
-      } else if (type === "log") {
-        // docs.js 由来の文書 (r001など) の場合: ID を Base64 エンコードして data-h に設定
-        dataAttr = `data-h="${btoa(id)}"`; 
-      } else {
-        // サイトの場合: 実際のファイルパス (file) を data-file に設定
+      let targetFile = "";
+      
+      // ログまたは docs.js 由来の文書の場合
+      if (type === "log") {
+        // Base64 エンコードする対象は、ファイルパス (.txt) または docs.js の ID
+        targetFile = file && file.endsWith('.txt') ? file : id;
+        dataAttr = `data-h="${btoa(targetFile)}"`; // Base64 エンコードして data-h に設定
+      } else if (type === "site") {
+        // 病院サイトの場合: 実際のファイルパス (file) を data-file に設定
         dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
       }
 
@@ -155,9 +159,11 @@
         }
       });
     });
+  }
+
 
   // ======================
-  // ユーティリティ：エスケープ
+  // ユーティリティ：エスケープ (変更なし)
   // ======================
   function escapeHtml(str) {
     return String(str)
@@ -178,7 +184,7 @@
   }
 
   // ======================
-  // 初期処理：?q= を拾って自動検索
+  // 初期処理：?q= を拾って自動検索 (変更なし)
   // ======================
   document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(location.search);
@@ -190,7 +196,7 @@
   });
 
   // ======================
-  // イベント設定
+  // イベント設定 (変更なし)
   // ======================
   btn.addEventListener("click", () => {
     search();
