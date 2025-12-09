@@ -30,17 +30,15 @@
     // 即時実行関数で全体をラップ
     (function() {
         const params = new URLSearchParams(location.search);
-        // URLパラメータ 'h' (Base64エンコードされた記録パスを想定)
+        // URLパラメータ 'h' (Base64エンコードされたパス)
         const h = params.get("h");
 
         const titleElement = document.getElementById("title");
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
+        // 1. Base64 デコード (ファイルパスを取得)
         let recordPath = ""; 
-        let searchKey = ""; // 検索に使用する純粋なID
-
-        // 1. Base64 デコードによる パス取得
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -48,40 +46,34 @@
             statusLight.className = 'status-light'; 
             return; 
         }
-
-        // 2. Base64 デコードしたパス (例: /logs/e4f7a2b1.txt) から検索用ID (e4f7a2b1) を抽出
-        {
-            // パスの整形: /logs/e4f7a2b1.txt -> e4f7a2b1
-            let tempPath = recordPath;
-
-            // フォルダ部分を削除 (例: /logs/e4f7a2b1.txt -> e4f7a2b1.txt)
-            const lastSlash = tempPath.lastIndexOf('/');
-            const filenameWithExt = (lastSlash !== -1) ? tempPath.substring(lastSlash + 1) : tempPath;
-            
-            // 拡張子 (.txt) を削除 (例: e4f7a2b1.txt -> e4f7a2b1)
-            const idWithoutExt = filenameWithExt.replace(/\.txt$/, '');
-
-            searchKey = idWithoutExt; // searchKey に純粋な ID を格納
-        }
         
+        // ★ ID抽出などの余計な加工は削除しました。
+        // recordPath (例: /logs/e4f7a2b1.txt) をそのまま検索に使います。
+
         // --- データ読み込みのメイン関数 ---
-        async function fetchRecordData(id) {
-            // 3. /data/index.json を読み込み (search.htmlとパスを合わせるため相対パスを使用)
+        async function fetchRecordData(targetPath) {
+            // 2. /data/index.json を読み込み
             const indexResponse = await fetch('data/index.json'); 
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
-            // 4. 抽出したID (searchKey) で該当レコードを検索
-            const record = indexData.find(item => item.id === id); 
+            // 3. ファイルパス (file) で該当レコードを検索
+            // ご指摘通り、IDではなく file フィールドで一致を確認します。
+            // 先頭の '/' の有無ズレを防ぐため、endsWith で比較するか、または厳密一致を試みます。
+            
+            // 例: index.json の file が "logs/e4f7a2b1.txt" で、targetPath が "/logs/e4f7a2b1.txt" の場合も考慮
+            const record = indexData.find(item => {
+                return item.file === targetPath || targetPath.endsWith(item.file) || item.file.endsWith(targetPath);
+            });
+
             if (!record) {
-                // ここでエラーが出る場合は、ID抽出かindex.jsonのID名が間違っている
+                // ファイルパスに対応する定義が見つからない
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
-            // 5. ログファイルの内容を読み込み
-            // record.file の値は 'logs/XXXXXX.txt' の形式と想定
+            // 4. ログファイルの内容を読み込み
             const logResponse = await fetch(record.file); 
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
@@ -101,8 +93,8 @@
         
         // 読み込み演出のための遅延
         setTimeout(() => {
-            // 6. 抽出した純粋なID (searchKey) を渡して実行
-            fetchRecordData(searchKey) 
+            // そのままのパス (recordPath) を渡す
+            fetchRecordData(recordPath) 
                 .then(data => {
                     // 成功
                     statusLight.className = 'status-light ok';
@@ -115,7 +107,7 @@
                         return;
                     }
 
-                    // タイトル表示 (パスの表示を排除し、index.jsonのtitleを使用)
+                    // タイトル表示 (index.jsonのtitleを使用)
                     titleElement.innerText = `内部記録: ${data.title}`; 
                     
                     // ファイル内容を本文に設定
@@ -126,12 +118,10 @@
                     statusLight.className = 'status-light';
                     titleElement.innerText = "接続断 / アクセス失敗";
                     
-                    // ネタバレ要素を排除した汎用メッセージ
                     bodyElement.innerText = `【FATAL ERROR】\n\n通信プロトコルの破損が確認されました。\nアクセス試行は無効化されました。\n\n機密区画は封鎖されました。`;
                     
-                    // 開発者向けデバッグ情報としてコンソールにのみ出力
                     console.error("ARG Fetch Error:", e); 
-                    console.error("試行ID:", recordPath); // デバッグ用にパス全体を出力
+                    console.error("検索パス:", recordPath);
                 });
         }, 500);
 
@@ -139,5 +129,3 @@
 </script>
 </body>
 </html>
-
-
