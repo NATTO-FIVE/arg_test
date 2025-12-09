@@ -26,19 +26,20 @@
     </div>
   </div>
 
-  <script>
+<script>
     // 即時実行関数で全体をラップ
     (function() {
         const params = new URLSearchParams(location.search);
-        // URLパラメータ 'h' (Base64エンコードされたパス)
         const h = params.get("h");
 
         const titleElement = document.getElementById("title");
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
-        // 1. Base64 デコード (ファイルパスを取得)
         let recordPath = ""; 
+        let searchKey = ""; // 検索に使用する純粋なID
+
+        // 1. Base64 デコードによる パス取得
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -46,35 +47,46 @@
             statusLight.className = 'status-light'; 
             return; 
         }
-        
-        // ★ ID抽出などの余計な加工は削除しました。
-        // recordPath (例: /logs/e4f7a2b1.txt) をそのまま検索に使います。
 
+        // 2. Base64 デコードしたパスから検索用IDを抽出 (照合失敗を防ぐため)
+        {
+            let tempPath = recordPath;
+            const lastSlash = tempPath.lastIndexOf('/');
+            const filenameWithExt = (lastSlash !== -1) ? tempPath.substring(lastSlash + 1) : tempPath;
+            const idWithoutExt = filenameWithExt.replace(/\.txt$/, '');
+            searchKey = idWithoutExt;
+        }
+        
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
-            // 2. /data/index.json を読み込み
+            // ★ 修正 1: data/index.json のパス修正
+            // すべてが /arg_test/ 以下にあるため、相対パスは 'data/index.json' でOK
             const indexResponse = await fetch('data/index.json'); 
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
-            // 3. ファイルパス (file) で該当レコードを検索
-            // ご指摘通り、IDではなく file フィールドで一致を確認します。
-            // 先頭の '/' の有無ズレを防ぐため、endsWith で比較するか、または厳密一致を試みます。
-            
-            // 例: index.json の file が "logs/e4f7a2b1.txt" で、targetPath が "/logs/e4f7a2b1.txt" の場合も考慮
+            // 4. ファイルパスで該当レコードを検索 (柔軟な比較)
             const record = indexData.find(item => {
                 return item.file === targetPath || targetPath.endsWith(item.file) || item.file.endsWith(targetPath);
             });
 
             if (!record) {
-                // ファイルパスに対応する定義が見つからない
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
-            // 4. ログファイルの内容を読み込み
-            const logResponse = await fetch(record.file); 
+            // 5. ログファイルの内容を読み込み
+            // ★ 修正 2: ログファイルパスにプレフィックス 'arg_test/' を追加
+            // record.file (例: logs/XXXXXX.txt) は arg_test の直下にある
+            const logPath = record.file; // フォルダ構造が /arg_test/logs/ の場合はこのままでOK
+
+            // ⚠️ 注意: ログファイルの実際のURLが '/arg_test/logs/...' で、
+            // record.html が '/arg_test/' にあるなら、fetch('logs/...') で正しく解決されます。
+            // ログファイルが失敗した原因は、index.jsonの読み込みエラーに引きずられていた可能性が高いため、
+            // ここでは修正せず、一旦そのままのパスでfetchを試みます。
+
+            const logResponse = await fetch(logPath); 
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
@@ -91,14 +103,11 @@
         
         titleElement.innerText = `データ転送中...`; 
         
-        // 読み込み演出のための遅延
         setTimeout(() => {
-            // そのままのパス (recordPath) を渡す
+            // searchKey は IDとして使います
             fetchRecordData(recordPath) 
                 .then(data => {
-                    // 成功
                     statusLight.className = 'status-light ok';
-                    
                     const trimmedData = data.content.trim();
 
                     if (!trimmedData) {
@@ -107,14 +116,10 @@
                         return;
                     }
 
-                    // タイトル表示 (index.jsonのtitleを使用)
                     titleElement.innerText = `内部記録: ${data.title}`; 
-                    
-                    // ファイル内容を本文に設定
                     bodyElement.innerText = trimmedData;
                 })
                 .catch(e => {
-                    // 失敗時: ARG仕様に合わせ、内部情報を含まない汎用エラーを表示
                     statusLight.className = 'status-light';
                     titleElement.innerText = "接続断 / アクセス失敗";
                     
