@@ -26,7 +26,7 @@
     </div>
   </div>
 
- <script src="docs.js"></script>
+  <script src="docs.js"></script>
 
   <script>
     const params = new URLSearchParams(location.search);
@@ -41,10 +41,10 @@
     try {
       // Base64 デコード (ファイルパスまたは DOCS ID)
       decodedKey = atob(h);
-      pathElement.innerText = decodedKey; // デコードしたパスを表示
+      pathElement.innerText = decodedKey; // デコードしたキーを表示
     } catch (e) {
       titleElement.innerText = "文書の読み込みエラー: 無効なキー";
-      statusLight.className = 'status-light'; // 赤点滅
+      statusLight.className = 'status-light'; 
       return;
     }
 
@@ -68,13 +68,16 @@
       const logFileName = decodedKey.split('/')[1];
       titleElement.innerText = `データ転送中... (ファイル: ${logFileName})`;
 
+      // logs/*.txt のパスは、現在の index.html, record.html と同じ階層にあると仮定する
+      // 正確なパスを保証するため、decodedKey をそのまま使用（logs/~~.txt）
+      const fetchPath = decodedKey;
+      
       // 0.5秒の遅延を設けて、読み込み演出と非同期処理の確実性を高める
       setTimeout(() => {
           
-        fetch(decodedKey)
+        fetch(fetchPath)
           .then(response => {
             if (!response.ok) {
-              // 404 (Not Found) などのエラーをここでキャッチ
               throw new Error(`HTTP ERROR ${response.status}: ${response.statusText || 'ファイルが見つかりません (404)'}`);
             }
             return response.text();
@@ -108,8 +111,8 @@
             // 失敗時に詳細なエラーを画面に表示
             statusLight.className = 'status-light';
             titleElement.innerText = "接続断 / アクセス失敗";
-            bodyElement.innerText = `【FATAL ERROR】\n\nパス: ${decodedKey}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
-            console.error("ARG Fetch Error:", e); // コンソールにもエラーを出力
+            bodyElement.innerText = `【FATAL ERROR】\n\nパス試行: ${fetchPath}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
+            console.error("ARG Fetch Error:", e); 
           });
       }, 500);
       
@@ -122,6 +125,5 @@
     statusLight.className = 'status-light';
     titleElement.innerText = "文書が見つかりません";
   </script>
-
 </body>
 </html>
