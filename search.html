@@ -84,8 +84,8 @@
     renderHits(hits, q);
   }
 
-  // ======================
-  // 結果描画
+// ======================
+  // 結果描画 (renderHits 関数を修正)
   // ======================
   function renderHits(hits, q) {
     const escQ = escapeHtml(q);
@@ -99,16 +99,31 @@
       const snippet = escapeHtml((doc.snippet || "").toString());
       const file    = doc.file || "";
       const type    = doc.type || "";
+      const id      = doc.id || "";
 
       let typeLabel = "";
       if (type === "log")  typeLabel = "[内部記録]";
       if (type === "site") typeLabel = "[院内サイト]";
       if (type === "other") typeLabel = "[その他]";
 
+      let dataAttr = "";
+      if (type === "log" && file.endsWith('.txt')) {
+        // 【重要】logs/*.txtの場合: 実際のファイルパスを Base64 エンコードして data-h に設定
+        dataAttr = `data-h="${btoa(file)}"`; 
+      } else if (type === "log") {
+        // docs.js 由来の文書 (r001など) の場合: ID を Base64 エンコードして data-h に設定
+        dataAttr = `data-h="${btoa(id)}"`; 
+      } else {
+        // サイトの場合: 実際のファイルパス (file) を data-file に設定
+        dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
+      }
+
+
       html.push(`
         <li class="hit">
           <h3 class="doc-title"
-              data-file="${encodeHtmlAttr(file)}"
+              ${dataAttr}
+              data-type="${type}"
               style="cursor:pointer; text-decoration:underline;">
             ${typeLabel ? `<span class="hit-type">${typeLabel}</span> ` : ""}${title}
           </h3>
@@ -120,15 +135,26 @@
     html.push("</ul>");
     result.innerHTML = html.join("");
 
-    // クリックで file を新タブで開く
+    // クリックイベントのロジックを修正
     document.querySelectorAll(".doc-title").forEach(el => {
       el.addEventListener("click", () => {
-        const file = el.getAttribute("data-file");
-        if (!file) return;
-        window.open(file, "_blank");
+        const type = el.getAttribute("data-type");
+        
+        if (type === "log") {
+          // 内部記録（log）の場合: Base64 エンコードされたキーを record.html に渡す
+          const base64Key = el.getAttribute("data-h");
+          if (base64Key) {
+            window.open(`record.html?h=${base64Key}`, "_blank");
+          }
+        } else if (type === "site") {
+          // 病院サイト（site）の場合: 既存のファイルパスを直接開く
+          const file = el.getAttribute("data-file");
+          if (file) {
+            window.open(file, "_blank");
+          }
+        }
       });
     });
-  }
 
   // ======================
   // ユーティリティ：エスケープ
