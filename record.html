@@ -1,49 +1,48 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>内部記録ビューア：接続中</title>
-  <link rel="stylesheet" href="style.css"> 
+  <meta charset="UTF-8">
+  <title>内部記録ビューア：接続中</title>
+  <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
-  <div class="terminal record"> 
-    
-    <div class="terminal-header">
-        > CONNECTED: 翠波ネットワーク / 記録検索端末
-        <br>
-        > FETCHING FILE　・・・・
-        <span class="status-light" id="status-light" title="接続状態"></span>
-    </div>
+  <div class="terminal record"> 
+    
+    <div class="terminal-header">
+        > CONNECTED: 翠波ネットワーク / 記録検索端末
+        <br>
+        > FETCHING FILE　・・・・
+        <span class="status-light" id="status-light" title="接続状態"></span>
+    </div>
 
-    <h1 id="title"></h1>
-    <pre id="body" style="white-space:pre-wrap;"></pre>
-    
-    <div class="terminal-footer">
-        <p class="disclaimer">
-            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-        </p>
-    </div>
-  </div>
+    <h1 id="title"></h1>
+    <pre id="body" style="white-space:pre-wrap;"></pre>
+    
+    <div class="terminal-footer">
+        <p class="disclaimer">
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+        </p>
+    </div>
+  </div>
 
-<script>
-    // 即時実行関数で全体をラップし、return 文を有効にする
+  <script>
+    // 即時実行関数で全体をラップ
     (function() {
         const params = new URLSearchParams(location.search);
-        // URLパラメータ 'h' (Base64エンコードされたIDを想定)
+        // URLパラメータ 'h' (Base64エンコードされた記録IDを想定)
         const h = params.get("h");
-  
-        // JSON DB のパス
-        const DB_URL = "data/index.json";
-      
+
         const titleElement = document.getElementById("title");
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
-        // Base64 デコード (ここではログのIDとして使用)
         let recordId = ""; 
+        
+        // 1. Base64 デコードによる ID 取得
         try {
             recordId = atob(h);
+            // 以前のパス表示ロジックは全て削除
         } catch (e) {
             titleElement.innerText = "文書の読み込みエラー: 無効なキー";
             statusLight.className = 'status-light'; 
@@ -52,22 +51,25 @@
 
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(id) {
-            //const indexResponse = await fetch('data/index.json');
-            const indexResponse = await fetch(DB_URL, { cache: "no-cache" });
+            // 2. /data/index.json を読み込み (search.htmlとパスを合わせるため相対パスを使用)
+            // 'data/index.json' が record.html から見て正しいパスであることを想定
+            const indexResponse = await fetch('data/index.json'); 
             if (!indexResponse.ok) {
-                // 通信エラーを汎用的なエラーとしてスロー
+                // 通信エラーは汎用的なエラーとしてスロー
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
-            // 2. ID で該当レコードを検索
+            // 3. ID で該当レコードを検索
+            // IDフィールド名はシステムの設計に依存
             const record = indexData.find(item => item.id === id); 
             if (!record) {
                 // レコードが見つからないエラーも汎用的なエラーとしてスロー
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
-            // 3. ログファイルの内容を読み込み
+            // 4. ログファイルの内容を読み込み
+            // record.file の値は 'logs/XXXXXX.txt' の形式と想定
             const logResponse = await fetch(record.file); 
             if (!logResponse.ok) {
                 // ログファイルが見つからないエラーも汎用的なエラーとしてスロー
@@ -84,10 +86,9 @@
         // 実行ロジック
         // ===============================================
         
-        // 読み込み開始時の演出も ID を使わず汎用的に
         titleElement.innerText = `データ転送中...`; 
         
-        // 0.5秒の遅延
+        // 読み込み演出のための遅延 (元のコードから継承)
         setTimeout(() => {
             fetchRecordData(recordId)
                 .then(data => {
@@ -102,22 +103,24 @@
                         return;
                     }
 
-                    // タイトル表示
+                    // タイトル表示 (パスの表示を排除し、index.jsonのtitleを使用)
                     titleElement.innerText = `内部記録: ${data.title}`; 
                     
                     // ファイル内容を本文に設定
                     bodyElement.innerText = trimmedData;
+
+                    // 以前のファイル内容からタイトルを取得する複雑なロジックは削除
                 })
                 .catch(e => {
-                    // ★ 修正後のエラーメッセージ
+                    // 失敗時: ARG仕様に合わせ、内部情報を含まない汎用エラーを表示
                     statusLight.className = 'status-light';
                     titleElement.innerText = "接続断 / アクセス失敗";
                     
-                    // 汎用的なエラーメッセージに置き換え
+                    // ネタバレ要素を排除したメッセージ
                     bodyElement.innerText = `【FATAL ERROR】\n\n通信プロトコルの破損が確認されました。\nアクセス試行は無効化されました。\n\n機密区画は封鎖されました。`;
                     
-                    // 開発者向けデバッグ情報
-                    console.error("Fetch Error:", e); 
+                    // 開発者向けデバッグ情報としてコンソールにのみ出力
+                    console.error("ARG Fetch Error:", e); 
                     console.error("試行ID:", recordId);
                 });
         }, 500);
