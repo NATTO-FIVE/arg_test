@@ -42,25 +42,23 @@
         try {
             recordPath = atob(h);
         } catch (e) {
-            titleElement.innerText = "文書の読み込みエラー: 無効なキー";
-            statusLight.className = 'status-light'; 
+            // ... エラー処理 (変更なし)
             return; 
         }
         
         // ----------------------------------------------------
-        // ★ 修正箇所: 検索キー (searchKey) を抽出
+        // ★ 修正箇所: 検索キー (searchKey) を抽出するロジックをここに追加
         // ----------------------------------------------------
         let searchKey = recordPath;
         
-        // パスの整形
+        // パスの整形: /logs/e4f7a2b1.txt -> e4f7a2b1
         if (searchKey.startsWith('/logs/')) {
-            // 例: /logs/e4f7a2b1.txt  -> e4f7a2b1.txt
             searchKey = searchKey.substring(6); 
         }
         if (searchKey.endsWith('.txt')) {
-            // 例: e4f7a2b1.txt -> e4f7a2b1
             searchKey = searchKey.slice(0, -4);
         }
+        // ----------------------------------------------------
 
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(id) {
