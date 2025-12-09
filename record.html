@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>内部記録ビューア：接続中</title>
   <link rel="stylesheet" href="style.css"> 
-</head>
+  <base href="./"> </head>
 <body>
 
   <div class="terminal record"> 
@@ -26,8 +26,7 @@
     </div>
   </div>
 
-<script>
-    // 即時実行関数で全体をラップ
+  <script>
     (function() {
         const params = new URLSearchParams(location.search);
         const h = params.get("h");
@@ -39,7 +38,7 @@
         let recordPath = ""; 
         let searchKey = ""; // 検索に使用する純粋なID
 
-        // 1. Base64 デコードによる パス取得
+        // 1. Base64 デコード
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -48,7 +47,7 @@
             return; 
         }
 
-        // 2. Base64 デコードしたパスから検索用IDを抽出 (照合失敗を防ぐため)
+        // 2. パスから検索用IDを抽出
         {
             let tempPath = recordPath;
             const lastSlash = tempPath.lastIndexOf('/');
@@ -57,47 +56,35 @@
             searchKey = idWithoutExt;
         }
         
-       // --- データ読み込みのメイン関数 ---
-        async function fetchRecordData(id) {
-            // 2. /data/index.json を読み込み
-            // ★ 修正: 相対パスの起点を明確にするため、現在のURLからベースパスを生成
-        
-            // 現在のページURL (例: https://host.com/arg_test/record.html)
-            const baseUrl = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-            
-            // index.jsonへのフルパス (例: /arg_test/data/index.json)
-            const indexPath = baseUrl + 'data/index.json'; 
-            
-            // ログファイルへのフルパス (例: /arg_test/logs/XXXXXX.txt)
-            const logFilePath = baseUrl + record.file; 
-            
-            
-            // 【修正後の fetch 呼び出し】
-            const indexResponse = await fetch(indexPath); // フルパスで呼び出し
+        // --- データ読み込みのメイン関数 ---
+        async function fetchRecordData(targetPath) {
+            // 3. /data/index.json を読み込み
+            // ★ 修正: <base href="./"> の効果により、シンプルな相対パスに戻す
+            const indexResponse = await fetch('data/index.json'); 
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
-        
-            // 4. ファイルパスで該当レコードを検索 (柔軟な比較はそのまま維持)
+
+            // 4. ファイルパスで該当レコードを検索
             const record = indexData.find(item => {
-                // ... (検索ロジックは維持)
+                // 柔軟な比較 (fileパスが /logs/ か logs/ かの差を吸収)
+                return item.file === targetPath || targetPath.endsWith(item.file) || item.file.endsWith(targetPath);
             });
-            
+
             if (!record) {
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
             // 5. ログファイルの内容を読み込み
-            // record.file の値は 'logs/XXXXXX.txt' の形式と想定
-            // ここもフルパスで指定する
-            const logResponse = await fetch(baseUrl + record.file); 
+            // ★ 修正: <base href="./"> の効果により、シンプルな相対パスに戻す
+            const logResponse = await fetch(record.file); 
             
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
             const logContent = await logResponse.text();
-        
+
             return { title: record.title, content: logContent };
         }
         // --- データ読み込み関数 終了 ---
@@ -110,8 +97,7 @@
         titleElement.innerText = `データ転送中...`; 
         
         setTimeout(() => {
-            // searchKey は IDとして使います
-            fetchRecordData(recordPath) 
+            fetchRecordData(recordPath) // 渡すのはデコードされたパス全体
                 .then(data => {
                     statusLight.className = 'status-light ok';
                     const trimmedData = data.content.trim();
@@ -136,7 +122,7 @@
                 });
         }, 500);
 
-    })(); // 即時実行
+    })();
 </script>
 </body>
 </html>
