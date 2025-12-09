@@ -49,9 +49,6 @@
 
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(id) {
-            // 1. /data/index.json を読み込み
-            // 目録ファイルが存在することは確定している前提で、
-            // fetchに失敗した場合でも具体的なファイル名は表示しない。
             const indexResponse = await fetch('/data/index.json');
             if (!indexResponse.ok) {
                 // 通信エラーを汎用的なエラーとしてスロー
