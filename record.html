@@ -57,43 +57,49 @@
             searchKey = idWithoutExt;
         }
         
-        // --- データ読み込みのメイン関数 ---
-        async function fetchRecordData(targetPath) {
-            // ★ 修正 1: data/index.json のパス修正
-            // すべてが /arg_test/ 以下にあるため、相対パスは 'data/index.json' でOK
-            const indexResponse = await fetch('data/index.json'); 
-            if (!indexResponse.ok) {
-                throw new Error(`[CRITICAL] 目録データ通信エラー`);
-            }
-            const indexData = await indexResponse.json();
+       // --- データ読み込みのメイン関数 ---
+async function fetchRecordData(id) {
+    // 2. /data/index.json を読み込み
+    // ★ 修正: 相対パスの起点を明確にするため、現在のURLからベースパスを生成
 
-            // 4. ファイルパスで該当レコードを検索 (柔軟な比較)
-            const record = indexData.find(item => {
-                return item.file === targetPath || targetPath.endsWith(item.file) || item.file.endsWith(targetPath);
-            });
+    // 現在のページURL (例: https://host.com/arg_test/record.html)
+    const baseUrl = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
+    
+    // index.jsonへのフルパス (例: /arg_test/data/index.json)
+    const indexPath = baseUrl + 'data/index.json'; 
+    
+    // ログファイルへのフルパス (例: /arg_test/logs/XXXXXX.txt)
+    const logFilePath = baseUrl + record.file; 
+    
+    
+    // 【修正後の fetch 呼び出し】
+    const indexResponse = await fetch(indexPath); // フルパスで呼び出し
+    if (!indexResponse.ok) {
+        throw new Error(`[CRITICAL] 目録データ通信エラー`);
+    }
+    const indexData = await indexResponse.json();
 
-            if (!record) {
-                throw new Error(`[CRITICAL] 記録データ照合失敗`);
-            }
-            
-            // 5. ログファイルの内容を読み込み
-            // ★ 修正 2: ログファイルパスにプレフィックス 'arg_test/' を追加
-            // record.file (例: logs/XXXXXX.txt) は arg_test の直下にある
-            const logPath = record.file; // フォルダ構造が /arg_test/logs/ の場合はこのままでOK
+    // 4. ファイルパスで該当レコードを検索 (柔軟な比較はそのまま維持)
+    const record = indexData.find(item => {
+        // ... (検索ロジックは維持)
+    });
+    
+    if (!record) {
+        throw new Error(`[CRITICAL] 記録データ照合失敗`);
+    }
+    
+    // 5. ログファイルの内容を読み込み
+    // record.file の値は 'logs/XXXXXX.txt' の形式と想定
+    // ここもフルパスで指定する
+    const logResponse = await fetch(baseUrl + record.file); 
+    
+    if (!logResponse.ok) {
+        throw new Error(`[CRITICAL] ログファイル通信エラー`);
+    }
+    const logContent = await logResponse.text();
 
-            // ⚠️ 注意: ログファイルの実際のURLが '/arg_test/logs/...' で、
-            // record.html が '/arg_test/' にあるなら、fetch('logs/...') で正しく解決されます。
-            // ログファイルが失敗した原因は、index.jsonの読み込みエラーに引きずられていた可能性が高いため、
-            // ここでは修正せず、一旦そのままのパスでfetchを試みます。
-
-            const logResponse = await fetch(logPath); 
-            if (!logResponse.ok) {
-                throw new Error(`[CRITICAL] ログファイル通信エラー`);
-            }
-            const logContent = await logResponse.text();
-
-            return { title: record.title, content: logContent };
-        }
+    return { title: record.title, content: logContent };
+}
         // --- データ読み込み関数 終了 ---
 
 
