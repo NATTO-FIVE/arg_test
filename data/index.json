@@ -39,60 +39,12 @@
     "file": "logs/b3a219d0.txt",
     "type": "log"
   },
-  {
-    "id": "log_ds187",
-    "keys": ["DS187", "DS-187", "意識転落", "同期層"],
-    "title": "DS-187：同期層転落ログ",
-    "snippet": "被験体187が同期層に転落した際のログ断片。",
-    "file": "logs/8a91c3ef.txt",
-    "type": "log"
-  },
-  {
-    "id": "log_layer8",
-    "keys": ["意識同期層", "Layer-8", "層外", "片道接続"],
-    "title": "Layer-8：意識同期層について",
-    "snippet": "事故後の研究班が残した意識同期層に関する技術メモ。",
-    "file": "logs/f4b903a1.txt",
-    "type": "log"
-  },
-  {
-    "id": "log_patient_c",
-    "keys": ["患者C", "異常回復", "断裂", "後遺症", "2012"],
-    "title": "患者C：経過記録（抜粋）",
-    "snippet": "1978年事故唯一の生存者Cの経過記録。",
-    "file": "logs/7fb2a841.txt",
-    "type": "log"
-  },
-  {
-    "id": "log_echo_voices",
-    "keys": ["合唱", "同期現象", "きこえているか"],
-    "title": "院内異常：合唱現象ログ",
-    "snippet": "複数患者の発語が一致した“合唱”現象の監視ログ。",
-    "file": "logs/da942c15.txt",
-    "type": "log"
-  },
-  {
-    "id": "project_echelon_summary",
-    "keys": ["永位計画", "Echelon", "院長", "意識移行"],
-    "title": "永位計画（Project Echelon）概要",
-    "snippet": "院長が主導する意識移行計画の内部メモ。",
-    "file": "logs/59ac8f10.txt",
-    "type": "log"
-  },
-  {
-    "id": "patient_A_note",
-    "keys": ["患者A", "不眠症", "転院", "適合者", "6.2hz反応"],
-    "title": "新規患者A：検査メモ",
-    "snippet": "2025年に来院した患者Aの検査ログ。",
-    "file": "logs/0ce7b2d4.txt",
-    "type": "log"
-  },
-  {
-    "id": "internal_mail_01",
-    "keys": ["内部メール", "警告", "異常", "温度低下"],
-    "title": "内部メール：温度低下の報告",
-    "snippet": "観察棟付近で発生した室温低下に関する内部連絡。",
-    "file": "logs/c8ee1fa2.txt",
+ {
+    "id": "doc_r001",
+    "keys": ["睡眠同期", "報告書"],
+    "title": "内部報告書：睡眠同期現象（初期報告）",
+    "snippet": "長期滞在被験者 12 名のうち、8 名の睡眠パターンが過去 72 時間にわたり完全同期していることを確認。",
+    "file": "logs/e4f7a2b1.txt", /* ユーザーが作成したランダムファイル名 */
     "type": "log"
   }
 ]
