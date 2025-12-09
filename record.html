@@ -26,7 +26,7 @@
     </div>
   </div>
 
- <script>
+<script>
     // 即時実行関数で全体をラップし、return 文を有効にする
     (function() {
         const params = new URLSearchParams(location.search);
@@ -35,14 +35,12 @@
 
         const titleElement = document.getElementById("title");
         const bodyElement = document.getElementById("body");
-        // const pathElement = document.getElementById("access-path"); // HTMLに存在しないため、ここでは定義削除
         const statusLight = document.getElementById("status-light");
         
         // Base64 デコード (ここではログのIDとして使用)
         let recordId = ""; 
         try {
             recordId = atob(h);
-            // パス表示ロジックは削除
         } catch (e) {
             titleElement.innerText = "文書の読み込みエラー: 無効なキー";
             statusLight.className = 'status-light'; 
@@ -52,24 +50,27 @@
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(id) {
             // 1. /data/index.json を読み込み
+            // 目録ファイルが存在することは確定している前提で、
+            // fetchに失敗した場合でも具体的なファイル名は表示しない。
             const indexResponse = await fetch('/data/index.json');
             if (!indexResponse.ok) {
-                throw new Error(`目録ファイルが見つかりません: /data/index.json`);
+                // 通信エラーを汎用的なエラーとしてスロー
+                throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
-            // 2. ID で該当レコードを検索 (index.json内のIDフィールドと照合を仮定)
-            // ※ IDフィールド名はシステムの設計に依存
+            // 2. ID で該当レコードを検索
             const record = indexData.find(item => item.id === id); 
             if (!record) {
-                throw new Error(`記録 ID: ${id} は目録に存在しません`);
+                // レコードが見つからないエラーも汎用的なエラーとしてスロー
+                throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
             // 3. ログファイルの内容を読み込み
-            // record.file は logs/XXXXXX.txt のパスを保持
             const logResponse = await fetch(record.file); 
             if (!logResponse.ok) {
-                throw new Error(`HTTP ERROR ${logResponse.status}: ${logResponse.statusText || 'ログファイルが見つかりません'}`);
+                // ログファイルが見つからないエラーも汎用的なエラーとしてスロー
+                throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
             const logContent = await logResponse.text();
 
@@ -82,11 +83,10 @@
         // 実行ロジック
         // ===============================================
         
-        // ログファイルのパスチェックは不要になったため、処理を統合
-
-        titleElement.innerText = `データ転送中... (記録ID: ${recordId})`;
+        // 読み込み開始時の演出も ID を使わず汎用的に
+        titleElement.innerText = `データ転送中...`; 
         
-        // 0.5秒の遅延を設けて、読み込み演出と非同期処理の確実性を高める
+        // 0.5秒の遅延
         setTimeout(() => {
             fetchRecordData(recordId)
                 .then(data => {
@@ -101,20 +101,23 @@
                         return;
                     }
 
-                    // ★ 修正箇所: /data/index.json から取得した title を表示
+                    // タイトル表示
                     titleElement.innerText = `内部記録: ${data.title}`; 
                     
                     // ファイル内容を本文に設定
                     bodyElement.innerText = trimmedData;
-
-                    // 以前のファイル内容からタイトルを取得するロジックは不要なため削除
                 })
                 .catch(e => {
-                    // 失敗時に詳細なエラーを画面に表示
+                    // ★ 修正後のエラーメッセージ
                     statusLight.className = 'status-light';
                     titleElement.innerText = "接続断 / アクセス失敗";
-                    bodyElement.innerText = `【FATAL ERROR】\n\n記録ID試行: ${recordId}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
+                    
+                    // 汎用的なエラーメッセージに置き換え
+                    bodyElement.innerText = `【FATAL ERROR】\n\n通信プロトコルの破損が確認されました。\nアクセス試行は無効化されました。\n\n機密区画は封鎖されました。`;
+                    
+                    // 開発者向けデバッグ情報
                     console.error("ARG Fetch Error:", e); 
+                    console.error("試行ID:", recordId);
                 });
         }, 500);
 
