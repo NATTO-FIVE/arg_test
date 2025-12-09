@@ -55,4 +55,52 @@ h1 {
   text-decoration: underline;
 }
 
+/*---record.html　文書ビューアのデザイン--*/
+
+/* ターミナル風のタイトル部分 */
+.terminal-header {
+  border-bottom: 1px solid #3aa7ff55; /* 青い光のようなライン */
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  color: #0af; /* アクセントカラー（シアン） */
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* ステータスランプ */
+.status-light {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: red;
+  margin-left: 10px;
+  vertical-align: middle;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  animation: blink-red 1s infinite alternate; /* 読み込み中は点滅 */
+}
+
+.status-light.ok {
+  background: #0f0; /* 成功時は緑 */
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  animation: none;
+}
+
+@keyframes blink-red {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
+/* 記録内容のタイトルと本文 */
+.record h1 {
+  color: #a8d8ff;
+  border-bottom: 1px solid #3aa7ff22;
+  padding-bottom: 4px;
+}
+
+.record pre {
+  margin-top: 16px;
+}
+
+
 
