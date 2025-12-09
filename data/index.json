@@ -23,25 +23,10 @@
     "file": "hospital/research_center.html",
     "type": "site"
   },
-  {
-    "id": "log_1978_summary",
-    "keys": ["1978", "事故", "実験", "6.2hz", "観察棟B"],
-    "title": "1978年同期実験事故：概要記録",
-    "snippet": "1978年に観察棟Bで発生した脳波同期実験事故の概要。",
-    "file": "logs/19fe0a7c.txt",
-    "type": "log"
-  },
-  {
-    "id": "log_1978_detail",
-    "keys": ["被験体", "同期事故", "脳波同期", "合唱"],
-    "title": "1978年事故：詳細ログ抜粋",
-    "snippet": "事故当日の詳細な被験体ログの断片です。",
-    "file": "logs/b3a219d0.txt",
-    "type": "log"
-  },
+  
  {
     "id": "doc_r001",
-    "keys": ["睡眠同期", "報告書"],
+    "keys": ["睡眠同期","同期"],
     "title": "内部報告書：睡眠同期現象（初期報告）",
     "snippet": "長期滞在被験者 12 名のうち、8 名の睡眠パターンが過去 72 時間にわたり完全同期していることを確認。",
     "file": "logs/e4f7a2b1.txt", 
