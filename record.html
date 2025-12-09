@@ -32,7 +32,10 @@
         const params = new URLSearchParams(location.search);
         // URLパラメータ 'h' (Base64エンコードされたIDを想定)
         const h = params.get("h");
-
+  
+        // JSON DB のパス
+        const DB_URL = "data/index.json";
+      
         const titleElement = document.getElementById("title");
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
