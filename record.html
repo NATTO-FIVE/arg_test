@@ -26,104 +26,103 @@
     </div>
   </div>
 
-  <script src="docs.js"></script>
+<script src="docs.js"></script>
 
   <script>
-    const params = new URLSearchParams(location.search);
-    const h = params.get("h");
+    // 即時実行関数で全体をラップし、return 文を有効にする
+    (function() {
+      const params = new URLSearchParams(location.search);
+      const h = params.get("h");
 
-    const titleElement = document.getElementById("title");
-    const bodyElement = document.getElementById("body");
-    const pathElement = document.getElementById("access-path");
-    const statusLight = document.getElementById("status-light");
-    
-    let decodedKey = "";
-    try {
-      // Base64 デコード (ファイルパスまたは DOCS ID)
-      decodedKey = atob(h);
-      pathElement.innerText = decodedKey; // デコードしたキーを表示
-    } catch (e) {
-      titleElement.innerText = "文書の読み込みエラー: 無効なキー";
-      statusLight.className = 'status-light'; 
-      return;
-    }
-
-    // ===============================================
-    // 1. docs.js 内の ID (r001, s105 など) として検索
-    // ===============================================
-    const doc = DOCS.find(d => d.id === decodedKey);
-
-    if (doc) {
-      titleElement.innerText = doc.title;
-      bodyElement.innerText = doc.body.trim();
-      statusLight.className = 'status-light ok'; // 成功表示
-      return;
-    }
-
-    // ===============================================
-    // 2. .txt ファイルパスの場合、fetch で内容を取得
-    // ===============================================
-
-    if (decodedKey.startsWith('logs/') && decodedKey.endsWith('.txt')) {
-      const logFileName = decodedKey.split('/')[1];
-      titleElement.innerText = `データ転送中... (ファイル: ${logFileName})`;
-
-      // logs/*.txt のパスは、現在の index.html, record.html と同じ階層にあると仮定する
-      // 正確なパスを保証するため、decodedKey をそのまま使用（logs/~~.txt）
-      const fetchPath = decodedKey;
+      const titleElement = document.getElementById("title");
+      const bodyElement = document.getElementById("body");
+      const pathElement = document.getElementById("access-path");
+      const statusLight = document.getElementById("status-light");
       
-      // 0.5秒の遅延を設けて、読み込み演出と非同期処理の確実性を高める
-      setTimeout(() => {
-          
-        fetch(fetchPath)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP ERROR ${response.status}: ${response.statusText || 'ファイルが見つかりません (404)'}`);
-            }
-            return response.text();
-          })
-          .then(data => {
-            // 成功
-            statusLight.className = 'status-light ok';
+      let decodedKey = "";
+      try {
+        // Base64 デコード (ファイルパスまたは DOCS ID)
+        decodedKey = atob(h);
+        pathElement.innerText = decodedKey;
+      } catch (e) {
+        titleElement.innerText = "文書の読み込みエラー: 無効なキー";
+        statusLight.className = 'status-light'; 
+        return; // ★ 関数内の return になる
+      }
+
+      // ===============================================
+      // 1. docs.js 内の ID (r001, s105 など) として検索
+      // ===============================================
+      const doc = DOCS.find(d => d.id === decodedKey);
+
+      if (doc) {
+        titleElement.innerText = doc.title;
+        bodyElement.innerText = doc.body.trim();
+        statusLight.className = 'status-light ok'; 
+        return; // ★ 関数内の return になる
+      }
+
+      // ===============================================
+      // 2. .txt ファイルパスの場合、fetch で内容を取得
+      // ===============================================
+
+      if (decodedKey.startsWith('logs/') && decodedKey.endsWith('.txt')) {
+        const logFileName = decodedKey.split('/')[1];
+        titleElement.innerText = `データ転送中... (ファイル: ${logFileName})`;
+
+        const fetchPath = decodedKey;
+        
+        // 0.5秒の遅延を設けて、読み込み演出と非同期処理の確実性を高める
+        setTimeout(() => {
             
-            const trimmedData = data.trim();
+          fetch(fetchPath)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP ERROR ${response.status}: ${response.statusText || 'ファイルが見つかりません (404)'}`);
+              }
+              return response.text();
+            })
+            .then(data => {
+              // 成功
+              statusLight.className = 'status-light ok';
+              
+              const trimmedData = data.trim();
 
-            if (!trimmedData) {
-                titleElement.innerText = "記録が存在しないか、データが破損しています";
-                bodyElement.innerText = "ファイルは存在しますが、内容は空です。";
-                return;
-            }
+              if (!trimmedData) {
+                  titleElement.innerText = "記録が存在しないか、データが破損しています";
+                  bodyElement.innerText = "ファイルは存在しますが、内容は空です。";
+                  return;
+              }
 
-            // ★ ファイル内容を本文に設定
-            bodyElement.innerText = trimmedData;
+              // ★ ファイル内容を本文に設定
+              bodyElement.innerText = trimmedData;
 
-            // タイトル設定 (本文の最初の行を利用)
-            const firstLine = trimmedData.split('\n')[0];
-            if (firstLine.startsWith('[source')) {
-              // ログの場合、タイトルはログのヘッダーを使用
-              titleElement.innerText = firstLine.replace(/\\s*【/, '').replace(/】\s*$/, '').trim();
-            } else {
-              // それ以外の場合（もしあれば）はファイル名をタイトルに
-              titleElement.innerText = `内部記録（ファイル名: ${logFileName}）`;
-            }
-          })
-          .catch(e => {
-            // 失敗時に詳細なエラーを画面に表示
-            statusLight.className = 'status-light';
-            titleElement.innerText = "接続断 / アクセス失敗";
-            bodyElement.innerText = `【FATAL ERROR】\n\nパス試行: ${fetchPath}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
-            console.error("ARG Fetch Error:", e); 
-          });
-      }, 500);
-      
-      return;
-    }
+              // タイトル設定 (本文の最初の行を利用)
+              const firstLine = trimmedData.split('\n')[0];
+              if (firstLine.startsWith('[source')) {
+                titleElement.innerText = firstLine.replace(/\\s*【/, '').replace(/】\s*$/, '').trim();
+              } else {
+                titleElement.innerText = `内部記録（ファイル名: ${logFileName}）`;
+              }
+            })
+            .catch(e => {
+              // 失敗時に詳細なエラーを画面に表示
+              statusLight.className = 'status-light';
+              titleElement.innerText = "接続断 / アクセス失敗";
+              bodyElement.innerText = `【FATAL ERROR】\n\nパス試行: ${fetchPath}\nエラー内容: ${e.message}\n\n機密区画は封鎖されました。`;
+              console.error("ARG Fetch Error:", e); 
+            });
+        }, 500);
+        
+        return; // ★ 関数内の return になる
+      }
 
-    // ===============================================
-    // 3. どちらでもなかった場合
-    // ===============================================
-    statusLight.className = 'status-light';
-    titleElement.innerText = "文書が見つかりません";
+      // ===============================================
+      // 3. どちらでもなかった場合
+      // ===============================================
+      statusLight.className = 'status-light';
+      titleElement.innerText = "文書が見つかりません";
+    })(); // 即時実行
   </script>
 </body>
 </html>
