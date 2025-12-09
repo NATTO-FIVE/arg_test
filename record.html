@@ -49,7 +49,7 @@
 
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(id) {
-            const indexResponse = await fetch('/data/index.json');
+            const indexResponse = await fetch('./data/index.json');
             if (!indexResponse.ok) {
                 // 通信エラーを汎用的なエラーとしてスロー
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
