@@ -37,16 +37,29 @@
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
-        let recordId = ""; 
-        
-        // 1. Base64 デコードによる ID 取得
+       // Base64 デコード (ここではログのパス全体を取得)
+        let recordPath = ""; // 名前を recordPath に変更
         try {
-            recordId = atob(h);
-            // 以前のパス表示ロジックは全て削除
+            recordPath = atob(h);
         } catch (e) {
             titleElement.innerText = "文書の読み込みエラー: 無効なキー";
             statusLight.className = 'status-light'; 
             return; 
+        }
+        
+        // ----------------------------------------------------
+        // ★ 修正箇所: 検索キー (searchKey) を抽出
+        // ----------------------------------------------------
+        let searchKey = recordPath;
+        
+        // パスの整形
+        if (searchKey.startsWith('/logs/')) {
+            // 例: /logs/e4f7a2b1.txt  -> e4f7a2b1.txt
+            searchKey = searchKey.substring(6); 
+        }
+        if (searchKey.endsWith('.txt')) {
+            // 例: e4f7a2b1.txt -> e4f7a2b1
+            searchKey = searchKey.slice(0, -4);
         }
 
         // --- データ読み込みのメイン関数 ---
@@ -90,7 +103,7 @@
         
         // 読み込み演出のための遅延 (元のコードから継承)
         setTimeout(() => {
-            fetchRecordData(recordId)
+            fetchRecordData(searchKey)
                 .then(data => {
                     // 成功
                     statusLight.className = 'status-light ok';
