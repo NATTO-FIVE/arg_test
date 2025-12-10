@@ -31,26 +31,27 @@
             return; 
         }
 
-        // --- データ読み込みのメイン関数 ---
+                // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
             
-            // ★ 修正1: ログファイル名部分のみを抽出する
-            // /logs/e4f7a2b1.txt -> e4f7a2b1.txt
-            const targetFilename = targetPath.substring(targetPath.lastIndexOf('/') + 1); 
-
+            // ★ 修正1: 検索に使うパスには、リポジトリ名を含めないシンプルな相対パスを使用 (search.htmlが成功しているため)
+            const indexUrl = 'data/index.json'; 
+        
             // 3. /data/index.json を読み込み
-            const indexResponse = await fetch('data/index.json'); 
+            const indexResponse = await fetch(indexUrl); 
             
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
-
-            // 4. ファイルパスで該当レコードを検索
-            // ★ 修正2: index.jsonのfileフィールドの末尾と、デコード後のファイル名を比較する
+        
+            // 4. ファイルパスで該当レコードを検索 (パス正規化ロジックを使用)
+            // 検索ロジックは前回のもので維持します。
+            const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
+            const targetPathNormalized = normalizePath(targetPath);
+            
             const record = indexData.find(item => {
-                // item.file (例: /logs/e4f7a2b1.txt) の末尾が targetFilename と一致するか
-                return item.file.endsWith(targetFilename);
+                return normalizePath(item.file) === targetPathNormalized;
             });
             
             if (!record) {
@@ -58,13 +59,17 @@
             }
             
             // 5. ログファイルの内容を読み込み
-            const logResponse = await fetch(record.file); // record.file は /logs/e4f7a2b1.txt
+            // record.file の値 (例: /logs/e4f7a2b1.txt) は、ホストの起点からの絶対パスと解釈されている可能性が高い。
+            // search.html の成功を信じ、シンプルな相対パスに戻します。
+            
+            const logResponse = await fetch(record.file); 
             
             if (!logResponse.ok) {
+                // ログファイル通信エラーが出た場合、失敗URLからパスを修正します。
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
             const logContent = await logResponse.text();
-
+        
             return { title: record.title, content: logContent };
         }
         // --- データ読み込み関数 終了 ---
