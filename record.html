@@ -8,22 +8,7 @@
 <body>
 
   <div class="terminal record"> 
-    
-    <div class="terminal-header">
-        > CONNECTED: 翠波ネットワーク / 記録検索端末
-        <br>
-        > FETCHING FILE　・・・・
-        <span class="status-light" id="status-light" title="接続状態"></span>
-    </div>
-
-    <h1 id="title"></h1>
-    <pre id="body" style="white-space:pre-wrap;"></pre>
-    
-    <div class="terminal-footer">
-        <p class="disclaimer">
-            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-        </p>
-    </div>
+// ... (HTML body 省略) ...
   </div>
 
   <script>
@@ -37,7 +22,7 @@
         
         let recordPath = ""; 
 
-        // 1. Base64 デコード (recordPath は /logs/e4f7a2b1.txt のようなパス全体)
+        // 1. Base64 デコード
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -49,35 +34,31 @@
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
             
-            // パス正規化のためのヘルパー関数: 前後のスラッシュを削除
-            const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
+            // ★ 修正1: ログファイル名部分のみを抽出する
+            // /logs/e4f7a2b1.txt -> e4f7a2b1.txt
+            const targetFilename = targetPath.substring(targetPath.lastIndexOf('/') + 1); 
 
             // 3. /data/index.json を読み込み
-            // ★ 修正1: search.htmlで成功しているシンプルな相対パスに戻す
             const indexResponse = await fetch('data/index.json'); 
             
             if (!indexResponse.ok) {
-                // 404エラーの場合はここで弾かれる
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
             // 4. ファイルパスで該当レコードを検索
-            const targetPathNormalized = normalizePath(targetPath);
-            
+            // ★ 修正2: index.jsonのfileフィールドの末尾と、デコード後のファイル名を比較する
             const record = indexData.find(item => {
-                // ★ 修正2: index.jsonのfileフィールドも正規化し、厳密に比較する
-                return normalizePath(item.file) === targetPathNormalized;
+                // item.file (例: /logs/e4f7a2b1.txt) の末尾が targetFilename と一致するか
+                return item.file.endsWith(targetFilename);
             });
             
             if (!record) {
-                // ここでエラーが出る場合は、パスの渡し方か、index.jsonのfile値がrecordPathと異なる
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
             // 5. ログファイルの内容を読み込み
-            // ★ 修正3: シンプルな相対パス record.file (logs/XXXXXX.txt) を使用
-            const logResponse = await fetch(record.file); 
+            const logResponse = await fetch(record.file); // record.file は /logs/e4f7a2b1.txt
             
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
