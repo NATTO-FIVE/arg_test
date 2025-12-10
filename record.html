@@ -56,35 +56,42 @@
             searchKey = idWithoutExt;
         }
         
-        // --- データ読み込みのメイン関数 ---
+       // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
+            
+            // ★ 追加: リポジトリ名をベースにした絶対パスの定義
+            // GitHub Pagesの環境では '/リポジトリ名/' がURLの起点となるため、これを強制適用します。
+            // record.html はこのパスの直下に配置されているため、この起点を元に fetch を実行します。
+            const REPO_BASE = "/arg_test/"; 
+        
             // 3. /data/index.json を読み込み
-            // ★ 修正: <base href="./"> の効果により、シンプルな相対パスに戻す
-            const indexResponse = await fetch('data/index.json'); 
+            // ★ 修正: REPO_BASE + data/index.json で絶対パスを構築
+            const indexResponse = await fetch(REPO_BASE + 'data/index.json'); 
+            
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
-
-            // 4. ファイルパスで該当レコードを検索
+        
+            // 4. ファイルパスで該当レコードを検索 (ロジックは維持)
             const record = indexData.find(item => {
-                // 柔軟な比較 (fileパスが /logs/ か logs/ かの差を吸収)
-                return item.file === targetPath || targetPath.endsWith(item.file) || item.file.endsWith(targetPath);
+                // ... (検索ロジックは維持) ...
             });
-
+            
             if (!record) {
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
             // 5. ログファイルの内容を読み込み
-            // ★ 修正: <base href="./"> の効果により、シンプルな相対パスに戻す
-            const logResponse = await fetch(record.file); 
+            // ★ 修正: REPO_BASE + record.file で絶対パスを構築
+            // record.file の値 (例: logs/XXXXXX.txt) にプレフィックスを付けて絶対パスにします
+            const logResponse = await fetch(REPO_BASE + record.file); 
             
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
             const logContent = await logResponse.text();
-
+        
             return { title: record.title, content: logContent };
         }
         // --- データ読み込み関数 終了 ---
