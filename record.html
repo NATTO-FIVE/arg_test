@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>内部記録ビューア：接続中</title>
   <link rel="stylesheet" href="style.css"> 
-  <base href="./"> </head>
+</head>
 <body>
 
   <div class="terminal record"> 
@@ -35,8 +35,7 @@
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
-        let recordPath = ""; 
-        let searchKey = ""; // 検索に使用する純粋なID
+        let recordPath = ""; // デコードされたパス全体 (例: /logs/e4f7a2b1.txt)
 
         // 1. Base64 デコード
         try {
@@ -47,35 +46,31 @@
             return; 
         }
 
-        // 2. パスから検索用IDを抽出
-        {
-            let tempPath = recordPath;
-            const lastSlash = tempPath.lastIndexOf('/');
-            const filenameWithExt = (lastSlash !== -1) ? tempPath.substring(lastSlash + 1) : tempPath;
-            const idWithoutExt = filenameWithExt.replace(/\.txt$/, '');
-            searchKey = idWithoutExt;
-        }
-        
-       // --- データ読み込みのメイン関数 ---
+        // ★ 修正: ID抽出ロジックは全て削除し、パス全体 recordPath をそのまま使用します。
+
+        // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
             
-            // ★ 追加: リポジトリ名をベースにした絶対パスの定義
-            // GitHub Pagesの環境では '/リポジトリ名/' がURLの起点となるため、これを強制適用します。
-            // record.html はこのパスの直下に配置されているため、この起点を元に fetch を実行します。
-            const REPO_BASE = "/arg_test/"; 
-        
+            // パス正規化のためのヘルパー関数
+            const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
+
             // 3. /data/index.json を読み込み
-            // ★ 修正: REPO_BASE + data/index.json で絶対パスを構築
-            const indexResponse = await fetch(REPO_BASE + 'data/index.json'); 
+            // ★ 修正1: search.htmlで成功しているシンプルな相対パスに戻す
+            const indexResponse = await fetch('data/index.json'); 
             
             if (!indexResponse.ok) {
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
-        
-            // 4. ファイルパスで該当レコードを検索 (ロジックは維持)
+
+            // 4. ファイルパスで該当レコードを検索
+            // ★ 修正2: 検索ロジックを、正規化後の厳密一致に置き換える
+            const targetPathNormalized = normalizePath(targetPath);
+            
             const record = indexData.find(item => {
-                // ... (検索ロジックは維持) ...
+                // index.jsonのfileフィールドも正規化して比較することで、
+                // 先頭のスラッシュ(/)の有無による不一致を解消
+                return normalizePath(item.file) === targetPathNormalized;
             });
             
             if (!record) {
@@ -83,15 +78,14 @@
             }
             
             // 5. ログファイルの内容を読み込み
-            // ★ 修正: REPO_BASE + record.file で絶対パスを構築
-            // record.file の値 (例: logs/XXXXXX.txt) にプレフィックスを付けて絶対パスにします
-            const logResponse = await fetch(REPO_BASE + record.file); 
+            // ★ 修正3: シンプルな相対パス record.file (logs/XXXXXX.txt) を使用
+            const logResponse = await fetch(record.file); 
             
             if (!logResponse.ok) {
                 throw new Error(`[CRITICAL] ログファイル通信エラー`);
             }
             const logContent = await logResponse.text();
-        
+
             return { title: record.title, content: logContent };
         }
         // --- データ読み込み関数 終了 ---
@@ -104,7 +98,7 @@
         titleElement.innerText = `データ転送中...`; 
         
         setTimeout(() => {
-            fetchRecordData(recordPath) // 渡すのはデコードされたパス全体
+            fetchRecordData(recordPath) // デコードされたパス全体を渡す
                 .then(data => {
                     statusLight.className = 'status-light ok';
                     const trimmedData = data.content.trim();
