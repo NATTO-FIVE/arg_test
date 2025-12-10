@@ -35,9 +35,9 @@
         const bodyElement = document.getElementById("body");
         const statusLight = document.getElementById("status-light");
         
-        let recordPath = ""; // デコードされたパス全体 (例: /logs/e4f7a2b1.txt)
+        let recordPath = ""; 
 
-        // 1. Base64 デコード
+        // 1. Base64 デコード (recordPath は /logs/e4f7a2b1.txt のようなパス全体)
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -46,12 +46,10 @@
             return; 
         }
 
-        // ★ 修正: ID抽出ロジックは全て削除し、パス全体 recordPath をそのまま使用します。
-
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
             
-            // パス正規化のためのヘルパー関数
+            // パス正規化のためのヘルパー関数: 前後のスラッシュを削除
             const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
 
             // 3. /data/index.json を読み込み
@@ -59,21 +57,21 @@
             const indexResponse = await fetch('data/index.json'); 
             
             if (!indexResponse.ok) {
+                // 404エラーの場合はここで弾かれる
                 throw new Error(`[CRITICAL] 目録データ通信エラー`);
             }
             const indexData = await indexResponse.json();
 
             // 4. ファイルパスで該当レコードを検索
-            // ★ 修正2: 検索ロジックを、正規化後の厳密一致に置き換える
             const targetPathNormalized = normalizePath(targetPath);
             
             const record = indexData.find(item => {
-                // index.jsonのfileフィールドも正規化して比較することで、
-                // 先頭のスラッシュ(/)の有無による不一致を解消
+                // ★ 修正2: index.jsonのfileフィールドも正規化し、厳密に比較する
                 return normalizePath(item.file) === targetPathNormalized;
             });
             
             if (!record) {
+                // ここでエラーが出る場合は、パスの渡し方か、index.jsonのfile値がrecordPathと異なる
                 throw new Error(`[CRITICAL] 記録データ照合失敗`);
             }
             
