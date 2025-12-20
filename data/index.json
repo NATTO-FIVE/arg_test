@@ -1,30 +1,29 @@
 [
   {
     "id": "site_top",
-    "keys": ["翠波総合病院", "トップ", "病院"],
-    "title": "翠波総合病院：トップページ",
-    "snippet": "翠波総合病院の公式ページです。各診療科の案内をご覧いただけます。",
+    "keys": ["金枝聖域第八病院", "トップ", "病院"],
+    "title": "金枝聖域第八病院：トップページ",
+    "snippet": "金枝聖域第八病院の公式ページです。",
     "file": "hospital/index.html",
     "type": "site"
   },
   {
     "id": "site_insomnia",
     "keys": ["不眠", "睡眠外来", "特殊外来", "眠れない"],
-    "title": "特殊外来科（睡眠外来）",
-    "snippet": "不眠症・睡眠障害の治療を行う専門外来です。",
+    "title": "特殊睡眠外来",
+    "snippet": "睡眠障害の治療を行う専門外来です。",
     "file": "hospital/insomnia.html",
     "type": "site"
   },
   {
     "id": "info_sync_center",
-    "keys": ["睡眠研究センター", "研究センター", "センター", "夜間検査"],
-    "title": "睡眠研究センター案内",
-    "snippet": "専門的な睡眠検査を行うための付属研究施設です。",
+    "keys": ["不和睡眠総合技術センター"],
+    "title": "不和睡眠総合技術センター",
+    "snippet": "専門的な睡眠検査を行うための研究施設です。",
     "file": "hospital/research_center.html",
     "type": "site"
   },
-  
- {
+  {
     "id": "doc_r001",
     "keys": ["睡眠同期","同期"],
     "title": "内部報告書：睡眠同期現象（初期報告）",
@@ -32,19 +31,20 @@
     "file": "logs/e4f7a2b1.txt", 
     "type": "log"
   },
-　{
+  {
     "id": "REC-001",
+    "keys": ["聖眠金枝財団", "財団", "出資"],
     "title": "聖眠金枝財団 概要資料",
-    "keywords": ["聖眠金枝財団", "財団", "出資"],
-    "type": "record",
-    "url": "record.html?id=REC-001"
+    "snippet": "聖眠金枝財団の成り立ちと主要事業に関する記録資料。",
+    "file": "logs/finance_01.txt", 
+    "type": "log"
   },
   {
     "id": "WEB-001",
+    "keys": ["聖眠金枝財団", "ホームページ", "財団"],
     "title": "一般財団法人 聖眠金枝財団 公式サイト",
-    "keywords": ["聖眠金枝財団", "ホームページ", "財団"],
-    "type": "external",
-    "url": "foundation.html"
+    "snippet": "当病院の支援団体である聖眠金枝財団の公式ページです。",
+    "file": "hospital/foundation.html",
+    "type": "site"
   }
-  
 ]
