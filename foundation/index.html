@@ -37,6 +37,39 @@
     .foundation-search-btn:hover {
       background: var(--foundation-dark-gold);
     }
+
+    /* 関連施設バナーの追加スタイル */
+    .facility-link-card {
+      display: block;
+      text-decoration: none;
+      border: 1px solid #ddd;
+      padding: 25px;
+      margin: 20px 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .facility-link-card:hover {
+      border-color: var(--foundation-gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .facility-info h3 {
+      margin: 0 0 5px 0;
+      color: var(--foundation-dark-gold);
+      font-size: 1.2rem;
+    }
+    .facility-info p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .arrow-icon {
+      font-size: 1.5rem;
+      color: var(--foundation-gold);
+      padding-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -54,7 +87,6 @@
       <div class="header-right">
         <nav class="main-nav">
           <ul>
-            <li> </li>
             <li><a href="XXXX.html">活動理念</a></li>
             <li><a href="XXXXX.html">情報公開</a></li>
           </ul>
@@ -72,7 +104,7 @@
 <section class="hero-banner">
   <div class="container">
     <h1>光り輝く安眠の、その先へ。</h1>
-    <p>聖眠金枝財団は、人類が到達すべき精神的極致を支援しています。</p>
+    <p>聖眠金枝財団は、人類が到達すべき安寧への道を支援しています。</p>
   </div>
 </section>
 
@@ -81,8 +113,8 @@
     <section>
       <h2>ご挨拶</h2>
       <p>
-        一般財団法人 聖眠金枝財団は、古来より伝わる精神的伝統と、現代の脳科学・通信工学を融合させるべく設立されました。
-        当財団は、金枝聖域第八病院への資本出資を通じ、全人類が等しく深い安らぎを得られる「精神的平原」の構築を目指しております。
+        一般財団法人 聖眠金枝財団は、学術研究の支援および地域医療への寄与を目的に設立されました。
+        当財団は、先端医療技術の導入支援や、心身の健康を支える文化的研究への助成を通じ、次世代に向けた社会貢献のあり方を追求しております。
       </p>
     </section>
 
@@ -90,26 +122,30 @@
       <h3>「金枝」が象徴するもの</h3>
       <p>
         我々の掲げる金枝とは、意識の深淵において迷える魂を導く灯火です。<br>
-        個の境界を越え、共有された静寂（Layer-8）へ至る道筋を、我々は技術と信念によって切り拓きます。
+        個の境界を越え、共有された静寂へ至る道筋を、我々は技術と信念によって切り拓きます。
       </p>
     </div>
 
     <section>
       <h2>主要活動内容</h2>
       <ul style="list-style-type: none; padding: 0;">
-        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・高次意識階層接続プロトコルの策定支援</li>
-        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・位相同期現象における倫理ガイドラインの作成</li>
-        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・「御視様」伝承に紐づく民俗学的データのデジタル解析</li>
-      </ul>
-    </section>
-    <section>
-      <h2>関連施設</h2>
-      <ul style="list-style-type: none; padding: 0;">
-        <li style="border-bottom: 1px solid #eee; padding: 15px 0;"><a href="../hospital/index.html">病院公式サイト</a></li>
+        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・精神衛生および睡眠科学分野における研究助成事業</li>
+        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・先進的医療機器の導入支援と施設改修プログラムの推進</li>
+        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・地域コミュニティにおける健康増進セミナーの開催</li>
+        <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・伝統文化と精神生理学の相関に関する学術調査</li>
       </ul>
     </section>
 
-    
+    <section>
+      <h2>関連施設</h2>
+      <a href="../hospital/index.html" class="facility-link-card">
+        <div class="facility-info">
+          <h3>金枝聖域第八病院</h3>
+          <p>当財団が支援する、睡眠障害治療と脳機能解析の専門医療拠点</p>
+        </div>
+        <div class="arrow-icon">→</div>
+      </a>
+    </section>
   </div>
 </main>
 
