@@ -70,10 +70,11 @@ a:hover { text-decoration: underline; }
   background: radial-gradient(circle at 30% 30%, #9bd4ff, #2f6fb1);
 }
 
+/* ロゴテキストの折り返し防止とサイズ調整 */
 .logo-text-main {
   font-weight: 700;
   font-size: 16px;
-  white-space: nowrap; /* これを追加すると絶対に折り返さなくなります */
+  white-space: nowrap; /* 1行に強制 */
 }
 
 .logo-text-sub {
@@ -119,9 +120,18 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
 }
 
+/* メニューの視認性向上（太字・下線） */
 .main-nav a {
   color: var(--text);
   white-space: nowrap;
+  font-weight: bold;      /* 太字にする */
+  text-decoration: underline; /* 常に下線を引く */
+  text-underline-offset: 4px; /* 下線と文字の間隔 */
+}
+
+.main-nav a:hover {
+  color: var(--accent);
+  text-decoration: none;  /* ホバー時はあえて下線を消すなど変化を出す */
 }
 
 .main-nav a.highlight {
@@ -171,21 +181,22 @@ a:hover { text-decoration: underline; }
 /* ▲ 診療科ドロップダウン */
 
 
-/* 検索フォーム全体のコンテナ */
+/* 検索フォームの幅制限（ウィンドウを半分にした時の対策） */
 .header-search-form {
   display: flex;
   align-items: center;
-  gap: 8px; /* 入力欄とボタンの間に少し隙間を作る */
+  gap: 8px;
+  max-width: 300px; /* ★最大幅を制限してメニューを圧迫しないようにする */
+  flex-shrink: 1;   /* 幅が狭まった時に自身が縮むようにする */
 }
 
 /* 入力欄 */
 .header-search-form input[type="search"] {
-  padding: 10px 16px;       /* 以前より上下左右に広げて大きく */
+  min-width: 100px; /* ★極端に小さくなりすぎない下限 */
+  width: 100%;      /* max-widthの範囲内で可変 */
+  padding: 8px 12px;
   border-radius: 999px;
-  border: 3px solid #d4af37; /* 枠線を 1px から 3px に太くし、金枝カラーに */
-  font-size: 15px;          /* 文字も少し大きく */
-  width: 240px;             /* 横幅を広げる */
-  outline: none;            /* 入力時の青い枠を消す */
+  border: 3px solid #d4af37;
 }
 
 /* 検索ボタン */
@@ -223,11 +234,15 @@ a:hover { text-decoration: underline; }
     display: block;
   }
 
-  .header-right {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  /* ヘッダー右側エリアのレイアウト維持 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0; /* 子要素の縮小を許可するマジックコード */
+}
 
   .main-nav {
     display: none;
