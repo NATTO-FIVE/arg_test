@@ -1,0 +1,137 @@
+:root {
+  --foundation-gold: #c5a059;   /* 落ち着いたシャンパンゴールド */
+  --foundation-light-gold: #f9f4e8;
+  --foundation-dark-gold: #8e6d2f;
+  --foundation-white: #ffffff;
+  --foundation-black: #222222;
+  --foundation-gray: #f8f9fa;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--foundation-gray);
+  color: var(--foundation-black);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--foundation-white);
+  border-bottom: 1px solid var(--foundation-gold);
+  padding: 20px 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--foundation-gold), var(--foundation-dark-gold));
+  transform: rotate(45deg); /* 財団は菱形のロゴ */
+}
+
+.logo-text-main {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  color: var(--foundation-dark-gold);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--foundation-black);
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--foundation-gold);
+  transition: width 0.3s;
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero Banner */
+.hero-banner {
+  background-color: var(--foundation-white);
+  background-image: radial-gradient(circle at center, #ffffff 0%, #f1f1f1 100%);
+  padding: 100px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--foundation-light-gold);
+}
+
+.hero-banner h1 {
+  font-size: 2.8rem;
+  color: var(--foundation-dark-gold);
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+}
+
+/* Content */
+.page-content {
+  background-color: var(--foundation-white);
+  margin: -40px auto 60px;
+  padding: 60px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  line-height: 2;
+}
+
+h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--foundation-dark-gold);
+}
+
+.philosophy-card {
+  border: 1px solid var(--foundation-light-gold);
+  background-color: var(--foundation-light-gold);
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--foundation-white);
+  padding: 60px 0 20px;
+  border-top: 1px solid var(--foundation-light-gold);
+  color: #888;
+  font-size: 0.8rem;
+  text-align: center;
+}
