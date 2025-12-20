@@ -174,41 +174,29 @@ a:hover { text-decoration: underline; }
 .header-search-form {
   display: flex;
   align-items: center;
-  gap: 0; /* 入力欄とボタンをくっつける */
-  background: #fff;
-  padding: 2px;
-  border: 2px solid var(--kanae-gold); /* 財団カラーの金枠で目立たせる */
-  border-radius: 6px;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-/* 検索がフォーカスされた時に光らせる（ARG的な演出） */
-.header-search-form:focus-within {
-  border-color: #ff4500; /* 警告色に近いオレンジ */
-  box-shadow: 0 0 12px rgba(255, 69, 0, 0.4);
+  gap: 8px; /* 入力欄とボタンの間に少し隙間を作る */
 }
 
 /* 入力欄 */
 .header-search-form input[type="search"] {
-  border: none;
-  padding: 8px 12px;
-  font-size: 14px;
-  width: 200px;
-  outline: none;
-  background: transparent;
-  color: var(--sanctuary-blue);
+  padding: 10px 16px;       /* 以前より上下左右に広げて大きく */
+  border-radius: 999px;
+  border: 3px solid #d4af37; /* 枠線を 1px から 3px に太くし、金枝カラーに */
+  font-size: 15px;          /* 文字も少し大きく */
+  width: 240px;             /* 横幅を広げる */
+  outline: none;            /* 入力時の青い枠を消す */
 }
 
 /* 検索ボタン */
 .header-search-form button {
-  background: var(--kanae-gold);
-  color: #000;
+  padding: 10px 20px;       /* ボタンも入力欄に合わせて大きく */
+  border-radius: 999px;
   border: none;
-  padding: 8px 16px;
+  background: #d4af37;      /* ボタンも金枝カラー */
+  color: #fff;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 0 3px 3px 0;
-  transition: background 0.2s;
 }
 
 .header-search-form button:hover {
