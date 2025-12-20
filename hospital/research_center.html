@@ -2,182 +2,171 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>翠波睡眠研究センター｜翠波総合病院</title>
-  <link rel="stylesheet" href="style.css">
+  <title>不和睡眠総合技術センター｜金枝聖域第八病院 提携機関</title>
+  <link rel="stylesheet" href="style.css"> 
   <style>
-    .page-main {
-      max-width: 880px;
-      margin: 24px auto 40px;
-      padding: 0 16px;
+    /* 共通基盤のデザイン調整 */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    /* メニュー設定：ガタつき防止のため他ページと完全同期 */
+    .main-nav ul {
+      display: flex;
+      gap: 12px; 
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; 
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    .page-content {
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 0 20px;
       line-height: 1.8;
     }
-    .page-main h1 {
-      font-size: 22px;
-      margin-bottom: 8px;
+    h2 {
+      border-left: 5px solid var(--kanae-gold);
+      padding-left: 15px;
+      margin: 40px 0 20px;
+      color: var(--sanctuary-blue);
     }
-    .page-main h2 {
-      margin-top: 32px;
-      border-left: 6px solid var(--accent);
-      padding-left: 10px;
-      font-size: 18px;
+    .tech-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
     }
-    .page-main ul {
-      padding-left: 1.2em;
+    .tech-tag {
+      display: inline-block;
+      background: var(--sanctuary-blue);
+      color: #fff;
+      padding: 2px 10px;
+      font-size: 0.75em;
+      border-radius: 4px;
+      margin-bottom: 10px;
     }
-    .note {
-      color: var(--muted);
+    .center-message {
+      font-style: italic;
+      border-top: 1px solid #eee;
+      margin-top: 20px;
+      padding-top: 20px;
       font-size: 0.9em;
-      margin-top: 6px;
-    }
-    .subtle {
-      color: var(--muted);
-      font-size: 0.85em;
-      margin-top: 6px;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ヘッダー -->
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
-      <!-- ロゴ -->
       <div class="logo-area">
-        <div class="logo-mark"></div>
-        <div>
-          <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiba General Hospital</div>
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
-      <!-- スマホ用ハンバーガー -->
-      <button class="nav-toggle" type="button" aria-label="メニュー">
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-      </button>
-
-      <!-- 右側：ナビ＋検索 -->
       <div class="header-right">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="director.html">院長挨拶</a></li>
             <li><a href="doctors.html">医師紹介</a></li>
-            <li><a href="neuro.html">脳神経外科</a></li>
-            <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
-            <li><a href="research_center.html">翠波睡眠研究センター</a></li>
-            <li><a href="guide.html">病院案内</a></li>
-            <li><a href="recruit.html">採用情報</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
           </ul>
         </nav>
 
-
         <form class="header-search-form" action="../search.html" method="get">
-          <label for="q" class="visually-hidden">検索キーワード</label>
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
-          <button type="submit">検索</button>
+          <input id="q" name="q" type="search" placeholder="技術コード / 研究ID / キーワード">
+          <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
-
-    <!-- 注意書きはヘッダーの一番下に独立させる -->
-    <p class="header-search-note">
-      ※診療科名・検査名などで検索できます。
-    </p>
   </div>
 </header>
 
+<section class="hero-banner">
+  <div class="container">
+    <h1>不和睡眠総合技術センター</h1>
+    <p>睡眠に関するすべての障害を研究する、国内唯一の施設です。</p>
+  </div>
+</section>
 
+<main class="page-content">
+  <section>
+    <h2>センターの概要</h2>
+    <p>
+      当センターは、従来の睡眠医学の枠組みを超え、脳神経外科と精神心理学を高度に融合させた研究機関です。
+      独自の睡眠調整方式と、それを用いた安眠研究開発を行っています。
+    </p>
+  </section>
 
-  <!-- メイン -->
-  <main>
-    <div class="page-main">
-      <h1>翠波睡眠研究センター</h1>
-      <p>
-        翠波睡眠研究センターは、睡眠医学に基づいた診断・検査を専門に行う施設です。  
-        夜間脳波検査や生体モニタリングを通じて、睡眠障害の原因を多角的に解析します。
-      </p>
-
-      <h2>センターの役割</h2>
-      <ul>
-        <li>終夜睡眠ポリグラフ（PSG）による精密検査</li>
-        <li>入眠潜時測定（MSLT）などの日中検査</li>
-        <li>睡眠行動のモニタリング</li>
-        <li>睡眠外来との連携による総合診断</li>
-      </ul>
-
-      <h2>研究・取り組み</h2>
-      <p>
-        当センターでは、睡眠の質向上につながる新しい治療法の研究や、
-        生活習慣と睡眠リズムの関連解析など、臨床データを基にした研究活動を行っています。
-      </p>
-
-      <p class="note">
-        ※研究協力については、事前に書面でご説明し、ご同意いただいた場合のみ実施されます。
-      </p>
-
-      <h2>主な設備</h2>
-      <ul>
-        <li>夜間睡眠検査室（4室）</li>
-        <li>脳波・心電・呼吸などの生体情報計測装置</li>
-        <li>睡眠行動モニタリングシステム</li>
-        <li>光・音刺激反応を評価する各種装置</li>
-      </ul>
-
-      <h2>よくある質問</h2>
-
-      <h3>Q. 夜間検査はどのように行われますか？</h3>
-      <p>
-        個室にて計測機器を装着した状態で一晩お休みいただき、脳波・呼吸・心拍などを記録します。
-        スタッフが常時監視しているため安心して受けていただけます。
-      </p>
-
-      <h3>Q. 検査の結果はいつ分かりますか？</h3>
-      <p>
-        診療担当医による解析後、後日の外来で結果をご説明します。
-      </p>
-
+  <section>
+    <h2>センターの役割</h2>
+    
+    <div class="tech-card">
+      <span class="tech-tag">終夜睡眠ポリグラフ（PSG）による精密検査</span>
+      <h3>非記号的無意識通信の確立</h3>
+      <p>言語や符号を介さず、脳波の位相整合（位相同期）のみによって情報を伝達する次世代プロトコル。暗号化不要の絶対的秘匿通信としての可能性を追求しています。</p>
     </div>
-  </main>
 
-  <!-- フッター -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div>© 翠波総合病院</div>
-        <div class="footer-nav">
-          <span>※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</span>
-        </div>
+    <div class="tech-card">
+      <span class="tech-tag">PROJECT: ASCENSION</span>
+      <h3>意識層の登攀（とうはん）アルゴリズム</h3>
+      <p>睡眠深度を人為的に操作し、意識をLayer-8（第8層）へと安定的に接続させるための位相補正技術。DS-187の観測データを基にした最適パスの算出を行っています。</p>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-tag">EXPERIMENT: CHORAL</span>
+      <h3>集団的脳波同期（合唱現象）の制御</h3>
+      <p>複数被験体間での脳波の完全一致時に発生する多重共鳴現象の解析。局所的な温度低下や共通夢領域の発生メカニズムを解明します。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>センター長挨拶</h2>
+    <div class="center-message">
+      「不和睡眠総合技術センターは、旧来の医学が到達できなかった「安らげる睡眠」を、我々は技術によって実現します。」
+      <br><br>
+      <strong>センター長：不破 臨界（ふわ りんかい）</strong>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 金枝聖域第八病院 / 不和睡眠総合技術センター</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
 <script>
   (function () {
-    const header = document.querySelector('.site-header');
-    const toggle = document.querySelector('.nav-toggle');
-
-    // ハンバーガー開閉
-    if (toggle && header) {
-      toggle.addEventListener('click', () => {
-        header.classList.toggle('nav-open');
-      });
-    }
-
-    // 現在ページのリンクをハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
   })();
 </script>
-</body>
-</html>
-
-
-
-  
 </body>
 </html>
