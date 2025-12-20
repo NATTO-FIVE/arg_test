@@ -170,30 +170,50 @@ a:hover { text-decoration: underline; }
 /* ▲ 診療科ドロップダウン */
 
 
-/* 検索 */
-
+/* 検索フォーム全体のコンテナ */
 .header-search-form {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0; /* 入力欄とボタンをくっつける */
+  background: #fff;
+  padding: 2px;
+  border: 2px solid var(--kanae-gold); /* 財団カラーの金枠で目立たせる */
+  border-radius: 6px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+/* 検索がフォーカスされた時に光らせる（ARG的な演出） */
+.header-search-form:focus-within {
+  border-color: #ff4500; /* 警告色に近いオレンジ */
+  box-shadow: 0 0 12px rgba(255, 69, 0, 0.4);
+}
+
+/* 入力欄 */
 .header-search-form input[type="search"] {
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 13px;
-  width: 180px;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 200px;
+  outline: none;
+  background: transparent;
+  color: var(--sanctuary-blue);
 }
 
+/* 検索ボタン */
 .header-search-form button {
-  padding: 6px 10px;
-  border-radius: 999px;
+  background: var(--kanae-gold);
+  color: #000;
   border: none;
-  background: var(--accent);
-  color: #fff;
-  font-size: 12px;
+  padding: 8px 16px;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 0 3px 3px 0;
+  transition: background 0.2s;
+}
+
+.header-search-form button:hover {
+  background: #b8860b; /* 少し暗い金 */
+  color: #fff;
 }
 
 .header-search-note {
