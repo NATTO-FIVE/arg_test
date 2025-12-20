@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>情報公開｜一般財団法人 聖眠金枝財団</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    .header-right { display: flex; align-items: center; gap: 20px; }
+    .foundation-search-form {
+      display: flex;
+      border: 1px solid var(--foundation-gold);
+      border-radius: 2px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .foundation-search-form input {
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      outline: none;
+      width: 180px;
+    }
+    .foundation-search-btn {
+      background: var(--foundation-gold);
+      color: #fff;
+      border: none;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .document-list {
+      list-style: none;
+      padding: 0;
+      margin: 40px 0;
+    }
+    .document-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid #eee;
+      margin-bottom: 15px;
+      background: #fff;
+    }
+    .pdf-icon {
+      font-weight: bold;
+      color: #b22222; /* PDFらしい赤 */
+      margin-right: 20px;
+      border: 2px solid #b22222;
+      padding: 5px;
+      font-size: 0.7rem;
+    }
+    .document-info {
+      flex-grow: 1;
+    }
+    .document-title {
+      display: block;
+      font-weight: bold;
+      color: var(--foundation-dark-gold);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .document-date {
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .disclaimer-box {
+      font-size: 0.85rem;
+      color: #666;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 4px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">聖眠金枝財団</div>
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="philosophy.html">活動理念</a></li>
+            <li><a href="disclosure.html">情報公開</a></li>
+          </ul>
+        </nav>
+
+        <form class="foundation-search-form" action="../search.html" method="get">
+          <input name="q" type="search" placeholder="検索欄">
+          <button type="submit" class="foundation-search-btn">SEARCH</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>情報公開</h1>
+    <p>当財団の運営状況および財務に関する資料を公開しております。</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="page-content">
+    
+    <h2>財務報告</h2>
+    <p>法令に基づき、各年度の収支計算書および貸借対照表を公開いたします。</p>
+
+    <ul class="document-list">
+      <li class="document-item">
+        <span class="pdf-icon">PDF</span>
+        <div class="document-info">
+          <a href="../files/financial_report_2024.pdf" class="document-title">2024年度 財務諸表（決算報告書）</a>
+          <span class="document-date">公開日：2025年05月20日</span>
+        </div>
+      </li>
+      <li class="document-item">
+        <span class="pdf-icon">PDF</span>
+        <div class="document-info">
+          <a href="../files/financial_report_2023.pdf" class="document-title">2023年度 財務諸表（決算報告書）</a>
+          <span class="document-date">公開日：2024年05月18日</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="disclaimer-box">
+      <p><strong>閲覧にあたっての注意事項</strong></p>
+      <ul>
+        <li>一部の個別助成案件、および「指定寄付金」の詳細内訳については、守秘義務に基づき機密保持コード（<strong>AUTH_CODE</strong>）による照会が必要です。</li>
+        <li>研究支援事業における共同研究先（不和睡眠総合技術センター等）との会計連結については、別途「<strong>連結決算附帯書</strong>」をご参照ください。</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 General Incorporated Foundation The Sanctuary Kinshi.</p>
+    <p style="margin-top: 20px; font-size: 0.7rem; opacity: 0.6;">
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
