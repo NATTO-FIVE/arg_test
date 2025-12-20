@@ -99,20 +99,19 @@
       let typeLabel = "";
       if (type === "log")  typeLabel = "[内部記録]";
       if (type === "site") typeLabel = "[関連サイト]";
-      if (type === "pdf")  typeLabel = "[PDF資料]"; // 追加
+      if (type === "pdf")  typeLabel = "[PDF資料]";
+      if (type === "other") typeLabel = "[その他]";
       
       let dataAttr = "";
       
       if (type === "log") {
         // 内部記録: record.html?h=... 用に Base64 化
-        // fileがあればfileパスを、なければIDを使用
         const target = file && file.endsWith('.txt') ? file : id;
         dataAttr = `data-h="${btoa(unescape(encodeURIComponent(target)))}"`; 
-      } else if (type === "site") {
-        // 直接リンク（foundation.htmlなど）: data-file にパスを保持
+      } else if (type === "site" || type === "pdf") {
+        // 直接リンク（サイトまたはPDF）: data-file にパスを保持
         dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
       }
-      
 
       html.push(`
         <li class="hit">
@@ -140,7 +139,7 @@
           if (base64Key) {
             window.open(`record.html?h=${base64Key}`, "_blank");
           }
-        } else if (type === "site") {
+        } else if (type === "site" || type === "pdf") {
           const filePath = el.getAttribute("data-file");
           if (filePath) {
             window.open(filePath, "_blank");
@@ -150,6 +149,9 @@
     });
   }
 
+  // ======================
+  // ユーティリティ
+  // ======================
   function escapeHtml(str) {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
@@ -158,6 +160,9 @@
     return String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  // ======================
+  // 初期処理：?q= を拾って自動検索
+  // ======================
   document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(location.search);
     const qParam = (params.get("q") || "").trim();
@@ -167,6 +172,9 @@
     }
   });
 
+  // ======================
+  // イベント設定
+  // ======================
   btn.addEventListener("click", () => search());
   input.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
 </script>
