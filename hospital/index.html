@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>金枝聖域第八病院｜公式サイト</title>
-  <link rel="stylesheet" href="style.css"> <style>
-    /* サイトの雰囲気を「金枝（ゴールド）」と「聖域（ネイビー）」に寄せる */
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* サイト固有の調整 */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
     }
+    /* ヒーローエリアのデザイン */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -16,99 +18,128 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    .news-tag {
-      background: var(--kanae-gold);
-      color: black;
-      padding: 2px 8px;
-      font-size: 0.8em;
-      margin-right: 10px;
+    .hero-banner p { color: #ccc; }
+
+    /* サイドバーとメインのレイアウト調整 */
+    .main-layout {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    @media (max-width: 900px) {
+      .main-layout { flex-direction: column; }
+    }
+    
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="header-container">
-    <div class="logo">
-      <img src="logo_kanae.png" alt="金の枝ロゴ" style="height:40px; vertical-align:middle;"> 
-      <span style="font-weight:bold; font-size:1.5em;">金枝聖域第八病院</span>
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div>
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kanae Sanctuary 8th Hospital</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li> <li><a href="doctors.html">医師紹介</a></li> <li><a href="access.html">アクセス</a></li> </ul>
+        </nav>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査ID / 医師名">
+          <button type="submit">検索</button>
+        </form>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="director.html">院長挨拶</a></li> <li><a href="doctors.html">医師紹介</a></li> <li><a href="access.html">アクセス</a></li> </ul>
-    </nav>
   </div>
 </header>
 
 <section class="hero-banner">
-  <h1>意識の可能性をひらく、未来のウェルビーイング。</h1>
-  <p>当院は「一般財団法人 聖眠金枝財団」の全面的な支援を受け、次世代の脳機能ケアを提供しています。</p>
+  <div class="container">
+    <h1>意識の可能性をひらく、未来のウェルビーイング。</h1>
+    <p>当院は「一般財団法人 聖眠金枝財団」の全面的な支援を受け、次世代の脳機能ケアを提供しています。</p>
+  </div>
 </section>
 
 <main class="container">
-  <div class="main-layout" style="display: flex; gap: 30px; margin-top: 30px;">
+  <div class="main-layout">
     
     <div class="content-area" style="flex: 2;">
       <h2>診療科のご案内</h2>
-      <div class="dept-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="dept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
         <div class="card">
           <h3>特殊外来科（睡眠外来） [003]</h3>
           <p>「合唱現象」や「睡眠時の位相同期」に関する専門的な治療を行います。担当医：**神代 永久** / **虚空蔵 零**</p>
+          <p><a href="insomnia.html">詳細はこちら →</a></p>
         </div>
         <div class="card">
           <h3>脳神経外科 [004]</h3>
           <p>不和睡眠総合技術センターと連携した、高次意識階層へのアプローチを研究しています。</p>
+          <p><a href="neuro.html">詳細はこちら →</a></p>
         </div>
       </div>
 
       <div class="banners" style="margin-top: 40px;">
-        <a href="research_center/index.html" class="banner-link">
-          <div style="background: #eee; padding: 20px; border-left: 10px solid var(--sanctuary-blue);">
-            <h4>提携機関：不和睡眠総合技術センター [006]</h4>
-            <p>OSI第8層プロトコルに基づく、非記号的情報伝送の最前線。</p>
-          </div>
-        </a>
+        <div style="background: #fff; padding: 20px; border-left: 10px solid var(--sanctuary-blue); border: 1px solid #ddd;">
+          <h4>提携機関：不和睡眠総合技術センター [006]</h4>
+          <p>OSI第8層プロトコルに基づく、非記号的情報伝送の最前線。</p>
+          <p><a href="research_center.html">不和睡眠総合技術センタートップページ →</a></p>
+        </div>
       </div>
     </div>
 
     <aside class="sidebar" style="flex: 1;">
-      <div class="search-box" style="background: #f4f4f4; padding: 20px; margin-bottom: 20px;">
+      <div class="card" style="background: #f9f9f9; margin-bottom: 20px;">
         <h4>院内資料検索</h4>
-        <form action="../search.html" method="get">
-          <input type="text" name="q" placeholder="検査ID・キーワード" style="width: 80%;">
-          <button type="submit">検索</button>
+        <p style="font-size: 0.8em; color: #666;">※関係者以外は「暗黙知」による認証が必要です。</p>
+        <form action="../search.html" method="get" class="header-search-form" style="flex-direction: column; align-items: stretch; gap: 10px;">
+          <input type="text" name="q" placeholder="検査ID・キーワード" style="width: 100%; border-radius: 4px;">
+          <button type="submit" style="width: 100%; border-radius: 4px;">検索</button>
         </form>
       </div>
 
-      <div class="info-links" style="border: 1px solid #ddd; padding: 15px;">
+      <div class="card">
         <h4>関連リンク</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="history.html">病院沿革 [008]</a>（出資：聖眠金枝財団）</li>
-          <li><a href="https://kanae-sanctuary.org" target="_blank">一般財団法人 聖眠金枝財団 [015]</a></li>
-          <li><a href="insomnia_info.html">「御視様」と睡眠の質について</a></li>
+        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+          <li style="margin-bottom: 8px;"><a href="history.html">病院沿革 [008]</a>（出資：聖眠金枝財団）</li>
+          <li style="margin-bottom: 8px;"><a href="foundation.html">一般財団法人 聖眠金枝財団 [015]</a></li>
+          <li style="margin-bottom: 8px;"><a href="ossy.html">「御視様」と睡眠の質について</a></li>
         </ul>
       </div>
     </aside>
-
   </div>
-
-  <section class="news" style="margin-top: 50px;">
-    <h2>お知らせ</h2>
-    <ul class="news-list" style="list-style: none; padding: 0;">
-      <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
-        <span class="news-tag">重要</span> 2025/12/10：地下アーカイブの定期メンテナンスに伴う「位相同期」の一時停止について
-      </li>
-      <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
-        <span class="news-tag">広報</span> 2025/11/20：百目島院長のインタビュー記事が地域広報誌に掲載されました。
-      </li>
-    </ul>
-  </section>
 </main>
 
 <footer>
-  <p>&copy; 2025 Kanae Sanctuary 8th Hospital. All Rights Reserved.</p>
+  <div class="container">
+    <div class="footer-inner" style="flex-direction: column; align-items: center; text-align: center; gap: 10px;">
+      <div>© 2025 金枝聖域第八病院</div>
+      <div class="footer-nav" style="color: #888; font-size: 0.8em; max-width: 800px;">
+        <span>※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</span>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
 </body>
 </html>
