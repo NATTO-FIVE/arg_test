@@ -2,189 +2,159 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>特殊外来科（睡眠外来）｜翠波総合病院</title>
-  <link rel="stylesheet" href="style.css">
+  <title>特殊睡眠外来科｜金枝聖域第八病院</title>
+  <link rel="stylesheet" href="style.css"> 
   <style>
-    .page-main {
-      max-width: 880px;
-      margin: 24px auto 40px;
-      padding: 0 16px;
+    /* 共通基盤のデザイン調整 */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    /* メニュー設定：ガタつき防止のため他ページと完全同期 */
+    .main-nav ul {
+      display: flex;
+      gap: 12px; 
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; 
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    .page-content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
       line-height: 1.8;
     }
-    .page-main h1 {
-      font-size: 22px;
-      margin-bottom: 8px;
+    h2 {
+      border-left: 5px solid var(--kanae-gold);
+      padding-left: 15px;
+      margin: 40px 0 20px;
     }
-    .page-main h2 {
-      margin-top: 32px;
-      border-left: 6px solid var(--accent);
-      padding-left: 10px;
-      font-size: 18px;
+    .info-box {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin: 20px 0;
     }
-    .page-main ul {
-      padding-left: 1.2em;
-    }
-    .note {
-      color: var(--muted);
+    .warning-text {
+      color: #b22222;
+      font-weight: bold;
       font-size: 0.9em;
-      margin-top: 8px;
-    }
-    .subtle {
-      color: var(--muted);
-      font-size: 0.85em;
-      margin-top: 6px;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ヘッダー -->
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
-      <!-- ロゴ -->
       <div class="logo-area">
-        <div class="logo-mark"></div>
-        <div>
-          <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiba General Hospital</div>
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
-      <!-- スマホ用ハンバーガー -->
-      <button class="nav-toggle" type="button" aria-label="メニュー">
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-      </button>
-
-      <!-- 右側：ナビ＋検索 -->
       <div class="header-right">
-       <nav class="main-nav">
-        <ul>
-          <li><a href="index.html">ホーム</a></li>
-          <li><a href="director.html">院長挨拶</a></li>
-          <li><a href="doctors.html">医師紹介</a></li>
-          <li><a href="neuro.html">脳神経外科</a></li>
-          <li><a href="insomnia.html">特殊外来科（睡眠外来）</a></li>
-          <li><a href="research_center.html">翠波睡眠研究センター</a></li>
-          <li><a href="guide.html">病院案内</a></li>
-          <li><a href="recruit.html">採用情報</a></li>
-        </ul>
-      </nav>
-
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+          </ul>
+        </nav>
 
         <form class="header-search-form" action="../search.html" method="get">
-          <label for="q" class="visually-hidden">検索キーワード</label>
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
-          <button type="submit">検索</button>
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
-
-    <!-- 注意書きはヘッダーの一番下に独立させる -->
-    <p class="header-search-note">
-      ※診療科名・検査名などで検索できます。
-    </p>
   </div>
 </header>
 
+<section class="hero-banner">
+  <div class="container">
+    <h1>特殊睡眠外来科</h1>
+    <p>深層睡眠へのアプローチにより、生活の安らぎをとり戻します。</p>
+  </div>
+</section>
 
+<main class="page-content">
+  <section>
+    <h2>診療方針</h2>
+    <p>
+      当科では、一般的な慢性不眠症から、従来の治療では改善が見られなかった難治性の睡眠障害まで幅広く対応しています。
+      特に、睡眠中に発生する異常な感覚や、入眠時の違和感など特殊な症例において、独自の手法を用いた診断を行っています。
+    </p>
+    <p>
+      提携する「不和睡眠総合技術センター」との連携により、脳波状態を詳細に測定し、患者様一人ひとりに適した睡眠障害治療方法を模索します。
+    </p>
+  </section>
 
-  <!-- メインコンテンツ -->
-  <main>
-    <div class="page-main">
-      <h1>特殊外来科（睡眠外来）</h1>
-      <p>
-        特殊外来科・睡眠外来では、慢性的な不眠症状や睡眠の質に関するお悩みに対して、
-        医師・看護師・検査技師が連携しながら診療を行っています。
-        症状の背景には身体的要因・心理的要因・生活習慣など様々な要素が関わるため、
-        個々の状況を丁寧に伺った上で、最適な治療方針をご提案します。
-      </p>
+  <section>
+    <h2>対象となる主な症状</h2>
+    <ul>
+      <li>なかなか寝付けない</li>
+      <li>入眠直前に違和感がある</li>
+      <li>睡眠中、身体が急速に冷え込むような感覚を伴う</li>
+      <li>同じ寝言を繰り返していると指摘されたことがある>おな>
+    </ul>
+   
+  </section>
 
-      <h2>対象となる主な症状</h2>
-      <ul>
-        <li>寝つきが悪い・眠れない</li>
-        <li>夜中に何度も目が覚める</li>
-        <li>朝早く目が覚め、それ以上眠れない</li>
-        <li>日中の強い眠気</li>
-        <li>睡眠リズムが整わない</li>
-        <li>睡眠中のいびきや無呼吸の疑い</li>
-      </ul>
-
-      <h2>診療の流れ</h2>
-      <ol>
-        <li>初診受付と問診</li>
-        <li>担当医師による診察</li>
-        <li>必要に応じた血液・呼吸・睡眠関連検査</li>
-        <li>治療方針の決定（薬物療法・生活指導・検査紹介など）</li>
-      </ol>
-
-      <p class="note">
-        ※睡眠中の状態を詳しく評価する必要がある場合、翠波睡眠研究センターでの夜間検査をご案内する場合があります。
-      </p>
-
-      <h2>主な治療内容</h2>
-      <ul>
-        <li>生活習慣の指導（睡眠衛生指導）</li>
-        <li>薬物療法の調整・変更</li>
-        <li>心理的要因が関係する場合の専門外来との連携</li>
-        <li>睡眠時無呼吸を疑う場合の専門検査のご案内</li>
-      </ul>
-
-      <h2>よくある質問</h2>
-
-      <h3>Q. 受診の目安はありますか？</h3>
-      <p>
-        「眠れない状態が2週間以上続く」「日中の生活に支障が出てきた」と感じたら、
-        一度ご相談いただくことをおすすめしています。
-      </p>
-
-      <h3>Q. 夜間検査は必ず必要ですか？</h3>
-      <p>
-        必須ではありません。医師の判断のもと、必要な場合のみご案内します。
-        初診時点では生活習慣や症状のヒアリングが中心となります。
-      </p>
-
+  <section>
+    <h2>検査と治療の流れ</h2>
+    <div class="info-box">
+      <strong>■ 生活習慣の指導</strong><br>
+      <strong>■ 薬物療法の調整・変更</strong><br>
+      <strong>■ 睡眠時無呼吸を疑う場合の専門検査</strong><br>
+      <strong>■ 精密脳波測定などの専門検査</strong><br>
+      <strong>■ 不和睡眠総合技術センターでの特殊専門検査</strong><br>
     </div>
-  </main>
+  </section>
 
-  <!-- フッター -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div>© 翠波総合病院</div>
-        <div class="footer-nav">
-          <span>※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</span>
-        </div>
+  <section>
+    <p>
+      原因不明の睡眠体験にお悩みの方は、一人で抱え込まずにご相談ください。<br>
+      
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 金枝聖域第八病院</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
 <script>
   (function () {
-    const header = document.querySelector('.site-header');
-    const toggle = document.querySelector('.nav-toggle');
-
-    // ハンバーガー開閉
-    if (toggle && header) {
-      toggle.addEventListener('click', () => {
-        header.classList.toggle('nav-open');
-      });
-    }
-
-    // 現在ページのリンクをハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
   })();
 </script>
-</body>
-</html>
-
-
-
-  
 </body>
 </html>
