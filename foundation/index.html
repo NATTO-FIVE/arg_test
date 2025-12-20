@@ -4,6 +4,40 @@
   <meta charset="UTF-8">
   <title>一般財団法人 聖眠金枝財団</title>
   <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* 検索欄用の追加スタイル */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .foundation-search-form {
+      display: flex;
+      border: 1px solid var(--foundation-gold);
+      border-radius: 2px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .foundation-search-form input {
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      outline: none;
+      width: 180px;
+    }
+    .foundation-search-btn {
+      background: var(--foundation-gold);
+      color: #fff;
+      border: none;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.3s;
+    }
+    .foundation-search-btn:hover {
+      background: var(--foundation-dark-gold);
+    }
+  </style>
 </head>
 <body>
 
@@ -16,14 +50,21 @@
           <div class="logo-text-main">聖眠金枝財団</div>
         </div>
       </div>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="../hospital/index.html">病院公式サイト</a></li>
-          <li><a href="index.html">財団概要</a></li>
-          <li><a href="philosophy.html">設立理念</a></li>
-          <li><a href="contact.html">アクセス</a></li>
-        </ul>
-      </nav>
+      
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li> </li>
+            <li><a href="index.html">財団概要</a></li>
+            <li><a href="philosophy.html">設立理念</a></li>
+          </ul>
+        </nav>
+
+        <form class="foundation-search-form" action="../search.html" method="get">
+          <input name="q" type="search" placeholder="技術コード / キーワード">
+          <button type="submit" class="foundation-search-btn">SEARCH</button>
+        </form>
+      </div>
     </div>
   </div>
 </header>
@@ -61,6 +102,14 @@
         <li style="border-bottom: 1px solid #eee; padding: 15px 0;">・「御視様」伝承に紐づく民俗学的データのデジタル解析</li>
       </ul>
     </section>
+    <section>
+      <h2>関連施設</h2>
+      <ul style="list-style-type: none; padding: 0;">
+        <li style="border-bottom: 1px solid #eee; padding: 15px 0;"><a href="../hospital/index.html">病院公式サイト</a></li>
+      </ul>
+    </section>
+
+    
   </div>
 </main>
 
