@@ -4,34 +4,53 @@
   <meta charset="UTF-8">
   <title>内部記録検索端末</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 戻るリンクのスタイル（ターミナル風） */
+    .nav-links {
+      margin-top: 10px;
+      font-size: 0.8em;
+    }
+    .back-link {
+      color: #00ff00; /* ターミナルグリーン */
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .back-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .hit-type {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
   <div class="terminal">
     <h1>内部記録検索端末</h1>
-    <input id="query" type="text" placeholder="キーワードを入力" autofocus>
-    <button id="searchBtn">SEARCH</button>
+    
+    <div class="input-area">
+      <input id="query" type="text" placeholder="キーワードを入力" autofocus>
+      <button id="searchBtn">SEARCH</button>
+    </div>
+
+    <div class="nav-links">
+      <a href="hospital/index.html" class="back-link">>&nbsp;RETURN TO HOSPITAL_INDEX</a>
+    </div>
+
     <div id="results"></div>
   </div>
 
 <script>
-  // ======================
-  // 要素参照
-  // ======================
   const input  = document.getElementById('query');
   const btn    = document.getElementById('searchBtn');
   const result = document.getElementById('results');
-
-  // JSON DB のパス
   const DB_URL = "data/index.json";
 
-  // 読み込んだDBを保持
   let DB = null;
   let dbLoaded = false;
   let dbLoadError = false;
 
-  // ======================
-  // DB読み込み
-  // ======================
   async function loadDB() {
     if (dbLoaded || dbLoadError) return; 
     try {
@@ -46,18 +65,12 @@
     }
   }
 
-  // ======================
-  // 検索ロジック
-  // ======================
   async function search() {
     const q = (input.value || "").trim().toLowerCase();
     result.innerHTML = "";
-
     if (!q) return;
 
-    if (!dbLoaded && !dbLoadError) {
-      await loadDB();
-    }
+    if (!dbLoaded && !dbLoadError) await loadDB();
     if (dbLoadError || !DB) {
       result.innerHTML = "<p>検索データの読み込みに失敗しました。</p>";
       return;
@@ -65,29 +78,19 @@
 
     const hits = DB.filter(item => {
       if (!Array.isArray(item.keys)) return false;
-      return item.keys.some(k => {
-        if (!k) return false;
-        return String(k).toLowerCase().includes(q); 
-      });
+      return item.keys.some(k => String(k).toLowerCase().includes(q));
     });
 
     if (hits.length === 0) {
       result.innerHTML = `<p>「${escapeHtml(q)}」に一致するデータは見つかりませんでした。</p>`;
       return;
     }
-
     renderHits(hits, q);
   }
 
-  // ======================
-  // 結果描画
-  // ======================
   function renderHits(hits, q) {
     const escQ = escapeHtml(q);
-    const html = [];
-
-    html.push(`<h2>「${escQ}」の検索結果 (${hits.length}件)</h2>`);
-    html.push("<ul class=\"hit-list\">");
+    const html = [`<h2>「${escQ}」の検索結果 (${hits.length}件)</h2>`, "<ul class=\"hit-list\">"];
 
     hits.forEach(doc => {
       const title   = escapeHtml(doc.title || "（無題）");
@@ -100,58 +103,41 @@
       if (type === "log")  typeLabel = "[内部記録]";
       if (type === "site") typeLabel = "[関連サイト]";
       if (type === "pdf")  typeLabel = "[PDF資料]";
-      if (type === "other") typeLabel = "[その他]";
       
       let dataAttr = "";
-      
       if (type === "log") {
-        // 内部記録: record.html?h=... 用に Base64 化
         const target = file && file.endsWith('.txt') ? file : id;
         dataAttr = `data-h="${btoa(unescape(encodeURIComponent(target)))}"`; 
       } else if (type === "site" || type === "pdf") {
-        // 直接リンク（サイトまたはPDF）: data-file にパスを保持
         dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
       }
 
       html.push(`
         <li class="hit">
-          <h3 class="doc-title"
-              ${dataAttr}
-              data-type="${type}"
-              style="cursor:pointer; text-decoration:underline;">
+          <h3 class="doc-title" ${dataAttr} data-type="${type}" style="cursor:pointer; text-decoration:underline;">
             ${typeLabel ? `<span class="hit-type">${typeLabel}</span> ` : ""}${title}
           </h3>
           <p class="snippet">${snippet}</p>
         </li>
       `);
     });
-
     html.push("</ul>");
     result.innerHTML = html.join("");
 
-    // クリックイベントの設定
     document.querySelectorAll(".doc-title").forEach(el => {
       el.addEventListener("click", () => {
         const type = el.getAttribute("data-type");
-        
         if (type === "log") {
           const base64Key = el.getAttribute("data-h");
-          if (base64Key) {
-            window.open(`record.html?h=${base64Key}`, "_blank");
-          }
+          if (base64Key) window.open(`record.html?h=${base64Key}`, "_blank");
         } else if (type === "site" || type === "pdf") {
           const filePath = el.getAttribute("data-file");
-          if (filePath) {
-            window.open(filePath, "_blank");
-          }
+          if (filePath) window.open(filePath, "_blank");
         }
       });
     });
   }
 
-  // ======================
-  // ユーティリティ
-  // ======================
   function escapeHtml(str) {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
@@ -160,9 +146,6 @@
     return String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  // ======================
-  // 初期処理：?q= を拾って自動検索
-  // ======================
   document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(location.search);
     const qParam = (params.get("q") || "").trim();
@@ -172,9 +155,6 @@
     }
   });
 
-  // ======================
-  // イベント設定
-  // ======================
   btn.addEventListener("click", () => search());
   input.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
 </script>
