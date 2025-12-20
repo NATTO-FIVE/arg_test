@@ -69,15 +69,11 @@
           </ul>
         </nav>
 
-        <div class="card" style="background: #fff; border: 2px solid var(--sanctuary-blue); box-shadow: 4px 4px 0 var(--kanae-gold);">
-          <h4 style="margin-top: 0; color: var(--sanctuary-blue);">【内部資料照会端末】</h4>
-          <p style="font-size: 0.8em; color: #d63384; font-weight: bold;">※閲覧には適切な「暗黙知」が必要です。</p>
-          
-          <form action="../search.html" method="get" class="header-search-form">
-            <input type="search" name="q" placeholder="キーワードを入力..." required>
-            <button type="submit">照会</button>
-          </form>
-        </div>
+        <form class="header-search-form" action="../search.html" method="get">
+          <label for="q" class="visually-hidden">検索キーワード</label>
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <button type="submit">検索</button>
+        </form>
 
         
       </div>
