@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>脳神経外科｜金枝聖域第八病院</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* サイト固有のデザイン調整（共通基盤を継承） */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .page-content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.8;
+    }
+    h2 {
+      border-left: 5px solid var(--kanae-gold);
+      padding-left: 15px;
+      margin-bottom: 20px;
+    }
+    .check-list {
+      background: #f9f9f9;
+      padding: 20px 40px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+          </ul>
+        </nav>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <button type="submit" class="search-btn">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>脳神経外科</h1>
+    <p>確かな診断と高度な解析で、脳の健康を守ります。</p>
+  </div>
+</section>
+
+<main class="page-content">
+  <section>
+    <h2>診療案内</h2>
+    <p>
+      脳神経外科では、頭痛、めまい、手足のしびれといった日常的な症状から、脳血管障害（脳卒中）、頭部外傷、脳腫瘍などの外科的疾患まで幅広く対応しています。
+      当院では、最新の画像診断装置を用い、迅速かつ正確な診断に基づいた最適な治療方針をご提案いたします。
+    </p>
+    <p>
+      また、意識障害や高次脳機能に関するお悩みについては、不和睡眠総合技術センターとも密接に連携し、専門的な解析を行っております。
+    </p>
+  </section>
+
+  <section style="margin-top: 40px;">
+    <h2>このような方はご相談ください</h2>
+    <div class="check-list">
+      <ul>
+        <li>突然の激しい頭痛や、慢性的な頭痛が続いている方</li>
+        <li>手足の力が入らない、しびれや震えがある方</li>
+        <li>言葉が出にくい、物忘れがひどくなったと感じる方</li>
+        <li>めまいやふらつき、意識が遠のく感覚がある方</li>
+        <li>睡眠中の異常行動や、原因不明の意識の混濁にお悩みの方</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 金枝聖域第八病院</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
+</body>
+</html>
