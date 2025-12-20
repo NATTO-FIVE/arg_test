@@ -5,7 +5,6 @@
   <title>金枝聖域第八病院｜公式サイト</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* サイト固有のデザイン調整 */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
@@ -17,34 +16,26 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    .hero-banner p { color: #ccc; }
-
-    .main-layout {
-      display: flex;
-      gap: 30px;
-      margin-top: 30px;
-    }
-    @media (max-width: 900px) {
-      .main-layout { flex-direction: column; }
-    }
-    
-    .card {
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    /* 追加メニューの文字数が多い場合の微調整 */
+    /* メニューの固定設定：ここをdoctors.htmlと完全一致させる */
     .main-nav ul {
-      gap: 12px; /* メニュー間の間隔を少し詰める */
+      display: flex;
+      gap: 12px; 
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
     .main-nav a {
-      font-size: 13px; /* 文字サイズを微調整して1行に収める */
+      font-size: 13px; 
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
     }
+    .main-layout { display: flex; gap: 30px; margin-top: 30px; }
+    @media (max-width: 900px) { .main-layout { flex-direction: column; } }
+    .card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
   </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
@@ -55,7 +46,6 @@
           <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
-
       <div class="header-right">
         <nav class="main-nav">
           <ul>
@@ -65,7 +55,6 @@
             <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
           </ul>
         </nav>
-
         <form class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
           <button type="submit" class="search-btn">検索</button>
