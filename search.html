@@ -99,7 +99,7 @@
       let typeLabel = "";
       if (type === "log")  typeLabel = "[内部記録]";
       if (type === "site") typeLabel = "[関連サイト]";
-      if (type === "other") typeLabel = "[その他]";
+      if (type === "pdf")  typeLabel = "[PDF資料]"; // 追加
       
       let dataAttr = "";
       
@@ -112,6 +112,7 @@
         // 直接リンク（foundation.htmlなど）: data-file にパスを保持
         dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
       }
+      
 
       html.push(`
         <li class="hit">
