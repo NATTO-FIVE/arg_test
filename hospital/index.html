@@ -5,6 +5,7 @@
   <title>金枝聖域第八病院｜公式サイト</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
+    /* サイト固有のデザイン調整 */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
@@ -16,7 +17,9 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    /* メニューの固定設定：ここをdoctors.htmlと完全一致させる */
+    .hero-banner p { color: #ccc; }
+
+    /* メニュー設定：他ページと完全に同期させる */
     .main-nav ul {
       display: flex;
       gap: 12px; 
@@ -30,12 +33,26 @@
       text-decoration: underline;
       white-space: nowrap;
     }
-    .main-layout { display: flex; gap: 30px; margin-top: 30px; }
-    @media (max-width: 900px) { .main-layout { flex-direction: column; } }
-    .card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+
+    .main-layout {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    @media (max-width: 900px) {
+      .main-layout { flex-direction: column; }
+    }
+    
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
+
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
@@ -46,6 +63,7 @@
           <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
+
       <div class="header-right">
         <nav class="main-nav">
           <ul>
@@ -55,6 +73,7 @@
             <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
           </ul>
         </nav>
+
         <form class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
           <button type="submit" class="search-btn">検索</button>
@@ -97,13 +116,12 @@
       </div>
     </div>
 
-    
-
+    <aside class="sidebar" style="flex: 1;">
       <div class="card">
         <h4>関連リンク</h4>
         <ul style="list-style: none; padding: 0; font-size: 0.9em;">
           <li style="margin-bottom: 8px;"><a href="history.html">病院沿革</a></li>
-          <li style="margin-bottom: 8px;"><a href="history.html">アクセス</li>
+          <li style="margin-bottom: 8px;"><a href="history.html">アクセス</a></li>
           <li style="margin-bottom: 8px;"><a href="foundation.html">一般財団法人 聖眠金枝財団</a></li>
         </ul>
       </div>
