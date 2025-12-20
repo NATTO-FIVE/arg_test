@@ -33,9 +33,8 @@
   // DB読み込み
   // ======================
   async function loadDB() {
-    if (dbLoaded || dbLoadError) return; // 一度試行したら再度fetchしない
+    if (dbLoaded || dbLoadError) return; 
     try {
-      // データのキャッシュを防ぐために no-cache を使用
       const res = await fetch(DB_URL, { cache: "no-cache" });
       if (!res.ok) throw new Error("HTTP " + res.status);
       DB = await res.json();
@@ -48,17 +47,14 @@
   }
 
   // ======================
-  // 検索ロジック (【ここを修正】)
+  // 検索ロジック
   // ======================
   async function search() {
     const q = (input.value || "").trim().toLowerCase();
     result.innerHTML = "";
 
-    if (!q) {
-      return;
-    }
+    if (!q) return;
 
-    // DBがまだなら読み込み
     if (!dbLoaded && !dbLoadError) {
       await loadDB();
     }
@@ -67,13 +63,10 @@
       return;
     }
 
-    // マッチするエントリを抽出
     const hits = DB.filter(item => {
       if (!Array.isArray(item.keys)) return false;
       return item.keys.some(k => {
         if (!k) return false;
-        // 修正: キーワード k の中にクエリ q が含まれているかをチェックする
-        // 以前のロジック (q.includes(k)) では、クエリがキーワードより短い場合に失敗していた
         return String(k).toLowerCase().includes(q); 
       });
     });
@@ -83,12 +76,11 @@
       return;
     }
 
-    // 検索結果を描画
     renderHits(hits, q);
   }
 
   // ======================
-  // 結果描画 (【ここを修正】Base64処理を再導入)
+  // 結果描画
   // ======================
   function renderHits(hits, q) {
     const escQ = escapeHtml(q);
@@ -106,22 +98,20 @@
 
       let typeLabel = "";
       if (type === "log")  typeLabel = "[内部記録]";
-      if (type === "site") typeLabel = "[院内サイト]";
+      if (type === "site") typeLabel = "[関連サイト]";
       if (type === "other") typeLabel = "[その他]";
       
       let dataAttr = "";
-      let targetFile = "";
       
-      // ログまたは docs.js 由来の文書の場合
       if (type === "log") {
-        // Base64 エンコードする対象は、ファイルパス (.txt) または docs.js の ID
-        targetFile = file && file.endsWith('.txt') ? file : id;
-        dataAttr = `data-h="${btoa(targetFile)}"`; // Base64 エンコードして data-h に設定
+        // 内部記録: record.html?h=... 用に Base64 化
+        // fileがあればfileパスを、なければIDを使用
+        const target = file && file.endsWith('.txt') ? file : id;
+        dataAttr = `data-h="${btoa(unescape(encodeURIComponent(target)))}"`; 
       } else if (type === "site") {
-        // 病院サイトの場合: 実際のファイルパス (file) を data-file に設定
+        // 直接リンク（foundation.htmlなど）: data-file にパスを保持
         dataAttr = `data-file="${encodeHtmlAttr(file)}"`;
       }
-
 
       html.push(`
         <li class="hit">
@@ -139,53 +129,34 @@
     html.push("</ul>");
     result.innerHTML = html.join("");
 
-    // クリックイベントのロジックを修正
+    // クリックイベントの設定
     document.querySelectorAll(".doc-title").forEach(el => {
       el.addEventListener("click", () => {
         const type = el.getAttribute("data-type");
         
         if (type === "log") {
-          // 内部記録（log）の場合: Base64 エンコードされたキーを record.html に渡す
           const base64Key = el.getAttribute("data-h");
           if (base64Key) {
             window.open(`record.html?h=${base64Key}`, "_blank");
           }
         } else if (type === "site") {
-          // 病院サイト（site）の場合: 既存のファイルパスを直接開く
-          const file = el.getAttribute("data-file");
-          if (file) {
-            window.open(file, "_blank");
+          const filePath = el.getAttribute("data-file");
+          if (filePath) {
+            window.open(filePath, "_blank");
           }
         }
       });
     });
   }
 
-
-  // ======================
-  // ユーティリティ：エスケープ (変更なし)
-  // ======================
   function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
 
   function encodeHtmlAttr(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+    return String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  // ======================
-  // 初期処理：?q= を拾って自動検索 (変更なし)
-  // ======================
   document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(location.search);
     const qParam = (params.get("q") || "").trim();
@@ -195,18 +166,8 @@
     }
   });
 
-  // ======================
-  // イベント設定 (変更なし)
-  // ======================
-  btn.addEventListener("click", () => {
-    search();
-  });
-
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      search();
-    }
-  });
+  btn.addEventListener("click", () => search());
+  input.addEventListener("keydown", e => { if (e.key === "Enter") search(); });
 </script>
 </body>
 </html>
