@@ -31,5 +31,20 @@
     "snippet": "長期滞在被験者 12 名のうち、8 名の睡眠パターンが過去 72 時間にわたり完全同期していることを確認。",
     "file": "logs/e4f7a2b1.txt", 
     "type": "log"
+  },
+　{
+    "id": "REC-001",
+    "title": "聖眠金枝財団 概要資料",
+    "keywords": ["聖眠金枝財団", "財団", "出資"],
+    "type": "record",
+    "url": "record.html?id=REC-001"
+  },
+  {
+    "id": "WEB-001",
+    "title": "一般財団法人 聖眠金枝財団 公式サイト",
+    "keywords": ["聖眠金枝財団", "ホームページ", "財団"],
+    "type": "external",
+    "url": "foundation.html"
   }
+  
 ]
