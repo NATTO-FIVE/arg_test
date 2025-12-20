@@ -5,11 +5,13 @@
   <title>金枝聖域第八病院｜公式サイト</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* サイト固有のデザイン調整 */
+    /* 1. 共通カラー定義 */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
     }
+
+    /* 2. ヒーローバナー（高さを他ページと合わせる） */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -17,23 +19,25 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    .hero-banner p { color: #ccc; }
 
-    /* メニュー設定：他ページと完全に同期させる */
+    /* 3. 【ここが原因】ナビゲーションのスタイルを他ページと完全同期 */
     .main-nav ul {
       display: flex;
-      gap: 12px; 
+      gap: 12px;           /* 他ページと同じ数値 */
       list-style: none;
       padding: 0;
       margin: 0;
+      align-items: center;
     }
     .main-nav a {
-      font-size: 13px; 
+      font-size: 13px;     /* 他ページと同じ数値 */
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
+      color: var(--text);  /* style.cssの変数を使用 */
     }
 
+    /* 4. レイアウト構造 */
     .main-layout {
       display: flex;
       gap: 30px;
@@ -48,6 +52,14 @@
       border: 1px solid #ddd;
       padding: 20px;
       border-radius: 8px;
+    }
+
+    /* 5. 検索窓の干渉を防ぐための最小限の設定 */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 1; /* 検索窓が縮むことでメニューを押し出さないようにする */
     }
   </style>
 </head>
