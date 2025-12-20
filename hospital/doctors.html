@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>医師紹介｜金枝聖域第八病院</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* 共通基盤のデザイン調整 */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .page-content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* 医師カードのデザイン */
+    .doctor-card {
+      display: flex;
+      gap: 30px;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      align-items: flex-start;
+    }
+    @media (max-width: 600px) {
+      .doctor-card { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* 写真プレースホルダー */
+    .doctor-img {
+      width: 200px;
+      height: 250px;
+      background: #eee;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .doctor-info h2 {
+      margin-top: 0;
+      color: var(--sanctuary-blue);
+      border-bottom: 2px solid var(--kanae-gold);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .specialty {
+      font-weight: bold;
+      color: var(--kanae-gold);
+      margin-bottom: 10px;
+    }
+    .profile-text {
+      font-size: 0.95em;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+          </ul>
+        </nav>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <button type="submit" class="search-btn">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>医師紹介</h1>
+    <p>専門的な知識と最新の解析技術を持つ、当院の医師陣をご紹介します。</p>
+  </div>
+</section>
+
+<main class="page-content">
+
+  <div class="doctor-card">
+    <div class="doctor-img">
+      <span>PHOTO: 神代 永久</span>
+    </div>
+    <div class="doctor-info">
+      <div class="specialty">特殊睡眠外来科 主任医</div>
+      <h2>神代 永久（かみしろ とわ）</h2>
+      <p class="profile-text">
+        睡眠構造に関する研究の第一人者。金枝聖域第八病院の設立時より、臨床試験の統括を務める。
+        患者様個々の「脳波の癖」を特定し、最適な入眠深度を設計する技術に長けている。
+        <br><br>
+        「睡眠は単なる休息ではなく、生活の一部です。皆様の夜がより深い安らぎに満ちるよう尽力いたします。」
+      </p>
+    </div>
+  </div>
+
+  <div class="doctor-card">
+    <div class="doctor-img">
+      <span>PHOTO: 虚空蔵 零</span>
+    </div>
+    <div class="doctor-info">
+      <div class="specialty">特殊睡眠外来科 / 精神科</div>
+      <h2>虚空蔵 零（こくぞう れい）</h2>
+      <p class="profile-text">
+        深層心理と神経生理学の境界領域を専門とする。
+        「睡眠領域」における認知変容プログラムの開発に携わり、原因不明の意識混濁や入眠時障害のケアを担当する。
+        <br><br>
+        「境界線に立つ皆様の不安に寄り添い、確かな睡眠へと導くことが私の使命です。」
+      </p>
+    </div>
+  </div>
+
+  <div class="doctor-card">
+    <div class="doctor-img">
+      <span>PHOTO: 銀河 軌道</span>
+    </div>
+    <div class="doctor-info">
+      <div class="specialty">脳神経外科 部長</div>
+      <h2>銀河 軌道（ぎんが きどう）</h2>
+      <p class="profile-text">
+        脳機能の物理的なネットワーク解析を専門とする。
+        難治性の症例においては、不和睡眠総合技術センターへのスムーズに連携し外科的アプローチとデータ解析を行う。
+        <br><br>
+        「脳という回路を整え、正しい神経伝達へと回帰させる。それが我々の提供する医療の本質です。」
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 金枝聖域第八病院</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
+</body>
+</html>
