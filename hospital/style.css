@@ -73,6 +73,7 @@ a:hover { text-decoration: underline; }
 .logo-text-main {
   font-weight: 700;
   font-size: 16px;
+  white-space: nowrap; /* これを追加すると絶対に折り返さなくなります */
 }
 
 .logo-text-sub {
