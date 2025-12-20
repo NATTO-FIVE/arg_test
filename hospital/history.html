@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>病院沿革｜金枝聖域第八病院</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* 共通基盤のデザイン調整 */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    /* メニュー設定：完全同期 */
+    .main-nav ul {
+      display: flex;
+      gap: 12px; 
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; 
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    .page-content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h2 {
+      border-left: 5px solid var(--kanae-gold);
+      padding-left: 15px;
+      margin: 40px 0 20px;
+    }
+
+    /* 年表スタイル */
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .history-table th {
+      width: 120px;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      vertical-align: top;
+      color: var(--sanctuary-blue);
+    }
+    .history-table td {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      line-height: 1.6;
+    }
+    .highlight-row {
+      background-color: #fffdf5; /* 財団出資後の行を微かに強調 */
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+          </ul>
+        </nav>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <button type="submit" class="search-btn">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>病院沿革</h1>
+    <p>地域医療への貢献と、最先端研究へのたゆまぬ歩み。</p>
+  </div>
+</section>
+
+<main class="page-content">
+  <section>
+    <h2>沿革</h2>
+    <table class="history-table">
+      <tr>
+        <th>19XX年</th>
+        <td>金枝医院として現在地に開院。地域に根ざした一般診療を開始。</td>
+      </tr>
+      <tr>
+        <th>19XX年</th>
+        <td>医療法人社団としての認可を受け、病床数を拡大。名称を「金枝総合病院」に変更。</td>
+      </tr>
+      <tr>
+        <th>20XX年</th>
+        <td>脳神経外科および精神科の専門病棟を開設。</td>
+      </tr>
+      <tr class="highlight-row">
+        <th>20XX年</th>
+        <td>
+          <strong>一般財団法人 聖眠金枝財団より大規模な資本出資を受ける。</strong><br>
+          これに伴い、最新のMRIおよび脳波解析システムを導入。病院名称を現在の「金枝聖域第八病院」へと改称。
+        </td>
+      </tr>
+      <tr class="highlight-row">
+        <th>20XX年</th>
+        <td>
+          財団の全面的支援により、敷地内に「不和睡眠総合技術センター」を併設。<br>
+          特殊睡眠外来科を開設し、次世代の脳機能ケアに向けた臨床研究を開始。
+        </td>
+      </tr>
+      <tr>
+        <th>現在</th>
+        <td>
+          聖眠金枝財団との強固なパートナーシップのもと、高度先進医療と地域医療の融合を推進。
+          「意識の可能性」を追求する国内有数の拠点として現在に至る。
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section style="margin-top: 50px; font-size: 0.9em; color: #666;">
+    <p>当院は、設立当初からの精神を継承しつつ、聖眠金枝財団の理念である「全人類への安らぎの提供」を実現するため、日々邁進しております。</p>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 金枝聖域第八病院</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
+</body>
+</html>
