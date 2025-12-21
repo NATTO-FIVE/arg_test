@@ -54,7 +54,16 @@
     "snippet": "宗教法人　金の聖眠教の公式ページです。",
     "file": "Seimin/index.html",
     "type": "site"
+  },
+{
+    "id": "Seimi-001",
+    "keys": ["神の経脈"],
+    "title": "宗教法人 金の聖眠教 教義本「神の経脈」",
+    "snippet": "宗教法人　金の聖眠教の教義本「神の経脈」。",
+    "file": "files/kamino_keimyaku.pdf",
+    "type": "site"
   }
+
 
   
 ]
