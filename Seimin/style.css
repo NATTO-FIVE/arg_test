@@ -76,6 +76,27 @@ body header nav ul li a:hover {
   color: var(--seimin-gold);
 }
 
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+.history-table th {
+  width: 25%;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: top;
+  color: #a68b5c; /* 金系 */
+}
+.history-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  line-height: 1.6;
+}
+
+
+
 /* コンテンツ */
 .content-section {
   padding: 60px 0;
