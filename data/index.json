@@ -46,7 +46,18 @@
   "keys": ["pdf"],
   "type": "pdf",
   "file": "files/confidential_finance_2024.pdf"
-}
+},
+{
+    "id": "Seimi-001",
+    "keys": ["金の聖眠"],
+    "title": "宗教法人 金の聖眠教 公式サイト",
+    "snippet": "宗教法人　金の聖眠教の公式ページです。",
+    "file": "Seimin/index.html",
+    "type": "site"
+  },
+
+
+  
 ]
 
 
