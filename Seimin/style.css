@@ -1,0 +1,82 @@
+:root {
+  --seimin-purple: #2e003e; /* 深い紫 */
+  --seimin-gold: #ffd700;   /* 鮮やかな金 */
+  --seimin-black: #0a0a0a;  /* 漆黒 */
+  --seimin-white: #f0f0f0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--seimin-black);
+  color: var(--seimin-white);
+  font-family: "Yu Mincho", "MS Mincho", serif; /* 宗教らしく明朝体 */
+  line-height: 1.8;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  padding: 40px 0;
+  text-align: center;
+  border-bottom: 2px double var(--seimin-gold);
+}
+
+.logo-text {
+  font-size: 2.5rem;
+  color: var(--seimin-gold);
+  letter-spacing: 0.5em;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 20px 0;
+}
+
+nav a {
+  color: var(--seimin-gold);
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.hero-visual {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, var(--seimin-purple) 0%, var(--seimin-black) 100%);
+  border-bottom: 1px solid var(--seimin-gold);
+}
+
+.hero-text {
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--seimin-gold);
+}
+
+.content-section {
+  padding: 60px 0;
+  border-bottom: 1px solid #333;
+}
+
+.section-title {
+  color: var(--seimin-gold);
+  border-left: 3px solid var(--seimin-gold);
+  padding-left: 15px;
+  margin-bottom: 30px;
+}
+
+footer {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+}
