@@ -33,24 +33,31 @@ header {
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
+/* Seimin/style.css の nav 部分を以下に差し替え */
+
 nav ul {
   display: flex;
   justify-content: center;
   gap: 30px;
   list-style: none;
   padding: 20px 0;
+  margin: 0;
 }
 
-nav a {
-  color: var(--seimin-gold);
-  text-decoration: underline;
-  text-decoration: none;
+nav ul li a {
+  color: var(--seimin-gold) !important; /* 強制的に色を適用 */
+  text-decoration: underline !important; /* 強制的に下線を適用 */
   font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
-nav a:hover {
+nav ul li a:hover {
   opacity: 0.7;
-  color: var(--seimin-white); /* ホバー時に色を変えて反応を出す */
+  color: var(--seimin-white) !important;
+  text-shadow: 0 0 8px var(--seimin-gold);
+  transform: translateY(-2px); /* 少し浮く演出 */
 }
 
 .hero-visual {
