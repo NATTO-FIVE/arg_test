@@ -41,9 +41,9 @@
   },
   {
   "id": "CONF-FINANCE-2024",
-  "title": "2024年度 財務諸表（内部閲覧用）",
+  "title": "2024年度 財務諸表",
   "snippet": "一般財団法人 聖眠金枝財団の収支内訳",
-  "keys": ["財務諸表"],
+  "keys": ["pdf"],
   "type": "pdf",
   "file": "files/confidential_finance_2024.pdf"
 }
