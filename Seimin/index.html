@@ -4,10 +4,53 @@
   <meta charset="UTF-8">
   <title>金の聖眠｜心の安らぎ、魂の位相同期</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 宗教サイト仕様の検索欄スタイル */
+    .header-top {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+    }
+    .seimin-search-form {
+      display: flex;
+      border: 1px solid var(--seimin-gold);
+      background: var(--seimin-black);
+    }
+    .seimin-search-form input {
+      background: transparent;
+      border: none;
+      color: var(--seimin-white);
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      outline: none;
+      width: 150px;
+      font-family: serif;
+    }
+    .seimin-search-btn {
+      background: var(--seimin-gold);
+      color: var(--seimin-black);
+      border: none;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.75rem;
+      font-family: serif;
+    }
+    .seimin-search-btn:hover {
+      background: var(--seimin-white);
+    }
+  </style>
 </head>
 <body>
 
 <header>
+  <div class="header-top">
+    <form class="seimin-search-form" action="../search.html" method="get">
+      <input name="q" type="search" placeholder="真理を問う">
+      <button type="submit" class="seimin-search-btn">探求</button>
+    </form>
+  </div>
+
   <div class="container">
     <div class="logo-text">金の聖眠</div>
     <nav>
