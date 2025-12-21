@@ -1,3 +1,4 @@
+/* --- 変数定義 --- */
 :root {
   --seimin-purple: #2e003e; /* 深い紫 */
   --seimin-gold: #ffd700;   /* 鮮やかな金 */
@@ -5,12 +6,13 @@
   --seimin-white: #f0f0f0;
 }
 
+/* --- 全体スタイル --- */
 body {
   margin: 0;
   padding: 0;
   background-color: var(--seimin-black);
   color: var(--seimin-white);
-  font-family: "Yu Mincho", "MS Mincho", serif; /* 宗教らしく明朝体 */
+  font-family: "Yu Mincho", "MS Mincho", serif;
   line-height: 1.8;
 }
 
@@ -20,33 +22,70 @@ body {
   padding: 0 20px;
 }
 
+/* --- ヘッダー・検索欄 --- */
 header {
-  padding: 40px 0;
-  text-align: center;
+  padding: 20px 0 40px; /* 上部を少し詰め、下部を広げる */
   border-bottom: 2px double var(--seimin-gold);
 }
 
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 20px;
+}
+
+/* 検索フォームの微調整 */
+.seimin-search-form {
+  display: flex;
+  border: 1px solid var(--seimin-gold);
+  background: var(--seimin-black);
+}
+
+.seimin-search-form input {
+  background: transparent;
+  border: none;
+  color: var(--seimin-white);
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  outline: none;
+  width: 150px;
+  font-family: serif;
+}
+
+.seimin-search-btn {
+  background: var(--seimin-gold);
+  color: var(--seimin-black);
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.75rem;
+  font-family: serif;
+}
+
+/* ロゴ */
 .logo-text {
+  text-align: center;
   font-size: 2.5rem;
   color: var(--seimin-gold);
   letter-spacing: 0.5em;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  margin-bottom: 20px;
 }
 
-/* Seimin/style.css の nav 部分を以下に差し替え */
-
+/* --- ナビゲーション（下線・横並び固定） --- */
 nav ul {
   display: flex;
   justify-content: center;
   gap: 30px;
   list-style: none;
-  padding: 20px 0;
+  padding: 0;
   margin: 0;
 }
 
 nav ul li a {
-  color: var(--seimin-gold) !important; /* 強制的に色を適用 */
-  text-decoration: underline !important; /* 強制的に下線を適用 */
+  color: var(--seimin-gold);
+  text-decoration: underline; /* 下線を常時表示 */
   font-size: 1.1rem;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -55,11 +94,12 @@ nav ul li a {
 
 nav ul li a:hover {
   opacity: 0.7;
-  color: var(--seimin-white) !important;
+  color: var(--seimin-white);
   text-shadow: 0 0 8px var(--seimin-gold);
-  transform: translateY(-2px); /* 少し浮く演出 */
+  transform: translateY(-2px);
 }
 
+/* --- メインビジュアル --- */
 .hero-visual {
   height: 300px;
   display: flex;
@@ -75,6 +115,7 @@ nav ul li a:hover {
   color: var(--seimin-gold);
 }
 
+/* --- コンテンツエリア --- */
 .content-section {
   padding: 60px 0;
   border-bottom: 1px solid #333;
@@ -87,6 +128,7 @@ nav ul li a:hover {
   margin-bottom: 30px;
 }
 
+/* --- フッター --- */
 footer {
   padding: 40px 0;
   text-align: center;
