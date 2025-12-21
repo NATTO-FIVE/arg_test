@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アクセス｜金の聖眠</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .header-top { display: flex; justify-content: flex-end; padding: 10px 20px; }
+    .seimin-search-form { display: flex; border: 1px solid #ffd700; background: #0a0a0a; }
+    .seimin-search-form input { background: transparent; border: none; color: #f0f0f0; padding: 5px 10px; font-size: 0.8rem; outline: none; width: 150px; font-family: serif; }
+    .seimin-search-btn { background: #ffd700; color: #0a0a0a; border: none; padding: 5px 15px; cursor: pointer; font-weight: bold; font-size: 0.75rem; font-family: serif; }
+    
+    .map-box {
+      width: 100%;
+      height: 300px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 30px 0;
+      color: #666;
+    }
+    .location-info {
+      margin-top: 30px;
+      line-height: 2;
+    }
+    .location-info strong {
+      color: var(--seimin-gold);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <form class="seimin-search-form" action="../search.html" method="get">
+      <input name="q" type="search" placeholder="真理を問う">
+      <button type="submit" class="seimin-search-btn">探求</button>
+    </form>
+  </div>
+  <div class="container">
+    <div class="logo-text">金の聖眠</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="teachings.html">お教え</a></li>
+        <li><a href="contact.html">入会のご案内</a></li>
+        <li><a href="access.html">アクセス</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="content-section">
+    <h2 class="section-title">聖域への道標</h2>
+    <p>
+      「金の聖眠」総本部は、清浄な空気に満ちた翠波（すいは）の地に位置しています。
+      俗世の喧騒を離れ、御視様（おしさま）の御許へと意識を高く昇らせるための、最も空に近い場所です。
+    </p>
+
+    <div class="map-box">
+      【周辺地図：翠波地区 案内図】
+    </div>
+
+    <div class="location-info">
+      <p>
+        <strong>所在地：</strong><br>
+        〒XXX-XXXX K県Y市透明町 7-80-9<br>
+        宗教法人 金の聖眠 総本部
+      </p>
+      <p>
+        <strong>交通のご案内：</strong><br>
+        ・透横電鉄「透明町駅」下車、徒歩20分<br>
+        ・駅前より定期送迎バス「黄金号」運行
+      </p>
+      <p style="margin-top: 20px; font-size: 0.9rem;">
+        ※当施設は閑静な高台にございます。周辺には医療機関（金枝聖域第八病院等）や住宅地がございますので、参拝の際は静粛にお願い申し上げます。
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>宗教法人 金の聖眠 総本部</p>
+    <p>© 2025 Golden Seimin. All Rights Reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
