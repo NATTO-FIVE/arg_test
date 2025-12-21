@@ -4,42 +4,51 @@
   <meta charset="UTF-8">
   <title>金の聖眠｜心の安らぎ、魂の位相同期</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* 宗教サイト仕様の検索欄スタイル */
-    .header-top {
-      display: flex;
-      justify-content: flex-end;
-      padding: 10px 20px;
-    }
-    .seimin-search-form {
-      display: flex;
-      border: 1px solid var(--seimin-gold);
-      background: var(--seimin-black);
-    }
-    .seimin-search-form input {
-      background: transparent;
-      border: none;
-      color: var(--seimin-white);
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      outline: none;
-      width: 150px;
-      font-family: serif;
-    }
-    .seimin-search-btn {
-      background: var(--seimin-gold);
-      color: var(--seimin-black);
-      border: none;
-      padding: 5px 15px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.75rem;
-      font-family: serif;
-    }
-    .seimin-search-btn:hover {
-      background: var(--seimin-white);
-    }
-  </style>
+ <style>
+  /* 検索欄スタイル（変数を使わず直接色指定して安定させる） */
+  .header-top {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+  }
+  .seimin-search-form {
+    display: flex;
+    border: 1px solid #ffd700;
+    background: #0a0a0a;
+  }
+  .seimin-search-form input {
+    background: transparent;
+    border: none;
+    color: #f0f0f0;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    outline: none;
+    width: 150px;
+    font-family: serif;
+  }
+  .seimin-search-btn {
+    background: #ffd700;
+    color: #0a0a0a;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    font-family: serif;
+  }
+  .seimin-search-btn:hover {
+    background: #f0f0f0;
+  }
+
+  /* メニューの下線を確実に強制する記述を追加 */
+  nav ul li a {
+    text-decoration: underline !important;
+    color: #ffd700 !important;
+  }
+  nav ul li a:hover {
+    color: #ffffff !important;
+  }
+</style>
 </head>
 <body>
 
