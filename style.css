@@ -154,7 +154,7 @@ h1 {
 
 /* 強調（strong）：視認性の高い太字 */
 .markdown-body strong { 
-    color: #b0b0b0; 
+    /*color: #b0b0b0;*/ 
     font-weight: bold;
 }
 
