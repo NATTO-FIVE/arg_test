@@ -158,6 +158,26 @@ h1 {
     font-weight: bold;
 }
 
+/* Markdown内のテーブル表示用 */
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    color: #b0b0b0;
+}
+
+.markdown-body th, .markdown-body td {
+    border: 1px solid #444;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.markdown-body th {
+    background-color: rgba(201, 160, 99, 0.1); /* 金枝カラーを薄く背景に */
+    color: #c9a063;
+}
+
+
 
 
 
