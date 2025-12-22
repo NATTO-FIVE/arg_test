@@ -116,4 +116,49 @@ h1 {
   line-height: 1.4;
 }
 
+/* --- 記録検索端末 (record.html) 用のスタイル --- */
+
+/* 基本の文字色：薄い灰色に設定 */
+.markdown-body {
+    color: #b0b0b0; 
+    line-height: 1.8;
+    white-space: normal;
+}
+
+/* 見出し：太字・大文字・黄金色 */
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3 {
+    color: #c9a063;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* 第一見出しの装飾 */
+.markdown-body h1 { 
+    font-size: 1.6em;
+    border-bottom: 2px solid #c9a063; 
+    padding-bottom: 5px; 
+}
+
+/* 引用（blockquote）：システム上の注釈表現 */
+.markdown-body blockquote { 
+    border-left: 4px solid #c9a063; 
+    padding-left: 15px; 
+    color: #888; 
+    font-style: italic; 
+    margin: 1.5em 0;
+}
+
+/* 強調（strong）：視認性の高い黄色 */
+.markdown-body strong { 
+    color: #ffeb3b; 
+    font-weight: bold;
+}
+
+
+
+
 
