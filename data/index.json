@@ -62,6 +62,14 @@
     "snippet": "宗教法人　金の聖眠教の教義本「神の経脈」。",
     "file": "files/docs_golden/kamino_keimyaku_8a2f9b.pdf",
     "type": "site"
+  },
+  {
+    "id": "DEITY-INFO-001",
+    "keys": ["御視様", "おしさま", "謂れ"],
+    "title": "内部記録：御視様の謂れと基礎概説",
+    "snippet": "教団における絶対的観測者「御視様」に関する伝承記録。",
+    "file": "logs/oshi_deity_v8p2k5.txt",
+    "type": "log"
   }
 
 
