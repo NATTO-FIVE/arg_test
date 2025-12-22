@@ -49,16 +49,28 @@
 
         // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
-            
+            // =========================================================
             // パス正規化のためのヘルパー関数: 前後のスラッシュを削除
-            const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
-
+            // const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
             // 3. /data/index.json を読み込み
             // search.htmlが成功しているシンプルな相対パスを使用
-            const indexResponse = await fetch('data/index.json'); 
-            
-            if (!indexResponse.ok) {
-                throw new Error(`[CRITICAL] 目録データ通信エラー`);
+            // const indexResponse = await fetch('data/index.json'); 
+            // if (!indexResponse.ok) {
+                // throw new Error(`[CRITICAL] 目録データ通信エラー`);
+            //===========================================================
+            .then(data => {
+                statusLight.className = 'status-light ok';
+                const trimmedData = data.content.trim();
+        
+                if (!trimmedData) {
+                    titleElement.innerText = "記録が存在しないか、データが破損しています";
+                    bodyElement.innerText = "内容が空です。";
+                    return;
+                }
+        
+                titleElement.innerText = `内部記録: ${data.title}`;
+                // marked.parse を使用して HTML に変換
+                bodyElement.innerHTML = marked.parse(trimmedData);
             }
             const indexData = await indexResponse.json();
 
