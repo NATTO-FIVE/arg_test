@@ -152,9 +152,9 @@ h1 {
     margin: 1.5em 0;
 }
 
-/* 強調（strong）：視認性の高い黄色 */
+/* 強調（strong）：視認性の高い太字 */
 .markdown-body strong { 
-    color: #ffeb3b; 
+    color: #b0b0b0; 
     font-weight: bold;
 }
 
