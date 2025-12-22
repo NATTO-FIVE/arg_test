@@ -1,47 +1,43 @@
 <!doctype html>
 <html lang="ja">
-<style>
-    /* record.html の表示エリア用スタイル例 */
-    #record-body h1 { border-bottom: 2px solid #c9a063; padding-bottom: 5px; }
-    #record-body h3 { color: #c9a063; margin-top: 1.5em; }
-    #record-body blockquote { 
-        border-left: 4px solid #c9a063; 
-        padding-left: 15px; 
-        color: #aaa; 
-        font-style: italic; 
-    }
-    #record-body strong { color: #ffeb3b; } /* 強調部分を黄金色に */
-    
-</style>
-
-    
 <head>
-  <meta charset="UTF-8">
-  <title>内部記録ビューア：接続中</title>
-  <link rel="stylesheet" href="style.css"> 
+    <meta charset="UTF-8">
+    <title>内部記録ビューア：接続中</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #body h1 { border-bottom: 2px solid #c9a063; padding-bottom: 5px; }
+        #body h3 { color: #c9a063; margin-top: 1.5em; }
+        #body blockquote { 
+            border-left: 4px solid #c9a063; 
+            padding-left: 15px; 
+            color: #aaa; 
+            font-style: italic; 
+        }
+        #body strong { color: #ffeb3b; }
+    </style>
 </head>
 <body>
 
-  <div class="terminal record"> 
-    
-    <div class="terminal-header">
-        > CONNECTED: 翠波ネットワーク / 記録検索端末
-        <br>
-        > FETCHING FILE　・・・・
-        <span class="status-light" id="status-light" title="接続状態"></span>
-    </div>
+<div class="terminal record">
+    <div class="terminal-header">
+        > CONNECTED: 翠波ネットワーク / 記録検索端末
+        <br>
+        > FETCHING FILE　・・・・
+        <span class="status-light" id="status-light" title="接続状態"></span>
+    </div>
 
-    <h1 id="title"></h1>
-    <div id="body" class="markdown-body"></div>
-    
-    <div class="terminal-footer">
-        <p class="disclaimer">
-            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-        </p>
-    </div>
-  </div>
+    <h1 id="title"></h1>
+    <div id="body" class="markdown-body" style="white-space: normal;"></div>
+    
+    <div class="terminal-footer">
+        <p class="disclaimer">
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+        </p>
+    </div>
+</div>
 
-  <script>
+<script src="./js/lib/marked.min.js"></script>
+<script>
     (function() {
         const params = new URLSearchParams(location.search);
         const h = params.get("h");
@@ -52,7 +48,6 @@
         
         let recordPath = ""; 
 
-        // 1. Base64 デコード (例: /logs/e4f7a2b1.txt)
         try {
             recordPath = atob(h);
         } catch (e) {
@@ -61,72 +56,33 @@
             return; 
         }
 
-        // --- データ読み込みのメイン関数 ---
         async function fetchRecordData(targetPath) {
-            // =========================================================
-            // パス正規化のためのヘルパー関数: 前後のスラッシュを削除
-            // const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
-            // 3. /data/index.json を読み込み
-            // search.htmlが成功しているシンプルな相対パスを使用
-            // const indexResponse = await fetch('data/index.json'); 
-            // if (!indexResponse.ok) {
-                // throw new Error(`[CRITICAL] 目録データ通信エラー`);
-            //===========================================================
-            .then(data => {
-                statusLight.className = 'status-light ok';
-                const trimmedData = data.content.trim();
-        
-                if (!trimmedData) {
-                    titleElement.innerText = "記録が存在しないか、データが破損しています";
-                    bodyElement.innerText = "内容が空です。";
-                    return;
-                }
-        
-                titleElement.innerText = `内部記録: ${data.title}`;
-                // marked.parse を使用して HTML に変換
-                bodyElement.innerHTML = marked.parse(trimmedData);
-            }
+            const normalizePath = (p) => String(p).replace(/^\/|\/$/g, '');
+            
+            // index.json の取得
+            const indexResponse = await fetch('data/index.json'); 
+            if (!indexResponse.ok) throw new Error(`[CRITICAL] 目録データ通信エラー`);
+            
             const indexData = await indexResponse.json();
-
-            // 4. ファイルパスで該当レコードを検索 (正規化による厳密な比較)
             const targetPathNormalized = normalizePath(targetPath);
             
-            const record = indexData.find(item => {
-                return normalizePath(item.file) === targetPathNormalized;
-            });
+            const record = indexData.find(item => normalizePath(item.file) === targetPathNormalized);
+            if (!record) throw new Error(`[CRITICAL] 記録データ照合失敗`);
             
-            if (!record) {
-                throw new Error(`[CRITICAL] 記録データ照合失敗`);
-            }
-            
-            // 5. ログファイルの内容を読み込み
             let logFilePath = record.file;
+            if (logFilePath.startsWith('/')) logFilePath = logFilePath.substring(1); 
             
-            // ★ 最終修正: ログファイルパスの先頭のスラッシュを削除し、相対パスとして強制する
-            if (logFilePath.startsWith('/')) {
-                logFilePath = logFilePath.substring(1); 
-            }
+            const logResponse = await fetch(logFilePath);
+            if (!logResponse.ok) throw new Error(`[CRITICAL] ログファイル通信エラー`);
             
-            const logResponse = await fetch(logFilePath); // ★ 修正された相対パスを使用
-            
-            if (!logResponse.ok) {
-                throw new Error(`[CRITICAL] ログファイル通信エラー`);
-            }
             const logContent = await logResponse.text();
-
             return { title: record.title, content: logContent };
         }
-        // --- データ読み込み関数 終了 ---
 
-
-        // ===============================================
-        // 実行ロジック
-        // ===============================================
-        
         titleElement.innerText = `データ転送中...`; 
         
         setTimeout(() => {
-            fetchRecordData(recordPath) // デコードされたパス全体を渡す
+            fetchRecordData(recordPath)
                 .then(data => {
                     statusLight.className = 'status-light ok';
                     const trimmedData = data.content.trim();
@@ -138,21 +94,20 @@
                     }
 
                     titleElement.innerText = `内部記録: ${data.title}`; 
-                    bodyElement.innerText = trimmedData;
+                    // Markdownとしてパースして表示
+                    if (typeof marked !== 'undefined') {
+                        bodyElement.innerHTML = marked.parse(trimmedData);
+                    } else {
+                        bodyElement.innerText = trimmedData;
+                    }
                 })
                 .catch(e => {
                     statusLight.className = 'status-light';
                     titleElement.innerText = "接続断 / アクセス失敗";
-                    
-                    bodyElement.innerText = `【FATAL ERROR】\n\n通信プロトコルの破損が確認されました。\nアクセス試行は無効化されました。\n\n機密区画は封鎖されました。`;
-                    
-                    console.error("ARG Fetch Error:", e); 
-                    console.error("検索パス:", recordPath);
+                    bodyElement.innerText = `【FATAL ERROR】\n\n${e.message}\n\n通信プロトコルの破損が確認されました。`;
                 });
         }, 500);
-
     })();
 </script>
-<script src="./js/lib/marked.min.js"></script>
 </body>
 </html>
