@@ -86,6 +86,14 @@
     "snippet": "登攀適性七曲弥起に関する報告書。",
     "file": "files/docs_golden/report_tekiseiA_k3m9s1.txt",
     "type": "log"
+},
+{
+    "id": "MONTHLY-REPORT-001",
+    "keys": ["永遠の位"],
+    "title": "業務委託申請書：12月度月報メール（不和→百目島）",
+    "snippet": "不和睡眠総合技術センターからの10月度月報。",
+    "file": "files/docs_golden/monthly_report_f4r9t2.txt",
+    "type": "log"
 }
 
 
