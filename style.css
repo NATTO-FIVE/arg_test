@@ -177,7 +177,42 @@ h1 {
     color: #c9a063;
 }
 
+/* 全画面共通ナビゲーション */
+.top-nav {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid #c9a063;
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: monospace;
+}
 
+.top-nav a {
+    color: #c9a063;
+    text-decoration: none;
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.top-nav a:hover {
+    opacity: 1;
+    text-shadow: 0 0 8px #c9a063;
+}
+
+.top-nav .nav-divider {
+    color: #444;
+}
+
+.top-nav .nav-current {
+    color: #888;
+    font-size: 0.8em;
+    margin-left: auto; /* 右端に寄せる */
+}
 
 
 
