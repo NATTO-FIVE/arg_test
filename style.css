@@ -182,26 +182,30 @@ h1 {
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
     border-bottom: 1px solid #c9a063;
-    padding: 10px 20px;
+    padding: 10px 30px; /* 左側の余白を 20px から 30px に増やして欠けを防止 */
     display: flex;
-    gap: 20px;
+    gap: 25px;         /* リンク同士の間隔を少し広げる */
     position: sticky;
     top: 0;
     z-index: 1000;
     font-family: monospace;
+    box-sizing: border-box; /* パディングを含めた幅計算を強制する */
 }
 
 .top-nav a {
     color: #c9a063;
     text-decoration: none;
-    font-size: 2.2rem; /* サイズを大きく変更 */
+    font-size: 2.1rem; 
     font-weight: bold;
-    padding: 15px 15px;
+    padding: 8px 18px; /* ボタン内の余白を調整 */
     border: 1px solid rgba(201, 160, 99, 0.3);
     background: rgba(201, 160, 99, 0.05);
     transition: all 0.3s ease;
     display: inline-block;
+    white-space: nowrap; /* 改行を防いで一行で表示 */
 }
+
+/* 中略（ホバー等はそのまま） */
 
 .top-nav a:hover {
     background: rgba(201, 160, 99, 0.2);
