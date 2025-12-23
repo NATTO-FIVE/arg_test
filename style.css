@@ -177,7 +177,7 @@ h1 {
     color: #c9a063;
 }
 
-/* 全画面共通ナビゲーション */
+/* record.html 専用ナビゲーションバー */
 .top-nav {
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
@@ -194,24 +194,32 @@ h1 {
 .top-nav a {
     color: #c9a063;
     text-decoration: none;
-    font-size: 1.2em;
-    opacity: 0.7;
-    transition: 0.3s;
+    font-size: 1.2rem; /* サイズを大きく変更 */
+    font-weight: bold;
+    padding: 5px 15px;
+    border: 1px solid rgba(201, 160, 99, 0.3);
+    background: rgba(201, 160, 99, 0.05);
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .top-nav a:hover {
+    background: rgba(201, 160, 99, 0.2);
+    border-color: #c9a063;
+    box-shadow: 0 0 10px rgba(201, 160, 99, 0.5);
     opacity: 1;
-    text-shadow: 0 0 8px #c9a063;
 }
 
 .top-nav .nav-divider {
     color: #444;
+    align-self: center;
 }
 
-.top-nav .nav-current {
+.top-nav .nav-status {
     color: #888;
-    font-size: 0.8em;
-    margin-left: auto; /* 右端に寄せる */
+    font-size: 0.9rem;
+    margin-left: auto;
+    align-self: center;
 }
 
 
