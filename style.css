@@ -194,7 +194,7 @@ h1 {
 .top-nav a {
     color: #c9a063;
     text-decoration: none;
-    font-size: 1.2rem; /* サイズを大きく変更 */
+    font-size: 2.2rem; /* サイズを大きく変更 */
     font-weight: bold;
     padding: 5px 15px;
     border: 1px solid rgba(201, 160, 99, 0.3);
