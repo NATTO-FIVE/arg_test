@@ -1,0 +1,200 @@
+:root {
+    --lab-bg: #0d1117;
+    --lab-panel: #161b22;
+    --lab-text: #c9d1d9;
+    --lab-accent: #58a6ff;
+    --lab-border: #30363d;
+    --lab-highlight: #ffeb3b;
+}
+
+body {
+    margin: 0;
+    font-family: "Consolas", "Monaco", "Courier New", "Meiryo", monospace;
+    background-color: var(--lab-bg);
+    color: var(--lab-text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.lab-header {
+    background: var(--lab-panel);
+    border-bottom: 2px solid var(--lab-accent);
+    padding: 15px 0;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-mark {
+    width: 30px;
+    height: 30px;
+    background: var(--lab-accent);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* 菱形ロゴ */
+}
+
+.logo-text .main {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--lab-accent);
+}
+
+.logo-text .sub {
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+.lab-nav ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lab-nav a {
+    text-decoration: none;
+    color: var(--lab-text);
+    font-size: 0.8rem;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+}
+
+.lab-nav a:hover {
+    border-color: var(--lab-accent);
+    color: var(--lab-accent);
+}
+
+/* Search */
+.lab-search {
+    display: flex;
+    border: 1px solid var(--lab-border);
+}
+
+.lab-search input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-family: inherit;
+    width: 150px;
+}
+
+.lab-search button {
+    background: var(--lab-accent);
+    border: none;
+    color: var(--lab-bg);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/* Hero */
+.lab-hero {
+    padding: 60px 0;
+    background: linear-gradient(to bottom, #161b22, #0d1117);
+    text-align: center;
+    border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: white;
+    letter-spacing: 0.2em;
+}
+
+/* Grid Layout */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.lab-card {
+    background: var(--lab-panel);
+    border: 1px solid var(--lab-border);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.lab-card h2 {
+    color: var(--lab-accent);
+    font-size: 1.1rem;
+    border-left: 4px solid var(--lab-accent);
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.research-list {
+    list-style: none;
+    padding: 0;
+}
+
+.research-list li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--lab-border);
+    padding-bottom: 10px;
+}
+
+.research-list strong {
+    display: block;
+    color: white;
+    font-size: 1rem;
+}
+
+.research-list span {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Sidebar */
+.status-panel {
+    background: var(--lab-panel);
+    border: 1px solid var(--lab-border);
+    padding: 20px;
+}
+
+.status-indicator {
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #4caf50;
+}
+
+.side-links {
+    list-style: none;
+    padding: 0;
+}
+
+.side-links li {
+    margin-bottom: 10px;
+}
+
+.side-links a {
+    color: var(--lab-accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+.lab-footer {
+    margin-top: 60px;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.75rem;
+    border-top: 1px solid var(--lab-border);
+    opacity: 0.6;
+}
