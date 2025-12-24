@@ -110,6 +110,14 @@
     "snippet": "不和睡眠総合技術センターの安全基準仕様書。",
     "file": "files/docs_golden/safety_order_v3t1p8.txt",
     "type": "log"
+},
+  {
+    "id": "PROJ-E-OUTLINE-001",
+    "keys": ["project-E"],
+    "title": "機密資料：永位計画（project-E）基本概要書",
+    "snippet": "1990年に起案された「永位計画」の初期概要。DS-187の肉体的不変性の発見と、自己延命への転用について。",
+    "file": "files/docs_golden/project_e_outline_m2n8b5.txt",
+    "type": "log"
 }
 
 
