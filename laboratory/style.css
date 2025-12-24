@@ -1,18 +1,18 @@
 :root {
-    --lab-bg: #0d1117;
-    --lab-panel: #161b22;
-    --lab-text: #c9d1d9;
-    --lab-accent: #58a6ff;
-    --lab-border: #30363d;
-    --lab-highlight: #ffeb3b;
+    --lab-bg: #ffffff;           /* クリーンな白 */
+    --lab-panel: #f8f9fa;        /* 非常に薄いグレー */
+    --lab-text: #333333;         /* 読みやすい黒 */
+    --lab-accent: #0055ff;       /* 信頼感のある理知的な青 */
+    --lab-border: #dee2e6;       /* 控えめな境界線 */
+    --lab-header-bg: #ffffff;
 }
 
 body {
     margin: 0;
-    font-family: "Consolas", "Monaco", "Courier New", "Meiryo", monospace;
+    font-family: "Helvetica Neue", "Arial", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
     background-color: var(--lab-bg);
     color: var(--lab-text);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .container {
@@ -21,180 +21,128 @@ body {
     padding: 0 20px;
 }
 
-/* Header */
+/* Header: 影を薄くつけて清潔感を出す */
 .lab-header {
-    background: var(--lab-panel);
-    border-bottom: 2px solid var(--lab-accent);
-    padding: 15px 0;
+    background: var(--lab-header-bg);
+    border-bottom: 3px solid var(--lab-accent);
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-}
-
-.logo-mark {
-    width: 30px;
-    height: 30px;
-    background: var(--lab-accent);
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* 菱形ロゴ */
 }
 
 .logo-text .main {
     display: block;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 800;
     color: var(--lab-accent);
+    letter-spacing: 0.05em;
 }
 
 .logo-text .sub {
-    font-size: 0.7rem;
-    opacity: 0.6;
+    font-size: 0.75rem;
+    color: #888;
+    font-weight: bold;
 }
 
-.lab-nav ul {
-    display: flex;
-    gap: 15px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
+/* Navigation */
 .lab-nav a {
     text-decoration: none;
-    color: var(--lab-text);
-    font-size: 0.8rem;
-    border: 1px solid transparent;
-    padding: 5px 10px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 15px;
+    transition: 0.2s;
 }
 
 .lab-nav a:hover {
-    border-color: var(--lab-accent);
     color: var(--lab-accent);
 }
 
-/* Search */
+/* Search: クリーンな入力フォーム */
 .lab-search {
     display: flex;
     border: 1px solid var(--lab-border);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .lab-search input {
-    background: transparent;
     border: none;
-    color: white;
-    padding: 5px 10px;
-    font-family: inherit;
-    width: 150px;
+    padding: 8px 12px;
+    background: #f1f3f5;
+    outline: none;
 }
 
 .lab-search button {
     background: var(--lab-accent);
     border: none;
-    color: var(--lab-bg);
-    font-weight: bold;
+    color: white;
+    padding: 0 15px;
     cursor: pointer;
-    padding: 5px 10px;
 }
 
-/* Hero */
+/* Hero Section: 明るく開放的な印象 */
 .lab-hero {
-    padding: 60px 0;
-    background: linear-gradient(to bottom, #161b22, #0d1117);
-    text-align: center;
+    padding: 80px 0;
+    background-color: #f1f3f5;
+    background-image: radial-gradient(#dee2e6 1px, transparent 1px);
+    background-size: 20px 20px; /* 方眼紙のようなドットで几帳面さを演出 */
+    text-align: left;
     border-bottom: 1px solid var(--lab-border);
 }
 
 .lab-hero h1 {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-    color: white;
-    letter-spacing: 0.2em;
+    font-size: 2.5rem;
+    color: #111;
+    margin-bottom: 15px;
 }
 
-/* Grid Layout */
-.main-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 30px;
-    margin-top: 40px;
-}
-
+/* Content Card: 白背景に細い枠線 */
 .lab-card {
-    background: var(--lab-panel);
+    background: white;
     border: 1px solid var(--lab-border);
-    padding: 30px;
+    padding: 35px;
     margin-bottom: 30px;
+    border-radius: 2px;
 }
 
 .lab-card h2 {
     color: var(--lab-accent);
-    font-size: 1.1rem;
-    border-left: 4px solid var(--lab-accent);
-    padding-left: 15px;
-    margin-bottom: 20px;
-}
-
-.research-list {
-    list-style: none;
-    padding: 0;
-}
-
-.research-list li {
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
     border-bottom: 1px solid var(--lab-border);
     padding-bottom: 10px;
 }
 
+.research-list li {
+    margin-bottom: 25px;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+}
+
 .research-list strong {
-    display: block;
-    color: white;
-    font-size: 1rem;
-}
-
-.research-list span {
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-/* Sidebar */
-.status-panel {
-    background: var(--lab-panel);
-    border: 1px solid var(--lab-border);
-    padding: 20px;
-}
-
-.status-indicator {
-    color: #4caf50;
-    font-weight: bold;
-    font-size: 0.8rem;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #4caf50;
-}
-
-.side-links {
-    list-style: none;
-    padding: 0;
-}
-
-.side-links li {
-    margin-bottom: 10px;
-}
-
-.side-links a {
     color: var(--lab-accent);
-    text-decoration: none;
-    font-size: 0.8rem;
+}
+
+/* Sidebar Status: 稼働中であることを強調 */
+.status-indicator {
+    color: var(--lab-accent);
+    background: #eef5ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 0.75rem;
+    margin-bottom: 20px;
 }
 
 /* Footer */
 .lab-footer {
-    margin-top: 60px;
-    padding: 40px 0;
-    text-align: center;
-    font-size: 0.75rem;
-    border-top: 1px solid var(--lab-border);
-    opacity: 0.6;
+    background: #f8f9fa;
+    padding: 50px 0;
+    color: #888;
 }
