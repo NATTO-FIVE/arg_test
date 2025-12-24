@@ -140,6 +140,56 @@ body {
     margin-bottom: 20px;
 }
 
+/* サイドバーのパネル */
+.info-panel {
+    background: #ffffff;
+    border: 1px solid var(--lab-border);
+    padding: 20px;
+    border-radius: 2px;
+}
+
+.panel-title {
+    font-size: 0.9rem;
+    color: #111;
+    border-bottom: 2px solid var(--lab-accent);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.side-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-links li {
+    margin-bottom: 15px;
+}
+
+.side-links a {
+    text-decoration: none;
+    display: block;
+    transition: 0.2s;
+}
+
+.side-links .link-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.side-links strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--lab-accent);
+}
+
+.side-links a:hover strong {
+    text-decoration: underline;
+}
+
+
+
 /* Footer */
 .lab-footer {
     background: #f8f9fa;
