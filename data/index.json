@@ -102,7 +102,14 @@
     "snippet": "百目島ミキによる「合唱」現象の考察。",
     "file": "files/docs_golden/memo_miki_1980_x7r2w9.txt",
     "type": "log"
-
+},
+  {
+    "id": "SAFETY-SPEC-001",
+    "keys": ["睡眠同期"],
+    "title": "内部資料：特殊脳波同期実験 安全基準仕様書",
+    "snippet": "不和睡眠総合技術センターの安全基準仕様書。",
+    "file": "files/docs_golden/safety_spec_v3t1p8.txt",
+    "type": "log"
 }
 
 
