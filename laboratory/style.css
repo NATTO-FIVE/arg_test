@@ -242,10 +242,65 @@ body {
     transform: translateX(5px);
 }
 
-
 /* Footer */
 .lab-footer {
     background: #f8f9fa;
     padding: 50px 0;
     color: #888;
 }
+
+/* --- 以前のCSSに加え、以下を修正・追記 --- */
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--lab-blue);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0044cc;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: var(--lab-blue);
+    border: 1px solid var(--lab-blue);
+}
+
+.btn-secondary:hover {
+    background: #f0f5ff;
+}
+
+/* 免責事項の装飾 */
+.arg-notice {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    font-size: 0.7rem;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+/* 財団への言及を消したためサイドバーの微調整 */
+.partner-card a {
+    display: inline-block;
+    margin-top: 5px;
+    color: var(--lab-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
