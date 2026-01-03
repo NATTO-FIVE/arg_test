@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ARG管理者用：ハッシュ＆JSON生成ツール</title>
+    <style>
+        body { font-family: monospace; padding: 20px; line-height: 1.6; background: #222; color: #0f0; }
+        input { width: 400px; padding: 10px; background: #000; color: #0f0; border: 1px solid #0f0; }
+        .box { border: 1px solid #0f0; padding: 20px; margin-top: 20px; }
+        pre { background: #000; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Hash & Content Generator</h1>
+    <p>設定したいキーワードを入力してください。SHA-256ハッシュが生成されます。</p>
+    
+    <input type="text" id="keyword" placeholder="例: password" oninput="generate()">
+
+    <div class="box">
+        <h3>1. 生成されたハッシュ（ファイル名に使用）</h3>
+        <p id="hash-result">---</p>
+    </div>
+
+    <div class="box">
+        <h3>2. 保存用JSONテンプレート</h3>
+        <p>以下の内容を <code>./data/vault/[ハッシュ名].json</code> として保存してください。</p>
+        <pre id="json-template">---</pre>
+    </div>
+
+    <script>
+        async function sha256(text) {
+            const msgUint8 = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function generate() {
+            const kw = document.getElementById('keyword').value;
+            if (!kw) return;
+            const hash = await sha256(kw);
+            document.getElementById('hash-result').innerText = hash + ".json";
+            
+            const template = [
+                {
+                    "title": "ここにタイトルを入力",
+                    "description": "ここに説明文を入力",
+                    "url": "./laboratory/secret_page.html"
+                }
+            ];
+            document.getElementById('json-template').innerText = JSON.stringify(template, null, 2);
+        }
+    </script>
+</body>
+</html>
