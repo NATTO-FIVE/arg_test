@@ -112,6 +112,16 @@
         const searchBox = document.getElementById('search-box');
         const resultsArea = document.getElementById('results-area');
 
+        // デコード関数（Base64対応）
+        function safeDecode(str) {
+            try {
+                // Base64形式かチェックしてデコード、失敗したらそのまま返す
+                return atob(str);
+            } catch (e) {
+                return str;
+            }
+        }
+
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -130,10 +140,12 @@
                     const response = await fetch(`./data/vault/${hash}.json?t=${Date.now()}`);
                     if (response.ok) {
                         const data = await response.json();
+                        
+                        // title, description, url をデコードして取得
                         const item = {
-                            title: data.title || data.TITLE || "名称未設定の記録",
-                            description: data.description || data.snippet || data.DESCRIPTION || "",
-                            url: data.url || data.file || data.URL || null
+                            title: safeDecode(data.title || data.TITLE || "名称未設定の記録"),
+                            description: safeDecode(data.description || data.snippet || data.DESCRIPTION || ""),
+                            url: safeDecode(data.url || data.file || data.URL || null)
                         };
                         renderResults(item);
                     } else {
@@ -152,23 +164,24 @@
                 return;
             }
 
+            // カード全体をクリックした際、およびボタンをクリックした際に別タブで開くように変更
             resultsArea.innerHTML = `
-                <div class="result-card rounded shadow-lg border border-green-500 bg-green-950/10" onclick="location.href='${item.url}'">
+                <div class="result-card rounded shadow-lg border border-green-500 bg-green-950/10" onclick="window.open('${item.url}', '_blank')">
                     <div class="text-[10px] opacity-60 mb-2 font-mono uppercase">>> Access Granted: Record Decoupled</div>
                     <h2 class="text-xl font-bold mb-2 text-white">
-                        <a href="${item.url}" style="color: inherit; text-decoration: none;">${item.title}</a>
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">${item.title}</a>
                     </h2>
                     
                     ${item.description ? `<p class="text-sm mt-2 opacity-90 text-green-100">${item.description}</p>` : ''}
                     
-                    <a href="${item.url}" class="btn-access">
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-access" onclick="event.stopPropagation();">
                         アクセスを開始する
                     </a>
                 </div>
             `;
         }
 
-            function renderError() {
+        function renderError() {
             resultsArea.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">Access Denied: Invalid Keyword or Hash Mismatch</div>`;
         }
 
