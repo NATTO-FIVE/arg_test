@@ -1,14 +1,15 @@
-/* ===== 病院デザインをベースとした共通テーマ ===== */
+/* ===== 病院デザインをベースとした共通テーマ（センター版） ===== */
 
 :root {
   --bg: #f5f7fa;
   --panel: #ffffff;
-  --accent: #0055ff;       /* センター用の鮮やかな青 */
-  --accent-soft: #eef5ff;
-  --sanctuary-blue: #001f3f; /* 病院と共通の濃紺 */
+  --accent: #0055ff;       /* センター用のアクセント・ブルー */
+  --accent-soft: #e4eef8;
   --text: #1f2933;
   --muted: #6b7280;
   --border: #d1d5db;
+  --danger-soft: #fff5f5;
+  --sanctuary-blue: #001f3f; /* 病院共通の濃紺 */
 }
 
 * { box-sizing: border-box; }
@@ -24,9 +25,9 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ===== ヘッダー（病院と同期） ===== */
+/* ===== ヘッダー（hospital/style.cssと完全同期） ===== */
 
-.lab-header {
+.site-header {
   background: #ffffff;
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -48,19 +49,17 @@ a:hover { text-decoration: underline; }
   padding: 12px 0;
 }
 
-.logo-area a {
+.logo-area {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text);
-  text-decoration: none;
 }
 
 .logo-mark {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: radial-gradient(circle at 30% 30%, #4facfe, #0055ff);
+  background: radial-gradient(circle at 30% 30%, #4facfe, #0055ff); /* センター用のグラデーション */
 }
 
 .logo-text-main {
@@ -72,19 +71,17 @@ a:hover { text-decoration: underline; }
 .logo-text-sub {
   font-size: 11px;
   color: var(--muted);
-  display: block;
 }
 
 .header-right {
   display: flex;
   align-items: center;
   gap: 24px;
-  flex: 1;
   justify-content: flex-end;
+  flex: 1;
 }
 
-/* ナビゲーション */
-.lab-nav ul {
+.main-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -93,38 +90,41 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
 }
 
-.lab-nav a {
+.main-nav a {
   color: var(--text);
+  white-space: nowrap;
   font-weight: bold;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
-.lab-nav a:hover {
+.main-nav a:hover {
   color: var(--accent);
   text-decoration: none;
 }
 
-/* 検索フォーム */
+/* 検索フォーム（hospital/style.cssと同期） */
 .header-search-form {
   display: flex;
   align-items: center;
   gap: 8px;
   max-width: 300px;
+  flex-shrink: 1;
 }
 
 .header-search-form input[type="search"] {
+  min-width: 100px;
+  width: 100%;
   padding: 8px 12px;
   border-radius: 999px;
-  border: 3px solid var(--accent);
-  width: 100%;
+  border: 3px solid var(--accent); /* センターカラー */
 }
 
 .header-search-form button {
   padding: 10px 20px;
   border-radius: 999px;
   border: none;
-  background: var(--accent);
+  background: var(--accent); /* センターカラー */
   color: #fff;
   font-size: 14px;
   font-weight: bold;
@@ -132,17 +132,15 @@ a:hover { text-decoration: underline; }
 }
 
 /* ===== ヒーローバナー ===== */
-
 .hero-banner {
   background-color: var(--sanctuary-blue);
   color: white;
-  padding: 50px 20px;
+  padding: 30px 20px;
   text-align: center;
   border-bottom: 5px solid var(--accent);
 }
 
-/* ===== レイアウト ===== */
-
+/* ===== レイアウト構造 ===== */
 .main-layout {
   display: flex;
   gap: 30px;
@@ -157,17 +155,10 @@ a:hover { text-decoration: underline; }
   margin-bottom: 20px;
 }
 
-/* フッター */
 footer {
   border-top: 1px solid var(--border);
+  padding: 20px 0;
   background: #ffffff;
   margin-top: 32px;
-  padding: 20px 0;
-}
-
-.arg-notice {
-  font-size: 11px;
-  color: #666;
   text-align: center;
-  margin-top: 10px;
 }
