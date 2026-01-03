@@ -42,9 +42,26 @@
             padding: 0.4rem 1rem;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 0.7rem;
             color: #666;
             letter-spacing: 0.1em;
+        }
+
+        /* 戻るボタンのスタイル */
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
         .content-body {
@@ -150,8 +167,11 @@
 
     <div class="container-frame">
         <div class="sys-header">
-            <div><span class="status-dot"></span>ENCRYPTED_SESSION: ACTIVE</div>
-            <div>RECORD_PATH: /DATA/ARCHIVE/APTITUDE_LIST_LOG.DAT</div>
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span><span class="status-dot"></span>ENCRYPTED_SESSION: ACTIVE</span>
+            </div>
+            <div class="hidden md:block">RECORD_PATH: /DATA/ARCHIVE/APTITUDE_LIST_LOG.DAT</div>
         </div>
 
         <div class="content-body">
