@@ -1,15 +1,14 @@
-/* ===== 病院デザインをベースとした共通テーマ（センター版） ===== */
+/* ===== 共通テーマ ===== */
 
 :root {
   --bg: #f5f7fa;
   --panel: #ffffff;
-  --accent: #0055ff;       /* センター用のアクセント・ブルー */
+  --accent: #2f6fb1;
   --accent-soft: #e4eef8;
   --text: #1f2933;
   --muted: #6b7280;
   --border: #d1d5db;
   --danger-soft: #fff5f5;
-  --sanctuary-blue: #001f3f; /* 病院共通の濃紺 */
 }
 
 * { box-sizing: border-box; }
@@ -22,7 +21,19 @@ body {
   line-height: 1.6;
 }
 
-/* ===== ヘッダーレイアウト（病院と完全同期） ===== */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; border: 0;
+  padding: 0;
+  clip: rect(0,0,0,0);
+  overflow: hidden;
+}
+
+/* ===== ヘッダー ===== */
 
 .site-header {
   background: #ffffff;
@@ -56,13 +67,14 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: radial-gradient(circle at 30% 30%, #4facfe, #0055ff);
+  background: radial-gradient(circle at 30% 30%, #9bd4ff, #2f6fb1);
 }
 
+/* ロゴテキストの折り返し防止とサイズ調整 */
 .logo-text-main {
   font-weight: 700;
   font-size: 16px;
-  white-space: nowrap;
+  white-space: nowrap; /* 1行に強制 */
 }
 
 .logo-text-sub {
@@ -78,7 +90,27 @@ body {
   flex: 1;
 }
 
-/* メニューの横並び設定 */
+/* ハンバーガー */
+
+.nav-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 4px 0;
+  background: #111827;
+  border-radius: 999px;
+}
+
+/* ナビ（PC） */
+
 .main-nav ul {
   list-style: none;
   margin: 0;
@@ -88,75 +120,217 @@ body {
   font-size: 14px;
 }
 
+/* メニューの視認性向上（太字・下線） */
 .main-nav a {
   color: var(--text);
   white-space: nowrap;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  font-weight: bold;      /* 太字にする */
+  text-decoration: underline; /* 常に下線を引く */
+  text-underline-offset: 4px; /* 下線と文字の間隔 */
 }
 
 .main-nav a:hover {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: none;  /* ホバー時はあえて下線を消すなど変化を出す */
 }
 
-/* 検索フォーム */
+.main-nav a.highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ▼ 診療科ドロップダウン */
+
+.main-nav li.has-sub {
+  position: relative;
+}
+
+.main-nav li.has-sub > a::after {
+  content: "▾";
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.main-nav .sub-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  display: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  z-index: 30;
+}
+
+.main-nav .sub-menu li a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* クリックで sub-open が付いたときだけ表示 */
+.main-nav li.has-sub.sub-open > .sub-menu {
+  display: block;
+}
+/* ▲ 診療科ドロップダウン */
+
+
+/* 検索フォームの幅制限（ウィンドウを半分にした時の対策） */
 .header-search-form {
   display: flex;
   align-items: center;
   gap: 8px;
-  max-width: 300px;
-  flex-shrink: 1;
+  max-width: 300px; /* ★最大幅を制限してメニューを圧迫しないようにする */
+  flex-shrink: 1;   /* 幅が狭まった時に自身が縮むようにする */
 }
 
+/* 入力欄 */
 .header-search-form input[type="search"] {
-  min-width: 100px;
-  width: 100%;
+  min-width: 100px; /* ★極端に小さくなりすぎない下限 */
+  width: 100%;      /* max-widthの範囲内で可変 */
   padding: 8px 12px;
   border-radius: 999px;
-  border: 3px solid var(--accent);
+  border: 3px solid #d4af37;
 }
 
+/* 検索ボタン */
 .header-search-form button {
-  padding: 10px 20px;
+  padding: 10px 20px;       /* ボタンも入力欄に合わせて大きく */
   border-radius: 999px;
   border: none;
-  background: var(--accent);
+  background: #d4af37;      /* ボタンも金枝カラー */
   color: #fff;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
 }
 
-/* ===== ヒーロー・メインレイアウト ===== */
-
-.hero-banner {
-  background-color: var(--sanctuary-blue);
-  color: white;
-  padding: 30px 20px;
-  text-align: center;
-  border-bottom: 5px solid var(--accent);
+.header-search-form button:hover {
+  background: #b8860b; /* 少し暗い金 */
+  color: #fff;
 }
 
-.main-layout {
+.header-search-note {
+  font-size: 9px;
+  color: var(--muted);
+  text-align: right;
+  margin: 0 0 6px;
+}
+
+/* ===== スマホ時（〜900px） ===== */
+
+@media (max-width: 900px) {
+  .header-inner {
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  /* ヘッダー右側エリアのレイアウト維持 */
+.header-right {
   display: flex;
-  gap: 30px;
-  margin-top: 30px;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0; /* 子要素の縮小を許可するマジックコード */
 }
 
-.card {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  .main-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .site-header.nav-open .main-nav {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+    /* スマホではサブメニューを下に展開する */
+  .main-nav .sub-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding-left: 16px;
+  }
+
+  .main-nav li.has-sub.sub-open > .sub-menu {
+    display: block;
+  }
+
+  
+
+  .header-search-form {
+    width: 100%;
+  }
+
+  .header-search-form input[type="search"] {
+    flex: 1;
+    width: auto;
+  }
+
+  .header-search-note {
+    text-align: left;
+  }
 }
+
+/* ===== メイン・トップ用など（今までのを軽く） ===== */
+
+main { padding-top: 0; }
+
+.page-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* トップのカード等は今のHTMLに合わせて適当に */
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.dept-card {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 18px rgba(15,23,42,0.04);
+}
+
+/* ===== フッター ===== */
 
 footer {
   border-top: 1px solid var(--border);
-  padding: 20px 0;
+  padding: 16px 0 0;
   background: #ffffff;
   margin-top: 32px;
-  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  justify-content: space-between;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 12px;
 }
