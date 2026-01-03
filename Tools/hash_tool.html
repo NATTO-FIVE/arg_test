@@ -2,53 +2,51 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ARG管理者用：ハッシュ＆JSON生成ツール</title>
+    <title>ARGハッシュ生成ツール</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: monospace; padding: 20px; line-height: 1.6; background: #222; color: #0f0; }
-        input { width: 400px; padding: 10px; background: #000; color: #0f0; border: 1px solid #0f0; }
-        .box { border: 1px solid #0f0; padding: 20px; margin-top: 20px; }
-        pre { background: #000; padding: 10px; overflow-x: auto; }
+        body { background-color: #0f172a; color: #e2e8f0; font-family: monospace; }
+        input { background-color: #1e293b; border: 1px solid #334155; color: #f8fafc; }
     </style>
 </head>
-<body>
-    <h1>Hash & Content Generator</h1>
-    <p>設定したいキーワードを入力してください。SHA-256ハッシュが生成されます。</p>
-    
-    <input type="text" id="keyword" placeholder="例: password" oninput="generate()">
+<body class="p-10">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-blue-400">ARG Keyword Hasher</h1>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-sm mb-2">キーワードを入力（例: 6.2Hz）</label>
+                <input type="text" id="keyword" class="w-full p-3 rounded" placeholder="Enter keyword..." oninput="generateHash()">
+            </div>
 
-    <div class="box">
-        <h3>1. 生成されたハッシュ（ファイル名に使用）</h3>
-        <p id="hash-result">---</p>
-    </div>
+            <div class="p-4 bg-slate-800 rounded border border-slate-700">
+                <label class="block text-xs text-slate-400 mb-2 uppercase">SHA-256 Hash (Filename)</label>
+                <div id="output" class="text-lg font-bold text-green-400 break-all select-all">---</div>
+            </div>
 
-    <div class="box">
-        <h3>2. 保存用JSONテンプレート</h3>
-        <p>以下の内容を <code>./data/vault/[ハッシュ名].json</code> として保存してください。</p>
-        <pre id="json-template">---</pre>
+            <div class="text-sm text-slate-500">
+                <p>手順：</p>
+                <ol class="list-decimal ml-5 mt-2 space-y-1">
+                    <li>キーワードを入力する。</li>
+                    <li>表示されたハッシュ値をコピーする。</li>
+                    <li><code>data/vault/[ハッシュ値].json</code> という名前でファイルを作成する。</li>
+                </ol>
+            </div>
+        </div>
     </div>
 
     <script>
-        async function sha256(text) {
-            const msgUint8 = new TextEncoder().encode(text);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+        async function generateHash() {
+            const val = document.getElementById('keyword').value;
+            if (!val) {
+                document.getElementById('output').innerText = "---";
+                return;
+            }
+            const msgBuffer = new TextEncoder().encode(val);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function generate() {
-            const kw = document.getElementById('keyword').value;
-            if (!kw) return;
-            const hash = await sha256(kw);
-            document.getElementById('hash-result').innerText = hash + ".json";
-            
-            const template = [
-                {
-                    "title": "ここにタイトルを入力",
-                    "description": "ここに説明文を入力",
-                    "url": "./laboratory/secret_page.html"
-                }
-            ];
-            document.getElementById('json-template').innerText = JSON.stringify(template, null, 2);
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('output').innerText = hashHex;
         }
     </script>
 </body>
