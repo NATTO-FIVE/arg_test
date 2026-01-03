@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESEARCH-MEMO-1980 | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "ARCHIVE_NOTE";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #666;
+            font-style: normal;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>RECOVERED_FILE: READ_ONLY</div>
+            <div>ORIGINAL_PATH: /ARCHIVE/1980/DEPT_PSYCH/MEMO_1980.LOG</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部記録：RESEARCH-MEMO-1980</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: SECRET (TRANSFERRED)
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>合唱に関する考察（写し）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">AUTHOR:</span>
+                    <span>百目島 ミキ（精神開発部 研究員）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">DATE:</span>
+                    <span>1980年11月12日</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <p class="mb-6">
+                    <strong>睡眠同期実験中</strong>の事故に発生した現象。低周波数（6.2Hz）の継続観測。
+                </p>
+
+                <h2 class="section-title">”合唱（コーラル）”についての考察</h2>
+                <div class="terminal-text space-y-6">
+                    <div>
+                        <span class="text-green-500 font-bold block mb-1">■ 発生機序：</span>
+                        <p class="pl-4">「親」とした被検体による強制的な位相同期。</p>
+                    </div>
+                    <div>
+                        <span class="text-green-500 font-bold block mb-1">■ 音声事象：</span>
+                        <p class="pl-4 leading-relaxed">
+                            発声器官の不随意運動を確認。検体全員が閉眼状態、かつ昏睡状態にありながら、一斉に「きこえる」と発話。<br>
+                            声帯の振動が異常に一致しており、単一の巨大な声として知覚される。
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-green-500 font-bold block mb-1">■ 環境変化：</span>
+                        <p class="pl-4">
+                            室温の急降下現象（摂氏12度低下）。結露。物理的なエネルギーの移動が発生している可能性が高い。
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title">個人的な仮説</h2>
+                <p>
+                    核となる意識は、我々の定義する睡眠のさらに高い同期層へ<strong>登攀</strong>したと見るべき。
+                    <strong>睡眠同期</strong>について、異なるパラメータで観測を続ける。
+                </p>
+
+                <h2 class="section-title">結論</h2>
+                <p class="italic opacity-60">
+                    まだ、結論を書くに至らない。
+                </p>
+
+                <div class="evidence-quote font-mono text-sm mt-12">
+                    注：本メモは後に聖眠金枝財団・機密アーカイブへ移送。
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono text-[10px]">
+                <div>SIGNAL_EOF: RESEARCH_MEMO_1980</div>
+                <div>LOCAL_TIME: 2025.01.03_23:14:02</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
