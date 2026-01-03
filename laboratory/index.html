@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>不和睡眠総合技術センター｜公式サイト</title>
+  <title>不和睡眠総合技術センター｜Fuwa Sleep Technology Center</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
     /* 1. 共通カラー定義 */
@@ -11,7 +11,7 @@
       --sanctuary-blue: #001f3f;
     }
 
-    /* 2. ヒーローバナー（高さを他ページと合わせる） */
+    /* 2. ヒーローバナー */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -20,10 +20,10 @@
       border-bottom: 5px solid var(--kanae-gold);
     }
 
-    /* 3. 【ここが原因】ナビゲーションのスタイルを他ページと完全同期 */
+    /* 3. ナビゲーションのスタイル同期 */
     .main-nav ul {
       display: flex;
-      gap: 12px;           /* 他ページと同じ数値 */
+      gap: 12px;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -33,7 +33,7 @@
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
-      color: var(--text);  /* style.cssの変数を使用 */
+      color: var(--text);
     }
 
     /* 4. レイアウト構造 */
@@ -53,12 +53,12 @@
       border-radius: 8px;
     }
 
-    /* 5. 検索窓の干渉を防ぐための最小限の設定 */
+    /* 5. 検索窓の設定 */
     .header-search-form {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 1; /* 検索窓が縮むことでメニューを押し出さないようにする */
+      flex-shrink: 1;
     }
   </style>
 </head>
@@ -71,7 +71,7 @@
         <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
         <div class="logo-text-wrapper">
           <div class="logo-text-main">不和睡眠総合技術センター</div>
-          <div class="logo-text-sub">Fuwa Sleep Technical Center</div>
+          <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
         </div>
       </div>
 
@@ -79,14 +79,14 @@
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
-            <li><a href="director.html">所長挨拶</a></li>
-            <li><a href="doctors.html">理念</a></li>
-            <li><a href="research_center.html">技術紹介</a></li>
+            <li><a href="philosophy.html">センター長挨拶</a></li>
+            <li><a href="philosophy.html">沿革</a></li>
+            <li><a href="technology.html">技術紹介</a></li>
           </ul>
         </nav>
 
         <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+          <input id="q" name="q" type="search" placeholder="技術名 / 検査名 / キーワード">
           <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
@@ -96,8 +96,8 @@
 
 <section class="hero-banner">
   <div class="container">
-    <h1>意識の可能性をひらく、未来のウェルビーイング。</h1>
-    <p>当院は、最先端の技術により次世代の脳機能ケアを提供しています。</p>
+    <h1>睡眠を、科学の光で。</h1>
+    <p>当センターは、神経生理学とデータサイエンスの融合により、未知の意識領域を解明します。</p>
   </div>
 </section>
 
@@ -105,24 +105,24 @@
   <div class="main-layout">
     
     <div class="content-area" style="flex: 2;">
-      <h2>診療科のご案内</h2>
+      <h2>研究・検査領域のご案内</h2>
       <div class="dept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
         <div class="card">
-          <h3>特殊睡眠外来科</h3>
-          <p>「睡眠障害」に関する専門的な治療を行います。担当医：神代 永久 / 虚空蔵 零</p>
-          <p><a href="insomnia.html">詳細はこちら →</a></p>
+          <h3>特殊脳波検査</h3>
+          <p>従来の検査では捕捉困難な、睡眠時の微細な脳波位相の整合性を測定します。位相適性の判定も実施可能です。</p>
+          <p><a href="technology.html">詳細はこちら →</a></p>
         </div>
         <div class="card">
-          <h3>脳神経外科</h3>
-          <p>頭痛、めまい、手足のしびれ等の神経に関する症状がある方はこちら。</p>
-          <p><a href="neuro.html">詳細はこちら →</a></p>
+          <h3>睡眠障害入院検査</h3>
+          <p>高度な環境制御下での入院検査を通じて、個々の意識階層における睡眠の質を徹底的に分析します。</p>
+          <p><a href="technology.html">詳細はこちら →</a></p>
         </div>
       </div>
 
       <div class="banners" style="margin-top: 40px;">
         <div style="background: #fff; padding: 20px; border-left: 10px solid var(--sanctuary-blue); border: 1px solid #ddd;">
-          <h4>提携機関：不和睡眠総合技術センター</h4>
-          <p>睡眠に関する最前線技術については<a href="../laboratory/index.html">不和睡眠総合技術センタートップページ</a>へ</p>
+          <h4>提携医療機関：金枝聖域第八病院</h4>
+          <p>当センターの研究成果は、金枝聖域第八病院の「特殊睡眠外来」での診療に直結しています。<a href="../hospital/index.html">病院トップページへ</a></p>
         </div>
       </div>
     </div>
@@ -131,9 +131,9 @@
       <div class="card">
         <h4>関連リンク</h4>
         <ul style="list-style: none; padding: 0; font-size: 0.9em;">
-          <li style="margin-bottom: 8px;"><a href="history.html">病院沿革</a></li>
-          <li style="margin-bottom: 8px;"><a href="history.html">アクセス</a></li>
-          <li style="margin-bottom: 8px;"><a href="../laboratory/index.html">不和睡眠総合技術センター</a></li>
+          <li style="margin-bottom: 8px;"><a href="philosophy.html">センター沿革</a></li>
+          <li style="margin-bottom: 8px;"><a href="access.html">アクセス</a></li>
+          <li style="margin-bottom: 8px;"><a href="../hospital/index.html">金枝聖域第八病院</a></li>
           <li style="margin-bottom: 8px;"><a href="../foundation/index.html">一般財団法人 聖眠金枝財団</a></li>
         </ul>
       </div>
@@ -144,7 +144,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院</div>
+      <div>© 2025 不和睡眠総合技術センター</div>
       <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
         ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
       </div>
