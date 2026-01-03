@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>データベース検索</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>内部アーカイブaa検索</h1>
-        <input type="text" id="searchInput" placeholder="キーワードを入力...">
-        <button onclick="executeSearch()">実行</button>
-        <div id="results"></div>
-    </div>
+    <input type="text" id="searchInput" placeholder="キーワードを入力...">
+    <button onclick="executeSearch()">実行</button>
+    <div id="results"></div>
 
     <script>
         async function executeSearch() {
@@ -19,29 +15,25 @@
             const resultsDiv = document.getElementById('results');
             if (!keyword) return;
 
-            try {
-                // SHA-256ハッシュ化
-                const uint8 = new TextEncoder().encode(keyword);
-                const buffer = await crypto.subtle.digest('SHA-256', uint8);
-                const hashArray = Array.from(new Uint8Array(buffer));
-                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-                
-                // デバッグ用：生成されたハッシュをコンソールに出す
-                console.log("Keyword:", keyword);
-                console.log("Hash:", hashHex);
+            // SHA-256ハッシュ化
+            const uint8 = new TextEncoder().encode(keyword);
+            const buffer = await crypto.subtle.digest('SHA-256', uint8);
+            const hashArray = Array.from(new Uint8Array(buffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            
+            // 【重要】生成されたハッシュ値を画面とコンソールに表示
+            console.log("入力キーワード:", keyword);
+            console.log("生成ハッシュ:", hashHex);
+            resultsDiv.innerHTML = `検証中...<br>生成ハッシュ: <code>${hashHex}</code>`;
 
+            try {
                 const response = await fetch(`./data/${hashHex}.json`);
                 if (!response.ok) throw new Error('Not Found');
 
                 const data = await response.json();
-                resultsDiv.innerHTML = `
-                    <div style="margin-top:20px; border:1px solid #444; padding:15px;">
-                        <h3>${data.title}</h3>
-                        <p>${data.description}</p>
-                        <a href="${data.url}">記録を閲覧する</a>
-                    </div>`;
+                resultsDiv.innerHTML = `<h3>${data.title}</h3><p>${data.description}</p>`;
             } catch (e) {
-                resultsDiv.innerHTML = "該当する記録は見つかりませんでした。";
+                resultsDiv.innerHTML += `<br><span style="color:red;">エラー: ./data/${hashHex}.json が見つかりません。</span>`;
             }
         }
     </script>
