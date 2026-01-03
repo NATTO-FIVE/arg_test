@@ -1,119 +1,110 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>不和睡眠総合技術センター | Fuwa Sleep Technology Center</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>不和睡眠総合技術センター | 公式サイト</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="lab-header">
-    <div class="container header-inner">
-        <div class="logo-area">
-            <a href="index.html" style="text-decoration: none;">
-                <span class="main">不和睡眠総合技術センター</span>
-                <span class="sub">Fuwa Sleep Technology Center</span>
-            </a>
-        </div>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <a href="index.html">
+          <div class="logo-mark"></div>
+          <div class="logo-text-wrapper">
+            <div class="logo-text-main">不和睡眠総合技術センター</div>
+            <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right">
         <nav class="lab-nav">
-            <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="philosophy.html">研究理念</a></li>
-                <li><a href="technology.html">技術紹介</a></li>
-                <li><a href="access.html">アクセス</a></li>
-            </ul>
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">研究理念</a></li>
+            <li><a href="technology.html">技術紹介</a></li>
+            <li><a href="access.html">アクセス</a></li>
+          </ul>
         </nav>
-        <form class="lab-search" action="../search.html" method="get">
-            <input name="q" type="search" placeholder="キーワード検索">
-            <button type="submit">SEARCH</button>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input name="q" type="search" placeholder="技術名 / 論文 / キーワード">
+          <button type="submit">検索</button>
         </form>
+      </div>
     </div>
+  </div>
 </header>
 
-<section class="lab-hero-v2">
-    <div class="container">
-        <div class="hero-content">
-            <span class="hero-tag">Precision Sleep Medicine</span>
-            <h1>睡眠を、科学の光で。</h1>
-            <p>不和睡眠総合技術センターは、神経生理学とデータサイエンスを融合し、<br>個々の生体リズムに最適化された「質の高い休息」を追求しています。</p>
-            <div class="hero-btns">
-                <a href="technology.html" class="btn-primary">技術紹介を見る</a>
-                <a href="philosophy.html" class="btn-secondary">センター長メッセージ</a>
-            </div>
-        </div>
-    </div>
+<section class="hero-banner">
+  <div class="container">
+    <h1>睡眠を、科学の光で。</h1>
+    <p>神経生理学とデータサイエンスを融合し、個々の生体リズムに最適化された休息を追求します。</p>
+  </div>
 </section>
 
-<main class="container main-grid">
-    <div class="content-body">
-        <section class="feature-grid">
-            <div class="feature-item">
-                <div class="icon">01</div>
-                <h3>脳波解析</h3>
-                <p>トポグラフィを用いた高精度な波形分析により、睡眠障害の根本原因を特定します。</p>
-            </div>
-            <div class="feature-item">
-                <div class="icon">02</div>
-                <h3>環境制御</h3>
-                <p>音響、光、温度を統合的にコントロールし、理想的な入眠環境を構築します。</p>
-            </div>
-            <div class="feature-item">
-                <div class="icon">03</div>
-                <h3>臨床連携</h3>
-                <p>提携医療機関との迅速な連携により、最新の研究成果を速やかに臨床現場へ反映します。</p>
-            </div>
-        </section>
+<main class="container">
+  <div class="main-layout">
+    
+    <div class="content-area" style="flex: 2;">
+      <h2>研究領域と技術</h2>
+      <div class="dept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+        <div class="card">
+          <h3>脳波解析システム</h3>
+          <p>高精度な波形分析により、睡眠障害の根本原因を特定。トポグラフィを用いた位相解析技術を導入しています。</p>
+          <p><a href="technology.html">技術詳細 →</a></p>
+        </div>
+        <div class="card">
+          <h3>睡眠環境制御</h3>
+          <p>音響、光、温度を統合的にコントロール。理想的な入眠環境を構築するためのフィードバックシステムを提供します。</p>
+          <p><a href="technology.html">開発実績 →</a></p>
+        </div>
+      </div>
 
-        <section class="lab-card">
-            <h2 class="section-title">News & Topics</h2>
-            <ul class="topics-list">
-                <li>
-                    <span class="date">2025.12.20</span>
-                    <span class="category">PRESS</span>
-                    <p>神経位相解析技術に関する特許を取得いたしました。</p>
-                </li>
-                <li>
-                    <span class="date">2025.11.10</span>
-                    <span class="category">INFO</span>
-                    <p>年末年始の研究センター休館スケジュールについてのお知らせ。</p>
-                </li>
-                <li>
-                    <span class="date">2025.10.25</span>
-                    <span class="category">CASE</span>
-                    <p>症例報告：重度不眠症患者における位相調律の効果確認。</p>
-                </li>
-            </ul>
-        </section>
+      <div class="card" style="margin-top: 20px;">
+        <h3>News & Topics</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+            <small>2025.12.20</small><br>神経位相解析技術に関する特許を取得いたしました。
+          </li>
+          <li>
+            <small>2025.10.25</small><br>症例報告：重度不眠症患者における位相調律の効果確認。
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <aside class="lab-sidebar">
-        <div class="info-panel">
-            <h3 class="panel-title">Partnership</h3>
-            <div class="partner-card">
-                <span class="label">主要提携医療機関</span>
-                <p>金枝聖域第八病院</p>
-                <a href="../hospital/index.html">詳細を見る</a>
-            </div>
-        </div>
-
-        <div class="recruit-banner">
-            <h3>RECRUIT</h3>
-            <p>睡眠の未来を共に描く研究員を募集しています。</p>
-            <a href="#">採用情報はこちら</a>
-        </div>
+    <aside class="sidebar" style="flex: 1;">
+      <div class="card">
+        <h4>提携医療機関</h4>
+        <p style="font-size: 0.9em;">当センターの研究成果は、金枝聖域第八病院の診療現場へ迅速に反映されます。</p>
+        <a href="../hospital/index.html" style="font-weight: bold;">金枝聖域第八病院 公式 →</a>
+      </div>
+      
+      <div class="card">
+        <h4>関連リンク</h4>
+        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+          <li style="margin-bottom: 8px;"><a href="philosophy.html">センター長挨拶</a></li>
+          <li style="margin-bottom: 8px;"><a href="access.html">施設案内・地図</a></li>
+          <li style="margin-bottom: 8px;"><a href="../foundation/index.html">一般財団法人 聖眠金枝財団</a></li>
+        </ul>
+      </div>
     </aside>
+  </div>
 </main>
 
-<footer class="lab-footer">
-    <div class="container">
-        <div class="footer-inner">
-            <div class="f-logo">Fuwa Sleep Technology Center</div>
-            <p>© 2025 Fuwa Sleep Technology Center. All Rights Reserved.</p>
-            <div class="arg-notice">
-                <p>※本ウェブサイトは、代替現実ゲーム（ARG）の演出の一部として作成された架空の団体のサイトです。<br>実在の人物・団体・事件とは一切関係ありません。</p>
-            </div>
-        </div>
+<footer>
+  <div class="container">
+    <div style="text-align: center; padding: 20px 0;">
+      <div>© 2025 Fuwa Sleep Technology Center</div>
+      <div class="arg-notice">
+        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。<br>実在の病院・団体・医療行為とは一切関係ありません。
+      </div>
     </div>
+  </div>
 </footer>
 
 </body>
