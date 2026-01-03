@@ -1,306 +1,173 @@
+/* ===== 病院デザインをベースとした共通テーマ ===== */
+
 :root {
-    --lab-bg: #ffffff;           /* クリーンな白 */
-    --lab-panel: #f8f9fa;        /* 非常に薄いグレー */
-    --lab-text: #333333;         /* 読みやすい黒 */
-    --lab-accent: #0055ff;       /* 信頼感のある理知的な青 */
-    --lab-border: #dee2e6;       /* 控えめな境界線 */
-    --lab-header-bg: #ffffff;
+  --bg: #f5f7fa;
+  --panel: #ffffff;
+  --accent: #0055ff;       /* センター用の鮮やかな青 */
+  --accent-soft: #eef5ff;
+  --sanctuary-blue: #001f3f; /* 病院と共通の濃紺 */
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #d1d5db;
 }
 
+* { box-sizing: border-box; }
+
 body {
-    margin: 0;
-    font-family: "Helvetica Neue", "Arial", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-    background-color: var(--lab-bg);
-    color: var(--lab-text);
-    line-height: 1.7;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== ヘッダー（病院と同期） ===== */
+
+.lab-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header: 影を薄くつけて清潔感を出す */
-.lab-header {
-    background: var(--lab-header-bg);
-    border-bottom: 3px solid var(--lab-accent);
-    padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 .header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
 }
 
-.logo-text .main {
-    display: block;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--lab-accent);
-    letter-spacing: 0.05em;
+.logo-area a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
 }
 
-.logo-text .sub {
-    font-size: 0.75rem;
-    color: #888;
-    font-weight: bold;
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 30% 30%, #4facfe, #0055ff);
 }
 
-/* Navigation */
+.logo-text-main {
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.logo-text-sub {
+  font-size: 11px;
+  color: var(--muted);
+  display: block;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* ナビゲーション */
+.lab-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+}
+
 .lab-nav a {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 5px 15px;
-    transition: 0.2s;
+  color: var(--text);
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .lab-nav a:hover {
-    color: var(--lab-accent);
+  color: var(--accent);
+  text-decoration: none;
 }
 
-/* Search: クリーンな入力フォーム */
-.lab-search {
-    display: flex;
-    border: 1px solid var(--lab-border);
-    border-radius: 4px;
-    overflow: hidden;
+/* 検索フォーム */
+.header-search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 300px;
 }
 
-.lab-search input {
-    border: none;
-    padding: 8px 12px;
-    background: #f1f3f5;
-    outline: none;
+.header-search-form input[type="search"] {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 3px solid var(--accent);
+  width: 100%;
 }
 
-.lab-search button {
-    background: var(--lab-accent);
-    border: none;
-    color: white;
-    padding: 0 15px;
-    cursor: pointer;
+.header-search-form button {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/* Hero Section: 明るく開放的な印象 */
-.lab-hero {
-    padding: 80px 0;
-    background-color: #f1f3f5;
-    background-image: radial-gradient(#dee2e6 1px, transparent 1px);
-    background-size: 20px 20px; /* 方眼紙のようなドットで几帳面さを演出 */
-    text-align: left;
-    border-bottom: 1px solid var(--lab-border);
+/* ===== ヒーローバナー ===== */
+
+.hero-banner {
+  background-color: var(--sanctuary-blue);
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+  border-bottom: 5px solid var(--accent);
 }
 
-.lab-hero h1 {
-    font-size: 2.5rem;
-    color: #111;
-    margin-bottom: 15px;
+/* ===== レイアウト ===== */
+
+.main-layout {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
 }
 
-/* Content Card: 白背景に細い枠線 */
-.lab-card {
-    background: white;
-    border: 1px solid var(--lab-border);
-    padding: 35px;
-    margin-bottom: 30px;
-    border-radius: 2px;
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
-.lab-card h2 {
-    color: var(--lab-accent);
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-    border-bottom: 1px solid var(--lab-border);
-    padding-bottom: 10px;
+/* フッター */
+footer {
+  border-top: 1px solid var(--border);
+  background: #ffffff;
+  margin-top: 32px;
+  padding: 20px 0;
 }
 
-.research-list li {
-    margin-bottom: 25px;
-    padding-left: 20px;
-    border-left: 2px solid #eee;
-}
-
-.research-list strong {
-    color: var(--lab-accent);
-}
-
-/* Sidebar Status: 稼働中であることを強調 */
-.status-indicator {
-    color: var(--lab-accent);
-    background: #eef5ff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    display: inline-block;
-    font-size: 0.75rem;
-    margin-bottom: 20px;
-}
-
-/* サイドバーのパネル */
-.info-panel {
-    background: #ffffff;
-    border: 1px solid var(--lab-border);
-    padding: 20px;
-    border-radius: 2px;
-}
-
-.panel-title {
-    font-size: 0.9rem;
-    color: #111;
-    border-bottom: 2px solid var(--lab-accent);
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-}
-
-.side-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.side-links li {
-    margin-bottom: 15px;
-}
-
-.side-links a {
-    text-decoration: none;
-    display: block;
-    transition: 0.2s;
-}
-
-.side-links .link-label {
-    display: block;
-    font-size: 0.7rem;
-    color: #888;
-}
-
-.side-links strong {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--lab-accent);
-}
-
-.side-links a:hover strong {
-    text-decoration: underline;
-}
-
-/* --- Philosophy Page Styles --- */
-
-.page-title {
-    font-size: 1.8rem;
-    color: #111;
-    margin-bottom: 20px;
-}
-
-.philosophy-lead {
-    font-size: 1.3rem;
-    color: var(--lab-accent);
-    font-weight: bold;
-    border-left: 5px solid var(--lab-accent);
-    padding-left: 15px;
-    margin: 30px 0;
-}
-
-/* センター長メッセージの装飾 */
-.director-section {
-    position: relative;
-    padding: 20px;
-    background: #fdfdfd;
-    border: 1px inset #eee;
-}
-
-.director-sign {
-    margin-top: 40px;
-    text-align: right;
-    border-top: 1px solid var(--lab-border);
-    padding-top: 15px;
-}
-
-.director-sign span {
-    display: block;
-    font-size: 0.8rem;
-    color: #666;
-}
-
-.director-sign .name {
-    font-size: 1.2rem;
-    color: #111;
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-/* リンクを綺麗に見せるための調整 */
-.side-links a {
-    transition: transform 0.2s;
-}
-
-.side-links a:hover {
-    transform: translateX(5px);
-}
-
-/* Footer */
-.lab-footer {
-    background: #f8f9fa;
-    padding: 50px 0;
-    color: #888;
-}
-
-/* --- 以前のCSSに加え、以下を修正・追記 --- */
-
-.hero-btns {
-    display: flex;
-    gap: 15px;
-}
-
-.btn-primary, .btn-secondary {
-    padding: 12px 25px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-.btn-primary {
-    background: var(--lab-blue);
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: #0044cc;
-}
-
-.btn-secondary {
-    background: #fff;
-    color: var(--lab-blue);
-    border: 1px solid var(--lab-blue);
-}
-
-.btn-secondary:hover {
-    background: #f0f5ff;
-}
-
-/* 免責事項の装飾 */
 .arg-notice {
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid #ddd;
-    font-size: 0.7rem;
-    color: #aaa;
-    line-height: 1.5;
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
 }
-
-/* 財団への言及を消したためサイドバーの微調整 */
-.partner-card a {
-    display: inline-block;
-    margin-top: 5px;
-    color: var(--lab-blue);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-
