@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>技術紹介｜不和睡眠総合技術センター</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* index.html の共通スタイルを継承 */
+    :root {
+      --kanae-gold: #d4af37;
+      --laboratory-green: #004d40;
+      --accent-green: #2e7d32;
+    }
+
+    .hero-banner {
+      background-color: var(--laboratory-green);
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--kanae-gold);
+    }
+    
+    .hero-banner h1 { font-size: 1.5rem; margin: 5px 0; }
+
+    .main-nav { margin-right: auto; }
+    .main-nav ul {
+      display: flex;
+      gap: 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    .main-layout { display: flex; gap: 30px; margin-top: 30px; }
+    @media (max-width: 900px) { .main-layout { flex-direction: column; } }
+    
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* 技術一覧用のスタイル */
+    .tech-list { list-style: none; padding: 0; }
+    .tech-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .tech-item:last-child { border-bottom: none; }
+    .tech-date { font-size: 0.85em; color: #666; }
+    .tech-title { font-weight: bold; display: block; margin: 5px 0; color: var(--laboratory-green); }
+    .tech-author { font-size: 0.9em; color: #444; }
+
+    .header-search-form { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #81c784, var(--laboratory-green));"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main">不和睡眠総合技術センター</div>
+          <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">センター長挨拶</a></li>
+            <li><a href="technology.html">技術紹介</a></li>
+            <li><a href="access.html">アクセス</a></li>
+          </ul>
+        </nav>
+
+        <form class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力">
+          <button type="submit" class="search-btn" style="background-color: var(--accent-green);">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>Technology & Research</h1>
+    <p>当センターが保有する主要技術および2025年度の研究成果一覧。</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="main-layout">
+    
+    <div class="content-area" style="flex: 2;">
+      <section class="card">
+        <h2>主要保有技術</h2>
+        <div style="margin-top: 15px;">
+          <h3 style="border-left: 4px solid var(--accent-green); padding-left: 10px;">位相整合性スキャニング</h3>
+          <p>第8階層における意識の連続性を担保するための、独自の位相整合アルゴリズムを用いた非侵襲測定技術です。</p>
+          
+          <h3 style="border-left: 4px solid var(--accent-green); padding-left: 10px; margin-top: 20px;">6.2Hz 共鳴誘導システム</h3>
+          <p>外部音響刺激と深部体温制御を同期させ、特定の睡眠深度へ強制導入する環境制御技術です。</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2025年度 技術成果・論文一覧</h2>
+        <ul class="tech-list">
+          <li class="tech-item">
+            <span class="tech-date">2025.11.20</span>
+            <span class="tech-title">第34回 国際神経生理学会「最優秀解析技術賞」：多点同時観測における位相整合性の自動補正</span>
+            <span class="tech-author">著者：不破 臨界, 瀬田 門十, 他</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.10.05</span>
+            <span class="tech-title">「非侵襲的深部脳波測定仕様の標準化」：OSI参照モデル第8階層へのアプローチ</span>
+            <span class="tech-author">著者：不破 臨界, 研究開発部第2ユニット</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.08.30</span>
+            <span class="tech-title">「位相同期現象における熱力学的散逸の観測」：睡眠環境制御下でのエネルギー収支</span>
+            <span class="tech-author">著者：瀬田 門十, 外部共同研究員</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.07.12</span>
+            <span class="tech-title">REM睡眠時における眼球運動と意識階層の相関分析</span>
+            <span class="tech-author">著者：解析チーム</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.06.18</span>
+            <span class="tech-title">6.2Hz音響誘導下でのδ波増幅効率の定量化</span>
+            <span class="tech-author">著者：不破 臨界, 技術開発班</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.05.02</span>
+            <span class="tech-title">永位計画における位相安定性プロトコルの検討（内部資料抜粋）</span>
+            <span class="tech-author">著者：Project E Echelon Steering Committee</span>
+          </li>
+          <li class="tech-item">
+            <span class="tech-date">2025.04.15</span>
+            <span class="tech-title">深部体温制御によるサーカディアンリズムの位相遷移速度の向上</span>
+            <span class="tech-author">著者：環境制御ユニット</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <aside class="sidebar" style="flex: 1;">
+      <div class="card">
+        <h4>研究に関するお問い合わせ</h4>
+        <p style="font-size: 0.85em;">当センターの技術・研究成果に関する詳細は、提携機関を通じてのみ公開しております。</p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
+      <div>© 2025 不和睡眠総合技術センター</div>
+      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
+        ※本サイトはフィクションであり、ARGの一部として作成されたものです。
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
