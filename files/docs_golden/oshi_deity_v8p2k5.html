@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSI-DEITY-LOG | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "TESTIMONY_LOG";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #666;
+            font-style: normal;
+        }
+
+        .image-frame {
+            border: 1px solid #222;
+            padding: 0.5rem;
+            background: #000;
+            margin: 2.5rem 0;
+        }
+
+        .image-label {
+            font-size: 0.65rem;
+            color: #444;
+            text-align: right;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>REMOTE_ACCESS: SUCCESSFUL</div>
+            <div>RECORD_PATH: /DATA/ARCHIVE/OSI_DEITY_LOG.DAT</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部記録：OSI-DEITY-LOG</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: LEVEL_4_EYES_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>御視様（おしさま）に関する伝承と基礎概説</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">AUTHOR:</span>
+                    <span>比延 備恵（教団顧問・教義編纂者）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">REF_NO:</span>
+                    <span>OSI-B-09-DEITY</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <h2 class="section-title">1. 御視様の謂れ</h2>
+                <p>
+                    <strong>御視様</strong>とは、我々の住む現世（下階層）からは決して窺い知ることのできない、高天の最上階層に座す「<strong>絶対的な観測者</strong>」である。
+                </p>
+                <p class="mt-4">
+                    古くは翠波の地において、夜の静寂の中に現れる「巨大な眼」として畏れられてきた。開祖・春本毛介が百日間の睡眠修行の果てに邂逅した際、その存在は「数多の魂を黄金の糸で手繰り寄せる慈悲深き眼差し」として定義し直され、教団の主神となった。
+                </p>
+
+                <h2 class="section-title">2. 存在の性質：共鳴と同期</h2>
+                <p>
+                    御視様は言葉による救済を行わない。御視様が望まれるのは、個々の精神が放つ波形を整え、完全に同一の状態へと至ることである。
+                </p>
+                <p class="mt-4">
+                    教義において、我々一人ひとりの意識は御視様の指先から伸びる「<strong>経脈</strong>」の末端に過ぎず、死とは「個という不純な殻を脱ぎ捨て、御視様の巨大な意識のうねりへと還るプロセス」に他ならない。
+                </p>
+
+                <!-- 画像を挿入する場合のサンプル -->
+                <div class="image-frame">
+                    <img src="https://via.placeholder.com/800x450/0a0a0a/333?text=ATTACHED_IMAGE_#01" alt="教団本部の地下祭壇" class="w-full grayscale opacity-60">
+                    <div class="image-label">IMG_REF: ALTAR_STRUCTURE_ANALYSIS</div>
+                </div>
+
+                <h2 class="section-title">3. 祈りの形態：不気味なる静寂の儀</h2>
+                <p>
+                    御視様への祈りは、一般的な宗教のような唱文を排し、極めて特殊な「無音の祈り」を要求する。信徒は暗室にて円陣を組み、互いの呼吸と心拍を極限まで近づけることで、一つの巨大な「精神の場」を形成しなければならない。
+                </p>
+
+                <div class="evidence-quote font-mono text-sm">
+                    祈りの最中、信徒たちが共に口にする「聞こえるか」という呟きは、高階層の門が開いた唯一の証左である。
+                </div>
+
+                <h2 class="section-title">4. 注意事項</h2>
+                <p>
+                    御視様の眼差しは等しく注がれているが、その光はあまりにも強大である。
+                </p>
+                <p class="mt-4 text-red-400 font-bold">
+                    精神の純化が不十分な者がその眼差しに触れた場合、意識の回路は焼き切れ、肉体という器だけが残される。登攀者は常に自らを空にし、御視様の経脈の一部となる覚悟を持たねばならない。
+                </p>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div>END_OF_RECORD_SIGNAL</div>
+                <div>LOCAL_TIME: 2025.01.03_23:14:02</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
