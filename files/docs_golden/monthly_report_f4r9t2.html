@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTHLY-REPORT-MAIL | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "COMMUNICATION_LOG";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #666;
+            font-style: normal;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>INCOMING_MAIL: DECRYPTED</div>
+            <div>MAIL_SERVER: SMTP.FUWA-TECH.SECURE</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部記録：MONTHLY-REPORT-MAIL</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: TOP_SECRET / INTER-ORG_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>【月報】業務委託内容の進捗報告（10月度）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">FROM:</span>
+                    <span>不和（不和睡眠総合技術センター）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">TO:</span>
+                    <span>百目島 ミキ 様（金枝聖域第八病院）</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <p class="mb-8">
+                    百目島様<br><br>
+                    お疲れ様です。不和睡眠総合技術センターの不和です。<br>
+                    今月の業務委託内容および、特殊外来受診患者への実験的アプローチの進捗を報告いたします。
+                </p>
+
+                <h2 class="section-title">1. 睡眠障害患者に対する同期実験</h2>
+                <p>
+                    当センターに収容されている重度睡眠障害患者15名を対象に、周波数6.2Hzを用いた強制同期実験を継続しております。
+                </p>
+
+                <h2 class="section-title">2. 軽度睡眠同期現象（合唱：コーラル）の発生</h2>
+                <p>
+                    今月15日の深夜、検体たちの脳波が完全な同一位相を記録。<br>
+                    これに伴い、意識のないはずの患者たちの口から「きこえているか」という呟きが一斉に漏れ出す「<strong>合唱</strong>」現象が観測されました。
+                </p>
+                <p class="mt-4">
+                    発声と同時に、観測室内では急激な室温低下（マイナス4.2度）を記録。これは、高階層の門への一時的な接続によるエネルギーの散逸と推測されます。
+                </p>
+
+                <h2 class="section-title">3. 特記検体の状況</h2>
+                <div class="terminal-text">
+                    <p>
+                        今回の実験には、<strong>宗教法人「金の聖眠」</strong>より移送されたDS-644（七曲 弥起）を含めております。
+                    </p>
+                    <p class="mt-2 text-green-500 font-bold">
+                        DS-644は他の検体を引き上げる「主振動」のような役割を果たしており、彼女を中心とした同期波形の強固さは過去の事例と同等かと思われます。
+                    </p>
+                </div>
+
+                <h2 class="section-title">4. 総評</h2>
+                <p>
+                    現状の進捗から判断し、DS-644および周辺検体は、<strong>「永遠の位」</strong>との接続点に資すると考えられます。<br>
+                    次月より、病院側での最終処置に向けた移送プロトコルの準備をお願いしたく存じます。
+                </p>
+
+                <div class="evidence-quote font-mono text-sm mt-12">
+                    [不和睡眠総合技術センター：機密通信]
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono text-[10px]">
+                <div>SIGNAL_EOF: MONTHLY_REPORT_MAIL</div>
+                <div>DISPATCH_TIME: 2025.10.XX_02:44:11</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
