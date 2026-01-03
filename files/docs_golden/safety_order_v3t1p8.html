@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFETY-SPEC-LOG | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "AUTH_VERIFICATION";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #666;
+            font-style: normal;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #ef4444; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        ul.feature-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .step-item {
+            margin-bottom: 1.5rem;
+        }
+        .step-number {
+            color: #00ff41;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>ENFORCEMENT_PROTOCOL: ACTIVE</div>
+            <div>RECORD_PATH: /SECURITY/SAFETY_SPEC_LOG.DAT</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部資料：SAFETY-SPEC-LOG</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: RESTRICTED_STAFF_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">DOCUMENT:</span>
+                    <span>特殊脳波同期実験における安全基準仕様書</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">DEPT:</span>
+                    <span>不和睡眠総合技術センター・安全管理セクション</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">CODE:</span>
+                    <span>project-E</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <h2 class="section-title">1. 実験概要</h2>
+                <p>
+                    本仕様書は、複数の被検体間において発生する「睡眠同期」現象（合唱）を観測する際、研究員および観測スタッフの精神的・身体的安全を確保するための手順を規定するものである。
+                </p>
+
+                <h2 class="section-title">2. 観測室の構成および防護策</h2>
+                <ul class="feature-list">
+                    <li>
+                        <strong>遮音および電磁シールド：</strong><br>
+                        観測室は外部から完全に隔離されなければならない。同期波形（6.2Hz帯）の漏洩を防ぐため、二重の電磁シールドを施す。
+                    </li>
+                    <li>
+                        <strong>低音波遮断フィルタ：</strong><br>
+                        スタッフ待機室には、特定の周波数帯を打ち消すアクティブノイズキャンセラーを常設すること。
+                    </li>
+                    <li>
+                        <strong>物理的距離の保持：</strong><br>
+                        被検体との距離は最低でも5メートル以上を確保し、直接的な接触は防護服の着用時のみ許可される。
+                    </li>
+                </ul>
+
+                <h2 class="section-title">3. 同期現象発生時の安全手順</h2>
+                <p class="mb-4 text-sm italic opacity-70">
+                    現象コード：合唱（コーラル）が観測された場合、以下の手順を遵守すること。
+                </p>
+                <div class="terminal-text">
+                    <div class="step-item">
+                        <span class="step-number">01.</span>
+                        <strong>聴覚保護の徹底：</strong><br>
+                        発声の位相が一致し、音圧が異常上昇する傾向にあるため、直ちにイヤーマフの装着を確認すること。
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">02.</span>
+                        <strong>環境温度の監視：</strong><br>
+                        同期率の上昇に伴い、室温の急降下が予見される。摂氏10度以下の変動を観測した場合、機材の結露を防ぐためヒーター等で補正を行うこと。
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">03.</span>
+                        <strong>精神汚染の回避：</strong><br>
+                        発話内容を意識的に理解しようと試みてはならない。スタッフは各自、機械的なデータログの監視のみに集中すること。
+                    </div>
+                </div>
+
+                <h2 class="section-title">4. スタッフの交代基準</h2>
+                <p>
+                    観測時間が4時間を超える場合、またはスタッフ自身の脳波に同期傾向が見られた場合は、直ちに観測を中止し、非汚染区域へ退避すること。本工程は「project-E」の全フェーズにおいて優先される。
+                </p>
+
+                <div class="evidence-quote font-mono text-sm mt-12">
+                    [承認済み：不和睡眠総合技術センター project-E]
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono text-[10px]">
+                <div>SIGNAL_EOF: SAFETY_SPEC_LOG</div>
+                <div>LOCAL_TIME: 2025.01.04_00:04:12</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
