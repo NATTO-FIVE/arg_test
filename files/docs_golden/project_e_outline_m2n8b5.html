@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT-E-OUTLINE | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #ef4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #fca5a5;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "SECURITY_NOTICE";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #ef4444;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        ul.feature-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #00ff41;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>REMOTE_DECRYPT: SUCCESS</div>
+            <div>RECORD_PATH: /ARCHIVE/1990/PROJECT_E_OUTLINE.DAT</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部記録：PROJECT-E-OUTLINE</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: TOP_SECRET / PROJECT_E_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>永位計画（project-E）基本概要書</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">AUTHOR:</span>
+                    <span>百目島、唐橋</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">DATE:</span>
+                    <span>1990年3月14日</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <h2 class="section-title">1. 計画始動の経緯</h2>
+                <p>
+                    1990年2月、1978年の事象における唯一の生存者（異常回復者C：佐伯 譲）が死亡。<br>
+                    これを受け、同事故の当事者であり、現在も当該機密区画にて意識不明状態にある検体<strong>「DS-187」</strong>の再検診を実施した。
+                </p>
+
+                <h2 class="section-title">2. DS-187に関する驚異的な観測結果</h2>
+                <div class="terminal-text">
+                    <p>
+                        事故から12年が経過しているにもかかわらず、DS-187の肉体には一切の経年劣化、筋肉の萎縮、細胞の老化が認められないことが判明した。<br>
+                        脳波は依然として特定の低周波数（6.2Hz）を維持しており、肉体は「事故直後の瞬間」で完全に固定（フリーズ）されている。
+                    </p>
+                    <p class="mt-4 text-white">
+                        これは生物学的な死を超越した、一種の「不変状態」にあると言える。
+                    </p>
+                </div>
+
+                <h2 class="section-title">3. 永位計画（project-E）の目的</h2>
+                <p class="mb-4">
+                    本計画の最終目的は、<strong>DS-187</strong>が体現している「肉体の不変性」を解析し、それを特定個人へ転写・適用することにある。
+                </p>
+                <ul class="feature-list">
+                    <li>
+                        <strong>自己延命の実現：</strong><br>
+                        老いと病を克服し、意識を保ったままDS-187と同様の<strong>「恒久的な肉体」</strong>を獲得する。
+                    </li>
+                    <li>
+                        <strong>意識の永続化：</strong><br>
+                        精神を肉体の崩壊から切り離し、<strong>永遠の位</strong>へと到達させる。
+                    </li>
+                </ul>
+
+                <h2 class="section-title">4. 実行プロトコル</h2>
+                <p>
+                    DS-187を「核」とし、新たな適格者を用いた位相同期実験を再開する。<br>
+                    不和睡眠総合技術センターと金枝聖域第八病院の連携を強化し、次世代の同期環境を構築。
+                    まずは「階層の登攀」を可能とする高適性個体の選別を急務とする。
+                </p>
+
+                <div class="evidence-quote font-mono text-sm mt-12">
+                    [極秘：閲覧後は直ちに物理破棄すること]
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono text-[10px]">
+                <div>SIGNAL_EOF: PROJECT_E_OUTLINE</div>
+                <div>LOCAL_TIME: 2025.01.03_23:14:02</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
