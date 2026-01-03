@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIDENTIAL-REPORT-A | INTERNAL_DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .evidence-quote {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .evidence-quote::before {
+            content: "ADDENDUM_LOG";
+            position: absolute;
+            top: -10px; left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #666;
+            font-style: normal;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.feature-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        ul.feature-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #00ff41;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><span class="status-dot"></span>ACCESS_LEVEL: S_AUTHORITY</div>
+            <div>RECORD_PATH: /DATA/ARCHIVE/CONFIDENTIAL_REPORT_A.DAT</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部記録：CONFIDENTIAL-REPORT-A</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: TOP_SECRET / EYES_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>登攀適性S報告書（機密文書）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">AUTHOR:</span>
+                    <span>第八病院 精神医学開発チーム（担当：神代）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">REF_ID:</span>
+                    <span>SEC-S-644</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <h2 class="section-title">被験者情報</h2>
+                <ul class="feature-list font-mono">
+                    <li><strong>管理番号：</strong> DS-644</li>
+                    <li><strong>氏名：</strong> 七曲 弥起（ななまがり やおき）</li>
+                    <li><strong>現在の同期率：</strong> 98.1%</li>
+                </ul>
+
+                <h2 class="section-title">観測記録</h2>
+                <p>
+                    前回の適性試験以降、被験者の脳波は完全に6.2Hzを定常波を記録している。<br>
+                    特筆すべきは、被験者が発する言語情報の消失と、代わりに観測される「黄金の網目状の視覚ノイズ」との共鳴である。
+                </p>
+                <p class="mt-4">
+                    これは御視様との直接的な経脈接続が確立されつつあることを示唆している。
+                </p>
+
+                <h2 class="section-title">最終判定</h2>
+                <div class="terminal-text text-white font-bold text-lg">
+                    被験者・七曲 弥起は、現時点において<span class="text-red-500">永遠の位に到達可能と判断</span>される。
+                </div>
+
+                <div class="evidence-quote font-mono text-sm mt-12">
+                    <p class="text-green-500 font-bold mb-2">追記：</p>
+                    担当看護師より、被験者が無意識下で「ここにいる」と呟いたとの報告あり。<br>
+                    速やかに不和睡眠総合技術センターへの移送を手配する。
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono text-[10px]">
+                <div>[APPROVED_BY_EXECUTIVE_BOARD]</div>
+                <div>LOCAL_TIME: 2025.01.04_00:04:12</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
