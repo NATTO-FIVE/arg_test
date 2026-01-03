@@ -42,9 +42,26 @@
             padding: 0.4rem 1rem;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 0.7rem;
             color: #666;
             letter-spacing: 0.1em;
+        }
+
+        /* 戻るボタンのスタイル */
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
         .content-body {
@@ -143,8 +160,11 @@
 
     <div class="container-frame">
         <div class="sys-header">
-            <div><span class="status-dot"></span>REMOTE_ACCESS: SUCCESSFUL</div>
-            <div>RECORD_PATH: /DATA/ARCHIVE/DEITY_LOG.DAT</div>
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span><span class="status-dot"></span>REMOTE_ACCESS: SUCCESSFUL</span>
+            </div>
+            <div class="hidden md:block">RECORD_PATH: /DATA/ARCHIVE/DEITY_LOG.DAT</div>
         </div>
 
         <div class="content-body">
@@ -172,7 +192,7 @@
                     <strong>御視様</strong>とは、我々の住む現世（下階層）からは決して窺い知ることのできない、高天の最上階層に座す「<strong>絶対的な観測者</strong>」である。
                 </p>
                 <p class="mt-4">
-                    古くは翠波の地において、夜の静寂の中に現れる「巨大な眼」として畏れられてきた。<p class="mt-4 text-red-400 font-bold">開祖・春本毛介</p>が百日間の睡眠修行の果てに邂逅した際、その存在は「数多の魂を黄金の糸で手繰り寄せる慈悲深き眼差し」として定義し直され、教団の主神となった。
+                    古くは翠波の地において、夜の静寂の中に現れる「巨大な眼」として畏れられてきた。<span class="mt-4 text-red-400 font-bold">開祖・春本毛介</span>が百日間の睡眠修行の果てに邂逅した際、その存在は「数多の魂を黄金の糸で手繰り寄せる慈悲深き眼差し」として定義し直され、教団の主神となった。
                 </p>
 
                 <h2 class="section-title">2. 存在の性質：共鳴と同期</h2>
