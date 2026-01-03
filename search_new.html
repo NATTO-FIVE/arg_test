@@ -2,60 +2,48 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>データベース検索 - 金枝聖域第八病院</title>
+    <title>データベース検索</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>>内部アーカイブ検索</h1>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="キーワードを入力してください...">
-            <button onclick="executeSearch()">実行</button>
-        </div>
+        <h1>内部アーカイブ検索</h1>
+        <input type="text" id="searchInput" placeholder="キーワードを入力...">
+        <button onclick="executeSearch()">実行</button>
         <div id="results"></div>
     </div>
 
     <script>
-    async function executeSearch() {
-        const keyword = document.getElementById('searchInput').value.trim();
-        const resultsDiv = document.getElementById('results');
-        resultsDiv.innerHTML = "検索中...";
+        async function executeSearch() {
+            const keyword = document.getElementById('searchInput').value.trim();
+            const resultsDiv = document.getElementById('results');
+            if (!keyword) return;
 
-        if (!keyword) {
-            resultsDiv.innerHTML = "キーワードを入力してください。";
-            return;
-        }
+            try {
+                // SHA-256ハッシュ化
+                const uint8 = new TextEncoder().encode(keyword);
+                const buffer = await crypto.subtle.digest('SHA-256', uint8);
+                const hashArray = Array.from(new Uint8Array(buffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                // デバッグ用：生成されたハッシュをコンソールに出す
+                console.log("Keyword:", keyword);
+                console.log("Hash:", hashHex);
 
-        try {
-            // 1. キーワードをSHA-256ハッシュに変換
-            const msgUint8 = new TextEncoder().encode(keyword);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            
-            // 各バイトを必ず2桁の16進数文字列に変換 (修正ポイント)
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                const response = await fetch(`./data/${hashHex}.json`);
+                if (!response.ok) throw new Error('Not Found');
 
-            // 2. ハッシュ値をファイル名としてfetch
-            const response = await fetch(`./data/${hashHex}.json`);
-            
-            if (!response.ok) {
-                throw new Error('Not Found');
+                const data = await response.json();
+                resultsDiv.innerHTML = `
+                    <div style="margin-top:20px; border:1px solid #444; padding:15px;">
+                        <h3>${data.title}</h3>
+                        <p>${data.description}</p>
+                        <a href="${data.url}">記録を閲覧する</a>
+                    </div>`;
+            } catch (e) {
+                resultsDiv.innerHTML = "該当する記録は見つかりませんでした。";
             }
-
-            const data = await response.json();
-
-            // 3. 結果の表示
-            resultsDiv.innerHTML = `
-                <div class="result-item" style="margin-top:20px; border:1px solid #ccc; padding:10px;">
-                    <h3>${data.title}</h3>
-                    <p>${data.description}</p>
-                    <a href="${data.url}">詳細を閲覧</a>
-                </div>
-            `;
-        } catch (error) {
-            resultsDiv.innerHTML = "該当する記録は見つかりませんでした。";
         }
-    }
-</script>
+    </script>
 </body>
 </html>
