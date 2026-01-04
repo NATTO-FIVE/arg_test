@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNAL_ARCHIVE | 1978_CENTER_INCIDENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
+        
+        body {
+            background-color: #050505;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        /* 新聞切り抜きエリア */
+        .newspaper-scan {
+            background-color: #c8c2b0;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            color: #1a1a1a;
+            padding: 40px;
+            margin: 2rem 0;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.1), 5px 5px 15px rgba(0,0,0,0.5);
+            font-family: 'Sawarabi Mincho', serif;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .newspaper-scan::before {
+            content: "SCAN_REF: TOMEI_SHIMBUN_1978_07_12";
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-family: 'JetBrains Mono';
+            font-size: 0.6rem;
+            color: #444;
+        }
+
+        .headline {
+            font-size: 1.8rem;
+            font-weight: 900;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .article-text {
+            column-count: 2;
+            column-gap: 30px;
+            font-size: 0.95rem;
+            text-align: justify;
+            line-height: 1.7;
+        }
+
+        .quote-box {
+            background: rgba(0,0,0,0.05);
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-disclaimer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222;
+            font-size: 0.7rem;
+            color: #c00;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* 修正：点滅するステータスドット */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00ff41;
+            animation: blink 1.2s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; filter: brightness(1.2); }
+            50% { opacity: 0.3; filter: brightness(0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span class="flex items-center">
+                    <span class="status-dot"></span>
+                    <span class="font-bold tracking-widest">ARCHIVE_ACCESS: GRANTED</span>
+                </span>
+            </div>
+            <div>RECORD_ID: 1978-NC-EXPLOSION</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="text-2xl font-bold text-white mb-2">内部記録：1978年・国立センター事故デジタルアーカイブ</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: CONFIDENTIAL / DEPARTMENTAL_USE
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div><strong>事件名：</strong> 旧国立センター冷却系設備破裂事案（公式）</div>
+                <div><strong>発生日：</strong> 1978年7月11日 23時42分</div>
+                <div><strong>場所：</strong> 国立特殊通信総合研究センター・地下実験区画</div>
+            </div>
+
+            <!-- 新聞スキャンの再現 -->
+            <div class="newspaper-scan">
+                <div class="text-xs font-bold border-b border-black mb-2 flex justify-between">
+                    <span>透明町新聞（昭和五十三年七月十二日付）</span>
+                    <span>社会面抜粋</span>
+                </div>
+                
+                <h2 class="headline">真夜中の轟音、国立センターで爆発事故<br>「冷却ポンプ破裂」と発表、住民に不安広がる</h2>
+
+                <div class="article-text">
+                    <p>昨夜十一時すぎ、透明町に位置する国立特殊通信総合研究センターより、耳をつんざくような巨大な爆鳴音が響いた。音は数キロ先まで届き、多くの住民が驚き、家を飛び出す騒ぎとなった。</p>
+                    <p>センター側の発表によると、通信機器用冷却システムの一部である大型ポンプが内部圧力の異常上昇により破裂したという。人的被害はないとしているが、深夜の静寂を切り裂く轟音に、近隣住民の間では「単なるポンプの音とは思えない」といった不審の声が上がっている。</p>
+                    
+                    <div class="quote-box">
+                        「地響きというより、空が裂けるような音だった。その直後、近所の鳥が一斉に飛び立ち、異様な雰囲気だった」――近隣に住む佐伯氏（四十二）の談話。
+                    </div>
+
+                    <p>事態を重く見た研究チームの主任、瀬田門十氏は本紙の取材に対し、次のように陳謝した。</p>
+                    <p>「近隣の皆様には多大なるご心配をおかけし、心よりお詫び申し上げる。新技術の通信実験に付随する冷却系のトラブルであり、放射性物質などの漏洩は一切ない。安全性は確保されており、速やかに再発防止に努める所存だ」</p>
+                </div>
+            </div>
+
+            <article class="text-gray-400 text-sm italic mt-8 font-mono">
+                <p>【アーカイブ補足】</p>
+                <p>
+                    当時の警察および自治体への報告では「機械故障」として処理されているが、現場の破損状況と「ポンプ破裂」という説明の物理的整合性には疑問が残る。
+                    当時の脳波記録（project-E初期データ）によれば、爆鳴音発生の直前に被検体DS-187の位相同期率が限界値を超えていたことが判明している。
+                </p>
+            </article>
+
+            <footer class="footer-disclaimer">
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
