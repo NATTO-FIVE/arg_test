@@ -2,168 +2,219 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>院長挨拶｜翠波総合病院</title>
-  <link rel="stylesheet" href="style.css">
+  <title>院長挨拶｜金枝聖域第八病院</title>
+  <link rel="stylesheet" href="style.css"> 
   <style>
+    /* 1. テンプレート共通カラー定義 */
+    :root {
+      --kanae-gold: #d4af37;
+      --sanctuary-blue: #001f3f;
+    }
+
+    /* 2. ヘッダースタイル調整 */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
+    }
+
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 3. 院長挨拶ページ固有スタイル */
     .page-main {
       max-width: 880px;
-      margin: 24px auto 40px;
+      margin: 40px auto;
       padding: 0 16px;
       line-height: 1.8;
     }
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid var(--sanctuary-blue);
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      color: var(--sanctuary-blue);
+    }
     .director-profile {
       display: flex;
-      gap: 24px;
-      margin-top: 16px;
+      gap: 32px;
+      margin-top: 20px;
       flex-wrap: wrap;
     }
     .director-photo {
-      width: 180px;
-      height: 220px;
-      background: #e2e8f0;
-      border: 1px solid var(--border);
+      width: 220px;
+      height: 280px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
+      color: #94a3b8;
       font-size: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    .director-info {
+      flex: 1;
+      min-width: 300px;
     }
     .director-info h2 {
       margin-top: 0;
-      font-size: 18px;
-      border-left: 6px solid var(--accent);
-      padding-left: 10px;
+      font-size: 20px;
+      border-left: 6px solid var(--kanae-gold);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      color: var(--sanctuary-blue);
+    }
+    .director-info p {
+      margin-bottom: 1.5em;
+      color: #334155;
+    }
+
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid #e2e8f0;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ヘッダー -->
 <header class="site-header">
   <div class="container">
-    <div class="header-inner">
-      <!-- ロゴ -->
-      <div class="logo-area">
-        <div class="logo-mark"></div>
-        <div>
-          <div class="logo-text-main">翠波総合病院</div>
-          <div class="logo-text-sub">Suiba General Hospital</div>
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+      <!-- ロゴ：最新の病院名に統一 -->
+      <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
+        <div class="logo-mark" style="width: 40px; height: 40px; background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37); border-radius: 50%;"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--sanctuary-blue);">金枝聖域第八病院</div>
+          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
-      <!-- スマホ用ハンバーガー -->
-      <button class="nav-toggle" type="button" aria-label="メニュー">
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-        <span class="nav-toggle-line"></span>
-      </button>
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+        <!-- ナビゲーション：テンプレートに合わせた4項目 -->
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">院長挨拶</a></li>
+            <li><a href="doctors.html">医師紹介</a></li>
+            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+          </ul>
+        </nav>
 
-      <!-- 右側：ナビ＋検索 -->
-      <div class="header-right">
-       <nav class="main-nav">
-        <ul>
-          <li><a href="index.html">ホーム</a></li>
-          <li><a href="director.html">院長挨拶</a></li>
-          <li><a href="doctors.html">医師紹介</a></li>
-          <li><a href="neuro.html">脳神経外科</a></li>
-          <li><a href="insomnia.html">特殊外来科</a></li>
-          <li><a href="research_center.html">翠波睡眠研究センター</a></li>
-          <li><a href="guide.html">病院案内</a></li>
-          <li><a href="recruit.html">採用情報</a></li>
-        </ul>
-      </nav>
-
-
-        <form class="header-search-form" action="../search.html" method="get">
-          <label for="q" class="visually-hidden">検索キーワード</label>
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
-          <button type="submit">検索</button>
+        <!-- 検索フォーム：search.htmlとの連動仕様 -->
+        <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
+          <button type="button" id="search-submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
-
-    <!-- 注意書きはヘッダーの一番下に独立させる -->
-    <p class="header-search-note">
-      ※診療科名・検査名などで検索できます。
-    </p>
   </div>
 </header>
 
-  <!-- メイン -->
-  <main>
-    <div class="page-main">
+<main class="page-main">
+  <h1 class="page-title">院長挨拶</h1>
 
-      <h1>院長挨拶</h1>
-
-      <div class="director-profile">
-        <div class="director-photo">
-          院長写真<br>（ダミー）
-        </div>
-
-        <div class="director-info">
-          <h2>院長　百目島 ミキ（どめしま みき）</h2>
-          <p>
-            翠波総合病院のホームページをご覧いただき、誠にありがとうございます。
-            当院は地域の皆さまに寄り添い、安心して医療を受けていただける体制づくりを大切にしてまいりました。
-          </p>
-          <p>
-            医療技術の進歩は目覚ましいものがありますが、その中心にいるのは常に“人”です。
-            患者さま一人ひとりの不安に寄り添い、必要な情報を丁寧にお伝えし、納得いただいたうえで治療を進めることを
-            当院では最も重要と考えています。
-          </p>
-          <p>
-            また、近年増加している生活習慣病や心身のストレスによる疾患に対しても、
-            各専門科が緊密に連携しながら総合的な診療を提供しています。
-            地域医療の拠点として、皆さまの健康を守る存在であり続けることが当院の使命です。
-          </p>
-          <p>
-            これからもより良い医療環境を整え、安心して通える病院づくりに努めてまいります。
-            どうぞよろしくお願い申し上げます。
-          </p>
-        </div>
-      </div>
-
+  <div class="director-profile">
+    <div class="director-photo">
+      院長近影<br>（準備中）
     </div>
-  </main>
 
-  <!-- フッター -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div>© 翠波総合病院</div>
-        <div class="footer-nav">
-          <span>※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</span>
-        </div>
-      </div>
+    <div class="director-info">
+      <h2>院長　百目島 ミキ（どめしま みき）</h2>
+      <p>
+        金枝聖域第八病院のホームページをご覧いただき、誠にありがとうございます。
+        当院は最先端の精神医学と睡眠科学を融合させ、現代社会が抱える複雑な心身の課題に応えるべく、独自のケア体制を構築してまいりました。
+      </p>
+      <p>
+        私たちが最も大切にしているのは、目に見える症状の改善だけではなく、患者様の内側にある「意識の安らぎ」です。
+        不和睡眠総合技術センターとの密接な連携により提供される次世代の脳機能アプローチは、単なる治療を超え、皆様のウェルビーイングの新たな地平を拓くものであると自負しております。
+      </p>
+      <p>
+        「永遠の眠り」と表現されるような、深く、淀みのない休息こそが、人間の生命力を最大化する鍵となります。
+        当院スタッフ一同、皆様の意識の登攀を全力でサポートし、安心して未来を託していただける病院づくりに努めてまいります。
+      </p>
+      <p>
+        どうぞよろしくお願い申し上げます。
+      </p>
     </div>
-  </footer>
+  </div>
+</main>
+
+<footer class="text-center">
+  <div class="container">
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+    </div>
+  </div>
+</footer>
 
 <script>
   (function () {
-    const header = document.querySelector('.site-header');
-    const toggle = document.querySelector('.nav-toggle');
-
-    // ハンバーガー開閉
-    if (toggle && header) {
-      toggle.addEventListener('click', () => {
-        header.classList.toggle('nav-open');
-      });
-    }
-
-    // 現在ページのリンクをハイライト
+    // 1. 現在ページのハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
+
+    // 2. 検索実行ロジック（Canvasのテンプレート準拠）
+    const searchInput = document.getElementById('q');
+    const searchBtn = document.getElementById('search-submit');
+
+    const doSearch = () => {
+      const val = searchInput.value.trim();
+      if (val) {
+        // search.htmlにパラメータを渡して遷移
+        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
+      }
+    };
+
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+    searchBtn.addEventListener('click', doSearch);
   })();
 </script>
-</body>
-</html>
-
-
-
-  
 </body>
 </html>
