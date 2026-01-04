@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIVE_1970 | NATIONAL_COM_LAB_ANNUAL_REPORT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&display=swap');
+
+        body {
+            background-color: #121210; /* 漆黒に近い背景で紙を際立たせる */
+            font-family: 'Noto Serif JP', serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* スキャンした古い紙の質感 */
+        .aged-paper {
+            background-color: #e8dab2;
+            background-image: 
+                /* 紙の繊維感 */
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                /* 周縁部の焼け */
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), rgba(139,69,19,0.15)),
+                /* 水濡れ跡のようなムラ */
+                linear-gradient(45deg, rgba(139,69,19,0.02) 25%, transparent 25%, transparent 50%, rgba(139,69,19,0.02) 50%, rgba(139,69,19,0.02) 75%, transparent 75%, transparent);
+            background-size: auto, 100% 100%, 100px 100px;
+            color: #1a1a1a;
+            max-width: 800px;
+            width: 100%;
+            padding: 80px 60px;
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.8),
+                inset 0 0 100px rgba(139,69,19,0.1);
+            position: relative;
+            border: 1px solid #c4b48d;
+            line-height: 1.9;
+            /* スキャン時のわずかな傾き */
+            transform: rotate(0.3deg);
+            /* 印刷の滲み再現 */
+            filter: contrast(1.1) brightness(0.95) sepia(0.1);
+        }
+
+        /* 紙のシワとノイズ */
+        .aged-paper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dust.png');
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* 経年劣化のシミ */
+        .stain {
+            position: absolute;
+            background: rgba(85, 45, 10, 0.08);
+            filter: blur(30px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .report-header {
+            border-bottom: 2px solid #333;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        .institution-name {
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .report-year {
+            font-size: 0.8rem;
+        }
+
+        .main-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 0.3em;
+            border: 5px double #333;
+            padding: 20px;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #000;
+        }
+
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+
+        .team-table th, .team-table td {
+            border: 1px solid #444;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .team-table th {
+            background: rgba(0,0,0,0.08);
+            width: 35%;
+            font-weight: bold;
+        }
+
+        .research-summary {
+            text-align: justify;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .comment-box {
+            background: rgba(255,255,255,0.3);
+            border: 1px dashed #444;
+            padding: 25px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .comment-box::before {
+            content: "研究員個別所感";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #e1d2a8; /* 背景色に合わせて調整 */
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #080808;
+            color: #00ff41;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid #00ff41;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0,255,65,0.3);
+        }
+
+        .stamp {
+            position: absolute;
+            right: 40px;
+            bottom: 180px;
+            width: 90px;
+            height: 90px;
+            border: 3px solid rgba(150, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(150, 0, 0, 0.5);
+            font-weight: bold;
+            font-size: 0.75rem;
+            transform: rotate(-12deg);
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .footer-disclaimer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.2);
+            font-size: 0.75rem;
+            color: #a00;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* 縦書きの受付番号のような演出 */
+        .serial-number {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            writing-mode: vertical-rl;
+            font-size: 0.6rem;
+            opacity: 0.5;
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../search.html" class="btn-return">← TERMINAL_BACK</a>
+
+    <div class="aged-paper">
+        <div class="serial-number">管理番号：技－七〇－〇〇四二</div>
+        
+        <!-- シミの配置 -->
+        <div class="stain" style="width: 250px; height: 180px; top: 10%; left: -50px;"></div>
+        <div class="stain" style="width: 150px; height: 150px; bottom: 5%; right: 10%;"></div>
+        <div class="stain" style="width: 300px; height: 100px; top: 40%; right: -100px; transform: rotate(45deg);"></div>
+
+        <header class="report-header">
+            <div class="institution-name">国立特殊通信総合研究センター</div>
+            <div class="report-year">昭和四十五年度（1970年）</div>
+        </header>
+
+        <h1 class="main-title">研究年報 第十八巻<br><span style="font-size: 0.8em;">特殊通信工学部門 報告集</span></h1>
+
+        <section>
+            <h2 class="section-title">■ 組織構成（特殊通信工学第三チーム）</h2>
+            <table class="team-table">
+                <tr>
+                    <th>主任研究員</th>
+                    <td>瀬田 門十（Seta Monju）</td>
+                </tr>
+                <tr>
+                    <th>研究員</th>
+                    <td>不和 臨界（Fuwa Rinkai）</td>
+                </tr>
+                <tr>
+                    <th>研究員</th>
+                    <td>百目島 ミキ（Domesima Miki）</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="section-title">■ 研究概要：脳機能同期による非言語通信の基盤研究</h2>
+            <div class="research-summary">
+                <p>
+                    本研究は、既存の無線電信技術の限界を突破すべく、人間の睡眠時脳波を情報の伝送媒体（通信路）として再定義し、個体間における直接的な意識情報の遷移（Trans-Individual Data Transfer）を実現するための理論的基盤を構築することを目的とする。
+                </p>
+                <p class="mt-4">
+                    本年度は、レム睡眠期における脳波の位相同期（Phase Synchronization）現象に着目。特定の外部刺激（6.2Hz帯のパルス状低周波音および熱力学的変動）を介入させることで、複数被検者間の脳波を同一位相に固定する実験を実施した。その結果、言語的・符号的な媒体を介することなく、特定の概念図形や感情情報の「同時共有」が確認された。
+                </p>
+                <p class="mt-4">
+                    これは、人間の脳が潜在的に保持する、個を超越した「共通の受信帯域」へのアクセスを可能にするものであり、将来的には究極の秘匿通信技術、あるいは集団意識の完全統合へと繋がる革新的な端緒となり得るものである。
+                </p>
+            </div>
+        </section>
+
+        <div class="stamp">
+            機密資料<br>部外秘<br>（閲覧制限）
+        </div>
+
+        <section class="comment-box">
+            <div class="interview-text italic" style="font-family: 'Sawarabi Mincho', serif;">
+                「瀬田先輩は、当センターでも屈指の研究意欲をお持ちであり、その独創的な視点は我々若手研究員にとって常に大きな指針となっています。特に『睡眠を通信リソースとして定義する』という大胆な発想は、瀬田先輩にしか成し得ないものであり、心から尊敬できる先輩です。瀬田先輩が提唱される『完全なる同期』の理想を実現すべく、不肖私も全力を尽くす所存です。瀬田先輩の背中を追い、我々の研究が人類の新たな夜明けとなることを確信しております。」
+                <p class="text-right mt-6 not-italic font-bold" style="font-size: 1.1rem; opacity: 0.9;">―― 研究員：不和 臨界</p>
+            </div>
+        </section>
+
+        <footer class="footer-disclaimer">
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動とは一切関係ありません。
+        </footer>
+    </div>
+
+</body>
+</html>
