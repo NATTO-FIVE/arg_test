@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNAL_RECORD | OSI_STANDARD_DEFINITION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        .osi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.85rem;
+        }
+        .osi-table th, .osi-table td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+        .osi-table th {
+            background: #111;
+            color: #00ff41;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00ff41;
+            animation: blink 1.2s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .disclaimer {
+            color: #b00;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span class="flex items-center">
+                    <span class="status-dot"></span>
+                    <span class="font-bold tracking-widest uppercase">General_Ref: OSI_MODEL</span>
+                </span>
+            </div>
+            <div class="hidden md:block">ISO_IEC_7498_1_STANDARD</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="text-2xl font-bold text-white mb-2 uppercase tracking-tighter">内部記録：OSI参照モデルの基本定義</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: PUBLIC_REFERENCE_DATA
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>開放型システム間相互接続の参照モデル</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">ID:</span>
+                    <span>ISO/IEC 7498-1</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <p>
+                    OSI参照モデルは、コンピュータネットワークの機能を抽象化し、7つの階層に分割して定義したものである。異なるメーカーの機器間での通信を可能にするための国際標準フレームワークとして機能する。
+                </p>
+
+                <table class="osi-table font-mono">
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>L7</td><td>Application</td><td>具体的な通信サービス（HTTP等）</td></tr>
+                        <tr><td>L6</td><td>Presentation</td><td>データの形式、圧縮、暗号化</td></tr>
+                        <tr><td>L5</td><td>Session</td><td>通信の開始から終了までの手順管理</td></tr>
+                        <tr><td>L4</td><td>Transport</td><td>通信の信頼性、エラー訂正、再送制御</td></tr>
+                        <tr><td>L3</td><td>Network</td><td>経路選択、論理アドレス（IP等）の識別</td></tr>
+                        <tr><td>L2</td><td>Data Link</td><td>隣接ノード間のデータ転送、物理アドレス</td></tr>
+                        <tr><td>L1</td><td>Physical</td><td>電気信号、コネクタ形状等の物理的定義</td></tr>
+                    </tbody>
+                </table>
+
+                <p class="mt-8 font-bold text-white">【注記】</p>
+                <p class="text-sm">
+                    本モデルは理論上の標準であり、実稼働環境ではTCP/IPプロトコルスタックが主流として用いられている。
+                    各階層は独立しており、下位層のサービスを利用して上位層へサービスを提供する構造となっている。
+                </p>
+
+                <div class="disclaimer">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div>END_OF_REFERENCE_SIGNAL</div>
+                <div>SYSTEM_TIME: 2024.12.XX_14:20:00</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
