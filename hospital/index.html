@@ -11,7 +11,7 @@
       --sanctuary-blue: #001f3f;
     }
 
-    /* 2. ヒーローバナー（高さを他ページと合わせる） */
+    /* 2. ヒーローバナー */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -20,7 +20,7 @@
       border-bottom: 5px solid var(--kanae-gold);
     }
 
-    /* 3. ナビゲーションのスタイルを他ページと同期 */
+    /* 3. ナビゲーションのスタイル */
     .main-nav ul {
       display: flex;
       gap: 12px;
@@ -68,6 +68,7 @@
       padding: 5px 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      color: #333;
     }
     .search-btn {
       background: var(--kanae-gold);
@@ -103,9 +104,8 @@
           </ul>
         </nav>
 
-        <!-- 検索フォーム: search.html に GET パラメータ q を送る -->
-        <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
@@ -122,7 +122,6 @@
 
 <main class="container">
   <div class="main-layout">
-    
     <div class="content-area" style="flex: 2;">
       <h2>診療科のご案内</h2>
       <div class="dept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
@@ -137,13 +136,6 @@
           <p><a href="neuro.html">詳細はこちら →</a></p>
         </div>
       </div>
-
-      <div class="banners" style="margin-top: 40px;">
-        <div style="background: #fff; padding: 20px; border-left: 10px solid var(--sanctuary-blue); border: 1px solid #ddd;">
-          <h4>提携機関：不和睡眠総合技術センター</h4>
-          <p>睡眠に関する最前線技術については<a href="../laboratory/index.html">不和睡眠総合技術センタートップページ</a>へ</p>
-        </div>
-      </div>
     </div>
 
     <aside class="sidebar" style="flex: 1;">
@@ -151,7 +143,6 @@
         <h4>関連リンク</h4>
         <ul style="list-style: none; padding: 0; font-size: 0.9em;">
           <li style="margin-bottom: 8px;"><a href="history.html">病院沿革</a></li>
-          <li style="margin-bottom: 8px;"><a href="history.html">アクセス</a></li>
           <li style="margin-bottom: 8px;"><a href="../laboratory/index.html">不和睡眠総合技術センター</a></li>
           <li style="margin-bottom: 8px;"><a href="../foundation/index.html">一般財団法人 聖眠金枝財団</a></li>
         </ul>
@@ -161,34 +152,24 @@
 </main>
 
 <footer>
-  <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-      </div>
-    </div>
+  <div class="container text-center py-6">
+    <div>© 2025 金枝聖域第八病院</div>
+    <div class="text-[10px] text-gray-500 mt-2">※本サイトはフィクションです。</div>
   </div>
 </footer>
 
 <script>
   (function () {
-    // 現在のページのハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
 
-    // --- 検索機能の強化 ---
     const searchInput = document.getElementById('q');
-    const searchForm = document.querySelector('.header-search-form');
+    const searchForm = document.getElementById('hospital-search-form');
 
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        // デフォルトのフォーム送信挙動（GETリクエスト）を利用
-        // これにより ../search.html?q=キーワード というURLへ遷移する
-        if (!searchInput.value.trim()) {
-          e.preventDefault();
-        }
+    searchForm.addEventListener('submit', (e) => {
+      if (!searchInput.value.trim()) {
+        e.preventDefault();
       }
     });
   })();
