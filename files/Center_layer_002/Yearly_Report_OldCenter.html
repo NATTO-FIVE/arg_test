@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&display=swap');
 
         body {
-            background-color: #121210; /* 漆黒に近い背景で紙を際立たせる */
+            background-color: #121210;
             font-family: 'Noto Serif JP', serif;
             display: flex;
             justify-content: center;
@@ -18,15 +18,11 @@
             overflow-x: hidden;
         }
 
-        /* スキャンした古い紙の質感 */
         .aged-paper {
             background-color: #e8dab2;
             background-image: 
-                /* 紙の繊維感 */
                 url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
-                /* 周縁部の焼け */
                 radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), rgba(139,69,19,0.15)),
-                /* 水濡れ跡のようなムラ */
                 linear-gradient(45deg, rgba(139,69,19,0.02) 25%, transparent 25%, transparent 50%, rgba(139,69,19,0.02) 50%, rgba(139,69,19,0.02) 75%, transparent 75%, transparent);
             background-size: auto, 100% 100%, 100px 100px;
             color: #1a1a1a;
@@ -39,13 +35,10 @@
             position: relative;
             border: 1px solid #c4b48d;
             line-height: 1.9;
-            /* スキャン時のわずかな傾き */
             transform: rotate(0.3deg);
-            /* 印刷の滲み再現 */
             filter: contrast(1.1) brightness(0.95) sepia(0.1);
         }
 
-        /* 紙のシワとノイズ */
         .aged-paper::before {
             content: "";
             position: absolute;
@@ -55,7 +48,6 @@
             pointer-events: none;
         }
 
-        /* 経年劣化のシミ */
         .stain {
             position: absolute;
             background: rgba(85, 45, 10, 0.08);
@@ -143,7 +135,7 @@
             position: absolute;
             top: -12px;
             left: 20px;
-            background: #e1d2a8; /* 背景色に合わせて調整 */
+            background: #e1d2a8;
             padding: 0 10px;
             font-size: 0.75rem;
             font-weight: bold;
@@ -195,7 +187,6 @@
             opacity: 0.9;
         }
 
-        /* 縦書きの受付番号のような演出 */
         .serial-number {
             position: absolute;
             top: 100px;
@@ -214,10 +205,8 @@
     <div class="aged-paper">
         <div class="serial-number">管理番号：技－七〇－〇〇四二</div>
         
-        <!-- シミの配置 -->
         <div class="stain" style="width: 250px; height: 180px; top: 10%; left: -50px;"></div>
         <div class="stain" style="width: 150px; height: 150px; bottom: 5%; right: 10%;"></div>
-        <div class="stain" style="width: 300px; height: 100px; top: 40%; right: -100px; transform: rotate(45deg);"></div>
 
         <header class="report-header">
             <div class="institution-name">国立特殊通信総合研究センター</div>
@@ -245,16 +234,13 @@
         </section>
 
         <section class="mt-8">
-            <h2 class="section-title">■ 研究概要：脳機能同期による非言語通信の基盤研究</h2>
+            <h2 class="section-title">■ 研究概要：生体信号同期による非言語通信の基盤研究</h2>
             <div class="research-summary">
                 <p>
-                    本研究は、既存の無線電信技術の限界を突破すべく、人間の睡眠時脳波を情報の伝送媒体（通信路）として再定義し、個体間における直接的な意識情報の遷移（Trans-Individual Data Transfer）を実現するための理論的基盤を構築することを目的とする。
+                    本研究は、従来の電磁波伝送プロトコルにおける物理的減衰の制約を回避すべく、生体高周波パルスを情報の搬送波（Carrier Wave）として再定義し、個体間における直接的なデータ遷移（Trans-Individual Data Transfer）を実現するための理論的基盤を構築することを目的とする。
                 </p>
                 <p class="mt-4">
-                    本年度は、レム睡眠期における脳波の位相同期（Phase Synchronization）現象に着目。特定の外部刺激（6.2Hz帯のパルス状低周波音および熱力学的変動）を介入させることで、複数被検者間の脳波を同一位相に固定する実験を実施した。その結果、言語的・符号的な媒体を介することなく、特定の概念図形や感情情報の「同時共有」が確認された。
-                </p>
-                <p class="mt-4">
-                    これは、人間の脳が潜在的に保持する、個を超越した「共通の受信帯域」へのアクセスを可能にするものであり、将来的には究極の秘匿通信技術、あるいは集団意識の完全統合へと繋がる革新的な端緒となり得るものである。
+                    本年度は、レム睡眠期における神経パルスの位相同期（Phase Synchronization）現象に着目。特定の低周波刺激による強制変調（Forced Modulation）を介入させ、複数被検者間の信号出力を同一位相に固定する検証実験を実施した。その結果、既存の通信媒体を介在させない、多点間コヒーレント通信の確立を示唆する有意な観測データが得られた。
                 </p>
             </div>
         </section>
@@ -265,7 +251,7 @@
 
         <section class="comment-box">
             <div class="interview-text italic" style="font-family: 'Sawarabi Mincho', serif;">
-                「瀬田先輩は、当センターでも屈指の研究意欲をお持ちであり、その独創的な視点は我々若手研究員にとって常に大きな指針となっています。特に『睡眠を通信リソースとして定義する』という大胆な発想は、瀬田先輩にしか成し得ないものであり、心から尊敬できる先輩です。瀬田先輩が提唱される『完全なる同期』の理想を実現すべく、不肖私も全力を尽くす所存です。瀬田先輩の背中を追い、我々の研究が人類の新たな夜明けとなることを確信しております。」
+                「瀬田先輩の独創的な視点は、我々研究員にとって常に大きな指針となっています。その『完全なる同期』という理想を実現すべく、全力を尽くす所存です。」
                 <p class="text-right mt-6 not-italic font-bold" style="font-size: 1.1rem; opacity: 0.9;">―― 研究員：不和 臨界</p>
             </div>
         </section>
