@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INCOMING_MAIL | KARAHASHI_MONJU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.4rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .terminal-text {
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem 1.5rem;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+        }
+
+        /* 視認性の高いフッターテキスト */
+        .disclaimer {
+            color: #888;
+            font-size: 11px;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 10px;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span><span class="status-dot"></span>INCOMING_MAIL: DECRYPTED</span>
+            </div>
+            <div class="hidden md:block">SERVER: FUWA-TECH-VNET</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">内部通信：移送検体 DS-783 に関する最終評価</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Classification: TOP_SECRET / EYES_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">DATE:</span>
+                    <span>2025.11.08 02:44:11</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">FROM:</span>
+                    <span>不和（不和睡眠総合技術センター センター長）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">TO:</span>
+                    <span>唐橋 門十（金の聖眠教 代表）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>検体 DS-783 の評価下方修正および補充要請</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <p class="mb-6">
+                    唐橋様<br><br>
+                    先日貴教団より「高適性個体」として移送された検体 DS-783 について、詳細な同期試験を終了しました。残念ながら、当初の期待値には及ばない結果となりました。
+                </p>
+
+                <div class="terminal-text font-mono text-sm">
+                    <p class="text-red-500 font-bold mb-2">【最終解析データ：DS-783】</p>
+                    <p>・初期同期速度：118秒（一次評価：良）</p>
+                    <p>・第4階層到達後の維持時間：420秒（著しい減衰を確認）</p>
+                    <p>・黄金ノイズとの再共鳴率：0.22（致命的な乖離）</p>
+                    <p class="mt-4">
+                        結論：当該検体の<strong style="color: #00ff41;">位相適性（登攀適性）</strong>は、深部階層において自己意識の残存を許容する程度に留まっていました。
+                    </p>
+                </div>
+
+                <p class="mt-8">
+                    DS-783は、表面上の同調速度こそ優秀でしたが、登攀の核心部で信仰心——もとい、彼が演じていた「自己犠牲的な献身」の脆さが露呈しました。工学的に言えば、彼の脳波はノイズに対してあまりに敏感すぎ、不純な個の意識を排斥しきれませんでした。
+                </p>
+
+                <p class="mt-4">
+                    これではプロジェクト（project-E）における安定した触媒としては使えません。現在は病院側の機密区画へ「廃棄分（残存意識の処理）」として回しています。
+                </p>
+
+                <p class="mt-8">
+                    唐橋殿、貴殿が用意している「舞台」は、信者の感情を煽るのには十分かもしれませんが、我々が求める真の<strong style="color: #00ff41;">位相適性（登攀適性）</strong>を持つ者を選別するには、まだ強度が足りないようです。
+                </p>
+
+                <p class="mt-4">
+                    次期フェーズの「永遠の位」へ到達するには、さらに多くの、そしてより深く「自己を捨てられる」志願者が必要です。教団というフィルターの目をさらに細かくし、速やかな補充を期待します。
+                </p>
+
+                <p class="mt-12 text-sm italic opacity-50">
+                    「次に送る者は、もっと空っぽにしてからにしてください」
+                </p>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between uppercase mb-4">
+                    <div>SIGNAL_EOF: APTITUDE_REPORT_V2</div>
+                    <div>STATUS: ENCRYPTED_V_CHANNEL_04</div>
+                </div>
+                <div class="disclaimer">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
