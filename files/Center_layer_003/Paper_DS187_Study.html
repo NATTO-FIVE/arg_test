@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNAL_ARCHIVE | DS-187_STABLE_PHASE_STUDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        .thesis-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .thesis-section h2 {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .thesis-text {
+            font-size: 0.95rem;
+            text-align: justify;
+            color: #ccc;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00ff41;
+            animation: blink 1.2s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .highlight {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .footer-disclaimer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222;
+            font-size: 0.7rem;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN</a>
+                <span class="flex items-center">
+                    <span class="status-dot"></span>
+                    <span class="font-bold tracking-widest uppercase">Restricted_Access: OSI_L8_CORE</span>
+                </span>
+            </div>
+            <div class="hidden md:block">REF: SETA-78-CORE-STABILITY</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-10">
+                <h1 class="text-2xl font-bold text-white mb-2 leading-tight">
+                    非公開論文：「DS-187に基づく恒久的安定位相空間の検討」
+                </h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Classification: TOP_SECRET / PROJECT-E FOUNDATION
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">著者:</span>
+                    <span>瀬田 門十、百目島 ミキ</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">日付:</span>
+                    <span>1978年06月28日</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">識別体:</span>
+                    <span>被検体 DS-187</span>
+                </div>
+            </div>
+
+            <article class="thesis-text">
+                <div class="thesis-section">
+                    <h2>1. 実験設計の目的</h2>
+                    <p>
+                        OSI参照モデルにおける第８階層（意識接続層）の存在は既に予見されているが、その最大の問題点は接続の「不安定性」にある。意識の位相同期は、被検体の心理状態や生理的リズムに依存し、定常的な通信路としての維持が極めて困難であった。
+                    </p>
+                    <p class="mt-4">
+                        本実験では、極めて高い位相同期適性を示す<strong>被検体 DS-187</strong>を「アンカー（固定子）」として定義し、多人数間の意識を恒久的に接続するための「安定位相空間」を構築する設計手法について検討する。
+                    </p>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>2. DS-187の特性と準備段階の観測</h2>
+                    <p>
+                        準備段階における予備計測において、DS-187は我々の予測を遥かに上回る数値を記録した。通常の高適性個体であっても位相同期率は最大で70%程度に留まるが、DS-187は外部刺激なしに<span class="highlight">常時99.2%の整合性</span>を維持している。
+                    </p>
+                    <p class="mt-4">
+                        特筆すべきは、DS-187が睡眠状態にある際、その周囲半径3メートル以内の他個体が、特段の誘導なしにDS-187の脳波位相へ「吸い寄せられる」現象である。これはDS-187自体が強力な「意識の重力源」として機能していることを示しており、本実験における恒久的空間の核として、これ以上の適任者は存在しない。
+                    </p>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>3. 本実験への期待と展望</h2>
+                    <p>
+                        次月より開始される本実験では、DS-187を中心とした「合唱（コーラル）ネットワーク」を構築し、第８階層における情報の定常的な遷移を試みる。これまでの研究が「点」の通信であったのに対し、DS-187を用いることで、我々は「面」、あるいは「空間」としての意識共有を実現できると確信している。
+                    </p>
+                    <p class="mt-4">
+                        これが成功すれば、人類は個別の肉体という制約から解き放たれ、OSIモデルが真に完成を見ることになるだろう。
+                    </p>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>謝辞</h2>
+                    <p>
+                        本研究の遂行にあたり、献身的に実験に協力してくれている<span class="text-white">DS-187（小野 伊毛子）</span>に深く感謝の意を表する。彼女の存在なくして、我々が「永遠の位」の門を叩くことは不可能であった。
+                    </p>
+                </div>
+            </article>
+
+            <footer class="footer-disclaimer font-mono">
+                <div class="mb-2 uppercase">Signal_EOF: DS187_Phase_Stability_Study</div>
+                <div class="text-[10px] opacity-70">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
