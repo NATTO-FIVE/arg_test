@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEEKLY_GOSSIP_1985 | THE_CHORUS_INCIDENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
+
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Noto Serif JP', serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 10px;
+            margin: 0;
+        }
+
+        /* 雑誌の紙質再現：黄ばみとインクの滲み */
+        .magazine-page {
+            background-color: #e5dfcc;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), rgba(139, 69, 19, 0.05));
+            color: #222;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #c4bc9d;
+        }
+
+        /* 上部画像エリア */
+        .photo-section {
+            width: 100%;
+            height: 400px;
+            background: #333;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid #000;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 100%;
+            background: #444;
+            filter: grayscale(1) contrast(1.8) brightness(0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* 網点再現 */
+        .photo-img::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#000 1px, transparent 0);
+            background-size: 4px 4px;
+            opacity: 0.3;
+        }
+
+        /* 派手な袋とじ風・ゴシップ見出し */
+        .headline-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(180, 0, 0, 0.9);
+            color: #fff;
+            padding: 15px;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        .headline-main {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            display: block;
+        }
+
+        /* 下部記事エリア：縦書き1段 */
+        .article-section {
+            padding: 40px 50px;
+            box-sizing: border-box;
+            /* 縦書き設定 */
+            writing-mode: vertical-rl;
+            text-align: justify;
+            font-family: 'Sawarabi Mincho', serif;
+            line-height: 2.4;
+            font-size: 1.15rem;
+            height: 800px; /* ここで高さを決めることで、右から左へ流れる */
+            width: 100%;
+        }
+
+        .dropcap {
+            font-size: 3.5rem;
+            color: #b00;
+            font-weight: 900;
+            line-height: 1;
+            border: 3px solid #b00;
+            padding: 8px;
+            margin-left: 15px;
+            display: inline-block;
+        }
+
+        .caption-text {
+            writing-mode: horizontal-tb;
+            font-size: 0.8rem;
+            background: #000;
+            color: #fff;
+            padding: 5px 15px;
+            display: inline-block;
+            margin: 10px 0 0 20px;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #b00;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #fff;
+            z-index: 1000;
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .footer-disclaimer {
+            writing-mode: horizontal-tb;
+            margin-top: auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.05);
+            font-size: 0.8rem;
+            color: #800;
+            font-weight: bold;
+            text-align: center;
+            border-top: 1px dashed #c4bc9d;
+        }
+
+        .magazine-label {
+            writing-mode: horizontal-tb;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #555;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../search.html" class="btn-return">← 戻る</a>
+
+    <article class="magazine-page">
+        <div class="magazine-label">週刊・噂の深層 1985年11月号増刊号より抜粋</div>
+
+        <!-- 上部：画像セクション -->
+        <div class="photo-section">
+            <div class="photo-img">
+                [ 闇に沈む旧国立研究センター廃屋の鉄塔 ]
+            </div>
+            <div class="headline-overlay">
+                <span class="headline-main">怪奇！深夜に響く”死者の合唱”<br>透明町を襲う「謎の睡眠障害」の正体</span>
+            </div>
+        </div>
+        <div class="caption-text">写真：住民が撮影した「深夜に発光する」とされる研究施設跡</div>
+
+        <!-- 下部：縦書き1段セクション -->
+        <div class="article-section">
+            <p><span class="dropcap">狂</span>乱。銀座の街では一万円札が乱舞し、ビジネスマンたちは「二十四時間戦えますか」と叫びながら栄養ドリンクを煽る。日本中が眠りを忘れたかのようなバブルの絶頂。しかし、そんな不夜城の喧騒から取り残されたＫ県Ｙ市の端、透明町では今、それとは真逆の、そしてあまりに不気味な「眠りの恐怖」が住民を震え上がらせているという。</p>
+            
+            <p>事件が表面化したのは先月中旬のことだ。最寄り駅から徒歩二十分以上、街灯もまばらな寂れた夜道を辿り、ようやく布団に入った住民たちを襲ったのは、単なる過労による不眠ではなかった。寝入りばな、意識が薄れる瞬間に、自分の喉が勝手に震え、自分のものではないような声で「きこえるか」と呟くのである。しかも、驚くべきことに、その声は町内の複数の世帯で、ほぼ同時刻に、全く同じフレーズとして観測されているのだ。</p>
+
+            <p>「仕事の疲れで頭がおかしくなったのかと思いました」と語るのは、都内の不動産会社に勤める男性（三八）。「でも、隣の家の奥さんも、その向かいの老夫婦も、みんな同じ『寝言』を言っていると知った時、背筋が凍りつきました。しかも、どこか遠くから、何十人もの人間が低い声で歌っているような”ザワザワ”とした音が聞こえてくるんです」</p>
+
+            <p>当局の極秘調査により、この集団睡眠障害の発生範囲は、かつて先端通信を研究していたとされる『国立特殊通信総合研究センター』廃屋を中心とした、半径約二十キロ圏内に厳密に一致していることが判明した。一九七八年の事故以来、廃墟と化したはずのあの場所で、一体何が起きているのか。駅から遠く、通勤に不便なこの土地特有の磁場が関係しているのか、それともかつての国が残した「毒」が今になって漏れ出したのか。</p>
+
+            <p>国務機関は電磁波の影響を否定しているが、現地では防護服を着た職員が目撃されている。バブルの泡が膨らみ続ける不夜城の影で、徒歩二十分の暗い夜道を歩く住民たちは、今夜も自分が発する「きこえるか」という不気味な声に怯えながら、浅い眠りを繰り返している。合唱（コーラル）の正体が暴かれる日は、果たして来るのだろうか。</p>
+        </div>
+
+        <footer class="footer-disclaimer">
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+        </footer>
+    </article>
+
+</body>
+</html>
