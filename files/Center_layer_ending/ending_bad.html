@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINATED | INVESTIGATION_FAILED</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Noto+Sans+JP:wght@700&display=swap');
+        
+        body {
+            background-color: #0a0000;
+            color: #b00;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .report-card {
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid #b00;
+            padding: 3rem;
+            background: #000;
+            box-shadow: 0 0 30px rgba(180, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .header {
+            font-weight: bold;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #b00;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .log-entry {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .highlight { color: #fff; background: #b00; padding: 0 5px; }
+
+        .glitch-text { animation: glitch 2s infinite; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            1% { transform: translate(-2px, 2px); }
+            2% { transform: translate(2px, -2px); }
+            3% { transform: translate(0); }
+        }
+
+        .stamp {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            border: 3px double #b00;
+            padding: 10px;
+            transform: rotate(-15deg);
+            font-weight: bold;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-card">
+        <div class="header glitch-text">INVESTIGATION_FAILED</div>
+        
+        <div class="log-entry">
+            <span class="text-white opacity-50">[2026.04.01]</span><br>
+            対象（調査員）は「金の聖眠教」への入信を確認。<br>
+            「登攀」の教義に対し、極めて高い精神的陶酔を示した。
+        </div>
+
+        <div class="log-entry">
+            <span class="text-white opacity-50">[入信より1年後]</span><br>
+            対象に重度の意識混濁（Phase Synchronization Error）が発生。<br>
+            脳波が恒久的に6.2Hzで固定された。自発的意識の消失を確認。
+        </div>
+
+        <div class="log-entry">
+            <span class="text-white opacity-50">[現在]</span><br>
+            対象は脳波周波数が徐々に低下したため、<span class="highlight">「金枝聖域第八病院」地下第4区画</span>へ移送。<br>
+            不変検体（不感アンテナ）として処理完了。
+        </div>
+
+        <div class="stamp">廃棄済</div>
+
+        <div class="mt-8 text-center text-xs opacity-30">
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+        </div>
+    </div>
+</body>
+</html>
