@@ -185,6 +185,11 @@
             resultsArea.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">Access Denied: Invalid Keyword or Hash Mismatch</div>`;
         }
 
+    // search.html の末尾に追加するコード
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('q');
+        if (query) { searchBox.value = query; searchBox.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' })); }
+      
         document.addEventListener('click', () => searchBox.focus());
     </script>
 </body>
