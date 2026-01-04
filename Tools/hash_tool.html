@@ -2,52 +2,100 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ARGハッシュ生成ツール</title>
+    <title>ARG Data Preparation Tool (Multi-Hit Support)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #0f172a; color: #e2e8f0; font-family: monospace; }
-        input { background-color: #1e293b; border: 1px solid #334155; color: #f8fafc; }
+        input, textarea { background-color: #1e293b; border: 1px solid #334155; color: #f8fafc; }
+        .entry-card { border-left: 4px solid #3b82f6; }
     </style>
 </head>
 <body class="p-10">
-    <div class="max-w-2xl mx-auto">
-        <h1 class="text-2xl font-bold mb-6 text-blue-400">ARG Keyword Hasher</h1>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-blue-400 font-mono">ARG Data Preparation Tool v2.0</h1>
         
-        <div class="space-y-6">
-            <div>
-                <label class="block text-sm mb-2">キーワードを入力（例: 6.2Hz）</label>
-                <input type="text" id="keyword" class="w-full p-3 rounded" placeholder="Enter keyword..." oninput="generateHash()">
+        <div class="mb-10 p-6 bg-slate-900 rounded-lg border border-slate-700">
+            <h2 class="text-lg mb-4 text-blue-300 font-bold">1. ファイル名の生成 (SHA-256)</h2>
+            <label class="block text-sm mb-2">正解キーワードを入力 (例: 不和臨界)</label>
+            <input type="text" id="keyword" class="w-full p-3 rounded mb-4" oninput="generateHash()">
+            <p class="text-xs text-slate-400 mb-1 uppercase">Filename to use:</p>
+            <div id="hash-output" class="p-3 bg-black text-green-400 break-all select-all rounded border border-green-900 font-bold">---</div>
+        </div>
+
+        <div class="p-6 bg-slate-900 rounded-lg border border-slate-700">
+            <h2 class="text-lg mb-4 text-blue-300 font-bold">2. エントリーの追加とJSON生成</h2>
+            
+            <div id="entry-container" class="space-y-4 mb-6">
+                <!-- エントリーはここに追加される -->
             </div>
 
-            <div class="p-4 bg-slate-800 rounded border border-slate-700">
-                <label class="block text-xs text-slate-400 mb-2 uppercase">SHA-256 Hash (Filename)</label>
-                <div id="output" class="text-lg font-bold text-green-400 break-all select-all">---</div>
-            </div>
+            <button onclick="addEntry()" class="w-full py-2 mb-4 border-2 border-dashed border-slate-600 hover:border-blue-400 text-slate-400 hover:text-blue-400 rounded transition">
+                + エントリーを追加
+            </button>
 
-            <div class="text-sm text-slate-500">
-                <p>手順：</p>
-                <ol class="list-decimal ml-5 mt-2 space-y-1">
-                    <li>キーワードを入力する。</li>
-                    <li>表示されたハッシュ値をコピーする。</li>
-                    <li><code>data/vault/[ハッシュ値].json</code> という名前でファイルを作成する。</li>
-                </ol>
+            <button onclick="generateJson()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded transition">
+                難読化JSONを生成
+            </button>
+
+            <div class="mt-8">
+                <label class="block text-xs text-slate-400 mb-1 uppercase">JSON File Content:</label>
+                <textarea id="json-output" class="w-full p-3 bg-black text-yellow-400 h-60 rounded border border-yellow-900 font-mono text-xs select-all" readonly></textarea>
             </div>
         </div>
     </div>
 
     <script>
+        let entryCount = 0;
+
+        function addEntry() {
+            entryCount++;
+            const container = document.getElementById('entry-container');
+            const div = document.createElement('div');
+            div.className = "entry-card p-4 bg-slate-800 rounded relative mb-4";
+            div.id = `entry-${entryCount}`;
+            div.innerHTML = `
+                <button onclick="removeEntry(${entryCount})" class="absolute top-2 right-2 text-slate-500 hover:text-red-400">×</button>
+                <div class="grid grid-cols-1 gap-3">
+                    <input type="text" placeholder="タイトル (例: 透明町のひと)" class="title-input w-full p-2 text-sm rounded">
+                    <textarea placeholder="説明文" class="desc-input w-full p-2 text-sm rounded h-16"></textarea>
+                    <input type="text" placeholder="URL (例: fuwa_interview.html)" class="url-input w-full p-2 text-sm rounded font-mono">
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function removeEntry(id) {
+            document.getElementById(`entry-${id}`).remove();
+        }
+
         async function generateHash() {
-            const val = document.getElementById('keyword').value;
-            if (!val) {
-                document.getElementById('output').innerText = "---";
-                return;
-            }
+            const val = document.getElementById('keyword').value.trim();
+            if (!val) { document.getElementById('hash-output').innerText = "---"; return; }
             const msgBuffer = new TextEncoder().encode(val);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            document.getElementById('output').innerText = hashHex;
+            const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hash-output').innerText = hashHex + ".json";
         }
+
+        function obfuscate(str) {
+            return btoa(unescape(encodeURIComponent(str)));
+        }
+
+        function generateJson() {
+            const entries = document.querySelectorAll('.entry-card');
+            const dataList = Array.from(entries).map(card => ({
+                title: obfuscate(card.querySelector('.title-input').value),
+                description: obfuscate(card.querySelector('.desc-input').value),
+                url: btoa(card.querySelector('.url-input').value)
+            }));
+
+            // エントリーが1つの場合はオブジェクト、複数の場合は配列にする
+            const finalData = dataList.length === 1 ? dataList[0] : dataList;
+            document.getElementById('json-output').value = JSON.stringify(finalData, null, 2);
+        }
+
+        // 初期状態で1つ追加
+        addEntry();
     </script>
 </body>
 </html>
