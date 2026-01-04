@@ -1,103 +1,185 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>案件ファイル：特殊外来科の違和感調査</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      background:#111;
-      color:#eee;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height:1.6;
-      padding:20px;
-    }
-    .wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      border:1px solid #555;
-      padding:20px;
-      background:#181818;
-    }
-    h1,h2 {
-      margin-top:0;
-    }
-    .label {
-      font-size:0.9rem;
-      color:#aaa;
-    }
-    .btn {
-      display:inline-block;
-      margin-top:24px;
-      padding:10px 18px;
-      border:1px solid #0af;
-      text-decoration:none;
-      color:#0af;
-      font-size:0.95rem;
-    }
-    .btn:hover {
-      background:#0af;
-      color:#000;
-    }
-    code {
-      background:#222;
-      padding:2px 4px;
-      font-size:0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASE_FILE | 白米探偵事務所</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&display=swap');
+        
+        body {
+            background-color: #f4f1ea;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            color: #333;
+            font-family: 'Noto Serif JP', serif;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .request-paper {
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            padding: 60px 80px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #dcd7c9;
+            position: relative;
+        }
+
+        @media (max-width: 640px) {
+            .request-paper { padding: 40px 30px; }
+        }
+
+        .office-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #333;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-left: 5px solid #1a1a1a;
+            padding-left: 15px;
+            margin: 30px 0 15px 0;
+        }
+
+        .body-text {
+            line-height: 1.9;
+            text-align: justify;
+            font-family: 'Sawarabi Mincho', serif;
+        }
+
+        .important-note {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fdf6e3;
+            border: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .btn-action {
+            display: block;
+            margin-top: 50px;
+            padding: 15px 30px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            transition: all 0.3s;
+        }
+
+        .btn-action:hover {
+            background: #444;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stamp-red {
+            position: absolute;
+            top: 70px;
+            right: 60px;
+            border: 4px double #b00;
+            color: #b00;
+            padding: 8px 15px;
+            font-weight: bold;
+            transform: rotate(-12deg);
+            opacity: 0.7;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .footer-note {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.75rem;
+            color: #999;
+            text-align: center;
+        }
+        
+        .method-box {
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="label">CASE FILE / INTERNAL USE ONLY</div>
-    <h1>案件ファイル：特殊外来科の違和感調査</h1>
 
-    <h2>依頼人</h2>
-    <p>
-      某総合病院に配属予定の新人医師。<br>
-      配属前に、これから勤める病院の公式サイトに<strong>説明のつかない違和感</strong>を覚え、
-      我が探偵事務所に調査を依頼してきた。
-    </p>
+    <article class="request-paper">
+        <div class="stamp-red">秘</div>
 
-    <h2>依頼内容</h2>
-    <p>
-      問題となっているのは、病院サイトに掲載されている
-      <strong>「特殊外来科」</strong>の情報である。<br>
-      ラインナップは「睡眠外来」に加え、聞き慣れない科名が並んでいるが、
-      どの教科書にも載っていない分野だという。
-    </p>
-    <p>
-      依頼人の希望はただ一つ。<br>
-      <em>「配属前に、この違和感の正体を知りたい。もし不穏な要素があるなら、覚悟を決めたい」</em>
-    </p>
+        <header class="office-header">
+            <div>白米探偵事務所 - 受付案件：#T-1978</div>
+            <div>INTERNAL USE ONLY</div>
+        </header>
 
-    <h2>調査方法</h2>
-    <p>
-      我が事務所の強みは、独自に構築した<strong>特殊ネットワーク</strong>だ。<br>
-      通常のブラウザからは見えない階層――
-      病院の公開サイトの裏に残されたログや、誤って露出したデータベース断片に
-      アクセスすることができる。
-    </p>
-    <p>
-      調査の流れは以下の通り：
-    </p>
-    <ol>
-      <li>まずは<strong>病院の公式サイト</strong>を確認し、表向きの情報を把握する。</li>
-      <li>必要に応じて、事務所の<strong>内部記録検索端末</strong>から
-          サーバ内のログや記録にアクセスする。</li>
-      <li>違和感の原因となる要素を特定し、報告書としてまとめる。</li>
-    </ol>
+        <h1 class="title">案件調査依頼書：<br>特殊睡眠外来科の違和感調査</h1>
 
-    <h2>調査開始</h2>
-    <p>
-      まずは問題の病院サイトにアクセスしよう。<br>
-      特殊外来科のページから、何か手がかりが見つかるはずだ。
-    </p>
+        <div class="body-text">
+            <h2 class="section-title">依頼人背景</h2>
+            <p>
+                金枝聖域第八病院に配属予定の新人看護師。<br>
+                勤務開始を前に、病院公式サイトの構成に「説明のつかない違和感」を覚え、当事務所へ実態調査を依頼。
+            </p>
 
-    <a href="hospital/index.html" class="btn">病院サイトに接続する</a>
+            <h2 class="section-title">依頼内容</h2>
+            <p>
+                調査対象は、病院サイト内に存在する<strong>「特殊睡眠外来科」</strong>である。<br>
+                当該病院には一般的な「睡眠外来」が存在せず、代わりに医学の教科書には載っていないこの「特殊睡眠外来科」のみが置かれているという。
+            </p>
+            <div class="important-note">
+                依頼人談：<br>
+                「配属前に、この科の正体を知りたい。もし不穏な要素があるなら、私は覚悟を決めなければならない」
+            </div>
 
-    <p style="margin-top:18px; font-size:0.85rem; color:#aaa;">
-     ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・思想とは一切関係ありません。
-    </p>
-  </div>
+            <h2 class="section-title">調査方針</h2>
+            <ol class="mt-4 list-decimal list-inside space-y-2">
+                <li>病院公式サイトの表層情報を確認。</li>
+                <li>「内部情報検索端末」を使用し、秘匿された通信記録や論文を解析。<br>
+                    <span class="text-sm opacity-70">※内部情報検索端末へのアクセスは、調査対象サイトの検索欄と連携済。</span>
+                </li>
+                <li>違和感の核となる事象を特定せよ。</li>
+            </ol>
+
+            <h2 class="section-title">具体的な調査手順</h2>
+            <div class="method-box text-sm">
+                <ul class="list-disc list-inside space-y-2">
+                    <li>サイト内のテキストから、不自然な用語や違和感のある言葉を抽出せよ。</li>
+                    <li>抽出した言葉を病院サイトの<strong>「検索欄」</strong>に入力し、内部記録を呼び出せ。</li>
+                    <li>得られた検索結果から断片的な情報を集め、隠蔽された真相を特定せよ。</li>
+                </ul>
+            </div>
+
+            <a href="hospital/index.html" class="btn-action">調査を開始する（病院サイトへ）</a>
+        </div>
+
+        <footer class="footer-note">
+            <div>白米探偵事務所 代表 </div>
+            <div class="mt-4">
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・技術とは一切関係ありません。
+            </div>
+        </footer>
+    </article>
+
 </body>
 </html>
