@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>センター長挨拶｜不和睡眠総合技術センター</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    /* 1. 共通カラー定義 */
+    :root {
+      --kanae-gold: #d4af37;
+      --laboratory-green: #004d40;
+      --accent-green: #2e7d32;
+      --text-main: #334155;
+    }
+
+    /* 2. ヘッダースタイル */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+    .main-nav a.highlight {
+      color: var(--accent-green);
+      text-decoration: none;
+    }
+
+    /* 3. ヒーローバナー */
+    .hero-banner {
+      background-color: var(--laboratory-green);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* 4. レイアウト構造 */
+    .page-main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.8;
+    }
+    .director-profile {
+      display: flex;
+      gap: 32px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .director-photo {
+      width: 220px;
+      height: 280px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 12px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .director-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    .director-info h2 {
+      margin-top: 0;
+      font-size: 20px;
+      border-left: 6px solid var(--accent-green);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      color: var(--laboratory-green);
+    }
+    .director-info p {
+      margin-bottom: 1.5em;
+      color: #334155;
+    }
+
+    /* 5. 検索窓の設定 */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+      <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
+        <div class="logo-mark" style="width: 40px; height: 40px; background: radial-gradient(circle at 30% 30%, #81c784, var(--laboratory-green)); border-radius: 4px;"></div>
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--laboratory-green);">不和睡眠総合技術センター</div>
+          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Fuwa Sleep Technology Center</div>
+        </div>
+      </div>
+
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="director.html">センター長挨拶</a></li>
+            <li><a href="technology.html">技術紹介</a></li>
+            <li><a href="access.html">アクセス</a></li>
+          </ul>
+        </nav>
+
+        <form id="lab-search-form" class="header-search-form" onsubmit="return false;">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力">
+          <button type="button" id="search-submit" class="search-btn">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>センター長挨拶</h1>
+  </div>
+</section>
+
+<main class="page-main">
+  <div class="director-profile">
+    <div class="director-photo">
+      センター長近影<br>（記録抹消済）
+    </div>
+
+    <div class="director-info">
+      <h2>センター長　不和（ふわ）</h2>
+      <p>
+        不和睡眠総合技術センターの公式ウェブサイトへようこそ。
+        当センターは、1970年代より続く「意識と睡眠の関係」に関する研究を発端とし、現在では国内屈指の脳波解析・環境制御技術を有する研究機関へと成長いたしました。
+      </p>
+      <p>
+        私たちが追求しているのは、単なる休息としての睡眠ではありません。
+        それは、肉体の束縛を離れ、意識がより安らげる時間プロセスとしての睡眠です。
+        最新の低周波数制御技術は、人類がかつて到達し得なかった精神の静寂を可能にします。
+      </p>
+      <p>
+        金枝聖域第八病院をはじめとする各提携機関と共に、私たちはこれからも「不変の意識」の解明に全力を尽くします。
+        当センターの技術が、皆様の新たな目覚めの助けとなることを願っております。
+      </p>
+      <p>
+        探求に終わりはなく、諦めずに邁進してまいります。
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer class="text-center">
+  <div class="container">
+    <div style="font-size: 14px; color: var(--laboratory-green); font-weight: bold; margin-bottom: 10px;">
+      不和睡眠総合技術センター
+    </div>
+    <div style="font-size: 11px; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 不和睡眠総合技術センター<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の団体・研究・技術とは一切関係ありません。
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // 1. 現在ページのハイライト
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+
+    // 2. 検索実行ロジック
+    const searchInput = document.getElementById('q');
+    const searchBtn = document.getElementById('search-submit');
+
+    const doSearch = () => {
+      const val = searchInput.value.trim();
+      if (val) {
+        // laboratoryフォルダから見て上位のsearch.htmlへ遷移
+        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
+      }
+    };
+
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+    searchBtn.addEventListener('click', doSearch);
+  })();
+</script>
+</body>
+</html>
