@@ -64,6 +64,7 @@
             outline: none;
             margin-top: 1.5rem;
             transition: all 0.3s;
+            text-transform: uppercase;
         }
 
         .pass-input:focus {
@@ -118,7 +119,8 @@
         <p class="text-xs text-gray-500 uppercase">Highly Classified Archive Access</p>
         
         <div id="form-container">
-            <input type="password" id="passcode" class="pass-input" placeholder="PASSCODE REQUIRED" autofocus>
+            <!-- 変更点：type="password" から type="text" へ変更 -->
+            <input type="text" id="passcode" class="pass-input" placeholder="ACCESS KEYWORD REQUIRED" autofocus autocomplete="off">
             <button onclick="checkAuth()" class="btn-auth">Verify Identity</button>
         </div>
 
@@ -128,7 +130,7 @@
 
     <script>
         function checkAuth() {
-            const input = document.getElementById('passcode').value;
+            const input = document.getElementById('passcode').value.trim();
             const message = document.getElementById('message');
             const loader = document.getElementById('loader');
 
@@ -137,7 +139,6 @@
                 message.innerText = "> ACCESS GRANTED. PREPARING DECRYPTION...";
                 loader.style.width = "100%";
                 
-                // 1.5秒後に真の資料へリダイレクト
                 setTimeout(() => {
                     window.location.href = "layer8_top_secret.html";
                 }, 1500);
@@ -146,7 +147,6 @@
                 message.innerText = "> INVALID KEYWORD. INCIDENT LOGGED.";
                 document.getElementById('passcode').value = "";
                 
-                // 画面を赤くフラッシュさせる演出
                 document.body.style.backgroundColor = "#2a0000";
                 setTimeout(() => {
                     document.body.style.backgroundColor = "#050505";
@@ -154,7 +154,6 @@
             }
         }
 
-        // Enterキー対応
         document.getElementById('passcode').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') checkAuth();
         });
