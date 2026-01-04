@@ -131,7 +131,7 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // 検索処理を関数として独立（これがないと自動実行が不安定になる）
+        // 検索処理を関数として独立
         async function performSearch(keyword) {
             if (!keyword) return;
 
@@ -152,7 +152,7 @@
             } catch (error) {
                 renderError();
             }
-            searchBox.value = '';
+            // 検索後にキーワードを消去するコードを削除しました
         }
 
         function renderResults(item) {
@@ -189,7 +189,7 @@
             const params = new URLSearchParams(window.location.search);
             const query = params.get('q');
             if (query) {
-                searchBox.value = query;
+                searchBox.value = query; // URLから渡されたキーワードを入力欄に表示
                 performSearch(query);
             }
         })();
