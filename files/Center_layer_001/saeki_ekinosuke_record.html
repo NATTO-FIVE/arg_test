@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATIENT_RECORD | SAEKI_EKINOSUKE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .sys-header {
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        .content-body {
+            padding: 2.5rem 3rem;
+        }
+
+        .resume-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .resume-table th, .resume-table td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .resume-table th {
+            background: #111;
+            color: #00ff41;
+            width: 140px;
+            font-weight: bold;
+        }
+
+        .meta-box {
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px dashed #00ff41;
+            padding: 1rem;
+            margin: 2rem 0;
+            font-size: 0.85rem;
+        }
+
+        .status-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #b91c1c;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            font-size: 0.7rem;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        h1.doc-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            border-bottom: 2px solid #00ff41;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-area {
+            width: 120px;
+            height: 150px;
+            border: 1px solid #333;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div><a href="../../search.html" class="btn-return">← RETURN</a> | SECURE_DATABASE</div>
+            <div>REF_NO: SAEKI-1900-DS187-SUB</div>
+        </div>
+
+        <div class="content-body">
+            <div class="status-tag">PERMANENT_VEGETATIVE_STATE</div>
+            <br>
+            <h1 class="doc-title">患者履歴書 / 調査票</h1>
+
+            <div class="flex justify-between items-start mb-6">
+                <table class="resume-table mt-0" style="flex: 1; margin-right: 20px;">
+                    <tr>
+                        <th>氏名</th>
+                        <td class="text-lg font-bold">佐伯 亦乃介（さえき えきのすけ）</td>
+                    </tr>
+                    <tr>
+                        <th>生年月日</th>
+                        <td>1900年（明治33年）4月12日（90歳 / 1990年時点）</td>
+                    </tr>
+                    <tr>
+                        <th>性別</th>
+                        <td>男性</td>
+                    </tr>
+                </table>
+                <div class="photo-area">
+                    NO_IMAGE<br>(1978事象により喪失)
+                </div>
+            </div>
+
+            <table class="resume-table">
+                <tr>
+                    <th>出身地</th>
+                    <td>透明町 翠波地区（旧 翠波村）</td>
+                </tr>
+                <tr>
+                    <th>家族構成</th>
+                    <td>長男：佐伯 譲（1990年死亡） / その他親族不明</td>
+                </tr>
+                <tr>
+                    <th>経歴・背景</th>
+                    <td>
+                        地元翠波地区にて長年農業に従事。地域の伝承や祭事、特に「眠り」にまつわる古い風習に造詣が深かった。1970年代後半、不和臨界氏の勧誘により翠波総合病院（現 第八病院）の睡眠同期実験にボランティアとして参加。
+                    </td>
+                </tr>
+                <tr>
+                    <th>現況報告</th>
+                    <td>
+                        1970年代の「DS-187事象」における異常生存者。事象発生直後より、外部刺激に対する一切の反応を消失（昏睡状態）。呼吸・循環器系は自律維持されているものの、高次脳機能の活動は観測されず、植物人間状態として長期療養中。
+                    </td>
+                </tr>
+            </table>
+
+            <div class="meta-box font-mono">
+                <p class="text-green-400 font-bold mb-2">【特記事項：プロジェクトE 判定】</p>
+                <p>・被検体DS-187との位相同期係数：ERROR (計測不能)</p>
+                <p>・<strong>永位計画における位相整合性あり</strong></p>
+                <p class="mt-2 text-gray-500 italic">
+                    ※DS-187の「登攀」に伴うエネルギー遷移の直接的影響を受けたと推測される。意識の帰還は絶望的だが、その肉体は計画における重要なリファレンスとして維持。
+                </p>
+            </div>
+
+            <footer class="mt-12 pt-4 border-t border-gray-800 text-[10px] text-gray-600 flex justify-between uppercase font-mono">
+                <div>Archive Dept: Kinshi Sanctuary 8th Hospital</div>
+                <div>Last Updated: 1990.05.22</div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
