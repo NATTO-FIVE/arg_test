@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内部情報検索端末</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        body {
+            background-color: #080808;
+            color: #00ff41;
+            font-family: 'JetBrains+Mono', 'Noto Sans JP', monospace;
+            margin: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #00ff41;
+            outline: none;
+            color: #00ff41;
+            width: 100%;
+            padding: 12px 0;
+            font-size: 1.5rem;
+        }
+
+        .result-card {
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            background: rgba(0, 255, 65, 0.02);
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .result-card:hover {
+            background: rgba(0, 255, 65, 0.08);
+            border-color: #00ff41;
+            cursor: pointer;
+        }
+
+        .btn-access {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-access:hover {
+            background: #00ff41;
+            color: #000;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="crt-overlay"></div>
+
+    <main class="max-w-4xl mx-auto relative z-10">
+        <header class="mb-12 border-b border-green-900 pb-4">
+            <h1 class="text-2xl font-bold tracking-tighter uppercase">Terminal Access Layer</h1>
+            <p class="text-xs opacity-50">SECRET KEYWORD REQUIRED</p>
+        </header>
+
+        <section class="mb-16">
+            <div class="flex items-center gap-4">
+                <span class="text-2xl">&gt;</span>
+                <input type="text" id="search-box" class="search-input" placeholder="アクセスキーワードを入力..." autofocus autocomplete="off">
+            </div>
+        </section>
+
+        <div id="results-area" class="space-y-8 pb-32">
+            <div id="status-text" class="text-center py-20 opacity-30 italic">
+                -- 照合キーワードを入力してください --
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const searchBox = document.getElementById('search-box');
+        const resultsArea = document.getElementById('results-area');
+
+        // UTF-8対応のBase64デコード
+        function safeDecode(str) {
+            if (!str) return "";
+            try {
+                return decodeURIComponent(escape(atob(str)));
+            } catch (e) {
+                // Base64でなければそのまま、あるいはURIデコードを試みる
+                try { return decodeURIComponent(str); } catch(err) { return str; }
+            }
+        }
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // 検索実行
+        async function performSearch(keyword) {
+            if (!keyword) return;
+
+            const hash = await sha256(keyword);
+            resultsArea.innerHTML = `<div class="text-center py-20 opacity-50 animate-pulse uppercase tracking-widest">Searching Database...</div>`;
+            
+            try {
+                const response = await fetch(`./data/vault/${hash}.json?t=${Date.now()}`);
+                if (response.ok) {
+                    const rawData = await response.json();
+                    
+                    // 配列でも単一オブジェクトでも配列として扱う
+                    const items = Array.isArray(rawData) ? rawData : [rawData];
+                    
+                    const processedItems = items.map(d => ({
+                        title: safeDecode(d.title || d.TITLE || "名称未設定の記録"),
+                        description: safeDecode(d.description || d.snippet || d.DESCRIPTION || ""),
+                        url: safeDecode(d.url || d.file || d.URL || null)
+                    }));
+                    
+                    renderResults(processedItems);
+                } else {
+                    renderError();
+                }
+            } catch (error) {
+                renderError();
+            }
+        }
+
+        function renderResults(items) {
+            if (items.length === 0) {
+                renderError();
+                return;
+            }
+
+            resultsArea.innerHTML = items.map(item => `
+                <div class="result-card rounded shadow-lg" onclick="window.open('${item.url}', '_blank')">
+                    <div class="text-[10px] opacity-60 mb-2 font-mono uppercase">>> Access Granted: Record Decoupled</div>
+                    <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
+                    <p class="text-sm mt-2 opacity-90 text-green-100 mb-4">${item.description}</p>
+                    <a href="${item.url}" target="_blank" class="btn-access" onclick="event.stopPropagation();">報告書を閲覧する</a>
+                </div>
+            `).join('');
+        }
+
+        function renderError() {
+            resultsArea.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">Access Denied: Invalid Keyword or Hash Mismatch</div>`;
+        }
+
+        // IME入力中のEnterキーで検索が走らないように制御
+        let isComposing = false;
+        searchBox.addEventListener('compositionstart', () => isComposing = true);
+        searchBox.addEventListener('compositionend', () => isComposing = false);
+
+        searchBox.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !isComposing) {
+                performSearch(searchBox.value.trim());
+            }
+        });
+
+        // 起動時処理（URLパラメータ対応）
+        (function init() {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('q');
+            if (query) {
+                const decodedQuery = decodeURIComponent(query);
+                searchBox.value = decodedQuery;
+                performSearch(decodedQuery);
+            }
+        })();
+
+        document.addEventListener('click', () => searchBox.focus());
+    </script>
+</body>
+</html>
