@@ -104,6 +104,7 @@
           </ul>
         </nav>
 
+        <!-- action を ../search.html に指定し、GETメソッドで遷移 -->
         <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
@@ -167,6 +168,7 @@
     const searchInput = document.getElementById('q');
     const searchForm = document.getElementById('hospital-search-form');
 
+    // フォーム送信時に空文字チェックのみ行う
     searchForm.addEventListener('submit', (e) => {
       if (!searchInput.value.trim()) {
         e.preventDefault();
