@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNAL_ARCHIVE | OSI_LAYER8_STUDY_1976</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        .thesis-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .thesis-section h2 {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .thesis-text {
+            font-size: 0.95rem;
+            text-align: justify;
+            color: #ccc;
+        }
+
+        .graph-container {
+            border: 1px solid #333;
+            background: #000;
+            margin: 2rem 0;
+            padding: 1rem;
+            position: relative;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .graph-placeholder {
+            color: #444;
+            font-size: 0.8rem;
+            text-align: center;
+            border: 1px dashed #222;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .graph-label {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 0.6rem;
+            color: #00ff41;
+            font-family: 'JetBrains Mono';
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00ff41;
+            animation: blink 1.2s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .footer-disclaimer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222;
+            font-size: 0.7rem;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN</a>
+                <span class="flex items-center">
+                    <span class="status-dot"></span>
+                    <span class="font-bold tracking-widest uppercase">Research_Note: OSI_L8_PRE</span>
+                </span>
+            </div>
+            <div class="hidden md:block">UID: SETA-76-L8-PRELIM</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-10">
+                <h1 class="text-2xl font-bold text-white mb-2 leading-tight">
+                    非公開論文：OSI第８階層における無意識通信の可能性検討
+                </h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Status: UNPUBLISHED_DRAFT / 1976_INTERNAL_ONLY
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">著者:</span>
+                    <span>瀬田 門十、百目島 ミキ</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">日付:</span>
+                    <span>1976年11月02日</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">所属:</span>
+                    <span>国立特殊通信総合研究センター 特殊通信第三チーム</span>
+                </div>
+            </div>
+
+            <article class="thesis-text">
+                <div class="thesis-section">
+                    <h2>1. 要約</h2>
+                    <p>
+                        本研究は、情報の物理的伝送プロトコルを定義するOSI参照モデルに対し、その上位に位置する「第８階層：意識層」の工学的存在可能性を検討する。
+                      被検体間における睡眠時の脳波共鳴と、それに付随して観測される「発話情報の共通化（睡眠同期）」を、従来の心理学的事象ではなく、
+                      上位レイヤー間でのデータ交換プロトコルの漏洩として捉え直す試みである。
+                    </p>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>2. 先行研究と背景</h2>
+                    <p>
+                        睡眠導入時における複数個体間の脳波同調（Brainwave Synchronization）については、既にいくつかの先行研究によって報告されている。
+                      デルタ波およびシータ波の位相が近接する個体間において、心拍や発汗などの自律神経反応が同期する現象は、生物学的な共鳴として広く知られている。
+                    </p>
+                    <p class="mt-4">
+                        しかし、これまでの研究はあくまで「生体反応の一致」を観測するに留まり、そこに「情報」の介在を見出す視点は欠落していた。
+                      我々は、この共鳴状態が単なる生体現象ではなく、OSI第7層（アプリケーション層）よりも高次な、純粋意識間プロトコルへのアクセスゲートであると仮定する。
+                    </p>
+                </div>
+
+                <!-- 脳波グラフ領域 -->
+                <div class="graph-container">
+                    <div class="graph-placeholder">
+                        <p>[ 脳波振動グラフ：睡眠時位相同期データのプロット ]</p>
+                        <p class="mt-2 text-[10px] opacity-40">SOURCE: ANALOG_LOG_76-A (PRE-ACCIDENT_DATA)</p>
+                    </div>
+                    <div class="graph-label">Fig.1: Phase Resonance Pattern (Historical Reference)</div>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>3. 実験概要</h2>
+                    <p>
+                        防音・防磁処理を施した個室に複数名の被検体を配置し、低周波誘導によるレム睡眠への導入を試行した。
+                      特筆すべき実験条件として、音声による相互干渉を完全に遮断した状態で、被検体それぞれの「不随意な発話（寝言）」の内容を録音・解析した。
+                    </p>
+                </div>
+
+                <div class="thesis-section">
+                    <h2>4. 結果と考察</h2>
+                    <p>
+                        実験の結果、脳波の位相が特定の周期で完全に一致した瞬間、隔離された被検体たちが同一の単語、
+                      あるいは特定の概念（不鮮明なため記述不可能）を同時に発する現象が確認された。
+                    </p>
+                    <p class="mt-4">
+                        これは物理的な音声伝達（第1層〜第7層の利用）を介さない、未知の<strong>第８階層</strong>における直接的な情報遷移が行われていると考えられた。
+                      寝言は情報の本体ではなく、第８階層でやり取りされる「意識のパケット」が、低次レイヤーである発声器官へ溢れ出した（リークした）残滓であると推察される。
+                    </p>
+                    <p class="mt-4 text-white">
+                        結論として、睡眠はもはや単なる休息ではなく、OSIモデルの完成系としての「第８階層通信」を実現するためのリソースと考えられる。
+                    </p>
+                </div>
+            </article>
+
+            <footer class="footer-disclaimer font-mono">
+                <div class="mb-2 uppercase">Signal_EOF: Pre_Accident_Thesis_L8</div>
+                <div class="text-[10px] opacity-70">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
