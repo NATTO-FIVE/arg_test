@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE_JUDGMENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap');
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Noto Serif JP', serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* 画像配置領域のコンテナ */
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* ここに画像を挿入してください。
+           imgタグを置く場合は、class="oshisama-image" を指定すると、
+           不気味なグリッチアニメーションが適用されます。
+        */
+        .oshisama-image-area {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            opacity: 0.4;
+            filter: contrast(1.5) brightness(0.8);
+            animation: glitch-img 6s infinite;
+        }
+
+        @keyframes glitch-img {
+            0% { transform: scale(1); opacity: 0.4; filter: contrast(1.5) brightness(0.8); }
+            1% { transform: translate(5px, -5px) scale(1.01); opacity: 0.6; filter: hue-rotate(90deg); }
+            2% { transform: translate(-5px, 5px) scale(1); opacity: 0.4; filter: contrast(1.5) brightness(0.8); }
+            45% { transform: scale(1); }
+            46% { transform: skewX(20deg); opacity: 0.8; }
+            47% { transform: skewX(0deg); opacity: 0.4; }
+        }
+
+        .judgment-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%);
+            padding: 4rem;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 4rem;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+        }
+
+        .option-btn {
+            font-size: 1.5rem;
+            color: #888;
+            text-decoration: none;
+            transition: all 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.2em;
+        }
+
+        .option-btn:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #fff;
+            transform: scale(1.1);
+        }
+
+        .option-no:hover {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="image-container">
+        <!-- 
+             【画像挿入エリア】
+             imgタグをここに挿入するか、このdivに背景画像を設定してください。
+             例： <img src="oshisama.png" class="oshisama-image-area" alt="御視様">
+        -->
+        <div id="oshisama-image-area" class="oshisama-image-area">
+            <!-- ユーザーが生成した画像をここに配置 -->
+        </div>
+    </div>
+
+    <div class="judgment-box">
+        <h1 class="question">あなたは御視様を信じますか？</h1>
+        
+        <div class="options">
+            <a href="ending_bad.html" class="option-btn">はい</a>
+            <a href="ending_good.html" class="option-btn option-no">いいえ</a>
+        </div>
+    </div>
+
+</body>
+</html>
