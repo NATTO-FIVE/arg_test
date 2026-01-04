@@ -2,14 +2,62 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>医師紹介｜金枝聖域第八病院</title>
+  <title>院長挨拶｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 共通基盤のデザイン調整 */
+    /* 1. テンプレート共通カラー定義 */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
     }
+
+    /* 2. ヘッダースタイル調整 */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
+    }
+
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 3. ヒーローバナー */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -17,56 +65,61 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    .page-content {
-      max-width: 900px;
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* 4. 院長挨拶ページ固有スタイル */
+    .page-main {
+      max-width: 880px;
       margin: 40px auto;
-      padding: 0 20px;
+      padding: 0 16px;
+      line-height: 1.8;
     }
-
-    /* 医師カードのデザイン */
-    .doctor-card {
+    .director-profile {
       display: flex;
-      gap: 30px;
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 30px;
+      gap: 32px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .director-photo {
+      width: 220px;
+      height: 280px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      margin-bottom: 30px;
-      align-items: flex-start;
-    }
-    @media (max-width: 600px) {
-      .doctor-card { flex-direction: column; align-items: center; text-align: center; }
-    }
-
-    /* 写真プレースホルダー */
-    .doctor-img {
-      width: 200px;
-      height: 250px;
-      background: #eee;
-      border: 1px solid #ccc;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #999;
-      flex-shrink: 0;
-      object-fit: cover;
+      color: #94a3b8;
+      font-size: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    .director-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    .director-info h2 {
+      margin-top: 0;
+      font-size: 20px;
+      border-left: 6px solid var(--kanae-gold);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      color: var(--sanctuary-blue);
+    }
+    .director-info p {
+      margin-bottom: 1.5em;
+      color: #334155;
     }
 
-    .doctor-info h2 {
-      margin-top: 0;
-      color: var(--sanctuary-blue);
-      border-bottom: 2px solid var(--kanae-gold);
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-    .specialty {
-      font-weight: bold;
-      color: var(--kanae-gold);
-      margin-bottom: 10px;
-    }
-    .profile-text {
-      font-size: 0.95em;
-      line-height: 1.7;
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid #e2e8f0;
     }
   </style>
 </head>
@@ -74,16 +127,16 @@
 
 <header class="site-header">
   <div class="container">
-    <div class="header-inner">
-      <div class="logo-area">
-        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+      <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
+        <div class="logo-mark" style="width: 40px; height: 40px; background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37); border-radius: 50%;"></div>
         <div class="logo-text-wrapper">
-          <div class="logo-text-main">金枝聖域第八病院</div>
-          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
+          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--sanctuary-blue);">金枝聖域第八病院</div>
+          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -93,81 +146,57 @@
           </ul>
         </nav>
 
-        <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
-          <button type="submit" class="search-btn">検索</button>
+        <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
+          <button type="button" id="search-submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
   </div>
 </header>
 
+<!-- ヒーローバナーの追加 -->
 <section class="hero-banner">
   <div class="container">
-    <h1>医師紹介</h1>
-    <p>専門的な知識と最新の解析技術を持つ、当院の医師陣をご紹介します。</p>
+    <h1>院長挨拶</h1>
   </div>
 </section>
 
-<main class="page-content">
-
-  <div class="doctor-card">
-    <div class="doctor-img">
-      <span>PHOTO: 神代 永久</span>
+<main class="page-main">
+  <div class="director-profile">
+    <div class="director-photo">
+      院長近影<br>（準備中）
     </div>
-    <div class="doctor-info">
-      <div class="specialty">特殊睡眠外来科 主任医</div>
-      <h2>神代 永久（かみしろ とわ）</h2>
-      <p class="profile-text">
-        睡眠構造に関する研究の第一人者。金枝聖域第八病院の設立時より、臨床試験の統括を務める。
-        患者様個々の「脳波の癖」を特定し、最適な入眠深度を設計する技術に長けている。
-        <br><br>
-        「睡眠は単なる休息ではなく、生活の一部です。皆様の夜がより深い安らぎに満ちるよう尽力いたします。」
+
+    <div class="director-info">
+      <h2>院長　百目島 ミキ（どめしま みき）</h2>
+      <p>
+        金枝聖域第八病院のホームページをご覧いただき、誠にありがとうございます。
+        当院は最先端の精神医学と睡眠科学を融合させ、現代社会が抱える複雑な心身の課題に応えるべく、独自のケア体制を構築してまいりました。
+      </p>
+      <p>
+        私たちが最も大切にしているのは、目に見える症状の改善だけではなく、患者様の内側にある「意識の安らぎ」です。
+        不和睡眠総合技術センターとの密接な連携により提供される次世代の脳機能アプローチは、単なる治療を超え、皆様のウェルビーイングの新たな地平を拓くものであると自負しております。
+      </p>
+      <p>
+        「永遠の眠り」と表現されるような、深く、淀みのない休息こそが、人間の生命力を最大化する鍵となります。
+        当院スタッフ一同、皆様の意識の登攀を全力でサポートし、安心して未来を託していただける病院づくりに努めてまいります。
+      </p>
+      <p>
+        どうぞよろしくお願い申し上げます。
       </p>
     </div>
   </div>
-
-  <div class="doctor-card">
-    <div class="doctor-img">
-      <span>PHOTO: 虚空蔵 零</span>
-    </div>
-    <div class="doctor-info">
-      <div class="specialty">特殊睡眠外来科 / 精神科</div>
-      <h2>虚空蔵 零（こくぞう れい）</h2>
-      <p class="profile-text">
-        深層心理と神経生理学の境界領域を専門とする。
-        「睡眠領域」における認知変容プログラムの開発に携わり、原因不明の意識混濁や入眠時障害のケアを担当する。
-        <br><br>
-        「境界線に立つ皆様の不安に寄り添い、確かな睡眠へと導くことが私の使命です。」
-      </p>
-    </div>
-  </div>
-
-  <div class="doctor-card">
-    <div class="doctor-img">
-      <span>PHOTO: 銀河 軌道</span>
-    </div>
-    <div class="doctor-info">
-      <div class="specialty">脳神経外科 部長</div>
-      <h2>銀河 軌道（ぎんが きどう）</h2>
-      <p class="profile-text">
-        脳機能の物理的なネットワーク解析を専門とする。
-        難治性の症例においては、不和睡眠総合技術センターへのスムーズに連携し外科的アプローチとデータ解析を行う。
-        <br><br>
-        「脳という回路を整え、正しい神経伝達へと回帰させる。それが我々の提供する医療の本質です。」
-      </p>
-    </div>
-  </div>
-
 </main>
 
-<footer>
+<footer class="text-center">
   <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-      </div>
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
     </div>
   </div>
 </footer>
@@ -177,6 +206,19 @@
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
+
+    const searchInput = document.getElementById('q');
+    const searchBtn = document.getElementById('search-submit');
+
+    const doSearch = () => {
+      const val = searchInput.value.trim();
+      if (val) {
+        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
+      }
+    };
+
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+    searchBtn.addEventListener('click', doSearch);
   })();
 </script>
 </body>
