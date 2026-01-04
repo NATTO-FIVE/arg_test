@@ -20,10 +20,10 @@
       border-bottom: 5px solid var(--kanae-gold);
     }
 
-    /* 3. 【ここが原因】ナビゲーションのスタイルを他ページと完全同期 */
+    /* 3. ナビゲーションのスタイルを他ページと同期 */
     .main-nav ul {
       display: flex;
-      gap: 12px;           /* 他ページと同じ数値 */
+      gap: 12px;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -33,7 +33,11 @@
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
-      color: var(--text);  /* style.cssの変数を使用 */
+      color: var(--text);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
     }
 
     /* 4. レイアウト構造 */
@@ -53,12 +57,26 @@
       border-radius: 8px;
     }
 
-    /* 5. 検索窓の干渉を防ぐための最小限の設定 */
+    /* 5. 検索窓の設定 */
     .header-search-form {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 1; /* 検索窓が縮むことでメニューを押し出さないようにする */
+      flex-shrink: 1;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -85,6 +103,7 @@
           </ul>
         </nav>
 
+        <!-- 検索フォーム: search.html に GET パラメータ q を送る -->
         <form class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
           <button type="submit" class="search-btn">検索</button>
@@ -154,9 +173,24 @@
 
 <script>
   (function () {
+    // 現在のページのハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
+
+    // --- 検索機能の強化 ---
+    const searchInput = document.getElementById('q');
+    const searchForm = document.querySelector('.header-search-form');
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        // デフォルトのフォーム送信挙動（GETリクエスト）を利用
+        // これにより ../search.html?q=キーワード というURLへ遷移する
+        if (!searchInput.value.trim()) {
+          e.preventDefault();
+        }
+      }
+    });
   })();
 </script>
 </body>
