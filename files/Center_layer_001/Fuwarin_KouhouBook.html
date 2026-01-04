@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>透明町のひと | 不和臨界氏インタビュー</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+        body {
+            background-color: #1a1a1a; /* 机の上のイメージ */
+            font-family: 'Noto Serif JP', serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* 雑誌の紙質再現 */
+        .paper-clipping {
+            background: #fdfdfb;
+            background-image: 
+                radial-gradient(#e5e5e5 1px, transparent 1px),
+                linear-gradient(rgba(240, 235, 220, 0.2) 2px, transparent 2px);
+            background-size: 20px 20px, 100% 3px;
+            color: #2c2c2c;
+            max-width: 800px;
+            padding: 60px 50px;
+            box-shadow: 
+                10px 10px 20px rgba(0,0,0,0.5),
+                -1px -1px 2px rgba(255,255,255,0.1);
+            position: relative;
+            transform: rotate(-0.5deg); /* 少し傾けてリアリティを出す */
+            border: 1px solid #ddd;
+        }
+
+        /* 古紙の汚れ・質感を出すオーバーレイ */
+        .paper-clipping::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/paper.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* 縁のギザギザ（切り抜き感） */
+        .clipping-edge {
+            position: absolute;
+            top: -5px; left: 0; width: 100%; height: 10px;
+            background: radial-gradient(circle, transparent, transparent 50%, #1a1a1a 50%, #1a1a1a) 0 0 / 15px 15px;
+        }
+
+        .magazine-header {
+            border-bottom: 3px double #333;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 5px;
+        }
+
+        .magazine-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #c00;
+        }
+
+        .issue-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .headline {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-left: 8px solid #c00;
+            padding-left: 20px;
+        }
+
+        .column-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .column-container { grid-template-columns: 1fr; }
+        }
+
+        .dropcap {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 1;
+            padding-right: 8px;
+            color: #c00;
+            font-weight: bold;
+        }
+
+        .interview-text {
+            line-height: 1.9;
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+
+        .photo-box {
+            background: #eee;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.3) contrast(1.1);
+        }
+
+        .caption {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #333;
+            color: #00ff41;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid #00ff41;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../search.html" class="btn-return">← BACK_TO_TERMINAL</a>
+
+    <article class="paper-clipping">
+        <div class="clipping-edge"></div>
+        
+        <header class="magazine-header">
+            <span class="magazine-title">透明町のひと ― 地域を創る顔</span>
+            <span class="issue-date">2023年 秋号（No.142）</span>
+        </header>
+
+        <section>
+            <h1 class="headline">「眠り」が繋ぐ新しいコミュニティの形</h1>
+            
+            <div class="column-container">
+                <div class="interview-text">
+                    <div class="photo-box">
+                        <!-- 写真を挿入する場合はここ -->
+                        [不和臨界氏の近影：研究室にて]
+                    </div>
+                    <p class="caption">不和睡眠総合技術センター 設立メンバー・不和臨界氏</p>
+
+                    <p><span class="dropcap">不</span>和氏は、透明町の静かな環境を高く評価している。「この町には独特の波長がある」と彼は語る。かつて翠波総合病院で精神医学の研鑽を積んだ彼が、なぜこの地に研究センターの礎を築いたのか。</p>
+                    
+                    <p class="mt-4">「私たちが目指しているのは、単なる睡眠の質の向上ではありません。眠りという、全人類が共有する無意識の時間を同期させることで、個の境界を溶かす。それが、これからの社会における新しい『共生』の形だと信じているのです」</p>
+                </div>
+
+                <div class="interview-text">
+                    <h2 class="font-bold text-lg mb-2" style="color: #c00;">■技術と伝統の融合</h2>
+                    <p>当センターの核となる6.2Hz帯の脳波同期技術。不和氏はこれを「太古の祈りに似たもの」と表現する。</p>
+                    
+                    <p class="mt-4">「かつてこの地域の集落では、特定の夜に皆で一箇所に集まり、静かに眠るという風習がありました。私たちはそれを最新の科学で再現しているに過ぎません。テクノロジーは、私たちが忘れてしまった自然な繋がりを取り戻すためのツールなのです」</p>
+
+                    <p class="mt-4">インタビューの最後、不和氏は意味深な言葉を残した。「もうすぐ、皆が同じ夢を見る日が来るでしょう。その時、透明町は本当の意味で一つになるのです」</p>
+
+                    <div class="mt-12 pt-4 border-t border-dotted border-gray-400 text-xs text-gray-500 italic">
+                        聞き手：透明町広報課・佐伯 / 撮影：同・神代
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+</body>
+</html>
