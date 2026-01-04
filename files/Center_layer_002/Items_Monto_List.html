@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETED_ARCHIVE | SEIZED_ITEMS_1979</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body {
+            padding: 3rem 4rem;
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.2rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        .log-table {
+            width: 100%;
+            font-size: 0.85rem;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(0,0,0,0.3);
+        }
+        .log-table th {
+            text-align: left;
+            border-bottom: 1px solid #333;
+            color: #00ff41;
+            padding: 0.75rem;
+            text-transform: uppercase;
+        }
+        .log-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #1a1a1a;
+            vertical-align: top;
+        }
+
+        .highlight-item {
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* 点滅するステータスドット */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00ff41;
+            animation: blink 1.2s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; filter: brightness(1.2); }
+            50% { opacity: 0.3; filter: brightness(0.8); }
+        }
+
+        .footer-disclaimer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222;
+            font-size: 0.7rem;
+            color: #c00;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span class="flex items-center">
+                    <span class="status-dot"></span>
+                    <span class="font-bold tracking-widest">ARCHIVE_FILE: DELETED/RESTORED</span>
+                </span>
+            </div>
+            <div class="hidden md:block">REF_NO: 1979-SETA-E-LIST</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="text-2xl font-bold text-white mb-2">抹消済アーカイブ：1979年資料（押収品リスト）</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Origin: National Special Communication Research Center (CLOSED 1978)
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">調査件名:</span>
+                    <span>瀬田門十個人研究室における証拠品押収</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">執行日:</span>
+                    <span>1979年1月20日</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">執行機関:</span>
+                    <span>国務省情報管理局 特殊事案調査課</span>
+                </div>
+            </div>
+
+            <article class="text-gray-300">
+                <p class="mb-4 text-sm">
+                    1978年7月の地下実験区画における爆発事象（DS-187事象）を受け、同センター主任研究員・瀬田門十の個人室より以下の品目を押収し、国立公文書館別館へ移送・抹消処理を行った。
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="log-table font-mono">
+                        <thead>
+                            <tr>
+                                <th>管理番号</th>
+                                <th>品目名</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A-01</td>
+                                <td>研究日誌（計12冊）</td>
+                                <td>1968年～1978年。最終巻に「登攀」に関する記述多数。</td>
+                            </tr>
+                            <tr>
+                                <td>A-02</td>
+                                <td class="highlight-item">論文草稿第４版</td>
+                                <td>仮題「共鳴磁場による位相同期と高次階層への意識遷移」。一部に血痕あり。</td>
+                            </tr>
+                            <tr>
+                                <td>B-05</td>
+                                <td>磁気テープ（1/2インチ）</td>
+                                <td>DS-187事象発生時の脳波記録と推測。データ破損大。</td>
+                            </tr>
+                            <tr>
+                                <td>C-12</td>
+                                <td>脳波測定用ヘッドギア一式</td>
+                                <td>針状電極を多数備えたプロトタイプ。未洗浄。</td>
+                            </tr>
+                            <tr>
+                                <td>D-03</td>
+                                <td>書籍『睡眠とオカルティズム』</td>
+                                <td>ドイツ語原書。余白に瀬田による書き込みあり。</td>
+                            </tr>
+                            <tr>
+                                <td>D-04</td>
+                                <td>書籍『電気工学概論（1952年刊）』</td>
+                                <td>瀬田の学生時代の私物。</td>
+                            </tr>
+                            <tr>
+                                <td>E-01</td>
+                                <td>アナログ・オシロスコープ</td>
+                                <td>岩崎通信機製。目盛りに手書きのマーキング。</td>
+                            </tr>
+                            <tr>
+                                <td>F-09</td>
+                                <td>パンチカード（1箱）</td>
+                                <td>位相同期シミュレーション用計算データ。</td>
+                            </tr>
+                            <tr>
+                                <td>G-22</td>
+                                <td>カセットテープ「6.2Hz 正弦波」</td>
+                                <td>音響刺激用。ラベルに「門十・私用」と記載。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 p-4 border border-dashed border-red-900 bg-red-900/10 text-xs">
+                    <p class="font-bold text-red-500 mb-2">⚠ 内部監査注記：</p>
+                    リスト中「A-02（論文草稿第４版）」については、移送中に一部のページが紛失している。また、瀬田門十本人の身柄は1979年2月をもって当課の監視下を離れ、宗教法人格取得に向けた準備に入ったとの未確認情報がある。
+                </div>
+            </article>
+
+            <footer class="footer-disclaimer">
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
