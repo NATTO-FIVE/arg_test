@@ -11,7 +11,7 @@
         body {
             background-color: #080808;
             color: #00ff41;
-            font-family: 'JetBrains+Mono', 'Noto Sans JP', monospace;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
             margin: 0;
             min-height: 100vh;
             overflow-y: auto;
@@ -25,6 +25,22 @@
             background-size: 100% 3px, 3px 100%;
             pointer-events: none;
             z-index: 100;
+        }
+
+        /* 戻るボタンのスタイル */
+        .btn-top {
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+            transition: all 0.2s;
+            position: relative;
+            z-index: 110;
+            text-decoration: none;
+        }
+        .btn-top:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
         }
 
         .search-input {
@@ -45,7 +61,6 @@
             transition: all 0.2s;
             position: relative;
         }
-
         .result-card:hover {
             background: rgba(0, 255, 65, 0.08);
             border-color: #00ff41;
@@ -64,7 +79,6 @@
             position: relative;
             z-index: 10;
         }
-
         .btn-access:hover {
             background: #00ff41;
             color: #000;
@@ -73,6 +87,13 @@
 </head>
 <body class="p-4">
     <div class="crt-overlay"></div>
+
+    <!-- 探偵事務所（index.html）に戻るナビゲーションを追加 -->
+    <nav class="max-w-4xl mx-auto mb-10 mt-4 relative z-10">
+        <a href="./index.html" class="btn-top px-4 py-2 rounded text-sm font-bold inline-block">
+            ← 探偵事務所サイトへ戻る
+        </a>
+    </nav>
 
     <main class="max-w-4xl mx-auto relative z-10">
         <header class="mb-12 border-b border-green-900 pb-4">
@@ -98,13 +119,11 @@
         const searchBox = document.getElementById('search-box');
         const resultsArea = document.getElementById('results-area');
 
-        // UTF-8対応のBase64デコード
         function safeDecode(str) {
             if (!str) return "";
             try {
                 return decodeURIComponent(escape(atob(str)));
             } catch (e) {
-                // Base64でなければそのまま、あるいはURIデコードを試みる
                 try { return decodeURIComponent(str); } catch(err) { return str; }
             }
         }
@@ -116,19 +135,19 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // 検索実行
         async function performSearch(keyword) {
             if (!keyword) return;
+            searchBox.value = keyword;
 
             const hash = await sha256(keyword);
             resultsArea.innerHTML = `<div class="text-center py-20 opacity-50 animate-pulse uppercase tracking-widest">Searching Database...</div>`;
-            
+
             try {
                 const response = await fetch(`./data/vault/${hash}.json?t=${Date.now()}`);
                 if (response.ok) {
                     const rawData = await response.json();
                     
-                    // 配列でも単一オブジェクトでも配列として扱う
+                    // 配列でも単一オブジェクトでも柔軟に対応（マルチヒット対応）
                     const items = Array.isArray(rawData) ? rawData : [rawData];
                     
                     const processedItems = items.map(d => ({
@@ -166,7 +185,6 @@
             resultsArea.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">Access Denied: Invalid Keyword or Hash Mismatch</div>`;
         }
 
-        // IME入力中のEnterキーで検索が走らないように制御
         let isComposing = false;
         searchBox.addEventListener('compositionstart', () => isComposing = true);
         searchBox.addEventListener('compositionend', () => isComposing = false);
@@ -177,7 +195,6 @@
             }
         });
 
-        // 起動時処理（URLパラメータ対応）
         (function init() {
             const params = new URLSearchParams(window.location.search);
             const query = params.get('q');
