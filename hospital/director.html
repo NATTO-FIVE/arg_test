@@ -57,20 +57,26 @@
       font-weight: bold;
     }
 
-    /* 3. 院長挨拶ページ固有スタイル */
+    /* 3. ヒーローバナー */
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* 4. 院長挨拶ページ固有スタイル */
     .page-main {
       max-width: 880px;
       margin: 40px auto;
       padding: 0 16px;
       line-height: 1.8;
-    }
-    .page-title {
-      font-size: 24px;
-      font-weight: bold;
-      border-bottom: 2px solid var(--sanctuary-blue);
-      margin-bottom: 30px;
-      padding-bottom: 10px;
-      color: var(--sanctuary-blue);
     }
     .director-profile {
       display: flex;
@@ -122,7 +128,6 @@
 <header class="site-header">
   <div class="container">
     <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
-      <!-- ロゴ：最新の病院名に統一 -->
       <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
         <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div>
         <div class="logo-text-wrapper">
@@ -132,7 +137,6 @@
       </div>
 
       <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
-        <!-- ナビゲーション：テンプレートに合わせた4項目 -->
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -142,7 +146,6 @@
           </ul>
         </nav>
 
-        <!-- 検索フォーム：search.htmlとの連動仕様 -->
         <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
           <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="button" id="search-submit" class="search-btn">検索</button>
@@ -152,9 +155,14 @@
   </div>
 </header>
 
-<main class="page-main">
-  <h1 class="page-title">院長挨拶</h1>
+<!-- ヒーローバナーの追加 -->
+<section class="hero-banner">
+  <div class="container">
+    <h1>院長挨拶</h1>
+  </div>
+</section>
 
+<main class="page-main">
   <div class="director-profile">
     <div class="director-photo">
       院長近影<br>（準備中）
@@ -195,19 +203,16 @@
 
 <script>
   (function () {
-    // 1. 現在ページのハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
 
-    // 2. 検索実行ロジック（Canvasのテンプレート準拠）
     const searchInput = document.getElementById('q');
     const searchBtn = document.getElementById('search-submit');
 
     const doSearch = () => {
       const val = searchInput.value.trim();
       if (val) {
-        // search.htmlにパラメータを渡して遷移
         window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
       }
     };
