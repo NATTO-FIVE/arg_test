@@ -73,10 +73,7 @@
             transition: all 0.2s;
         }
 
-        .btn-access:hover {
-            background: #00ff41;
-            color: #000;
-        }
+        .btn-access:hover { background: #00ff41; color: #000; }
     </style>
 </head>
 <body class="p-4">
@@ -97,7 +94,7 @@
         <section class="mb-16">
             <div class="flex items-center gap-4">
                 <span class="text-2xl">&gt;</span>
-                <input type="text" id="search-box" class="search-input" placeholder="アクセスキーワードを入力..." autofocus>
+                <input type="text" id="search-box" class="search-input" placeholder="アクセスキーワードを入力..." autofocus autocomplete="off">
             </div>
         </section>
 
@@ -112,15 +109,12 @@
         const searchBox = document.getElementById('search-box');
         const resultsArea = document.getElementById('results-area');
 
-        // デコード関数（日本語対応のためのフォールバック込）
         function safeDecode(str) {
             if (!str) return "";
             try {
-                // Base64デコード（日本語対応）
                 return decodeURIComponent(escape(atob(str)));
             } catch (e) {
-                // Base64でなければそのまま返す
-                return str;
+                try { return decodeURIComponent(str); } catch(err) { return str; }
             }
         }
 
@@ -131,36 +125,37 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // 検索処理を関数として独立
         async function performSearch(keyword) {
             if (!keyword) return;
+            
+            // 検索実行時に入力欄を明示的にセット（冗長だが確実性を高める）
+            searchBox.value = keyword;
 
             const hash = await sha256(keyword);
+            resultsArea.innerHTML = `<div class="text-center py-20 opacity-50 animate-pulse uppercase tracking-widest">Searching Database...</div>`;
+
             try {
                 const response = await fetch(`./data/vault/${hash}.json?t=${Date.now()}`);
                 if (response.ok) {
                     const data = await response.json();
-                    const item = {
+                    renderResults({
                         title: safeDecode(data.title || data.TITLE || "名称未設定の記録"),
                         description: safeDecode(data.description || data.snippet || data.DESCRIPTION || ""),
                         url: safeDecode(data.url || data.file || data.URL || null)
-                    };
-                    renderResults(item);
+                    });
                 } else {
                     renderError();
                 }
             } catch (error) {
                 renderError();
             }
-            // 検索後にキーワードを消去するコードを削除しました
         }
 
         function renderResults(item) {
             if (!item.url) {
-                resultsArea.innerHTML = `<div class="result-card rounded border-red-500 text-red-500 font-bold uppercase">Error: アクセス先が定義されていません。</div>`;
+                renderError();
                 return;
             }
-
             resultsArea.innerHTML = `
                 <div class="result-card rounded shadow-lg border border-green-500 bg-green-950/10" onclick="window.open('${item.url}', '_blank')">
                     <div class="text-[10px] opacity-60 mb-2 font-mono uppercase">>> Access Granted: Record Decoupled</div>
@@ -179,18 +174,26 @@
             resultsArea.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">Access Denied: Invalid Keyword or Hash Mismatch</div>`;
         }
 
-        // 手入力時のリスナー
-        searchBox.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch(searchBox.value.trim());
+        // IME入力中のEnterキーで検索が走らないように制御
+        let isComposing = false;
+        searchBox.addEventListener('compositionstart', () => isComposing = true);
+        searchBox.addEventListener('compositionend', () => isComposing = false);
+
+        searchBox.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !isComposing) {
+                performSearch(searchBox.value.trim());
+            }
         });
 
-        // 遷移直後の自動実行処理（URLパラメータチェック）
-        (function() {
+        // 起動時処理：URLパラメータの取得とデコードを強化
+        (function init() {
             const params = new URLSearchParams(window.location.search);
             const query = params.get('q');
             if (query) {
-                searchBox.value = query; // URLから渡されたキーワードを入力欄に表示
-                performSearch(query);
+                // 自動デコードが失敗している場合に備え、明示的にデコードを試みる
+                const decodedQuery = decodeURIComponent(query);
+                searchBox.value = decodedQuery;
+                performSearch(decodedQuery);
             }
         })();
 
