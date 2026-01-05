@@ -119,11 +119,6 @@
             text-align: start;
         }
 
-        /* 軽度の擦れ */
-        .smudged {
-            filter: blur(1px) opacity(0.7);
-        }
-
         /* 重度の削れ（佐伯レベル） */
         .scratched {
             filter: blur(1px) contrast(0.4);
@@ -149,6 +144,38 @@
             font-size: 0.65rem; font-weight: bold;
             transform: rotate(5deg);
             opacity: 0.5;
+        }
+
+        /* 証言引用ボックスのデザイン強化 */
+        .testimony-quote {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed #333;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            font-style: italic;
+            color: #a0a0a0;
+        }
+
+        .testimony-quote::before {
+            content: "ORAL_TESTIMONY_FRAGMENT";
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #0a0a0a;
+            padding: 0 8px;
+            font-size: 0.6rem;
+            color: #00ff41;
+            font-style: normal;
+            font-weight: bold;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .testimony-text {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            line-height: 2;
         }
 
         .footer-tag { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #1a1a1a; font-size: 0.65rem; color: #444; text-align: center; }
@@ -181,18 +208,22 @@
                 <h2 class="section-title">1. 翠波八幡神社への奉納</h2>
                 <p>
                     1945年の復員後、旧翠波村出身の兵士たちは翠波八幡神社へ参集し、戦地での記憶を鎮めるための札を奉納した。
-                    奉納札は境内の小社に収められ、村内ではこれを「眼の跡」と呼称した。<br>
-                    以下に、翠波部隊の隊員の手記を抜粋する。<br>
-                    <i>"「……南方戦線のジャングルで泥濘を這っていた時、頭上の虚空に巨大な黄金の眼が開き、我々を見つめていた。<br>
+                    奉納札は境内の小社に収められ、村内ではこれを「眼の跡」と呼称した。
+                </p>
+
+                <!-- 引用を目立たせるボックス -->
+                <blockquote class="testimony-quote">
+                    <span class="testimony-text">
+                        「……南方戦線のジャングルで泥濘を這っていた時、頭上の虚空に巨大な黄金の眼が開き、我々を見つめていた。<br>
                         その眼差しが触れた瞬間、隊員全員の足音が一つに重なり、まるで誰かの夢の中を歩くような感覚に陥った。<br>
                         我々は一切の音を立てず、誰が命令を下すでもなく、敵陣の包囲網を幽霊のように通り抜けていた。<br>
                         村に帰り着いた後も、あの時に見た黄金の『眼の跡』が網膜から消えない。<br>
-                        あれは翠波の神が我々に刻んだ、接続の印なのだ」"</i>
-                </p>
+                        あれは翠波の神が我々に刻んだ、接続の印なのだ」
+                    </span>
+                </blockquote>
 
                 <!-- 連名状：損傷を全体に分散 -->
                 <div class="signature-paper">
-                    
                     <div class="sig-item">
                         <div class="sig-yago">一番家：庄屋</div>
                         <div class="sig-name-vertical">
@@ -204,7 +235,7 @@
                     <div class="sig-item">
                         <div class="sig-yago">二番家：あらや</div>
                         <div class="sig-name-vertical">
-                            <span class="scratched">瀬田 相時</span>
+                            <span class="scratched">瀬田 相時</span> 
                         </div>
                         <div class="sig-stamp">翠波</div>
                     </div>
@@ -218,11 +249,10 @@
                     <div class="sig-item">
                         <div class="sig-yago">四番家：大門</div>
                         <div class="sig-name-vertical">
-                            <span class="scratched">馬宿 門多</span>
+                           <span class="scratched">馬宿 門多</span>
                         </div>
                         <div class="sig-stamp">翠波</div>
                     </div>
-
                 </div>
 
                 <h2 class="section-title">2. 小社の造作</h2>
