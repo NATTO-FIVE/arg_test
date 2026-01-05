@@ -48,6 +48,36 @@
   nav ul li a:hover {
     color: #ffffff !important;
   }
+　/* 【重要なお知らせ】エリアの視認性改善（根本的解決） */
+  .notice-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px 20px;
+    border: 1px solid #444;
+    background: #111; /* 背景をわずかに明るくして境界を出す */
+    border-radius: 4px;
+  }
+  .notice-label {
+    font-size: 0.9rem;
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    letter-spacing: 0.1em;
+  }
+  .notice-link {
+    font-size: 0.9rem;
+    color: #ffffff !important; /* リンクを白に強制 */
+    text-decoration: underline;
+    transition: all 0.3s;
+  }
+  .notice-link:hover {
+    color: #ffd700 !important; /* ホバーで金色に光らせる */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  }
+  
+
+   
 </style>
 </head>
 <body>
@@ -100,10 +130,20 @@
       高階層の地にて、御視様があなたをお待ちしております。
     </p>
     
-    <div style="text-align: center; margin-top: 50px; padding: 20px; border: 1px solid #333;">
+    <!-- <div style="text-align: center; margin-top: 50px; padding: 20px; border: 1px solid #333;">
       <p style="font-size: 0.9rem; color: var(--seimin-gold);">【重要なお知らせ】</p>
       <p style="font-size: 0.8rem;"><a href="./Faith_Program.html">特別巡礼プログラム「金枝の導き」のパンフレットができました。</a></p>
+    </div> -->
+    <div class="notice-container">
+      <span class="notice-label">【重要なお知らせ】</span>
+      <p>
+        <a href="../kinshi_guidance_pamphlet.html" class="notice-link">
+          特別巡礼プログラム「金枝の導き」のパンフレットができました。
+        </a>
+      </p>
     </div>
+
+    
   </section>
 </main>
 
