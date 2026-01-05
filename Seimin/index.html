@@ -185,9 +185,6 @@
       <span class="notice-subtext">※翠波の地における位相同期、その詳細を公開いたしました。</span>
     </div>
 
-
-    
-    
   </section>
 </main>
 
@@ -196,10 +193,23 @@
     <p>宗教法人 金の聖眠 総本部</p>
     <p>© 2025 Golden Seimin. All Rights Reserved.</p>
     <div style="margin-top: 20px; opacity: 0.5;">
-      ※本サイトはフィクションであり、実在の宗教団体とは一切関係ありません。
+      ※本サイトはＡＲＧ向け演出用フィクションであり、実在の団体・人物・思想とは一切関係ありません。
     </div>
   </div>
 </footer>
+  
+<script>
+  // ページハイライト処理
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('nav ul li a[href="' + path + '"]');
+    if (current) {
+      current.style.color = '#ffffff';
+      current.style.textShadow = '0 0 8px #ffd700';
+    }
+  })();
+</script>
+  
 
 </body>
 </html>
