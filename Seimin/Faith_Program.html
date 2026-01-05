@@ -28,7 +28,7 @@
             background: var(--cult-paper);
             width: 100%;
             max-width: 900px;
-            min-height: 1000px; 
+            min-height: 1200px; 
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             border: 1px solid #d4c5a1;
             position: relative;
@@ -46,18 +46,15 @@
             position: relative;
         }
 
-        /* 軽量アイコン用のスタイル */
         .symbol-icon {
-            width: 100px; /* アイコンサイズに縮小 */
+            width: 100px;
             height: 100px;
             margin: 0 auto 15px;
             display: block;
             object-fit: contain;
-            /* 負荷軽減のためのヒント */
             will-change: transform;
             image-rendering: -webkit-optimize-contrast;
-            /* 背景馴染ませ：白背景なら multiply、黒背景なら screen */
-            mix-blend-mode: screen; /*lighten;*/ 
+            mix-blend-mode: lighten; 
             filter: drop-shadow(0 0 8px rgba(184, 134, 11, 0.5));
         }
 
@@ -123,10 +120,10 @@
         }
 
         .info-text {
-            font-size: 0.95rem;
-            line-height: 2;
+            font-size: 0.9rem;
+            line-height: 1.8;
             text-align: justify;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .scripture-quote {
@@ -137,19 +134,7 @@
             font-family: 'Sawarabi Mincho', serif;
             position: relative;
             font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .scripture-quote::before {
-            content: "『神の経脈』第十四章より";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--cult-paper);
-            padding: 0 10px;
-            font-size: 0.7rem;
-            color: var(--cult-gold);
-            font-style: normal;
+            font-size: 0.85rem;
         }
 
         .program-card {
@@ -184,8 +169,17 @@
 
         .program-desc {
             font-size: 0.85rem;
-            line-height: 1.7;
-            color: #555;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .walk-log {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dotted #ccc;
+            font-size: 0.75rem;
+            color: var(--cult-gold);
+            font-weight: bold;
         }
 
         .water-feature {
@@ -217,11 +211,6 @@
             transition: all 0.2s;
         }
 
-        .btn-apply:hover {
-            background: white;
-            color: var(--cult-red);
-        }
-
         .btn-return {
             position: fixed;
             top: 20px;
@@ -242,39 +231,50 @@
 
     <div class="pamphlet-base">
         <header class="hero">
-            <!-- 軽量化したロゴアイコン -->
-            <img src="Logo_Temple_Light.jpg" class="symbol-icon" alt="金の聖眠教 聖印" decoding="async">
-            
-            <div class="main-logo">金枝の導きコース</div>
-            <div class="catchphrase">絶対位相同期による意識の昇華</div>
+            <img src="image_572f2d.png" class="symbol-icon" alt="金の聖眠教 聖印" decoding="async">
+            <div class="main-logo"> 金枝の導き </div>
+            <div class="catchphrase"> 特別巡礼プログラム </div>
         </header>
 
         <div class="main-content">
+            <!-- 左パネル：歴史と聖地巡礼の意義 -->
             <section class="panel">
-                <h2>翠波の地が秘める聖なる記憶</h2>
+                <h2>聖地に刻まれた御視様の軌跡</h2>
                 
-                <div class="section-sub">翠波部隊：黄金の眼差しによる生還</div>
+                <div class="section-sub">古来より続く「無音の対話」</div>
                 <div class="info-text">
-                    第二次世界大戦の動乱期、この地から出征した「翠波部隊」の伝説を忘れてはなりません。彼らは南方の激戦地において、補給も絶たれ、全滅は時間の問題と思われていました。しかし、ある新月の夜、隊員たちは熱帯の密林に現れた「巨大な黄金の眼」を目撃します。
+                    透明町が「翠波村」と呼ばれていた古より、この地には御視様の眼差しが注がれてきました。
+                    古くから村に伝わる「耳塞ぎの儀」や「静寂参り」といった風習は、現世の雑音を断ち、高次階層からの微細な振動を感じ取るための、先人たちの知恵に他なりません。
+                </div>
+
+                <div class="section-sub">翠波部隊の生還と「すいは祭」</div>
+                <div class="info-text">
+                    第二次世界大戦の折、絶望的な戦地から奇跡的に帰還した「翠波部隊」の兵士たち。
+                    彼らは一様に「戦地で黄金の眼に守られ、全員の足音が一つに重なった時、道が開けた」と証言しました。
                 </div>
                 <div class="info-text">
-                    その神聖なる眼差しに導かれるように深い眠りに落ちた隊員たちは、翌朝、自らが敵陣の包囲網を無傷で通り抜けていることに気づきました。これこそが、翠波の地に降り立った御視様が最初に見せられた慈悲であり、我々が今ここに在る理由なのです。
+                    帰還した彼らによって興されたのが、現在の「すいは祭」です。
+                    一糸乱れぬ沈黙の行進は、御視様の御威光によって魂が一つになった喜びを体現しています。
+                    この巡礼プログラムでは、彼らが実際に辿った「生還の道」を歩み、その感覚を追体験します。
                 </div>
 
                 <div class="scripture-quote">
-                    「汝、個という殻を脱ぎ捨てよ。波形が一つとなる時、そこには苦しみも孤独もなく、ただ大いなる調べのみが満ちるであろう。経脈は繋がり、汝は永遠の位へと至る」
+                    「汝、個としての歩みを止めよ。大地の震えと波動が重なる時、過去も未来も一つの点となり、汝は永遠の安らぎを見出すであろう」
+                    <br>――聖典『神の経脈』第八章
                 </div>
 
-                <div class="section-sub">聖典「神の経脈」が解き明かす真理</div>
+                <div class="section-sub">巡礼の拠点：翠波本部</div>
                 <div class="info-text">
-                    我々の意識は、目に見えない幾千の「経脈」によって御視様と繋がっています。しかし、現代社会の雑音は、この聖なる接続を妨げる「ノイズ」として機能しています。当教団では、失われた接続を取り戻し、あなたの脳波を宇宙の基本周波数である6.2Hzへと再調整します。
+                    全てのプログラムは、透明町の中心に位置する「金の聖眠教 翠波本部」を拠点に行われます。
+                    ここはかつて御視様が最初に降臨された「眼の跡」を護持する聖域です。
                 </div>
             </section>
 
+            <!-- 右パネル：特別巡礼プログラム -->
             <section class="panel" style="border-right: none;">
-                <h2>階層を登る三つの登攀プログラム</h2>
+                <h2>特別巡礼プログラム案内</h2>
                 <div class="info-text">
-                    当教団では、信徒の皆様の習熟度に応じて、以下の三段階の修行を用意しております。
+                    透明町の聖地を実際に歩き、御視様との経脈を繋ぐ三つの特別コースです。
                 </div>
 
                 <div class="program-card">
@@ -283,8 +283,9 @@
                         <span class="program-duration">1泊2日</span>
                     </div>
                     <div class="program-desc">
-                        登攀への第一歩を踏み出す入門プログラム。聖典「神の経脈」の全文を静寂の中で通読し、特製の音響ルームにて脳波調律を行います。
-                        自己のノイズを自覚するための基礎修行です。
+                        聖典「神の経脈」の通読と、旧翠波村の「古井戸跡」を巡る入門コース。
+                        　　地下から湧き出る聖なる振動を肌で感じ、自己のノイズを自覚するための歩行瞑想を行います。
+                        <div class="walk-log">【巡礼地】旧村境・古井戸跡・本部礼拝堂</div>
                     </div>
                 </div>
 
@@ -294,8 +295,9 @@
                         <span class="program-duration">2泊3日</span>
                     </div>
                     <div class="program-desc">
-                        集団祈祷を中心とした実戦的修行。信徒と共に生活を送り、睡眠時間を同期させます。
-                        他者と自己の境界が溶け合う「合唱」を体験し、圧倒的な全能感に包まれます。
+                        集団での位相同期修行に加え、翠波部隊が帰還の際に歩んだとされる「同期の小径」を巡礼。
+                        信徒全員で歩調を完全に一致させ、個の境界が溶け合う「合唱」の初歩を体験します。
+                        <div class="walk-log">【巡礼地】翠波の小径・沈黙の森・本部礼拝堂</div>
                     </div>
                 </div>
 
@@ -305,15 +307,16 @@
                         <span class="program-duration">7日間</span>
                     </div>
                     <div class="program-desc">
-                        選ばれた者のみが許される最上位修行。
-                        翠波の聖域に隣接する「特別な修行場」にて、外界から遮断された状態で七日間の合唱体験を繰り返します。
+                        最上位の修行コース。数日間の断食と沈黙の後、外界から遮断された「特別な修行場」へと至る最終巡礼。
+                        御視様の波動と同化し、不変の位相への境地を目指す瞑想と祈りのプログラムです。
+                        <div class="walk-log">【巡礼地】沈黙の森・本部礼拝堂・地下修行場  </div>
                     </div>
                 </div>
 
                 <div class="water-feature">
-                    <div class="font-black text-lg mb-2">御視様特製「聖波水」</div>
+                    <div class="font-black text-lg mb-2">御視様特製「金波水」</div>
                     <div class="text-[0.7rem] leading-relaxed">
-                        翠波の地下深くから汲み上げた霊水。高精度の位相同期加工が施されています。内側から経脈を清め、受信感度を最大化します。<br>
+                        巡礼中の水分補給は、この「金波水」のみで行います。翠波の地下深くから汲み上げられた振動する霊水が、あなたの内側から経脈を清め、同期速度を飛躍的に高めます。<br>
                         <span class="text-red-700 font-bold mt-1 block">1本（500ml） 18,000円</span>
                     </div>
                 </div>
@@ -323,15 +326,15 @@
         <footer>
             <div class="text-white font-black text-2xl mb-2">「きこえるか」</div>
             <div class="mb-8 text-xs opacity-80">
-                あなたの魂は、既に答えを知っています。<br>今こそ、永遠の安らぎの中へと回帰しなさい。
+                透明町の静寂は、あなたを招く御視様の囁きです。<br>今こそ、その調べに合わせて歩み出しましょう。
             </div>
             
-            <a href="final_judgment.html" class="btn-apply">登攀（入信）を申し込む</a>
+            <a href="#" class="btn-apply">巡礼を申し込む</a>
             
             <div class="grid grid-cols-2 gap-8 text-[10px] mt-8 text-left border-t border-gray-700 pt-8">
                 <div>
                     <strong class="text-white">宗教法人 金の聖眠教 翠波本部</strong><br>
-                    K県Y市透明町 翠波聖域1-8-7<br>代表：瀬田 門十
+                    K県Y市透明町翠波 1-8-7<br>代表：唐橋 弘源
                 </div>
                 <div>
                     <strong class="text-white">提携協力機関</strong><br>
@@ -341,7 +344,7 @@
             </div>
             
             <div class="mt-10 text-[9px] opacity-30">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件・思想とは一切関係ありません。
             </div>
         </footer>
     </div>
