@@ -24,7 +24,6 @@
             justify-content: center;
         }
 
-        /* 縦幅をコンテンツに合わせるよう修正（min-heightを縮小） */
         .pamphlet-base {
             background: var(--cult-paper);
             width: 100%;
@@ -47,14 +46,20 @@
             position: relative;
         }
 
-        /* ロゴ画像用のスタイル */
+        /* ロゴ画像のスタイル修正 */
         .eye-symbol-img {
-            width: 120px; /* ロゴの幅 */
-            height: 120px; /* ロゴの高さ */
+            width: 140px;
+            height: 140px;
             object-fit: contain;
             margin: 0 auto 15px;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.6));
+            /* 【透過・馴染ませ処理】
+               もし画像に白背景がある場合は multiply（乗算）
+               黒背景がある場合は screen（スクリーン）が有効です。
+               ここでは汎用的な光彩（drop-shadow）を付与しています。
+            */
+            filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.8));
+            /* mix-blend-mode: multiply; */ /* 背景を透過させたい場合に有効化 */
         }
 
         .main-logo {
@@ -234,13 +239,12 @@
 </head>
 <body>
 
-    <a href="../../search.html" class="btn-return">← 戻る</a>
+    <a href="./search.html" class="btn-return">← 戻る</a>
 
     <div class="pamphlet-base">
         <header class="hero">
-            <!-- 👁 絵文字を <img> タグに置き換え -->
-            <!-- ロゴ画像を logo.png と仮定しています。適宜ファイル名を変更してください -->
-            <img src="logo.png" class="eye-symbol-img" alt="金の聖眠教 聖印" onerror="this.src='https://via.placeholder.com/120x120/001a33/b8860b?text=OSI';">
+            <!-- いただいたロゴ画像ファイルを指定 -->
+            <img src="image_572f2d.png" class="eye-symbol-img" alt="金の聖眠教 聖印" onerror="this.src='https://via.placeholder.com/120x120/001a33/b8860b?text=OSI';">
             
             <div class="main-logo">金の聖眠教</div>
             <div class="catchphrase">絶対位相同期による意識の昇華</div>
@@ -325,7 +329,7 @@
             <div class="grid grid-cols-2 gap-8 text-[10px] mt-8 text-left border-t border-gray-700 pt-8">
                 <div>
                     <strong class="text-white">宗教法人 金の聖眠教 翠波本部</strong><br>
-                    K県Y市透明町 翠波聖域1-8-7<br>代表：瀬田 門十
+                    K県Y市透明町 翠波聖域1-8-7<br>代表：唐橋　弘源
                 </div>
                 <div>
                     <strong class="text-white">提携協力機関</strong><br>
@@ -335,7 +339,7 @@
             </div>
             
             <div class="mt-10 text-[9px] opacity-30">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件とは一切関係ありません。
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
             </div>
         </footer>
     </div>
