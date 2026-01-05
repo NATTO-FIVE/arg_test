@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翠波八幡神社 参拝の栞</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
+        
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Noto Serif JP', serif;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pamphlet-sheet {
+            background: white;
+            width: 100%;
+            max-width: 1000px;
+            padding: 60px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid #d1d5db;
+            position: relative;
+        }
+
+        .header-box {
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.5em;
+            margin-bottom: 10px;
+        }
+
+        .title-sub {
+            font-size: 1rem;
+            color: #666;
+            letter-spacing: 0.2em;
+        }
+
+        .main-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        .image-frame {
+            border: 1px solid #eee;
+            background: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .image-frame img {
+            max-width: 100%;
+            height: auto;
+            filter: sepia(0.2);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+            margin: 30px 0 15px 0;
+            display: inline-block;
+        }
+
+        .highlight-name {
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-note {
+            margin-top: 60px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pamphlet-sheet">
+        <div class="header-box">
+            <h1 class="title-main">翠波八幡神社 参拝の栞</h1>
+            <p class="title-sub">―― 透明町（旧翠波村）鎮座 ――</p>
+        </div>
+
+        <div class="main-columns">
+            <!-- 左カラム -->
+            <div>
+                <div class="image-frame">
+                    <!-- 神社の全景写真として Logo_Temple.jpg を指定 -->
+                    <img src="Logo_Temple.jpg" alt="翠波八幡神社 本殿全景" onerror="this.style.display='none'; document.getElementById('placeholder-1').style.display='block';">
+                    <div id="placeholder-1" style="display:none; padding:40px; color:#999; font-size:0.8rem;">[ 神社全景写真：Logo_Temple.jpg ]</div>
+                </div>
+
+                <h2 class="section-title">一、御祭神</h2>
+                <p>
+                    <strong>八幡大神（はちまんおおかみ）</strong><br>
+                    第十五代・応神天皇（誉田別命）を主祭神としてお祀りしております。武運長久、家内安全、地域の平安を司る守護神です。
+                </p>
+
+                <h2 class="section-title">二、由緒</h2>
+                <p>
+                    創祀は平安時代末期と伝えられ、古来より翠波の地の産土神として信仰を集めてまいりました。この地特有の静謐な気を守り、里に安寧をもたらすための祭礼が代々受け継がれています。
+                </p>
+
+                <h2 class="section-title">三、境内社「眼の跡」</h2>
+                <p>
+                    本殿右奥に鎮座する「眼の跡（めのあと）」は、昭和二十年の復員後、無事に生還した「翠波部隊」の将兵たちが、戦地での加護に感謝して建立したものです。
+                </p>
+            </div>
+
+            <!-- 右カラム -->
+            <div>
+                <div class="image-frame">
+                    <!-- 彫刻写真として image_65a06d.png を指定 -->
+                    <img src="image_65a06d.png" alt="「眼の跡」彫刻意匠" onerror="this.style.display='none'; document.getElementById('placeholder-2').style.display='block';">
+                    <div id="placeholder-2" style="display:none; padding:40px; color:#999; font-size:0.8rem;">[ 「眼の跡」彫刻写真：image_65a06d.png ]</div>
+                </div>
+
+                <h2 class="section-title">四、社殿の意匠：職人の技</h2>
+                <p>
+                    境内社「眼の跡」の造営および外装装飾は、当時この地で名を馳せた<span class="highlight-name">宮大工：佐伯亦乃介（屋号：えきや）</span>が、復員直後に独力で手掛けたものです。
+                </p>
+                <p>
+                    佐伯氏は、見る者の意識を吸い込むような緻密な透かし彫りを用い、独特の造形美を追求しました。その技術の粋は、現在も神域の静寂の中に息づいており、文化遺産としても高い価値を有しています。
+                </p>
+
+                <h2 class="section-title">五、年中行事</h2>
+                <ul class="list-disc list-inside">
+                    <li>一月一日：歳旦祭</li>
+                    <li>七月下旬：翠波同期祭（旧 鎮目祭）</li>
+                    <li>十一月十五日：七五三祈祷</li>
+                </ul>
+
+                <h2 class="section-title">参拝の心得</h2>
+                <p class="text-sm">
+                    神域は清浄を保ち、静寂を以て貴しとなします。「眼の跡」周辺での大声や、社の中を覗き込む行為は、神聖な気を乱すため厳に慎んでください。
+                </p>
+
+                <div class="footer-note">
+                    <strong>翠波八幡神社 社務所</strong><br>
+                    K県Y市透明町 翠波聖域一番地一号
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
