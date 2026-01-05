@@ -46,20 +46,19 @@
             position: relative;
         }
 
-        /* ロゴ画像のスタイル修正 */
-        .eye-symbol-img {
-            width: 140px;
-            height: 140px;
-            object-fit: contain;
+        /* 軽量アイコン用のスタイル */
+        .symbol-icon {
+            width: 100px; /* アイコンサイズに縮小 */
+            height: 100px;
             margin: 0 auto 15px;
             display: block;
-            /* 【透過・馴染ませ処理】
-               もし画像に白背景がある場合は multiply（乗算）
-               黒背景がある場合は screen（スクリーン）が有効です。
-               ここでは汎用的な光彩（drop-shadow）を付与しています。
-            */
-            filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.8));
-            /* mix-blend-mode: multiply; */ /* 背景を透過させたい場合に有効化 */
+            object-fit: contain;
+            /* 負荷軽減のためのヒント */
+            will-change: transform;
+            image-rendering: -webkit-optimize-contrast;
+            /* 背景馴染ませ：白背景なら multiply、黒背景なら screen */
+            mix-blend-mode: lighten; 
+            filter: drop-shadow(0 0 8px rgba(184, 134, 11, 0.5));
         }
 
         .main-logo {
@@ -243,8 +242,8 @@
 
     <div class="pamphlet-base">
         <header class="hero">
-            <!-- いただいたロゴ画像ファイルを指定 -->
-            <img src="Logo_Temple.png" class="eye-symbol-img" alt="金の聖眠教 聖印" onerror="this.src='https://via.placeholder.com/120x120/001a33/b8860b?text=OSI';">
+            <!-- 軽量化したロゴアイコン -->
+            <img src="image_572f2d.png" class="symbol-icon" alt="金の聖眠教 聖印" decoding="async">
             
             <div class="main-logo">金の聖眠教</div>
             <div class="catchphrase">絶対位相同期による意識の昇華</div>
@@ -329,7 +328,7 @@
             <div class="grid grid-cols-2 gap-8 text-[10px] mt-8 text-left border-t border-gray-700 pt-8">
                 <div>
                     <strong class="text-white">宗教法人 金の聖眠教 翠波本部</strong><br>
-                    K県Y市透明町 翠波聖域1-8-7<br>代表：唐橋　弘源
+                    K県Y市透明町 翠波聖域1-8-7<br>代表：瀬田 門十
                 </div>
                 <div>
                     <strong class="text-white">提携協力機関</strong><br>
