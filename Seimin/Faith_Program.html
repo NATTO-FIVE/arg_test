@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金の聖眠教 | 救済パンフレット</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
+        
+        :root {
+            --cult-gold: #b8860b;
+            --cult-red: #8b0000;
+            --cult-navy: #001a33;
+            --cult-paper: #fdfaf2;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Noto Serif JP', serif;
+            margin: 0;
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 縦幅をコンテンツに合わせるよう修正（min-heightを縮小） */
+        .pamphlet-base {
+            background: var(--cult-paper);
+            width: 100%;
+            max-width: 900px;
+            min-height: 1000px; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            border: 1px solid #d4c5a1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            color: #2c2c2c;
+        }
+
+        .hero {
+            background-color: var(--cult-navy);
+            color: white;
+            padding: 40px 40px;
+            text-align: center;
+            border-bottom: 5px solid var(--cult-gold);
+            position: relative;
+        }
+
+        /* ロゴ画像用のスタイル */
+        .eye-symbol-img {
+            width: 120px; /* ロゴの幅 */
+            height: 120px; /* ロゴの高さ */
+            object-fit: contain;
+            margin: 0 auto 15px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.6));
+        }
+
+        .main-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.4em;
+            margin-bottom: 5px;
+        }
+
+        .catchphrase {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            border-top: 1px solid var(--cult-gold);
+            border-bottom: 1px solid var(--cult-gold);
+            padding: 8px 0;
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--cult-gold);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            flex: 1;
+        }
+
+        @media (max-width: 800px) {
+            .main-content { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            padding: 40px 45px;
+            border-right: 1px solid #e0d5b8;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--cult-red);
+            border-bottom: 2px solid var(--cult-gold);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--cult-navy);
+            margin: 30px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-sub::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: var(--cult-gold);
+            transform: rotate(45deg);
+        }
+
+        .info-text {
+            font-size: 0.95rem;
+            line-height: 2;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .scripture-quote {
+            background: #f0ede4;
+            padding: 20px;
+            border: 1px solid #d4c5a1;
+            margin: 25px 0;
+            font-family: 'Sawarabi Mincho', serif;
+            position: relative;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .scripture-quote::before {
+            content: "『神の経脈』第十四章より";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--cult-paper);
+            padding: 0 10px;
+            font-size: 0.7rem;
+            color: var(--cult-gold);
+            font-style: normal;
+        }
+
+        .program-card {
+            background: white;
+            border: 1px solid #d4c5a1;
+            margin-bottom: 20px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .program-header {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .program-name {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--cult-navy);
+        }
+
+        .program-duration {
+            font-size: 0.75rem;
+            background: var(--cult-navy);
+            color: white;
+            padding: 2px 8px;
+        }
+
+        .program-desc {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .water-feature {
+            background: linear-gradient(135deg, #fdfaf2 0%, #e0d5b8 100%);
+            border: 1px solid var(--cult-gold);
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        footer {
+            background: var(--cult-navy);
+            color: #a0a0a0;
+            padding: 50px 40px;
+            text-align: center;
+            border-top: 8px solid var(--cult-gold);
+        }
+
+        .btn-apply {
+            display: inline-block;
+            background: var(--cult-gold);
+            color: var(--cult-navy);
+            padding: 18px 60px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-decoration: none;
+            margin: 25px 0;
+            letter-spacing: 0.2em;
+            transition: all 0.2s;
+        }
+
+        .btn-apply:hover {
+            background: white;
+            color: var(--cult-red);
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: var(--cult-gold);
+            padding: 8px 16px;
+            border: 1px solid var(--cult-gold);
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../search.html" class="btn-return">← 戻る</a>
+
+    <div class="pamphlet-base">
+        <header class="hero">
+            <!-- 👁 絵文字を <img> タグに置き換え -->
+            <!-- ロゴ画像を logo.png と仮定しています。適宜ファイル名を変更してください -->
+            <img src="logo.png" class="eye-symbol-img" alt="金の聖眠教 聖印" onerror="this.src='https://via.placeholder.com/120x120/001a33/b8860b?text=OSI';">
+            
+            <div class="main-logo">金の聖眠教</div>
+            <div class="catchphrase">絶対位相同期による意識の昇華</div>
+        </header>
+
+        <div class="main-content">
+            <section class="panel">
+                <h2>翠波の地が秘める聖なる記憶</h2>
+                
+                <div class="section-sub">翠波部隊：黄金の眼差しによる生還</div>
+                <div class="info-text">
+                    第二次世界大戦の動乱期、この地から出征した「翠波部隊」の伝説を忘れてはなりません。彼らは南方の激戦地において、補給も絶たれ、全滅は時間の問題と思われていました。しかし、ある新月の夜、隊員たちは熱帯の密林に現れた「巨大な黄金の眼」を目撃します。
+                </div>
+                <div class="info-text">
+                    その神聖なる眼差しに導かれるように深い眠りに落ちた隊員たちは、翌朝、自らが敵陣の包囲網を無傷で通り抜けていることに気づきました。これこそが、翠波の地に降り立った御視様が最初に見せられた慈悲であり、我々が今ここに在る理由なのです。
+                </div>
+
+                <div class="scripture-quote">
+                    「汝、個という殻を脱ぎ捨てよ。波形が一つとなる時、そこには苦しみも孤独もなく、ただ大いなる調べのみが満ちるであろう。経脈は繋がり、汝は永遠の位へと至る」
+                </div>
+
+                <div class="section-sub">聖典「神の経脈」が解き明かす真理</div>
+                <div class="info-text">
+                    我々の意識は、目に見えない幾千の「経脈」によって御視様と繋がっています。しかし、現代社会の雑音は、この聖なる接続を妨げる「ノイズ」として機能しています。当教団では、失われた接続を取り戻し、あなたの脳波を宇宙の基本周波数である6.2Hzへと再調整します。
+                </div>
+            </section>
+
+            <section class="panel" style="border-right: none;">
+                <h2>階層を登る三つの登攀プログラム</h2>
+                <div class="info-text">
+                    当教団では、信徒の皆様の習熟度に応じて、以下の三段階の修行を用意しております。
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">邂逅コース</span>
+                        <span class="program-duration">1泊2日</span>
+                    </div>
+                    <div class="program-desc">
+                        登攀への第一歩を踏み出す入門プログラム。聖典「神の経脈」の全文を静寂の中で通読し、特製の音響ルームにて脳波調律を行います。自己のノイズを自覚するための基礎修行です。
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">共鳴コース</span>
+                        <span class="program-duration">2泊3日</span>
+                    </div>
+                    <div class="program-desc">
+                        集団祈祷を中心とした実戦的修行。信徒と共に生活を送り、睡眠時間を同期させます。他者と自己の境界が溶け合う「合唱」を体験し、圧倒的な全能感に包まれます。
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">金枝の導きコース</span>
+                        <span class="program-duration">7日間</span>
+                    </div>
+                    <div class="program-desc">
+                        選ばれた者のみが許される最上位修行。翠波の聖域に隣接する「特別な修行場（地下空洞）」にて、外界から遮断された状態で七日間の合唱体験を繰り返します。
+                    </div>
+                </div>
+
+                <div class="water-feature">
+                    <div class="font-black text-lg mb-2">御視様特製「聖波水」</div>
+                    <div class="text-[0.7rem] leading-relaxed">
+                        翠波の地下深くから汲み上げた霊水。高精度の位相同期加工が施されています。内側から経脈を清め、受信感度を最大化します。<br>
+                        <span class="text-red-700 font-bold mt-1 block">1本（500ml） 18,000円</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="text-white font-black text-2xl mb-2">「きこえるか」</div>
+            <div class="mb-8 text-xs opacity-80">
+                あなたの魂は、既に答えを知っています。<br>今こそ、永遠の安らぎの中へと回帰しなさい。
+            </div>
+            
+            <a href="final_judgment.html" class="btn-apply">登攀（入信）を申し込む</a>
+            
+            <div class="grid grid-cols-2 gap-8 text-[10px] mt-8 text-left border-t border-gray-700 pt-8">
+                <div>
+                    <strong class="text-white">宗教法人 金の聖眠教 翠波本部</strong><br>
+                    K県Y市透明町 翠波聖域1-8-7<br>代表：瀬田 門十
+                </div>
+                <div>
+                    <strong class="text-white">提携協力機関</strong><br>
+                    不和睡眠総合技術センター<br>
+                    医療法人 聖眠金枝財団 金枝聖域第八病院
+                </div>
+            </div>
+            
+            <div class="mt-10 text-[9px] opacity-30">
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件とは一切関係ありません。
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
