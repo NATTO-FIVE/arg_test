@@ -16,63 +16,67 @@
             justify-content: center;
         }
 
+        /* A4縦サイズ */
         .pamphlet-sheet {
             background: white;
             width: 100%;
-            max-width: 1000px;
-            padding: 60px;
+            max-width: 800px;
+            padding: 50px 60px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border: 1px solid #d1d5db;
             position: relative;
+            min-height: 1120px;
         }
 
         .header-box {
             border: 1px solid #333;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .title-main {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 900;
-            letter-spacing: 0.5em;
-            margin-bottom: 10px;
+            letter-spacing: 0.4em;
+            margin-bottom: 5px;
         }
 
         .title-sub {
-            font-size: 1rem;
+            font-size: 0.8rem;
             color: #666;
             letter-spacing: 0.2em;
         }
 
+        /* 神社全景写真（上部） */
+        .top-image-frame {
+            border: 1px solid #eee;
+            background: #f9f9f9;
+            padding: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .top-image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: sepia(0.1);
+        }
+
+        /* 2段組みレイアウト */
         .main-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            line-height: 2;
+            gap: 40px;
+            line-height: 1.9;
             text-align: justify;
         }
 
-        .image-frame {
-            border: 1px solid #eee;
-            background: #f9f9f9;
-            padding: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .image-frame img {
-            max-width: 100%;
-            height: auto;
-            filter: sepia(0.2);
-        }
-
         .section-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: bold;
             border-bottom: 2px solid #333;
-            margin: 30px 0 15px 0;
+            margin: 20px 0 10px 0;
             display: inline-block;
         }
 
@@ -81,82 +85,120 @@
             border-bottom: 1px solid #333;
         }
 
-        .footer-note {
-            margin-top: 60px;
+        /* フッターエリア（社務所と彫刻写真） */
+        .footer-area {
+            margin-top: 40px;
             border-top: 1px solid #eee;
-            padding-top: 20px;
+            padding-top: 30px;
+        }
+
+        .office-box {
+            border: 1px solid #ccc;
+            padding: 20px;
             text-align: center;
-            font-size: 0.9rem;
             background-color: #fafafa;
+            margin-bottom: 30px;
+        }
+
+        .carving-photo-frame {
+            text-align: center;
+        }
+        .carving-photo-frame img {
+            max-width: 280px;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+        .caption {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 640px) {
+            .main-columns { grid-template-columns: 1fr; }
+            .pamphlet-sheet { padding: 30px; }
+        }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .pamphlet-sheet { box-shadow: none; border: none; width: 100%; max-width: none; }
         }
     </style>
 </head>
 <body>
 
     <div class="pamphlet-sheet">
+        <!-- ヘッダー -->
         <div class="header-box">
             <h1 class="title-main">翠波八幡神社 参拝の栞</h1>
             <p class="title-sub">―― 透明町（旧翠波村）鎮座 ――</p>
         </div>
 
-        <div class="main-columns">
-            <!-- 左カラム -->
-            <div>
-                <div class="image-frame">
-                    <!-- 神社の全景写真として Logo_Temple.jpg を指定 -->
-                    <img src="arg_asset.png" alt="翠波八幡神社 本殿全景" onerror="this.style.display='none'; document.getElementById('placeholder-1').style.display='block';">
-                    <div id="placeholder-1" style="display:none; padding:40px; color:#999; font-size:0.8rem;">[ 神社全景写真 ]</div>
-                </div>
+        <!-- 神社全景写真 -->
+        <div class="top-image-frame">
+            <img src="arg_asset.png" alt="翠波八幡神社 本殿全景" onerror="this.style.display='none'; document.getElementById('placeholder-1').style.display='block';">
+            <div id="placeholder-1" style="display:none; padding:40px; color:#999; font-size:0.8rem;">[ 神社全景写真：Logo_Temple.jpg ]</div>
+        </div>
 
+        <!-- 2段組みの本文 -->
+        <div class="main-columns">
+            <!-- 左列 -->
+            <div class="col-left">
                 <h2 class="section-title">一、御祭神</h2>
-                <p>
+                <p class="text-sm">
                     <strong>八幡大神（はちまんおおかみ）</strong><br>
                     第十五代・応神天皇（誉田別命）を主祭神としてお祀りしております。武運長久、家内安全、地域の平安を司る守護神です。
                 </p>
 
                 <h2 class="section-title">二、由緒</h2>
-                <p>
+                <p class="text-sm">
                     創祀は平安時代末期と伝えられ、古来より翠波の地の産土神として信仰を集めてまいりました。この地特有の静謐な気を守り、里に安寧をもたらすための祭礼が代々受け継がれています。
                 </p>
 
                 <h2 class="section-title">三、境内社「眼の跡」</h2>
-                <p>
+                <p class="text-sm">
                     本殿右奥に鎮座する「眼の跡（めのあと）」は、昭和二十年の復員後、無事に生還した「翠波部隊」の将兵たちが、戦地での加護に感謝して建立したものです。
                 </p>
             </div>
 
-            <!-- 右カラム -->
-            <div>
-                <div class="image-frame">
-                    <!-- 彫刻写真として image_65a06d.png を指定 -->
-                    <img src="Menoato.png" alt="「眼の跡」彫刻意匠" onerror="this.style.display='none'; document.getElementById('placeholder-2').style.display='block';">
-                    <div id="placeholder-2" style="display:none; padding:40px; color:#999; font-size:0.8rem;">[ 「眼の跡」彫刻写真：image_65a06d.png ]</div>
-                </div>
-
-                <h2 class="section-title">四、社殿の意匠：職人の技</h2>
-                <p>
+            <!-- 右列 -->
+            <div class="col-right">
+                <h2 class="section-title">四、社殿の意匠</h2>
+                <p class="text-sm">
                     境内社「眼の跡」の造営および外装装飾は、当時この地で名を馳せた<span class="highlight-name">宮大工：佐伯亦乃介（屋号：えきや）</span>が、復員直後に独力で手掛けたものです。
                 </p>
-                <p>
-                    佐伯氏は、見る者の意識を吸い込むような緻密な透かし彫りを用い、独特の造形美を追求しました。その技術の粋は、現在も神域の静寂の中に息づいており、文化遺産としても高い価値を有しています。
+                <p class="text-sm">
+                    佐伯氏は、見る者の意識を吸い込むような緻密な透かし彫りを用い、独特の造形美を追求しました。その技術の粋は、現在も神域の静寂の中に息づいています。
                 </p>
 
                 <h2 class="section-title">五、年中行事</h2>
-                <ul class="list-disc list-inside">
+                <ul class="text-sm list-disc list-inside">
                     <li>一月一日：歳旦祭</li>
-                    <li>七月下旬：翠波同期祭（旧 鎮目祭）</li>
+                    <li>七月下旬：翠波同期祭</li>
                     <li>十一月十五日：七五三祈祷</li>
                 </ul>
 
                 <h2 class="section-title">参拝の心得</h2>
-                <p class="text-sm">
-                    神域は清浄を保ち、静寂を以て貴しとなします。「眼の跡」周辺での大声や、社の中を覗き込む行為は、神聖な気を乱すため厳に慎んでください。
+                <p class="text-[0.75rem] leading-relaxed">
+                    神域は清浄を保ち、静寂を以て貴しとなします。「眼の跡」周辺での大声や、社の中を覗き込む行為は慎んでください。
                 </p>
+            </div>
+        </div>
 
-                <div class="footer-note">
-                    <strong>翠波八幡神社 社務所</strong><br>
-                    K県Y市透明町 翠波聖域一番地一号
-                </div>
+        <!-- フッター：社務所と彫刻写真 -->
+        <div class="footer-area">
+            <div class="office-box">
+                <strong>翠波八幡神社 社務所</strong><br>
+                <span class="text-sm">K県Y市透明町 翠波聖域一番地一号</span>
+            </div>
+
+            <div class="carving-photo-frame">
+                <img src="Menoato.png" alt="「眼の跡」彫刻意匠" onerror="this.style.display='none'; document.getElementById('placeholder-2').style.display='block';">
+                <div id="placeholder-2" style="display:none; padding:20px; color:#999; font-size:0.7rem;">[ 「眼の跡」彫刻写真：image_65a06d.png ]</div>
+                <p class="caption">佐伯亦乃介氏の手による「眼の跡」社の装飾（部分）</p>
             </div>
         </div>
     </div>
