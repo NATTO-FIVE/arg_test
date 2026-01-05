@@ -5,7 +5,7 @@
   <title>金の聖眠｜心の安らぎ、魂の位相同期</title>
   <link rel="stylesheet" href="style.css">
  <style>
-  /* 検索欄スタイル（変数を使わず直接色指定して安定させる） */
+  /* 検索欄スタイル */
   .header-top {
     display: flex;
     justify-content: flex-end;
@@ -40,7 +40,7 @@
     background: #f0f0f0;
   }
 
-  /* メニューの下線を確実に強制する記述を追加 */
+  /* メニューの下線を確実に強制する記述 */
   nav ul li a {
     text-decoration: underline !important;
     color: #ffd700 !important;
@@ -48,31 +48,45 @@
   nav ul li a:hover {
     color: #ffffff !important;
   }
-　
-  /* 【重要なお知らせ】エリアの修正 
-     より抑えられた、権威的なデザインへ
-  */
+
+  /* 【重要なお知らせ】エリアの修正 */
   .notice-container {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 50px;
     padding: 40px 20px;
     border: 1px solid #333;
     background: #050505;
+    /* 基準点を強固に固定 */
     position: relative;
+    z-index: 1; 
+    overflow: hidden; /* 装飾が外に漏れるのを防ぐガード */
     transition: all 0.5s ease;
   }
   
-  /* 装飾的な四隅の意匠 */
+  /* 装飾的な四隅の意匠：基準点をコンテナの端（0,0）に固定 */
   .notice-container::before, .notice-container::after {
     content: "";
     position: absolute;
-    width: 10px; height: 10px;
+    width: 15px; 
+    height: 15px;
     border-color: #ffd700;
     border-style: solid;
     pointer-events: none;
+    display: block;
+    z-index: 2;
   }
-  .notice-container::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
-  .notice-container::after { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+  
+  /* 左上と右下に配置 */
+  .notice-container::before { 
+    top: 0; 
+    left: 0; 
+    border-width: 1px 0 0 1px; 
+  }
+  .notice-container::after { 
+    bottom: 0; 
+    right: 0; 
+    border-width: 0 1px 1px 0; 
+  }
 
   .notice-label {
     font-size: 0.8rem;
@@ -108,8 +122,6 @@
     margin-top: 15px;
     font-style: italic;
   }
-
-   
 </style>
 </head>
 <body>
@@ -132,7 +144,6 @@
         <li><a href="history.html">沿革</a></li>
         <li><a href="access.html">アクセス</a></li>
       </ul>
-
     </nav>
   </div>
 </header>
@@ -155,17 +166,14 @@
     </p>
   </section>
 
-  <section class="content-section">
+  <section class="content-section" style="border-bottom: none;">
     <h2 class="section-title">安らぎへの階層</h2>
     <p>
       現在、当教団では準備が整った選ばれし巡礼者を募っています。
       高階層の地にて、御視様があなたをお待ちしております。
     </p>
     
-    <!-- <div style="text-align: center; margin-top: 50px; padding: 20px; border: 1px solid #333;">
-      <p style="font-size: 0.9rem; color: var(--seimin-gold);">【重要なお知らせ】</p>
-      <p style="font-size: 0.8rem;"><a href="./Faith_Program.html">特別巡礼プログラム「金枝の導き」のパンフレットができました。</a></p>
-    </div> -->
+    <!-- パンフレットのお知らせ -->
     <div class="notice-container">
       <span class="notice-label">【重要なお知らせ】</span>
       <p>
@@ -175,6 +183,7 @@
       </p>
     </div>
 
+    <!-- 聖地巡礼の詳細（今回の修正対象デザイン） -->
     <div class="notice-container">
       <span class="notice-label">聖地巡礼の御案内</span>
       <p>
@@ -184,7 +193,6 @@
       </p>
       <span class="notice-subtext">※翠波の地における位相同期、その詳細を公開いたしました。</span>
     </div>
-
   </section>
 </main>
 
@@ -197,7 +205,7 @@
     </div>
   </div>
 </footer>
-  
+
 <script>
   // ページハイライト処理
   (function () {
@@ -209,7 +217,6 @@
     }
   })();
 </script>
-  
 
 </body>
 </html>
