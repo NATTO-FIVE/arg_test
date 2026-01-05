@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIBRARY_ARCHIVE | SUIBA_UNIT_RECORD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container-frame {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .content-body { padding: 3rem 4rem; }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; }
+
+        h1.doc-title { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+        h2.section-title { font-size: 1.1rem; color: #00ff41; border-bottom: 1px solid #222; margin-top: 3rem; margin-bottom: 1.5rem; }
+
+        /* 署名エリア：連名状スタイル */
+        .signature-paper {
+            background: #e6e2d3;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            padding: 50px 30px;
+            color: #1a1a1a;
+            border: 1px solid #c4bc9d;
+            margin: 2rem 0;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+            font-family: 'Yuji Syuku', serif;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            min-height: 350px;
+        }
+
+        .sig-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 130px;
+            padding: 10px;
+            border-right: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .sig-item:last-child { border-right: none; }
+
+        .sig-yago {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.65rem;
+            color: #555;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+
+        .sig-name-vertical {
+            writing-mode: vertical-rl;
+            font-size: 2.2rem;
+            letter-spacing: 0.2em;
+            height: 220px;
+            text-align: start;
+        }
+
+        /* 軽度の擦れ */
+        .smudged {
+            filter: blur(1px) opacity(0.7);
+        }
+
+        /* 重度の削れ（佐伯レベル） */
+        .scratched {
+            filter: blur(1px) contrast(0.4);
+            opacity: 0.2;
+            position: relative;
+            display: inline-block;
+        }
+        .scratched::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 1px, #e6e2d3 1px, #e6e2d3 3px);
+            pointer-events: none;
+        }
+
+        .sig-stamp {
+            margin-top: 10px;
+            border: 1.5px solid #a22;
+            color: #a22;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; font-weight: bold;
+            transform: rotate(5deg);
+            opacity: 0.5;
+        }
+
+        .footer-tag { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #1a1a1a; font-size: 0.65rem; color: #444; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../search.html" class="btn-return">← TERMINAL</a>
+                <span>LOCAL_ARCHIVE_DATA: NC-78-RECOVERY</span>
+            </div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">翠波部隊・帰還時祭事奉納名簿（写し）</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">Suiba-Hachiman Document / Digital Restored</div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="flex mb-1"><span class="meta-label">整理日:</span><span>1946年10月24日</span></div>
+                <div class="flex mb-1"><span class="meta-label">保管元:</span><span>翠波八幡神社 蔵資料</span></div>
+                <div class="flex"><span class="meta-label">事象概要:</span><span>帰還兵による札の奉納、および小社造営に関する連名記録。</span></div>
+            </div>
+
+            <article class="text-gray-300 text-sm">
+                <h2 class="section-title">1. 翠波八幡神社への奉納</h2>
+                <p>
+                    1945年の復員後、旧翠波村出身の兵士たちは翠波八幡神社へ参集し、戦地での記憶を鎮めるための札を奉納した。奉納札は境内の小社に収められ、村内ではこれを「眼の跡」と呼称した。
+                </p>
+
+                <!-- 連名状：損傷を全体に分散 -->
+                <div class="signature-paper">
+                    
+                    <div class="sig-item">
+                        <div class="sig-yago">一番家：庄屋</div>
+                        <div class="sig-name-vertical">
+                            諸々 <span class="scratched">善治</span>
+                        </div>
+                        <div class="sig-stamp">翠波</div>
+                    </div>
+
+                    <div class="sig-item">
+                        <div class="sig-yago">二番家：あらや</div>
+                        <div class="sig-name-vertical">
+                            <span class="scratched">瀬田</span> 相時
+                        </div>
+                        <div class="sig-stamp">翠波</div>
+                    </div>
+
+                    <div class="sig-item">
+                        <div class="sig-yago">三番家：えきや</div>
+                        <div class="sig-name-vertical scratched">佐伯 ──</div>
+                        <div class="sig-stamp" style="border-color: #777; color: #777; opacity: 0.2;">欠</div>
+                    </div>
+
+                    <div class="sig-item">
+                        <div class="sig-yago">四番家：大門</div>
+                        <div class="sig-name-vertical">
+                            馬宿 <span class="scratched">門多</span>
+                        </div>
+                        <div class="sig-stamp">翠波</div>
+                    </div>
+
+                </div>
+
+                <h2 class="section-title">2. 小社の造作</h2>
+                <p>
+                    「眼の跡」を収めるために造営された小社の外装、および施された装飾は、当時<span class="text-white font-bold">三番家（屋号：えきや）の長男</span>が独力で手掛けたものである。復員後、彼はこの小社の造作に当たり、その装飾は現在も残されている。
+                </p>
+
+                <h2 class="section-title">3. アーカイブ注記</h2>
+                <p>
+                    本資料は翠波八幡神社の蔵より発見されたものである。経年による劣化が激しく、全体に著しい擦れや削れが見られる。保存状態の悪化により、複数の氏名が判読不能となっている。
+                </p>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                [DATA_END_OF_FILE]
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
