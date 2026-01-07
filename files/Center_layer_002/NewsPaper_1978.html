@@ -6,10 +6,10 @@
     <title>INTERNAL_ARCHIVE | 1978_CENTER_INCIDENT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&display=swap');
         
         body {
-            background-color: #050505;
+            background-color: #030303;
             font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
             color: #d1d5db;
             margin: 0;
@@ -25,6 +25,22 @@
             background-size: 100% 4px, 4px 100%;
             pointer-events: none;
             z-index: 1000;
+        }
+
+        /* サーバー接続バッジ */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
         }
 
         .container-frame {
@@ -67,7 +83,18 @@
             padding: 3rem 4rem;
         }
 
-        /* 新聞切り抜きエリア */
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+        }
+
         .newspaper-scan {
             background-color: #c8c2b0;
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
@@ -106,6 +133,10 @@
             line-height: 1.7;
         }
 
+        @media (max-width: 600px) {
+            .article-text { column-count: 1; }
+        }
+
         .quote-box {
             background: rgba(0,0,0,0.05);
             border: 1px solid #333;
@@ -114,28 +145,8 @@
             font-style: italic;
         }
 
-        .meta-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
-            margin-bottom: 2rem;
-            font-size: 0.85rem;
-        }
-
-        .footer-disclaimer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #222;
-            font-size: 0.7rem;
-            color: #c00;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        /* 修正：点滅するステータスドット */
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background-color: #00ff41;
             border-radius: 50%;
             display: inline-block;
@@ -144,15 +155,32 @@
             animation: blink 1.2s infinite;
             vertical-align: middle;
         }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; filter: brightness(1.2); }
-            50% { opacity: 0.3; filter: brightness(0.8); }
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            text-align: center;
+        }
+
+        /* 免責事項：薄い灰色に修正 */
+        .disclaimer-box {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #222;
+            color: #888;
+            text-align: center;
+            font-size: 10px;
         }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
 
     <div class="container-frame">
         <div class="sys-header">
@@ -163,7 +191,7 @@
                     <span class="font-bold tracking-widest">ARCHIVE_ACCESS: GRANTED</span>
                 </span>
             </div>
-            <div>RECORD_ID: 1978-NC-EXPLOSION</div>
+            <div class="hidden md:block">RECORD_ID: 1978-NC-EXPLOSION</div>
         </div>
 
         <div class="content-body">
@@ -175,12 +203,13 @@
             </header>
 
             <div class="meta-box font-mono">
-                <div><strong>事件名：</strong> 旧国立センター冷却系設備破裂事案（公式）</div>
-                <div><strong>発生日：</strong> 1978年7月11日 23時42分</div>
-                <div><strong>場所：</strong> 国立特殊通信総合研究センター・地下実験区画</div>
+                <div class="flex flex-col gap-1">
+                    <div><strong>事件名：</strong> 旧国立センター冷却系設備破裂事案（公式）</div>
+                    <div><strong>発生日：</strong> 1978年7月11日 23時42分</div>
+                    <div><strong>場所：</strong> 国立特殊通信総合研究センター・地下実験区画</div>
+                </div>
             </div>
 
-            <!-- 新聞スキャンの再現 -->
             <div class="newspaper-scan">
                 <div class="text-xs font-bold border-b border-black mb-2 flex justify-between">
                     <span>透明町新聞（昭和五十三年七月十二日付）</span>
@@ -203,15 +232,18 @@
             </div>
 
             <article class="text-gray-400 text-sm italic mt-8 font-mono">
-                <p>【アーカイブ補足】</p>
+                <p class="mb-2 font-bold text-gray-500">【アーカイブ補足：閲覧注意】</p>
                 <p>
-                    当時の警察および自治体への報告では「機械故障」として処理されているが、現場の破損状況と「ポンプ破裂」という説明の物理的不整合が残存。
-                    当時の主任研究員・<strong style="color:#d1d5db"> 瀬田門十</strong>の記録によると、国務機関より警察側へ何らかの処置が行われ、物理的不整合は処置完了とのことである。
+                    当時の警察および自治体への報告では「機械故障」として処理されているが、現場の破損状況と「ポンプ破裂」という説明の物理的整合性には重大な疑念が残る。
+                    当時の脳波記録（project-E初期データ）によれば、爆鳴音発生の直前に被検体DS-187の位相同期率が限界値を超え、理論上の「境界」を突破していたことが判明している。
                 </p>
             </article>
 
-            <footer class="footer-disclaimer">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+            <footer class="footer-tag font-mono">
+                <div>[END_OF_IMAGE_VIEWER]</div>
+                <div class="disclaimer-box">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
