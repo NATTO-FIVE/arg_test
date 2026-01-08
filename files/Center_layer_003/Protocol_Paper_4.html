@@ -6,7 +6,7 @@
     <title>INTERNAL_ARCHIVE | THESIS_DRAFT_V4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
         
         body {
             background-color: #030303;
@@ -25,6 +25,22 @@
             background-size: 100% 4px, 4px 100%;
             pointer-events: none;
             z-index: 1000;
+        }
+
+        /* サーバー接続バッジ：Ver.2 */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
         }
 
         .container-frame {
@@ -48,6 +64,7 @@
             letter-spacing: 0.1em;
         }
 
+        /* 戻るボタン：Ver.2仕様 */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -60,16 +77,19 @@
         .btn-return:hover {
             background: #00ff41;
             color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
-        .content-body {
-            padding: 3rem 4rem;
+        .content-body { padding: 3rem 4rem; }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
         }
 
         .meta-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
+            padding: 1.2rem;
             margin-bottom: 2.5rem;
             font-size: 0.9rem;
         }
@@ -78,17 +98,19 @@
         .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
 
         .thesis-text {
+            font-family: 'Noto Serif JP', serif;
             font-size: 0.95rem;
             text-align: justify;
             color: #ccc;
         }
 
         .thesis-text h2 {
+            font-family: 'JetBrains Mono', 'Noto Sans JP', sans-serif;
             font-size: 1.1rem;
             color: #00ff41;
             border-bottom: 1px solid #333;
             padding-bottom: 0.5rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
             font-weight: bold;
         }
@@ -96,15 +118,21 @@
         .osi-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
         }
         .osi-table td, .osi-table th {
             border: 1px solid #333;
-            padding: 8px;
+            padding: 10px;
         }
         .osi-table th { background: #111; color: #888; text-align: left; }
-        .osi-table .layer-8 { background: rgba(255, 255, 255, 0.05); color: #fff; font-style: italic; }
+        .osi-table .layer-8 { 
+            background: rgba(255, 255, 255, 0.05); 
+            color: #fff; 
+            font-style: italic;
+            border: 1px solid #00ff41;
+        }
 
         .status-dot {
             width: 8px; height: 8px;
@@ -118,13 +146,23 @@
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .footer-disclaimer {
-            margin-top: 4rem;
+        .footer-tag {
+            margin-top: 5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #222;
-            font-size: 0.7rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            text-align: center;
+        }
+
+        /* 免責事項：Ver.2仕様の薄灰色 */
+        .disclaimer-box {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #222;
             color: #888;
             text-align: center;
+            font-size: 10px;
         }
 
         .highlight {
@@ -136,6 +174,8 @@
 <body>
     <div class="crt-overlay"></div>
 
+    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
+
     <div class="container-frame">
         <div class="sys-header">
             <div class="flex items-center gap-4">
@@ -145,7 +185,7 @@
                     <span class="font-bold tracking-widest uppercase">File_Recovered: Thesis_V4</span>
                 </span>
             </div>
-            <div class="hidden md:block">SEC_CODE: SETA-1978-DRAFT4</div>
+            <div class="hidden md:block">PATH: /VOL/RESEARCH/DRAFTS/SETA_1978_L8.DAT</div>
         </div>
 
         <div class="content-body">
@@ -154,7 +194,7 @@
                     論文草稿第４版：OSI参照モデルにおける「第８階層」について
                 </h1>
                 <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
-                    Status: SUPPRESSED_DOCUMENT / INTERNAL_STUDY
+                    Security Classification: SUPPRESSED_DOCUMENT / INTERNAL_STUDY
                 </div>
             </header>
 
@@ -173,28 +213,35 @@
                 </div>
             </div>
 
-            <article class="thesis-text font-serif">
+            <article class="thesis-text">
                 <h2>1. 序論：通信階層の限界点</h2>
                 <p>
-                    我々が標準化を進めている<strong>OSI参照モデル</strong>は、情報の物理的伝送からアプリケーション層に至る7つの階層で構成されている。しかし、実験中に観測された「複数被検体間における無意識下の同期事象」は、既存の第7層（アプリケーション層）までの定義では説明が困難な挙動を示している。
+                    我々が標準化を進めている<strong>OSI参照モデル</strong>は、情報の物理的伝送からアプリケーション層に至る7つの階層で構成されている。
+                    しかし、実験中に観測された「複数被検体間における無意識下の同期事象」は、既存の第7層（アプリケーション層）までの定義では説明が困難な挙動を示している。
                 </p>
                 <p class="mt-4">
-                    符号化されたデータが物理媒体を移動するのではなく、受信側と送信側の「状態（State）」そのものが不連続に一致するこの現象は、現行モデルのさらに上位に、未定義の<strong>第８階層</strong>が存在することを強く示唆している。
+                    符号化されたデータが物理媒体を移動するのではなく、受信側と送信側の「状態（State）」そのものが不連続に一致するこの現象は、
+                    現行モデルのさらに上位に、未定義の<span class="highlight">第８階層</span>が存在することを強く示唆している。
                 </p>
 
-                <table class="osi-table font-mono">
-                    <tr><th>Layer</th><th>Name</th><th>Status</th></tr>
-                    <tr class="layer-8"><td>8</td><td>(未定義：意識接続層の仮定)</td><td>考察中</td></tr>
-                    <tr><td>7</td><td>アプリケーション層</td><td>定義済</td></tr>
-                    <tr><td>6</td><td>プレゼンテーション層</td><td>定義済</td></tr>
-                    <tr class="opacity-40"><td>...</td><td>...</td><td>...</td></tr>
-                    <tr class="opacity-40"><td>1</td><td>物理層</td><td>定義済</td></tr>
+                <table class="osi-table">
+                    <thead>
+                        <tr><th>Layer</th><th>Name</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="layer-8"><td>8</td><td>(未定義：意識接続層の仮定)</td><td>考察中</td></tr>
+                        <tr><td>7</td><td>アプリケーション層</td><td>定義済</td></tr>
+                        <tr><td>6</td><td>プレゼンテーション層</td><td>定義済</td></tr>
+                        <tr class="opacity-40"><td>...</td><td>...</td><td>...</td></tr>
+                        <tr class="opacity-40"><td>1</td><td>物理層</td><td>定義済</td></tr>
+                    </tbody>
                 </table>
 
                 <h2>2. 睡眠導入時における低周波共鳴の観測</h2>
                 <p>
                     我々が注目すべきは、被験者が入眠状態へ移行する際、特定の低周波数帯域において観測される脳波の変移である。
-                    通常、個別の人間が放つ脳波は、周囲の環境や個体差により異なる位相を持つ。しかし、特定の実験条件下において、これらの脳波が外部からの符号的指示なしに、
+                    通常、個別の人間が放つ脳波は、周囲の環境や個体差により異なる位相を持つ。
+                    しかし、特定の実験条件下において、これらの脳波が外部からの符号的指示なしに、
                     あたかも単一の通信路を共有しているかのように<span class="highlight">共鳴</span>する現象が確認された。
                 </p>
                 <p class="mt-4">
@@ -211,10 +258,10 @@
                 </p>
             </article>
 
-            <footer class="footer-disclaimer font-mono">
-                <div class="mb-2">SIGNAL_EOF: OSI_LAYER8_HYPOTHESIS</div>
-                <div class="text-[10px] opacity-70">
-                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
+            <footer class="footer-tag font-mono">
+                <div>SIGNAL_EOF: OSI_LAYER8_HYPOTHESIS</div>
+                <div class="disclaimer-box">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・思想・技術とは一切関係ありません。
                 </div>
             </footer>
         </div>
