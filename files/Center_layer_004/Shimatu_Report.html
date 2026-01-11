@@ -27,6 +27,22 @@
             z-index: 1000;
         }
 
+        /* サーバー接続バッジ：Ver.2 赤いデザインに合わせた配色 */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(40, 0, 0, 0.85);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
         .container-frame {
             max-width: 850px;
             margin: 1.5rem auto;
@@ -60,29 +76,34 @@
         .btn-return:hover {
             background: #ef4444;
             color: #000;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
         }
 
         .content-body {
             padding: 3rem 4rem;
         }
 
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
         .meta-box {
             background: rgba(127, 29, 29, 0.05);
             border-left: 2px solid #ef4444;
-            padding: 1rem 1.5rem;
-            margin-bottom: 3rem;
-            font-size: 0.9rem;
+            padding: 1.2rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.85rem;
         }
 
         .meta-row { display: flex; margin-bottom: 0.2rem; }
         .meta-label { width: 120px; color: #ef4444; font-weight: bold; flex-shrink: 0; }
 
         h1.doc-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: #fff;
             margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
@@ -121,15 +142,17 @@
             border-top: 1px solid #1a1a1a;
             font-size: 0.65rem;
             color: #444;
+            text-align: center;
         }
 
+        /* 免責事項：薄い灰色に統一 */
         .disclaimer-box {
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px dashed #222;
-            color: #666;
+            color: #888;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .stamp-red {
@@ -150,6 +173,8 @@
 <body>
     <div class="crt-overlay"></div>
 
+    <div class="server-badge">CONNECT TO FST_TECHNICAL_LABO</div>
+
     <div class="container-frame">
         <div class="sys-header">
             <div class="flex items-center gap-4">
@@ -159,7 +184,7 @@
                     <span class="font-bold tracking-widest uppercase">Breach_Detected: Level_5_Confidential</span>
                 </span>
             </div>
-            <div class="hidden md:block">AGENCY_CODE: H.I.C.A-1978-X</div>
+            <div class="hidden md:block text-[#661b1b]">RECORD_ID: 1978-NC-EXPLOSION</div>
         </div>
 
         <div class="content-body">
@@ -172,7 +197,7 @@
                 </div>
             </header>
 
-            <div class="meta-box font-mono">
+            <div class="meta-box font-mono text-gray-300">
                 <div class="meta-row">
                     <span class="meta-label">作成日:</span>
                     <span>1978年12月20日</span>
@@ -194,12 +219,10 @@
             <article class="text-gray-300">
                 <h2 class="section-title">1. 事故発生の経緯</h2>
                 <p>
-                    1978年12月8日 23時42分、国立特殊通信総合研究センター地下第3実験区画において、第8階層（意識同期層）の実証を目的とした大規模位相同期実験を実施した。
-                    被検体は、選別された位相適性保持者10名。その中には、予備調査で極めて高い適合率を示していた<strong>DS-187（小野 伊毛子）</strong>が含まれていた。
+                    1978年12月8日 23時42分、国立特殊通信総合研究センター地下第3実験区画において、第8階層（意識同期層）の実証を目的とした大規模位相同期実験を実施した。被検体は、選別された位相適性保持者10名。その中には、予備調査で極めて高い適合率を示していた<strong>DS-187（小野 伊毛子）</strong>が含まれていた。
                 </p>
                 <p class="mt-4">
-                    実験開始より114秒後、DS-187の脳波位相が6.2Hz帯において他9名を圧倒する速度で一致を開始。予測値を遥かに上回るエネルギー遷移が発生し、
-                    観測機材の一部が爆裂・炎上。実験室内の室温はマイナス18度まで急降下した。
+                    実験開始より114秒後、DS-187の脳波位相が6.2Hz帯において他9名を圧倒する速度で一致を開始。予測値を遥かに上回るエネルギー遷移が発生し、観測機材の一部が爆裂・炎上。実験室内の室温はマイナス18度まで急降下した。
                 </p>
 
                 <h2 class="section-title">2. 現象の分析：第8階層への遷移</h2>
@@ -210,16 +233,12 @@
                     <p>・残存状態：植物状態（自発的脳活動あり。恒常性維持）</p>
                 </div>
                 <p>
-                    DS-187の意識は、本実験を通じて我々が仮説として立てていた<strong>「第8階層」</strong>へ完全に遷移したものと断定される。
-                    他9名の被検体のうち8名は死亡を確認。DS-185については生存が確認されたが、重度の意識混濁。
-                    DS-187のみが境界線を突破し、人類史上初の「完全同期者」となったと考えられる。
+                    DS-187の意識は、本実験を通じて我々が仮説として立てていた<strong>「第8階層」</strong>へ完全に遷移したものと断定される。他9名の被検体のうち8名は死亡を確認。DS-185については生存が確認されたが、重度の意識混濁。DS-187のみが境界線を突破し、人類史上初の「完全同期者」となった。
                 </p>
 
                 <h2 class="section-title">3. 顛末および今後の処置</h2>
                 <p>
-                    本事故は「冷却系設備の爆発」として対外的に処理し、地元メディアおよび住民への隠蔽を完了した。
-                    DS-187については、戸籍上は死亡したものとして処理（12月20日付）を行い、社会的な存在を抹消する。
-                    DS-186については、完全な死亡を確認できず状態としては、DS-187と同一状態である。
+                    本事故は「冷却系設備の爆発」として対外的に処理し、地元メディアおよび住民への隠蔽を完了した。DS-187については、戸籍上は死亡したものとして処理（12月20日付）を行い、社会的な存在を抹消する。DS-186については、完全な死亡を確認できず、状態としてはDS-187と同一である。
                 </p>
                 <p class="mt-4">
                     しかし、DS-187の肉体は、第8階層との接続を維持し続ける唯一の<strong>「生体アンテナ」</strong>として極めて高い軍事的・科学的価値を有する。当該検体は不和睡眠技術センター附属病院（現・第八病院予定地）の地下機密区画へ移送し、恒久的な冷却槽内で維持・管理する。
@@ -229,7 +248,7 @@
                 </p>
 
                 <div class="mt-12 p-4 border border-dashed border-red-900 bg-red-900/10 text-xs italic">
-                    透明町自治体、周辺町民への隠蔽対策は高度情報通信庁にて実施とのこと。対策期間中、瀬田門十以下の研究チームは、高度情報通信庁の管理下に入る。
+                    透明町自治体、周辺町民への隠蔽対策は高度情報通信庁にて実施済み。対策期間中、瀬田門十以下の研究チームは、高度情報通信庁の管理下に入る。
                 </div>
             </article>
 
