@@ -5,27 +5,51 @@
   <title>技術紹介｜不和睡眠総合技術センター</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* index.html の共通スタイルを継承 */
+    /* 1. 共通カラー定義 (研究センターテンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --laboratory-green: #004d40;
       --accent-green: #2e7d32;
+      --text-main: #334155;
+      --bg-light: #f8fafc;
     }
 
-    .hero-banner {
-      background-color: var(--laboratory-green);
-      color: white;
-      padding: 15px 20px;
-      text-align: center;
-      border-bottom: 3px solid var(--kanae-gold);
+    /* 2. ヘッダースタイル (研究センターテンプレート同期) */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
     }
-    
-    .hero-banner h1 { font-size: 1.5rem; margin: 5px 0; }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 15pxの固定パディング */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #81c784, var(--laboratory-green));
+      border-radius: 4px;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--laboratory-green);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
+    }
 
-    .main-nav { margin-right: auto; }
     .main-nav ul {
       display: flex;
-      gap: 18px;
+      gap: 18px; /* 研究センター規定値 */
       list-style: none;
       padding: 0;
       margin: 0;
@@ -35,32 +59,121 @@
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
-      color: var(--text);
+      color: var(--text-main);
+      font-size: 14px;
+    }
+    .main-nav a:hover, .main-nav a.highlight {
+      color: var(--accent-green);
+      text-decoration: none;
     }
 
-    .main-layout { display: flex; gap: 30px; margin-top: 30px; }
-    @media (max-width: 900px) { .main-layout { flex-direction: column; } }
+    /* 3. ヒーローバナー */
+    .hero-banner {
+      background-color: var(--laboratory-green);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+    .hero-banner p {
+      font-size: 14px;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* 4. レイアウト構造 (テンプレート同期) */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .page-main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.8;
+    }
+    .main-layout {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    @media (max-width: 900px) {
+      .main-layout { flex-direction: column; }
+    }
     
     .card {
       background: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+      margin-bottom: 30px;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--laboratory-green);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
       margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      color: var(--laboratory-green);
+      margin: 20px 0 10px 0;
+      border-left: 4px solid var(--accent-green);
+      padding-left: 12px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-main);
     }
 
     /* 技術一覧用のスタイル */
-    .tech-list { list-style: none; padding: 0; }
+    .tech-list { list-style: none; padding: 0; margin: 0; }
     .tech-item {
       padding: 15px 0;
       border-bottom: 1px solid #eee;
     }
     .tech-item:last-child { border-bottom: none; }
-    .tech-date { font-size: 0.85em; color: #666; }
-    .tech-title { font-weight: bold; display: block; margin: 5px 0; color: var(--laboratory-green); }
-    .tech-author { font-size: 0.9em; color: #444; }
+    .tech-date { font-size: 0.8rem; color: #64748b; font-family: monospace; }
+    .tech-title { font-weight: bold; display: block; margin: 5px 0; color: var(--text-main); line-height: 1.4; }
+    .tech-author { font-size: 0.85rem; color: #666; }
 
-    .header-search-form { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    /* 5. 検索窓の設定 */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid #e2e8f0;
+    }
   </style>
 </head>
 <body>
@@ -69,14 +182,14 @@
   <div class="container">
     <div class="header-inner">
       <div class="logo-area">
-        <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #81c784, var(--laboratory-green));"></div>
+        <div class="logo-mark"></div>
         <div class="logo-text-wrapper">
           <div class="logo-text-main">不和睡眠総合技術センター</div>
           <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -86,9 +199,9 @@
           </ul>
         </nav>
 
-        <form class="header-search-form" action="../search.html" method="get">
+        <form id="lab-search-form" class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="キーワードを入力">
-          <button type="submit" class="search-btn" style="background-color: var(--accent-green);">検索</button>
+          <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
@@ -108,12 +221,12 @@
     <div class="content-area" style="flex: 2;">
       <section class="card">
         <h2>主要保有技術</h2>
-        <div style="margin-top: 15px;">
-          <h3 style="border-left: 4px solid var(--accent-green); padding-left: 10px;">【特殊脳波検査】位相整合性スキャニング </h3>
-          <p>意識の連続性を担保するための、独自の位相整合アルゴリズムを用いた非侵襲測定技術です。</p>
+        <div>
+          <h3>【特殊脳波検査】位相整合性スキャニング</h3>
+          <p>意識の連続性を担保するための、独自の位相整合アルゴリズムを用いた非侵襲測定技術です。個体間同期の初期化プロトコルにおいて中心的な役割を果たします。</p>
           
-          <h3 style="border-left: 4px solid var(--accent-green); padding-left: 10px; margin-top: 20px;"> 【睡眠環境制御】睡眠誘導システム</h3>
-          <p>外部音響刺激と深部体温を同期させ、特定の睡眠深度へ強制導入する環境による睡眠制御技術です。</p>
+          <h3>【睡眠環境制御】睡眠誘導システム</h3>
+          <p>外部音響刺激（6.2Hz帯）と深部体温を同期させ、特定の睡眠深度へ強制導入する環境制御技術です。外界のノイズを遮断し、高次階層へのアクセス環境を整えます。</p>
         </div>
       </section>
 
@@ -148,7 +261,8 @@
           <li class="tech-item">
             <span class="tech-date">2025.05.02</span>
             <span class="tech-title">ウェアラブルデバイスを用いた長期睡眠ログの解析手法</span>
-            <span class="tech-author">著者：環境制御ユニット・尾井緒千矢</span>          </li>
+            <span class="tech-author">著者：環境制御ユニット・尾井緒千矢</span>
+          </li>
           <li class="tech-item">
             <span class="tech-date">2025.04.15</span>
             <span class="tech-title">深部体温制御によるサーカディアンリズム遷移の最適化手法</span>
@@ -160,24 +274,32 @@
 
     <aside class="sidebar" style="flex: 1;">
       <div class="card">
-        <h4>研究に関するお問い合わせ</h4>
-        <p style="font-size: 0.85em;">当センターの技術・研究成果に関する詳細は、提携機関を通じてのみ公開しております。</p>
+        <h4 style="margin-top:0; color:var(--laboratory-green); margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">研究に関するお問い合わせ</h4>
+        <p style="font-size: 0.85rem; line-height: 1.6;">当センターの技術・研究成果に関する詳細は、提携機関（金枝聖域第八病院等）を通じてのみ公開しております。一般の方への開示は原則として行っておりません。</p>
       </div>
     </aside>
 
   </div>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 不和睡眠総合技術センター</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARGの一部として作成されたものです。
-      </div>
+<footer class="text-center">
+  <div class="container" style="text-align: center;">
+    <div style="font-size: 14px; color: var(--laboratory-green); font-weight: bold; margin-bottom: 10px;">
+      不和睡眠総合技術センター
+    </div>
+    <div style="font-size: 11px; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 不和睡眠総合技術センター<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の団体・研究・技術とは一切関係ありません。
     </div>
   </div>
 </footer>
 
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
 </body>
 </html>
