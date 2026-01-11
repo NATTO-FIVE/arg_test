@@ -78,13 +78,9 @@
       font-size: 0.8rem;
     }
     
-    /* アニメーション：呼吸するように光る */
-    @keyframes pulse-gold {
-      0%, 100% { filter: drop-shadow(0 0 2px var(--seimin-gold)); opacity: 0.8; }
-      50% { filter: drop-shadow(0 0 10px var(--seimin-gold)); opacity: 1; }
-    }
-    .hq-mark {
-      animation: pulse-gold 3s infinite ease-in-out;
+    /* アニメーション：点滅は不要との指示により削除 */
+    .hq-label {
+      text-shadow: 0 0 10px #000;
     }
   </style>
 </head>
@@ -119,7 +115,7 @@
       俗世の喧騒を離れ、御視様（おしさま）の御許へと意識を同調させるための、静謐なる聖域です。
     </p>
 
-    <!-- 地図：修正版（総本部を病院の下側へ移動） -->
+    <!-- 地図：修正版（総本部を四角に変更、点滅を停止） -->
     <div class="map-box">
       <svg class="map-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
         <!-- 背景の山影 -->
@@ -140,7 +136,7 @@
         </g>
         
         <!-- 主要道路（光るライン・ガイド） -->
-        <g stroke="var(--seimin-gold)" stroke-width="2" fill="none" stroke-dasharray="4 4" opacity="0.5">
+        <g stroke="var(--seimin-gold)" stroke-width="2" fill="none" stroke-dasharray="4 4" opacity="0.3">
           <path d="M 80 350 H 220 V 280 H 400" />
         </g>
 
@@ -174,16 +170,16 @@
         <circle cx="400" cy="210" r="6" fill="#f00" />
         <text x="415" y="215" font-size="9" fill="#f00" font-weight="bold">病院ゲート</text>
 
-        <!-- 5. 金の聖眠 総本部（病院の下側に配置） -->
-        <g class="hq-mark" transform="translate(450, 280)">
-          <!-- 三角形の意匠 -->
-          <path d="M 0 -25 L 20 10 L -20 10 Z" fill="none" stroke="var(--seimin-gold)" stroke-width="3" />
-          <path d="M 0 -35 V 20" stroke="var(--seimin-gold)" stroke-width="4" stroke-linecap="round" />
-          <text x="0" y="35" text-anchor="middle" font-size="14" fill="white" font-weight="bold" style="text-shadow: 0 0 10px #000;">金の聖眠 総本部</text>
+        <!-- 5. 金の聖眠 総本部（普通の四角に変更） -->
+        <g transform="translate(400, 255)">
+          <rect width="100" height="50" fill="#111" stroke="var(--seimin-gold)" stroke-width="2" rx="4" />
+          <text x="50" y="30" text-anchor="middle" font-size="12" fill="white" font-weight="bold" class="hq-label">
+            金の聖眠 総本部
+          </text>
         </g>
 
         <!-- 補足テキスト -->
-        <text x="590" y="390" text-anchor="end" font-size="9" fill="#444" font-style="italic">SUIBA DISTRICT MAP v.2025.2</text>
+        <text x="590" y="390" text-anchor="end" font-size="9" fill="#444" font-style="italic">SUIBA DISTRICT MAP v.2025.2.1</text>
       </svg>
     </div>
 
