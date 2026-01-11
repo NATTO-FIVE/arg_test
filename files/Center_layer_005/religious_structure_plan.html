@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLASSIFIED | RELIGIOUS_STRUCTURE_DETAIL</title>
+    <title>CLASSIFIED | THEOLOGY_DRAFT_FRAGMENT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
         
         body {
-            background-color: #020202;
+            background-color: #050505;
             font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
             color: #cfd3d7;
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .crt-overlay {
@@ -26,129 +27,226 @@
             z-index: 1000;
         }
 
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(40, 0, 0, 0.9);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
         .container-frame {
-            max-width: 850px;
+            max-width: 900px;
             margin: 1.5rem auto;
-            border: 2px solid #4a0000;
+            border: 1px solid #660000;
             background: #0a0a0a;
             position: relative;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
+            box-shadow: 0 0 50px rgba(139, 0, 0, 0.3);
         }
 
         .sys-header {
-            background: #1a0808;
-            border-bottom: 1px solid #4a0000;
+            background: #2a0000;
+            border-bottom: 1px solid #660000;
             padding: 0.5rem 1.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.75rem;
-            color: #c53030;
+            color: #ff4d4d;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .btn-return {
-            color: #ef4444;
-            border: 1px solid #ef4444;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
             padding: 3px 10px;
             text-decoration: none;
-            background: rgba(239, 68, 68, 0.05);
+            background: rgba(255, 77, 77, 0.05);
             font-size: 0.7rem;
         }
 
-        .content-body { padding: 4rem 5rem; }
+        .content-body { padding: 2rem; }
 
-        .meta-box {
-            background: rgba(255, 255, 255, 0.02);
-            border-left: 3px solid #c53030;
-            padding: 1.5rem 2rem;
-            margin-bottom: 3rem;
-            font-size: 0.9rem;
+        .memo-sheet {
+            background-color: #efead4;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: auto, 100% 1.5rem;
+            color: #1a1a1a;
+            padding: 60px 50px;
+            margin: 1rem 0;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+            transform: rotate(-0.2deg);
+            position: relative;
+            font-family: 'Yuji Syuku', serif;
         }
 
-        h1.doc-title {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 1rem;
-            border-bottom: 4px double #4a0000;
-            padding-bottom: 1rem;
-            text-align: center;
+        .memo-sheet::before {
+            content: "INTERNAL_SCRAP / DRAFT-ONLY";
+            position: absolute;
+            top: 20px; left: 30px;
+            font-family: 'JetBrains Mono';
+            font-size: 0.7rem;
+            color: #a00;
+            opacity: 0.4;
         }
 
-        h2.section-title {
-            font-size: 1.1rem;
-            color: #c53030;
-            border-bottom: 1px solid #333;
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-            margin-bottom: 1.2rem;
+        .handwritten-red {
+            color: #b00;
+            text-decoration: underline wavy #b00;
             font-weight: bold;
         }
 
-        .osi-mapping-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.85rem;
+        .margin-note {
+            position: absolute;
+            font-size: 0.8rem;
+            color: #b00;
+            line-height: 1.2;
+            opacity: 0.8;
+            pointer-events: none;
         }
-        .osi-mapping-table th, .osi-mapping-table td {
-            border: 1px solid #333;
-            padding: 12px;
-            text-align: left;
-        }
-        .osi-mapping-table th { background: #111; color: #ef4444; }
 
-        .highlight-red { color: #ef4444; font-weight: bold; }
+        .sketch-box {
+            border: 1px dashed #b00;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            background: rgba(255,255,255,0.3);
+        }
+
+        footer.site-footer {
+            margin-top: 4rem;
+            padding: 2rem 1rem;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        .disclaimer-box {
+            color: #777;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .disclaimer-box b {
+            color: #999;
+            display: block;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
+    <div class="server-badge">CONNECT TO FST_TECHNICAL_LABO</div>
 
     <div class="container-frame">
-        <div class="sys-header uppercase font-bold">
-            <a href="layer8_secret_Directory.html" class="btn-return">← BACK_TO_DIR</a>
-            <div>TRUTH_DECODING: RELIGIOUS_FRAUD</div>
+        <div class="sys-header">
+            <a href="layer8_top_secret.html" class="btn-return">← RETURN</a>
+            <div>STRATEGIC_OUTLINE: THEOLOGY_STRUCTURE_DRAFT</div>
         </div>
 
         <div class="content-body">
-            <header class="mb-10">
-                <div class="text-[10px] text-gray-600 font-mono mb-2">REF: HICA-STRAT-1982-DOC-09</div>
-                <h1 class="doc-title">宗教構成案：OSI階層モデルの信仰への完全置換</h1>
+            <header class="mb-4">
+                <h1 class="text-xl font-bold text-white mb-1 tracking-tighter">内部記録：OSI参照モデルの教義化に向けた名称・意匠の検討メモ</h1>
+                <p class="text-[9px] text-gray-500 font-mono tracking-widest uppercase italic">Drafted by SM & DM / Recovery Ref: FRAGMENT_82_09</p>
             </header>
 
-            <div class="meta-box font-mono">
-                <div class="flex mb-1"><span class="w-32 text-red-700">起案:</span> 瀬田 門十</div>
-                <div class="flex"><span class="w-32 text-red-700">修正日:</span> 1982年5月15日</div>
+            <div class="memo-sheet">
+                <!-- 欄外の走り書き -->
+                <div class="margin-note" style="top: 50px; right: 20px; transform: rotate(15deg); width: 150px;">
+                    「実験」を「修行」へ。<br>「エラー」を「業」へ。
+                </div>
+
+                <div class="mb-10">
+                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ 宗教法人名：</span>
+                    <div class="text-lg leading-loose">
+                        <p>
+                            「睡眠同期」という無機質な言葉は捨てる。もっと根源的で、逃れられない運命を感じさせる名称に。
+                        </p>
+                        <ul class="list-none pl-4 space-y-2 mt-4 text-base italic">
+                            <li>－ <span class="handwritten-red">「潜位（せんい）」</span>：エネルギー遷移。</li>
+                            <li>－ <span class="handwritten-red">「聖眠（せいみん）」</span>：尊い眠り。</li>
+                            <li>－ <span class="handwritten-red">「静寂のパケット」</span>：発話なき通信。祈り。</li>
+                            <li>－ <span class="handwritten-red">「金枝（きんし）」</span>：同軸ケーブル。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-10">
+                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ コンセプト案：共通組織のネーミング</span>
+                    <div class="text-lg leading-relaxed">
+                        <p>
+                            財団、教団、病院をまとめるためのアイディア。
+                        </p>
+                        <ul class="list-none pl-4 space-y-3 mt-4 text-base">
+                            <li>－ <span class="handwritten-red">「金枝（きんし）」</span>：
+                                <span class="text-sm">もとは地下の金メッキ回線を指す工学隠語。。</span>
+                            </li>
+                            <li>－ <span class="handwritten-red">「財団法人の設立」</span>：
+                                <span class="text-sm">教団の「寄付金」および「聖水売上」の洗浄口として機能させる。
+                                    非課税枠を最大限活用し、project-Eの機材費（海外調達分）へ還流。</span>
+                            </li>
+                            <li>－ <span class="handwritten-red">「神の経脈」</span>：
+                                <span class="text-sm">ネットワークでつながる階層のイメージ。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-10">
+                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ ロゴ案：階層を貫く芯</span>
+                    <div class="sketch-box">
+                        <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke="#666" stroke-width="0.5" fill="none" opacity="0.5">
+                                <path d="M150 20 H350 M150 40 H350 M150 60 H350 M150 80 H350 M150 100 H350 M150 120 H350 M150 140 H350" />
+                            </g>
+                            <path d="M250 0 V150" stroke="#b00" stroke-width="4" stroke-linecap="round" />
+                            <circle cx="250" cy="75" r="30" stroke="#b00" stroke-width="1" fill="none" stroke-dasharray="2 2" />
+                            <text x="260" y="40" font-family="Yuji Syuku" font-size="12" fill="#b00">貫通する「有線」</text>
+                            <text x="130" y="80" font-size="9" fill="#888" transform="rotate(-90 130 80)">L1-L7 LAYERS</text>
+                        </svg>
+                    </div>
+                    <p class="text-sm opacity-80">
+                        7つの通信層を物理的に貫通し、最上階層へと強制接続する「有線」の象徴。
+                        この中心軸なくして御視様への道は開かない。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ 「御視様」のイメージ像</span>
+                    <div class="space-y-4 text-base pl-2 border-l-2 border-red-200">
+                        <p>－ 高みから見る眼のイメージ。</p>
+                        <p>－ 巨大なレンズの歪み。</p>
+                        <p>－ ネットワークケーブルのたどり着く先に見下ろす眼。</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-right italic text-gray-500 text-xs">
+                    メモ：宗教とは、混沌な世の中を説明するためのプロトコルに過ぎない。そこにあるのは、ただの無慈悲な事実のみだ。
+                    惑ってはならない。事実を見つめ、そこにある事象を受け入れるだけなのだ。
+                </div>
             </div>
 
-            <article class="text-gray-300">
-                <h2 class="section-title">1. 置換の基本概念</h2>
+            <article class="text-gray-400 text-[10px] mt-10 p-4 border-t border-gray-900 leading-relaxed font-mono">
                 <p>
-                    大衆を「登攀（実験への志願）」へ導くためには、難解な工学理論を神聖な教義に翻訳する必要がある。
-                    OSI参照モデルの各階層を精神的ステージと定義し、同期の失敗を「罪（ノイズ）」、完全な同期を「解脱（第8階層への遷移）」と定義する。
-                </p>
-
-                <h2 class="section-title">2. 教学マッピング</h2>
-                <table class="osi-mapping-table">
-                    <thead>
-                        <tr><th>OSI階層</th><th>信仰上の呼称</th><th>信者への定義</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>第8層</td><td><span class="highlight-red">永遠の位</span></td><td>御視様と一体となり、老化と苦痛から解放される終着点。</td></tr>
-                        <tr><td>第7層</td><td><span class="highlight-red">御視の言葉</span></td><td>アプリケーション。祈りの実践と教義の理解。</td></tr>
-                        <tr><td>第4層</td><td><span class="highlight-red">経脈の浄化</span></td><td>トランスポート。肉体のノイズを除去し、同期の準備を整える。</td></tr>
-                        <tr><td>第1層</td><td><span class="highlight-red">土の牢獄</span></td><td>物理層。肉体という脆弱なインターフェースに縛られた下等な状態。</td></tr>
-                    </tbody>
-                </table>
-
-                <h2 class="section-title">3. 「合唱（コーラル）」の演出</h2>
-                <p>
-                    実験中に観測される脳波リークによる不随意な発話は、信者には「御視様と繋がった証」として教育する。この時、室温が急降下する現象についても「聖霊の降臨に伴う現世の熱の散逸」と説明することで、被検体の身体的苦痛を宗教的エクスタシーへ変換させる。
+                    宗教法人の設立資格を取得するまでに、構想をまとめておく。
                 </p>
             </article>
 
-            <footer class="mt-16 pt-4 border-t border-gray-900 text-center text-[10px] text-gray-700">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動とは一切関係ありません。
+            <footer class="site-footer">
+                <div class="disclaimer-box">
+                    <b>【免責事項】</b>
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。<br>
+                    実在の団体・活動・事件・技術・思想とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
