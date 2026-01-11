@@ -6,7 +6,7 @@
     <title>CLASSIFIED | SUBJECT_LIQUIDATION_MANUAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
         
         body {
             background-color: #020202;
@@ -83,26 +83,29 @@
             padding-bottom: 1rem;
         }
 
-        /* 手書き図解コンテナ */
-        .sketch-container {
+        .sketch-area {
             background: #050505;
             border: 1px solid #4a0000;
-            padding: 25px;
             margin: 2rem 0;
             position: relative;
+            min-height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .sketch-svg {
-            width: 100%;
+        .sketch-img {
+            max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.2));
+            display: block;
         }
 
-        .sketch-label {
-            font-family: 'Yuji Syuku', serif;
-            font-size: 14px;
-            fill: #ff4d4d;
-            letter-spacing: 0.05em;
+        .sketch-placeholder {
+            font-family: 'JetBrains Mono';
+            color: #300;
+            font-size: 0.7rem;
+            text-align: center;
         }
 
         .protocol-section { margin-bottom: 3rem; }
@@ -134,7 +137,7 @@
         }
 
         .step-title { color: #fff; font-weight: bold; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
-        .step-desc { font-size: 0.85rem; color: #a0a0a0; }
+        .step-desc { font-size: 0.85rem; color: #a0a0a0; text-align: justify; }
 
         .status-dot {
             width: 8px; height: 8px;
@@ -146,6 +149,15 @@
             animation: blink 1.2s infinite;
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .footer-tag {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+            text-align: center;
+        }
 
         .disclaimer-box {
             margin-top: 1.5rem;
@@ -163,47 +175,23 @@
 
     <div class="container-frame">
         <div class="sys-header uppercase font-bold">
-            <a href="layer8_top_secret.html" class="btn-return">← RETURN_TO_TERMINAL</a>
-            <div>DISPOSAL_LOG: ASSET_PROCESSING_UNIT</div>
+            <a href="layer8_top_secret.html" class="btn-return">← BACK_TO_DIR</a>
+            <div>PROCESS_MANUAL: DISPOSAL_WORKFLOW</div>
         </div>
 
         <div class="content-body">
             <header class="mb-10">
-                <h1 class="doc-title">不適格検体（LEVEL R）の最終処分・資源化実施細則</h1>
-                <p class="text-right font-mono text-[10px] text-gray-500 tracking-widest">PRIVATE_DOC: HICA-LIQ-1985-042</p>
+                <h1 class="doc-title">不適格個体（LEVEL R）の処理および資源化実施手順</h1>
+                <p class="text-right font-mono text-[10px] text-gray-500 tracking-widest">PRIVATE_DOC: HICA-MAN-85-042</p>
             </header>
 
-            <!-- 手書きスケッチ風図解 -->
-            <div class="sketch-container">
-                <svg class="sketch-svg" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 人体シルエットのラフスケッチ -->
-                    <path d="M300 40 C310 40, 320 50, 320 70 C320 90, 310 100, 300 100 C290 100, 280 90, 280 70 C280 50, 290 40, 300 40" stroke="#4a0000" stroke-width="1.5" fill="none" />
-                    <path d="M300 100 L300 220 M280 110 L220 180 M320 110 L380 180 M285 220 L260 300 M315 220 L340 300" stroke="#330000" stroke-width="1.2" fill="none" opacity="0.6"/>
-                    
-                    <!-- 切断ラインの指示 -->
-                    <path d="M250 140 L210 155 M350 140 L390 155 M275 250 L240 260 M325 250 L360 260" stroke="#ff4d4d" stroke-width="2" stroke-dasharray="4 4" />
-                    
-                    <!-- 脳抽出の円 -->
-                    <circle cx="300" cy="70" r="15" stroke="#ff4d4d" stroke-width="1" stroke-dasharray="2 2" fill="none" />
-                    <path d="M315 65 L420 40" stroke="#ff4d4d" stroke-width="1" />
-                    <text x="430" y="45" class="sketch-label">脳：アーカイブ容器へ(地下6)</text>
-
-                    <!-- 四肢切断の注釈 -->
-                    <path d="M210 150 L100 130" stroke="#ff4d4d" stroke-width="1" />
-                    <text x="20" y="125" class="sketch-label">五肢：切除/反応試験</text>
-                    <text x="20" y="145" class="sketch-label">→ 廃棄またはバイオマス化</text>
-
-                    <!-- 胴体売却の注釈 -->
-                    <path d="M305 180 L420 220" stroke="#ff4d4d" stroke-width="1" />
-                    <text x="430" y="225" class="sketch-label">体躯：外部仲介（裏市場）へ</text>
-                    <text x="430" y="245" class="sketch-label">健康な臓器は「換金資産」</text>
-
-                    <!-- 脳ジャーの簡易スケッチ -->
-                    <rect x="500" y="60" width="40" height="50" rx="5" stroke="#4a0000" stroke-width="1.5" fill="none" />
-                    <path d="M505 85 Q520 70, 535 85" stroke="#ff4d4d" stroke-width="1.5" fill="none" />
-                    <text x="500" y="125" class="sketch-label" font-size="10">Jar: DS-Ref</text>
-                </svg>
-                <div class="absolute bottom-2 left-4 text-[10px] text-red-900 font-bold opacity-50 uppercase tracking-tighter">LIQUIDATION_SKETCH_#042</div>
+            <!-- イラスト挿入領域 -->
+            <div class="sketch-area">
+                <img src="disposal_sketch.png" alt="解体・再処理手順図解" class="sketch-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="sketch-placeholder hidden">
+                    [IMAGE_NOT_FOUND: disposal_sketch.png]<br>
+                    REQUIRED: HAND-DRAWN ANATOMICAL SKETCH #042
+                </div>
             </div>
 
             <article class="text-gray-300 text-sm">
@@ -255,16 +243,12 @@
 
                 <div class="mt-12 p-6 border border-red-900 bg-red-950/20 text-center">
                     <p class="text-sm font-bold text-red-500 mb-2">「不要な器を壊し、有用なデータを残せ。我々の海を濁らせてはならない」</p>
-                    <p class="text-[10px] text-gray-500 italic">―― 聖眠金枝財団 廃棄部門 運用心得</p>
                 </div>
 
             </article>
 
             <footer class="footer-tag font-mono">
-                <div class="flex justify-between uppercase">
-                    <div>SIGNAL_EOF: LIQUIDATION_PROTOCOL</div>
-                    <div>DATA_STATUS: RESTRICTED_RED</div>
-                </div>
+                <div>SIGNAL_EOF: LIQUIDATION_PROTOCOL</div>
                 <div class="disclaimer-box">
                     ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
                 </div>
