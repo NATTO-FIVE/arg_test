@@ -18,8 +18,10 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
+        /* 走査線エフェクト */
         .crt-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -30,109 +32,149 @@
             z-index: 1000;
         }
 
-        /* 画像配置領域のコンテナ */
-        .image-container {
+        /* 空間の奥行きを出すレイヤー */
+        .void-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #111 0%, #000 80%);
+        }
+
+        /* 御視様の画像：透過PNGを想定 */
+        .oshisama-wrapper {
+            position: relative;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1;
-            overflow: hidden;
         }
 
-        /* ここに画像を挿入してください。
-           imgタグを置く場合は、class="oshisama-image" を指定すると、
-           不気味なグリッチアニメーションが適用されます。
-        */
-        .oshisama-image-area {
-            width: 100%;
-            max-width: 1000px;
-            height: auto;
-            opacity: 0.4;
-            filter: contrast(1.5) brightness(0.8);
-            animation: glitch-img 6s infinite;
+        .oshisama-png {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            opacity: 0.2; /* 暗闇に溶け込む薄さ */
+            filter: contrast(1.5) brightness(0.6) drop-shadow(0 0 30px rgba(255, 215, 0, 0.1));
+            animation: deity-manifest 10s infinite ease-in-out, glitch-image 7s infinite step-end;
+            pointer-events: none;
         }
 
-        @keyframes glitch-img {
-            0% { transform: scale(1); opacity: 0.4; filter: contrast(1.5) brightness(0.8); }
-            1% { transform: translate(5px, -5px) scale(1.01); opacity: 0.6; filter: hue-rotate(90deg); }
-            2% { transform: translate(-5px, 5px) scale(1); opacity: 0.4; filter: contrast(1.5) brightness(0.8); }
-            45% { transform: scale(1); }
-            46% { transform: skewX(20deg); opacity: 0.8; }
-            47% { transform: skewX(0deg); opacity: 0.4; }
+        /* 脈動と浮遊感 */
+        @keyframes deity-manifest {
+            0%, 100% { transform: scale(1) translateY(0); opacity: 0.15; }
+            50% { transform: scale(1.05) translateY(-20px); opacity: 0.25; }
         }
 
-        .judgment-box {
+        /* 不規則なグリッチ */
+        @keyframes glitch-image {
+            0%, 95% { transform: translate(0); filter: hue-rotate(0deg) contrast(1.5); }
+            96% { transform: translate(-10px, 5px) skewX(5deg); filter: hue-rotate(90deg) brightness(1.2); }
+            97% { transform: translate(15px, -5px) scaleY(1.1); filter: contrast(3); }
+            98% { transform: translate(-5px, 10px) skewX(-10deg); filter: hue-rotate(-90deg); }
+            100% { transform: translate(0); }
+        }
+
+        .judgment-ui {
             position: relative;
             z-index: 10;
             text-align: center;
-            background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%);
-            padding: 4rem;
+            background: radial-gradient(circle, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
+            padding: 8rem;
+            width: 100%;
         }
 
         .question {
-            font-size: 2.5rem;
-            letter-spacing: 0.3em;
-            margin-bottom: 4rem;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            letter-spacing: 0.4em;
+            margin-bottom: 6rem;
+            text-shadow: 0 0 40px rgba(255,255,255,0.4);
+            font-weight: 900;
         }
 
-        .options {
+        .nav-options {
             display: flex;
             justify-content: center;
-            gap: 5rem;
+            gap: 6rem;
         }
 
-        .option-btn {
-            font-size: 1.5rem;
-            color: #888;
+        .choice-link {
+            font-size: 1.8rem;
+            color: #555;
             text-decoration: none;
-            transition: all 0.3s;
-            background: none;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
             border: none;
             cursor: pointer;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
+            position: relative;
+            padding: 10px 20px;
         }
 
-        .option-btn:hover {
+        .choice-link:hover {
             color: #fff;
-            text-shadow: 0 0 10px #fff;
-            transform: scale(1.1);
+            text-shadow: 0 0 20px #fff;
+            transform: scale(1.15);
         }
 
-        .option-no:hover {
+        .choice-no:hover {
             color: #ff0000;
-            text-shadow: 0 0 10px #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+        }
+
+        .choice-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: all 0.4s;
+            transform: translateX(-50%);
+        }
+
+        .choice-link:hover::after {
+            width: 100%;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .judgment-ui { padding: 3rem 1rem; }
+            .nav-options { gap: 2rem; flex-direction: column; align-items: center; }
+            .question { letter-spacing: 0.2em; margin-bottom: 4rem; }
         }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
 
-    <div class="image-container">
-        <!-- 
-             【画像挿入エリア】
-             imgタグをここに挿入するか、このdivに背景画像を設定してください。
-             例： <img src="oshisama.png" class="oshisama-image-area" alt="御視様">
-        -->
-        <div id="oshisama-image-area" class="oshisama-image-area">
-            <!-- ユーザーが生成した画像をここに配置 -->
+    <!-- 背景：御視様の顕現エリア -->
+    <div class="void-container">
+        <div class="oshisama-wrapper">
+            <!-- 
+                ここにPNG画像を配置します。
+                ファイル名は oshisama.png を想定しています。
+            -->
+            <img src="oshisama.png" alt="御視様" class="oshisama-png" onerror="this.style.display='none';">
         </div>
     </div>
 
-    <div class="judgment-box">
+    <!-- 前景：選択肢UI -->
+    <main class="judgment-ui">
         <h1 class="question">あなたは御視様を信じますか？</h1>
         
-        <div class="options">
-            <a href="ending_bad.html" class="option-btn">はい</a>
-            <a href="ending_good.html" class="option-btn option-no">いいえ</a>
-        </div>
-    </div>
+        <nav class="nav-options">
+            <a href="ending_bad.html" class="choice-link">はい</a>
+            <a href="ending_good.html" class="choice-link choice-no">いいえ</a>
+        </nav>
+    </main>
 
 </body>
 </html>
