@@ -5,22 +5,46 @@
   <title>金枝聖域第八病院｜公式サイト</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 1. 共通カラー定義 */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
+      --text-main: #334155;
     }
 
-    /* 2. ヒーローバナー */
-    .hero-banner {
-      background-color: var(--sanctuary-blue);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 5px solid var(--kanae-gold);
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 垂直方向のガタつきを防ぐ固定パディング */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--sanctuary-blue);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
     }
 
-    /* 3. ナビゲーションのスタイル */
     .main-nav ul {
       display: flex;
       gap: 12px;
@@ -30,21 +54,42 @@
       align-items: center;
     }
     .main-nav a {
+      font-size: 13px; /* テンプレート規定値 */
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
-      color: var(--text);
+      color: var(--text-main);
     }
     .main-nav a.highlight {
       color: var(--kanae-gold);
       text-decoration: none;
     }
 
+    /* 3. ヒーローバナー (テンプレート同期) */
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
     /* 4. レイアウト構造 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .main-layout {
       display: flex;
       gap: 30px;
-      margin-top: 30px;
+      padding: 40px 0;
     }
     @media (max-width: 900px) {
       .main-layout { flex-direction: column; }
@@ -52,17 +97,21 @@
     
     .card {
       background: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    .card h2, .card h3 {
+      margin-top: 0;
+      color: var(--sanctuary-blue);
     }
 
-    /* 5. 検索窓の設定 */
+    /* 5. 検索窓の設定 (テンプレート同期) */
     .header-search-form {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 1;
     }
     .header-search-form input {
       padding: 5px 10px;
@@ -79,6 +128,13 @@
       cursor: pointer;
       font-weight: bold;
     }
+
+    /* 6. フッター (テンプレート同期) */
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      border-top: 1px solid #e2e8f0;
+    }
   </style>
 </head>
 <body>
@@ -87,7 +143,6 @@
   <div class="container">
     <div class="header-inner">
       <div class="logo-area">
-        <!-- <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div> -->
         <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ">
         <div class="logo-text-wrapper">
           <div class="logo-text-main">金枝聖域第八病院</div>
@@ -95,17 +150,16 @@
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="director.html">院長挨拶</a></li>
             <li><a href="doctors.html">医師紹介</a></li>
-            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+            <!-- アクセスはメニューから削除 -->
           </ul>
         </nav>
 
-        <!-- action を ../search.html に指定し、GETメソッドで遷移 -->
         <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
@@ -118,46 +172,51 @@
 <section class="hero-banner">
   <div class="container">
     <h1>意識の可能性をひらく、未来のウェルビーイング。</h1>
-    <p>当院は、最先端の技術により次世代の脳機能ケアを提供しています。</p>
+    <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">当院は、最先端の技術により次世代の脳機能ケアを提供しています。</p>
   </div>
 </section>
 
 <main class="container">
   <div class="main-layout">
     <div class="content-area" style="flex: 2;">
-      <h2>診療科のご案内</h2>
+      <h2 style="font-size: 20px; border-left: 6px solid var(--kanae-gold); padding-left: 15px; margin-bottom: 25px; color: var(--sanctuary-blue);">診療科のご案内</h2>
       <div class="dept-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
         <div class="card">
           <h3>特殊睡眠外来科</h3>
-          <p>「睡眠障害」に関する専門的な治療を行います。担当医：神代 永久 / 虚空蔵 零</p>
-          <p><a href="insomnia.html">詳細はこちら →</a></p>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-main);">「睡眠障害」に関する専門的な治療を行います。担当医：神代 永久 / 虚空蔵 零</p>
+          <p style="margin-top: 15px;"><a href="insomnia.html" style="color: var(--kanae-gold); font-weight: bold; text-decoration: none;">詳細はこちら →</a></p>
         </div>
         <div class="card">
           <h3>脳神経外科</h3>
-          <p>頭痛、めまい、手足のしびれ等の神経に関する症状がある方はこちら。</p>
-          <p><a href="neuro.html">詳細はこちら →</a></p>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-main);">頭痛、めまい、手足のしびれ等の神経に関する症状がある方はこちら。</p>
+          <p style="margin-top: 15px;"><a href="neuro.html" style="color: var(--kanae-gold); font-weight: bold; text-decoration: none;">詳細はこちら →</a></p>
         </div>
       </div>
     </div>
 
     <aside class="sidebar" style="flex: 1;">
       <div class="card">
-        <h4>関連リンク</h4>
-        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
-          <li style="margin-bottom: 8px;"><a href="access.html">アクセス</a></li>
-          <li style="margin-bottom: 8px;"><a href="history.html">病院沿革</a></li>
-          <li style="margin-bottom: 8px;"><a href="../laboratory/index.html">不和睡眠総合技術センター</a></li>
-          <li style="margin-bottom: 8px;"><a href="../foundation/index.html">一般財団法人 聖眠金枝財団</a></li>
+        <h4 style="margin-top: 0; color: var(--sanctuary-blue); border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">関連リンク</h4>
+        <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+          <li style="margin-bottom: 10px;"><a href="access.html" style="color: var(--text-main);">アクセス案内</a></li>
+          <li style="margin-bottom: 10px;"><a href="history.html" style="color: var(--text-main);">病院沿革</a></li>
+          <li style="margin-bottom: 10px;"><a href="../laboratory/index.html" style="color: var(--text-main);">不和睡眠総合技術センター</a></li>
+          <li style="margin-bottom: 10px;"><a href="../foundation/index.html" style="color: var(--text-main);">一般財団法人 聖眠金枝財団</a></li>
         </ul>
       </div>
     </aside>
   </div>
 </main>
 
-<footer>
-  <div class="container text-center py-6">
-    <div>© 2025 金枝聖域第八病院</div>
-    <div class="text-[10px] text-gray-500 mt-2">※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。</div>
+<footer class="text-center">
+  <div class="container py-10" style="text-align: center;">
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
+    </div>
   </div>
 </footer>
 
@@ -170,7 +229,6 @@
     const searchInput = document.getElementById('q');
     const searchForm = document.getElementById('hospital-search-form');
 
-    // フォーム送信時に空文字チェックのみ行う
     searchForm.addEventListener('submit', (e) => {
       if (!searchInput.value.trim()) {
         e.preventDefault();
