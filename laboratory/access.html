@@ -92,37 +92,40 @@
       margin-bottom: 4px;
     }
 
-    /* 5. SVG地図のスタイル */
+    .warning-text {
+      font-size: 0.8rem;
+      color: #b91c1c;
+      background: #fef2f2;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 5px;
+      border-left: 3px solid #b91c1c;
+    }
+
+    /* 5. 地図画像エリアのスタイル */
     .map-container {
-      background: #f8fafc;
+      background: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
-      padding: 20px;
+      padding: 15px;
       position: relative;
       overflow: hidden;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
     }
 
-    .map-svg {
+    /* 地図写真自体のスタイル */
+    .map-image {
       width: 100%;
       height: auto;
-      display: block;
-    }
-
-    .map-label {
-      font-size: 12px;
-      font-family: 'Noto Sans JP', sans-serif;
-      fill: #334155;
-      font-weight: bold;
-    }
-
-    .map-label-highlight {
-      fill: var(--laboratory-green);
-      font-size: 13px;
-    }
-
-    .map-hospital {
-      fill: #b91c1c; /* 第八病院用 */
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
     }
 
     /* 6. 検索窓 */
@@ -205,58 +208,37 @@
       </div>
 
       <div class="info-item">
-        <span class="info-label">電車でお越しの方</span>
-        <p>透横電鉄「透明町駅」下車、徒歩約20分。<br>駅前より「翠波山ハイキングコース」方面へお進みください。</p>
+        <span class="info-label">公共交通機関をご利用の方</span>
+        <p>透横電鉄「透明町駅」下車。改札を出て左手、翠波山方面へ徒歩約20分。</p>
+        <div class="warning-text">
+          <strong>※運行本数に関するご注意：</strong><br>
+          透明町駅への列車は1時間に1〜2本程度と極めて少なくなっております。また、駅周辺にタクシー・バスの常駐はございません。お帰りの際は時刻表を事前によくお確かめください。
+        </div>
       </div>
 
       <div class="info-item">
-        <span class="info-label">周辺環境</span>
-        <p>当センターは翠波山の麓に位置しており、近隣には翠波八幡神社がございます。静謐な環境を保つため、周辺での騒音や許可なき立ち入りは固くお断りしております。</p>
+        <span class="info-label">周辺環境と立地</span>
+        <p>当センターは翠波山の麓、「聖地」と呼ばれる広大な私有地内に位置しております。道中は勾配が厳しく、街灯も少ないため、日没後の歩行による来訪は推奨されておりません。</p>
       </div>
 
       <div class="info-item">
-        <span class="info-label">提携機関</span>
-        <p>金枝聖域第八病院とは隣接しており、回廊で接続されています。外来受診の方は病院側の受付をご利用ください。</p>
+        <span class="info-label">来訪時の受付について</span>
+        <p>提携先の<strong>金枝聖域第八病院</strong>と敷地を共有しておりますが、外部からセンターへ直接アクセスできる公道はございません。病院とセンターは敷地内の「内部専用回廊」でのみ接続されています。一般の方の立ち入りは固く制限されております。</p>
       </div>
     </div>
 
-    <!-- 右側：簡易地図（SVG） -->
+    <!-- 右側：地図画像エリア -->
     <div class="map-container">
-      <svg class="map-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <!-- 背景の山（翠波山） -->
-        <path d="M0 100 L100 20 L200 80 L300 10 L400 100 V400 H0 Z" fill="#e2e8f0" opacity="0.5"/>
-        <text x="320" y="40" class="map-label" opacity="0.5">翠波山</text>
-
-        <!-- 道路 -->
-        <path d="M200 400 L200 250 L50 250 M200 250 L350 250 L350 150" stroke="#cbd5e1" stroke-width="20" fill="none"/>
-        
-        <!-- 透明町駅 -->
-        <rect x="20" y="230" width="60" height="40" fill="#64748b" rx="4"/>
-        <text x="50" y="290" class="map-label" text-anchor="middle">透明町駅</text>
-
-        <!-- 翠波八幡神社 -->
-        <path d="M330 150 L370 150 L350 120 Z" fill="#d4af37"/>
-        <text x="350" y="180" class="map-label" text-anchor="middle">翠波八幡神社</text>
-
-        <!-- 不和睡眠総合技術センター -->
-        <rect x="160" y="100" width="80" height="60" fill="var(--laboratory-green)" rx="2"/>
-        <text x="200" y="90" class="map-label map-label-highlight" text-anchor="middle">不和睡眠総合技術センター</text>
-
-        <!-- 金枝聖域第八病院（隣接） -->
-        <rect x="245" y="100" width="80" height="60" fill="#991b1b" rx="2"/>
-        <text x="285" y="90" class="map-label" text-anchor="middle" fill="#991b1b">第八病院</text>
-        
-        <!-- 接続回廊 -->
-        <rect x="240" y="125" width="5" height="10" fill="#444"/>
-
-        <!-- ハイキングコース -->
-        <path d="M100 250 Q150 200, 200 180 T300 100" stroke="#accent-green" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
-        <text x="130" y="210" class="map-label" font-size="10" transform="rotate(-30 130 210)">ハイキングコース</text>
-
-        <!-- 現在地アイコン等のマーカー -->
-        <circle cx="200" cy="130" r="4" fill="#fff" class="animate-pulse"/>
-      </svg>
-      <p style="font-size: 10px; color: #94a3b8; margin-top: 10px; text-align: center;">※当施設周辺は特別景観保存区域に指定されています。</p>
+      <!-- 
+           ここにPNG画像を配置します。
+           ファイル名は sample.png を想定しています。
+           読み込みに失敗した場合は代替テキストを表示します。
+      -->
+      <img src="sample.png" alt="透明町周辺アクセスマップ" class="map-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:#94a3b8; font-size:12px;\'>周辺地図画像（準備中）</p>';">
+      
+      <p style="font-size: 10px; color: #94a3b8; margin-top: 15px; text-align: center;">
+        ※特別景観保存区域につき、徒歩以外の手段（タクシー等）は確保困難ですのでご注意ください。
+      </p>
     </div>
   </div>
 </main>
@@ -275,12 +257,10 @@
 
 <script>
   (function () {
-    // 1. 現在ページのハイライト
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
 
-    // 2. 検索実行ロジック
     const searchInput = document.getElementById('q');
     const searchBtn = document.getElementById('search-submit');
 
