@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLASSIFIED | SUBJECT_LIQUIDATION_MANUAL</title>
+    <title>CLASSIFIED | ASSET_LIQUIDATION_FLOW</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
         
         body {
             background-color: #020202;
@@ -14,6 +14,7 @@
             color: #cfd3d7;
             margin: 0;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .crt-overlay {
@@ -29,7 +30,7 @@
         .server-badge {
             position: fixed;
             top: 20px; right: 20px;
-            background: rgba(40, 0, 0, 0.85);
+            background: rgba(40, 0, 0, 0.9);
             border: 1px solid #ef4444;
             color: #ef4444;
             padding: 4px 12px;
@@ -38,13 +39,13 @@
             z-index: 1100;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
         }
 
         .container-frame {
             max-width: 850px;
             margin: 1.5rem auto;
-            border: 2px solid #660000;
+            border: 1px solid #660000;
             background: #0a0a0a;
             position: relative;
             box-shadow: 0 0 50px rgba(139, 0, 0, 0.2);
@@ -68,9 +69,14 @@
             text-decoration: none;
             background: rgba(255, 77, 77, 0.05);
             font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .content-body { padding: 3rem 4rem; }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
 
         h1.doc-title {
             font-size: 1.4rem;
@@ -83,80 +89,108 @@
             padding-bottom: 1rem;
         }
 
-        .sketch-area {
-            background: #050505;
-            border: 1px solid #4a0000;
-            margin: 2rem 0;
+        .aged-notebook-area {
+            background-color: #efead4;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                url('https://www.transparenttextures.com/patterns/asfalt-dark.png'),
+                linear-gradient(135deg, rgba(139, 69, 19, 0.05) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+            background-blend-mode: multiply, overlay, normal;
+            border: 1px solid #d4c5a1;
+            padding: 60px 40px;
+            margin: 2.5rem 0;
             position: relative;
-            min-height: 350px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 
+                2px 2px 0 #c4b48d,
+                5px 5px 25px rgba(0,0,0,0.7);
+            transform: rotate(-0.5deg);
             overflow: hidden;
         }
 
-        .sketch-img {
-            max-width: 100%;
+        .aged-notebook-area::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 45px; height: 100%;
+            background-image: radial-gradient(circle, #1a1a1a 5px, transparent 6px);
+            background-size: 100% 50px;
+            opacity: 0.9;
+        }
+
+        .stain-layer {
+            position: absolute;
+            width: 200px; height: 150px;
+            background: radial-gradient(ellipse, rgba(101, 67, 33, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .blueprint-svg {
+            width: 100%;
             height: auto;
             display: block;
+            filter: url(#pencil-blur);
+            position: relative;
+            z-index: 2;
         }
 
-        .sketch-placeholder {
-            font-family: 'JetBrains Mono';
-            color: #300;
-            font-size: 0.7rem;
-            text-align: center;
+        .hand-drawn-line {
+            fill: none;
+            stroke: #222;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
-        .protocol-section { margin-bottom: 3rem; }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #4a0000;
-            padding-bottom: 0.3rem;
+        .hand-drawn-text {
+            font-family: 'Yuji Syuku', serif;
+            font-size: 16px;
+            fill: #1a1a1a;
+            letter-spacing: 0.05em;
         }
 
-        .section-num {
-            background: #660000;
-            color: #fff;
-            padding: 2px 8px;
-            font-size: 0.8rem;
+        .hand-drawn-subtext {
+            font-family: 'Yuji Syuku', serif;
+            font-size: 10px;
+            fill: #444;
+        }
+
+        .phase-indicator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            fill: #8b0000;
             font-weight: bold;
         }
 
-        .section-name { font-weight: bold; color: #ff4d4d; font-size: 1rem; }
-
-        .step-box {
-            margin-left: 1rem;
+        .phase-card {
+            margin-bottom: 3rem;
             border-left: 2px solid #330000;
             padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
         }
 
-        .step-title { color: #fff; font-weight: bold; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
-        .step-desc { font-size: 0.85rem; color: #a0a0a0; text-align: justify; }
-
-        .status-dot {
-            width: 8px; height: 8px;
-            background-color: #ff0000;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            box-shadow: 0 0 8px #ff0000;
-            animation: blink 1.2s infinite;
+        .phase-header {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: #ff4d4d;
         }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .phase-num { font-weight: bold; font-size: 1.2rem; }
+        .phase-title { font-weight: bold; font-size: 0.95rem; color: #fff; }
+
+        .step-item { margin-bottom: 1.5rem; }
+        .step-heading { color: #ef4444; font-weight: bold; font-size: 0.85rem; margin-bottom: 0.3rem; display: block; }
+        .step-text { font-size: 0.85rem; color: #b0b0b0; text-align: justify; }
 
         .footer-tag {
-            margin-top: 4rem;
+            margin-top: 5rem;
             padding-top: 1.5rem;
             border-top: 1px solid #1a1a1a;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #444;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
         }
 
         .disclaimer-box {
@@ -175,84 +209,123 @@
 
     <div class="container-frame">
         <div class="sys-header uppercase font-bold">
-            <a href="layer8_top_secret.html" class="btn-return">← BACK_TO_DIR</a>
-            <div>PROCESS_MANUAL: DISPOSAL_WORKFLOW</div>
+            <a href="layer8_top_secret.html" class="btn-return">← RETURN</a>
+            <div>PROCESS_MANUAL: TERMINATION_WORKFLOW</div>
         </div>
 
         <div class="content-body">
             <header class="mb-10">
                 <h1 class="doc-title">不適格個体（LEVEL R）の処理および資源化実施手順</h1>
-                <p class="text-right font-mono text-[10px] text-gray-500 tracking-widest">PRIVATE_DOC: HICA-MAN-85-042</p>
+                <p class="text-right font-mono text-[9px] text-gray-600 tracking-tighter">RESTRICTED_ACCESS_ONLY / REF-85-042</p>
             </header>
 
-            <!-- イラスト挿入領域 -->
-            <div class="sketch-area">
-                <img src="Hospital_Release_Protocol.png" alt="解体・再処理手順図解" class="sketch-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="sketch-placeholder hidden">
-                    [IMAGE_NOT_FOUND: disposal_sketch.png]<br>
-                    REQUIRED: HAND-DRAWN ANATOMICAL SKETCH #042
-                </div>
+            <div class="aged-notebook-area">
+                <div class="stain-layer" style="top:10%; right:5%;"></div>
+                <div class="stain-layer" style="bottom:5%; left:15%; width:100px;"></div>
+
+                <svg class="blueprint-svg" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="pencil-blur">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="4" result="noise" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
+                            <feGaussianBlur stdDeviation="0.3" />
+                        </filter>
+                        <marker id="drawn-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <path d="M0,0 L2,3.5 L0,7 L10,3.5 Z" fill="#222" />
+                        </marker>
+                    </defs>
+                    <text x="50" y="30" class="phase-indicator">PHASE 01: SCREENING</text>
+                    <rect x="230" y="40" width="140" height="40" rx="4" class="hand-drawn-line" />
+                    <text x="300" y="65" class="hand-drawn-text" text-anchor="middle">LEVEL R 検体</text>
+                    <path d="M300 80 Q295 100, 300 120" class="hand-drawn-line" marker-end="url(#drawn-arrow)" />
+                    <path d="M300 120 L340 150 L300 180 L260 150 Z" class="hand-drawn-line" />
+                    <text x="300" y="155" class="hand-drawn-text" text-anchor="middle" style="font-size:12px;">資産評価</text>
+                    <path d="M340 150 Q460 150, 460 200" class="hand-drawn-line" marker-end="url(#drawn-arrow)" />
+                    <rect x="400" y="200" width="130" height="50" rx="8" class="hand-drawn-line" stroke-dasharray="3 3" />
+                    <text x="465" y="225" class="hand-drawn-text" text-anchor="middle">外部組織売却</text>
+                    <text x="465" y="240" class="hand-drawn-subtext" text-anchor="middle">（裏市場への人体供給）</text>
+                    <path d="M300 180 Q300 200, 300 220" class="hand-drawn-line" marker-end="url(#drawn-arrow)" />
+                    <text x="50" y="200" class="phase-indicator">PHASE 02: PROCESSING</text>
+                    <rect x="220" y="220" width="160" height="50" rx="2" class="hand-drawn-line" />
+                    <text x="300" y="245" class="hand-drawn-text" text-anchor="middle">院内解体・実験</text>
+                    <text x="300" y="260" class="hand-drawn-subtext" text-anchor="middle">（維持コスト削減・試験）</text>
+                    <path d="M220 245 Q130 245, 130 290" class="hand-drawn-line" marker-end="url(#drawn-arrow)" />
+                    <rect x="60" y="290" width="140" height="55" rx="5" class="hand-drawn-line" />
+                    <text x="130" y="315" class="hand-drawn-text" text-anchor="middle">五肢切除</text>
+                    <text x="130" y="330" class="hand-drawn-subtext" text-anchor="middle">神経反応・拒絶波形記録</text>
+                    <path d="M380 245 Q470 245, 470 290" class="hand-drawn-line" marker-end="url(#drawn-arrow)" />
+                    <rect x="400" y="290" width="140" height="55" rx="5" class="hand-drawn-line" />
+                    <text x="470" y="315" class="hand-drawn-text" text-anchor="middle">脳標本化</text>
+                    <text x="470" y="330" class="hand-drawn-subtext" text-anchor="middle">アーカイブ・ジャー格納</text>
+                    <path d="M130 345 Q130 400, 240 400" class="hand-drawn-line" />
+                    <path d="M470 345 Q470 400, 360 400" class="hand-drawn-line" />
+                    <path d="M460 250 Q460 380, 360 400" class="hand-drawn-line" />
+                    <text x="50" y="380" class="phase-indicator">PHASE 03: ERASURE</text>
+                    <rect x="240" y="390" width="120" height="45" rx="3" class="hand-drawn-line" style="stroke-width:2.5; stroke:#000;" />
+                    <text x="300" y="418" class="hand-drawn-text" text-anchor="middle" style="font-size:18px;">事務的抹消</text>
+                    <text x="300" y="445" class="hand-drawn-subtext" text-anchor="middle" style="fill:#800; font-weight:bold;">DS番号置換 / 戸籍抹消完了</text>
+                    <path d="M380 410 L520 440" class="hand-drawn-line" style="stroke:#800; stroke-width:1; opacity:0.6;" />
+                    <text x="530" y="450" class="hand-drawn-text" style="font-size:11px; fill:#800; transform:rotate(5deg);">遺体返還は不可</text>
+                </svg>
             </div>
 
-            <article class="text-gray-300 text-sm">
-                
-                <section class="protocol-section">
-                    <div class="section-header">
-                        <span class="section-num">PHASE 01</span>
-                        <span class="section-name">個体選別と「資産」の流用ルート確定</span>
+            <article class="text-gray-300">
+                <section class="phase-card">
+                    <div class="phase-header">
+                        <span class="phase-num">PHASE 01</span>
+                        <span class="phase-title">個体選別と「資産」の流用ルート確定</span>
                     </div>
-                    <div class="step-box">
-                        <span class="step-title">1. 他医療実験・外部組織への受け渡し</span>
-                        <p class="step-desc">
+                    <div class="step-item">
+                        <span class="step-heading">1. 他医療実験・外部組織への受け渡し</span>
+                        <p class="step-text">
                             意識遷移の失敗により植物状態となったが、若年かつ肉体コンディションが良好な個体は「換金資産」として優先する。提携する仲介組織（裏の人体流通網）へ引き渡し、回収された資金は当病院の運営および機密維持費用へ充当する。一部の個体は、院内の別病棟（高度外科研究部）での「破壊的臨床試験」のサンプルとして転送する。
                         </p>
                     </div>
                 </section>
-
-                <section class="protocol-section">
-                    <div class="section-header">
-                        <span class="section-num">PHASE 02</span>
-                        <span class="section-name">院内解体および標本化プロトコル（廃棄確定分）</span>
+                <section class="phase-card">
+                    <div class="phase-header">
+                        <span class="phase-num">PHASE 02</span>
+                        <span class="phase-title">院内解体および標本化プロトコル（廃棄確定分）</span>
                     </div>
-                    <div class="step-box">
-                        <span class="step-title">1. 維持コスト削減のための物理的整理</span>
-                        <p class="step-desc">
+                    <div class="step-item">
+                        <span class="step-heading">1. 維持コスト削減のための物理的整理</span>
+                        <p class="step-text">
                             生命維持コストを最小化するため、不要な部位（両腕・両脚）を付け根より切除する。この解体工程中に、切断面への電気刺激を行い、植物状態にある脳の深部（第8階層付近）が示す「無意識の拒絶波形」を記録する。これは、位相同期に失敗した原因を特定するための極めて重要なデータとなる。
                         </p>
                     </div>
-                    <div class="step-box">
-                        <span class="step-title">2. 中枢神経（脳）の永久アーカイブ化</span>
-                        <p class="step-desc">
+                    <div class="step-item">
+                        <span class="step-heading">2. 中枢神経（脳）の永久アーカイブ化</span>
+                        <p class="step-text">
                             肉体の損耗が限界に達した個体については、外科手術により脳のみを摘出する。摘出された脳は特殊な培養液を満たしたキャニスター（通称：アーカイブ・ジャー）へ収容し、地下第6倉庫のラックにて永久保管する。これらは「定常的な脳波サンプル」として、後続の登攀実験におけるノイズ除去用フィルタの基準データとして利用される。
                         </p>
                     </div>
                 </section>
-
-                <section class="protocol-section">
-                    <div class="section-header">
-                        <span class="section-num">PHASE 03</span>
-                        <span class="section-name">事務的隠蔽の完了</span>
+                <section class="phase-card">
+                    <div class="phase-header">
+                        <span class="phase-num">PHASE 03</span>
+                        <span class="phase-title">事務的隠蔽の完了</span>
                     </div>
-                    <div class="step-box">
-                        <span class="step-title">一意の識別番号による管理</span>
-                        <p class="step-desc">
+                    <div class="step-item">
+                        <span class="step-heading">一意の識別番号による管理</span>
+                        <p class="step-text">
                             地下倉庫に保管されるサンプルから、氏名、生年月日などの個人的な属性は完全に剥奪される。以後は「DS-XXX（処分番号）」のみで呼称し、万一の漏洩時も個人が特定されないよう、事務局にて戸籍抹消手続き（死亡診断書の偽装発行）を並行して完了させること。
                         </p>
                     </div>
                 </section>
-
                 <div class="mt-12 p-6 border border-red-900 bg-red-950/20 text-center">
-                    <p class="text-sm font-bold text-red-500 mb-2">「不要な器を壊し、有用なデータを残せ。我々の海を濁らせてはならない」</p>
+                    <p class="text-sm font-bold text-red-500 mb-1">「不要な器を壊し、有用なデータを残せ。我々の海を濁らせてはならない」</p>
                 </div>
-
             </article>
 
             <footer class="footer-tag font-mono">
                 <div>SIGNAL_EOF: LIQUIDATION_PROTOCOL</div>
-                <div class="disclaimer-box">
-                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
-                </div>
+                <div>DATA_STATUS: RESTRICTED_RED</div>
             </footer>
+            
+            <!-- 免責事項の追加 -->
+            <div class="disclaimer-box">
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
+            </div>
         </div>
     </div>
 </body>
