@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>信徒による写実ギャラリー：聖域の記憶｜金の聖眠</title>
+  <title>信徒による写実録：聖域の記憶｜金の聖眠</title>
   <link rel="stylesheet" href="style.css">
   <style>
     :root {
@@ -71,12 +71,19 @@
       padding: 5px;
       background-color: #000;
       position: relative;
+      /* 枠の比率を16:9に固定して安定させる（オプション） */
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
     
     .photo-frame img {
       width: 100%;
-      height: 260px;
-      object-fit: cover;
+      height: 100%;
+      /* contain に変更することで画像全体を表示し、拡大（クロップ）を防ぐ */
+      object-fit: contain;
       display: block;
       filter: sepia(0.2) contrast(1.05) brightness(0.9);
       transition: filter 0.5s ease;
@@ -129,7 +136,7 @@
 
     .img-fallback {
       width: 100%;
-      height: 260px;
+      height: 100%;
       background: #111;
       display: none;
       align-items: center;
@@ -172,8 +179,8 @@
 <main>
   <section class="page-title-area">
     <div class="container">
-      <h1>信徒合宿「安らぎの階」の写実ギャラリー</h1>
-      <p>合宿で見出した「御視様」との繋がり</p>
+      <h1>信徒による写実録</h1>
+      <p>翠波の地で見出した「御視様」との繋がりを記録する</p>
     </div>
   </section>
 
@@ -182,17 +189,15 @@
     <section class="voice-section">
       <div class="voice-card">
         <div class="photo-frame">
-          <img src="./img/Photo_ceiling.png" alt="本部大広間の風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="../img/Photo_ceiling.png" alt="本部大広間の風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="img-fallback">[撮影：本部大広間]</div>
           <div class="gallery-caption">撮影：匿名信徒 ―― 「本堂の静寂」</div>
         </div>
         <div class="voice-content">
           <h2>「深い眠りの果てに、本当の家族を見つけました」</h2>
           <div class="voice-text">
-            修行中、朝の集いで見上げた高い天井が美しくてシャッターを切りました。長く絶縁状態だった両親とはもう会うことはないと思っていましたが、
-            ここで皆さんと呼吸を重ねるうち、頑なだった心が解けていくのを感じました。<br>
-            写真に写るこの広間で、見知らぬ方々と呼吸が一つに重なった瞬間、私たちは肉親という小さな繋がりを越えた一つの大きな命になったのだと確信しました。
-            今では隣にいる方々が、本当の家族以上に愛おしく思えます。
+            修行中、朝の集いで見上げた高い天井が美しくてシャッターを切りました。長く絶縁状態だった両親とはもう会うことはないと思っていましたが、ここで皆さんと呼吸を重ねるうち、頑なだった心が解けていくのを感じました。<br>
+            写真に写るこの広間で、見知らぬ方々と呼吸が一つに重なった瞬間、私たちは肉親という小さな繋がりを越えた一つの大きな命になったのだと確信しました。今では隣にいる方々が、本当の家族以上に愛おしく思えます。
           </div>
           <div class="keyword-tag">#私は一人ではない</div>
           <div class="keyword-tag">#同じ感覚を共有する</div>
@@ -214,7 +219,7 @@
           <div class="keyword-tag">#位相同期</div>
         </div>
         <div class="photo-frame">
-          <img src="./img/Photo_Meiso.png" alt="瞑想室の入り口" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="../img/Photo_Meiso.png" alt="瞑想室の入り口" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="img-fallback">[撮影：静寂の階]</div>
           <div class="gallery-caption">撮影：T.S様 ―― 「個の消失」</div>
         </div>
@@ -225,7 +230,7 @@
     <section class="voice-section">
       <div class="voice-card">
         <div class="photo-frame">
-          <img src="sample.png" alt="翠波山の朝霧" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="../img/Photo_fog.png" alt="翠波山の朝霧" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="img-fallback">[撮影：本部周辺]</div>
           <div class="gallery-caption">撮影：K.M様 ―― 「降り注ぐ経脈」</div>
         </div>
@@ -244,6 +249,11 @@
     <!-- 4. 魂の対話 -->
     <section class="voice-section">
       <div class="voice-card">
+        <div class="photo-frame">
+          <img src="../img/Photo_sync.png" alt="修行中の信徒たち" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[撮影：位相同期の刻]</div>
+          <div class="gallery-caption">撮影：匿名信徒 ―― 「重なる波形」</div>
+        </div>
         <div class="voice-content">
           <h2>「言葉を介さない、魂の対話」</h2>
           <div class="voice-text">
@@ -253,11 +263,6 @@
           <div class="keyword-tag">#私は一人ではない</div>
           <div class="keyword-tag">#位相同期</div>
         </div>
-        <div class="photo-frame">
-          <img src="sample.png" alt="修行中の信徒たち" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="img-fallback">[撮影：位相同期の刻]</div>
-          <div class="gallery-caption">撮影：匿名信徒 ―― 「重なる波形」</div>
-        </div>
       </div>
     </section>
 
@@ -265,7 +270,7 @@
     <section class="voice-section" style="border-bottom: none;">
       <div class="voice-card">
         <div class="photo-frame">
-          <img src="sample.png" alt="夜の本部建物" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="../img/Photo_hq_night.png" alt="夜の本部建物" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="img-fallback">[撮影：終焉の儀]</div>
           <div class="gallery-caption">撮影：登攀者の一人 ―― 「還るべき場所」</div>
         </div>
