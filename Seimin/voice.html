@@ -72,12 +72,20 @@
       background-color: #000;
       position: relative;
     }
+    
+    /* 画像のスタイル：セピア調と高コントラストで不気味さを演出 */
     .photo-frame img {
       width: 100%;
-      height: auto;
+      height: 220px; /* 高さを統一 */
+      object-fit: cover;
       display: block;
-      filter: sepia(0.3) contrast(1.1);
+      filter: sepia(0.3) contrast(1.1) brightness(0.8);
+      transition: filter 0.5s ease;
     }
+    .photo-frame img:hover {
+      filter: sepia(0) contrast(1.2) brightness(1);
+    }
+
     .photo-frame::after {
       content: "GOLDEN SEIMIN ARCHIVE";
       position: absolute;
@@ -127,6 +135,18 @@
       text-align: center;
     }
 
+    /* フォールバック用表示スタイル */
+    .img-fallback {
+      width: 100%;
+      height: 220px;
+      background: #222;
+      display: none; /* デフォルトは非表示 */
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 0.8rem;
+    }
+
     footer {
       border-top: 1px solid #333;
       padding: 40px 0;
@@ -171,7 +191,8 @@
     <section class="voice-section">
       <div class="voice-card">
         <div class="photo-frame">
-          <div style="width:100%; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">[修行：朝の集い]</div>
+          <img src="sample.png" alt="修行：朝の集い" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[修行：朝の集い]</div>
           <div class="gallery-caption">本部大広間にて呼吸を整える信徒たち</div>
         </div>
         <div class="voice-content">
@@ -200,7 +221,8 @@
           <div class="keyword-tag">#位相同期</div>
         </div>
         <div class="photo-frame">
-          <div style="width:100%; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">[本部：瞑想室]</div>
+          <img src="sample.png" alt="本部：瞑想室" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[本部：瞑想室]</div>
           <div class="gallery-caption">遮光が徹底された「静寂の階」</div>
         </div>
       </div>
@@ -210,7 +232,8 @@
     <section class="voice-section">
       <div class="voice-card">
         <div class="photo-frame">
-          <div style="width:100%; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">[聖地：翠波山を望む]</div>
+          <img src="sample.png" alt="聖地：翠波山を望む" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[聖地：翠波山を望む]</div>
           <div class="gallery-caption">夜明け前、霧に包める総本部周辺</div>
         </div>
         <div class="voice-content">
@@ -238,7 +261,8 @@
           <div class="keyword-tag">#位相同期</div>
         </div>
         <div class="photo-frame">
-          <div style="width:100%; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">[修行：位相同期の刻]</div>
+          <img src="sample.png" alt="修行：位相同期の刻" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[修行：位相同期の刻]</div>
           <div class="gallery-caption">心拍計の波形が一つに重なる瞬間</div>
         </div>
       </div>
@@ -253,7 +277,8 @@
     <section class="voice-section" style="border-bottom: none;">
       <div class="voice-card">
         <div class="photo-frame">
-          <div style="width:100%; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">[修行：終焉の儀]</div>
+          <img src="sample.png" alt="修行：終焉の儀" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback">[修行：終焉の儀]</div>
           <div class="gallery-caption">現世のしがらみを置き去る儀式</div>
         </div>
         <div class="voice-content">
