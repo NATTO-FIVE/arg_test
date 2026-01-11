@@ -5,11 +5,67 @@
   <title>脳神経外科｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* サイト固有のデザイン調整（共通基盤を継承） */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
+      --text-main: #334155;
     }
+
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 垂直方向のガタつきを防止 */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--sanctuary-blue);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; /* テンプレート規定値 */
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
+    }
+
+    /* 3. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -17,22 +73,95 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+    .hero-banner p {
+      font-size: 14px;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    /* 4. レイアウト構造 (テンプレート同期) */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .page-content {
       max-width: 800px;
       margin: 40px auto;
       padding: 0 20px;
       line-height: 1.8;
     }
+
     h2 {
-      border-left: 5px solid var(--kanae-gold);
+      font-size: 20px;
+      border-left: 6px solid var(--kanae-gold);
       padding-left: 15px;
-      margin-bottom: 20px;
+      margin: 40px 0 20px;
+      color: var(--sanctuary-blue);
+      font-weight: bold;
     }
+
+    /* 特有のスタイル：チェックリストボックス */
     .check-list {
-      background: #f9f9f9;
-      padding: 20px 40px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+      background: #f8fafc;
+      padding: 30px 40px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin: 25px 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .check-list ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+    }
+    .check-list li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--kanae-gold);
+      font-weight: bold;
+    }
+
+    /* 5. 検索窓の設定 (テンプレート同期) */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 6. フッター (テンプレート同期) */
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      border-top: 1px solid #e2e8f0;
     }
   </style>
 </head>
@@ -49,7 +178,7 @@
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -59,8 +188,8 @@
           </ul>
         </nav>
 
-        <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
@@ -101,13 +230,14 @@
   </section>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-      </div>
+<footer class="text-center">
+  <div class="container" style="text-align: center;">
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動・事件・技術とは一切関係ありません。
     </div>
   </div>
 </footer>
