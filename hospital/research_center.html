@@ -2,14 +2,70 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>不和睡眠総合技術センター｜金枝聖域第八病院 提携機関</title>
+  <title>不和睡眠総合技術センター｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 共通基盤のデザイン調整 */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
+      --text-main: #334155;
     }
+
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 垂直方向のガタつきを防止 */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--sanctuary-blue);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; /* テンプレート規定値 */
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
+    }
+
+    /* 3. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -17,56 +73,98 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    /* メニュー設定：ガタつき防止のため他ページと完全同期 */
-    .main-nav ul {
-      display: flex;
-      gap: 12px; 
-      list-style: none;
-      padding: 0;
+    .hero-banner h1 {
+      font-size: 24px;
       margin: 0;
-      align-items: center;
+      letter-spacing: 0.1em;
     }
-    .main-nav a {
-      font-size: 13px; 
-      font-weight: bold;
-      text-decoration: underline;
-      white-space: nowrap;
+    .hero-banner p {
+      font-size: 14px;
+      margin-top: 8px;
+      opacity: 0.9;
     }
+
+    /* 4. レイアウト構造 (テンプレート同期) */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .page-content {
       max-width: 850px;
       margin: 40px auto;
       padding: 0 20px;
       line-height: 1.8;
     }
+
     h2 {
-      border-left: 5px solid var(--kanae-gold);
+      font-size: 20px;
+      border-left: 6px solid var(--kanae-gold);
       padding-left: 15px;
       margin: 40px 0 20px;
       color: var(--sanctuary-blue);
+      font-weight: bold;
     }
+
+    /* センター独自スタイル */
     .tech-card {
-      background: #fff;
-      border: 1px solid #ddd;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       padding: 25px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
     }
     .tech-tag {
       display: inline-block;
       background: var(--sanctuary-blue);
       color: #fff;
       padding: 2px 10px;
-      font-size: 0.75em;
+      font-size: 0.7rem;
+      font-weight: bold;
       border-radius: 4px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
     }
-    .center-message {
-      font-style: italic;
-      border-top: 1px solid #eee;
-      margin-top: 20px;
-      padding-top: 20px;
-      font-size: 0.9em;
+    .tech-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.1rem;
+      color: var(--sanctuary-blue);
+    }
+    .tech-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    /* 5. 検索窓の設定 (テンプレート同期) */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 6. フッター (テンプレート同期) */
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      border-top: 1px solid #e2e8f0;
     }
   </style>
 </head>
@@ -83,7 +181,7 @@
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -93,8 +191,8 @@
           </ul>
         </nav>
 
-        <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="技術コード / 研究ID / キーワード">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
@@ -110,64 +208,67 @@
 </section>
 
 <main class="page-content">
-  <section>
-    <h2>センターの概要</h2>
-    <p>
-      当センターは、従来の睡眠医学の枠組みを超え、脳神経外科と精神心理学を高度に融合させた研究機関です。
-      独自の睡眠調整方式と、それを用いた安眠研究開発を行っています。
-    </p>
-  </section>
+  <div class="container">
+    <section>
+      <h2>センターの概要</h2>
+      <p>
+        当センターは、従来の睡眠医学の枠組みを超え、脳神経外科と精神心理学を高度に融合させた研究機関です。
+        独自の睡眠調整方式と、それを用いた安眠研究開発を行っています。
+      </p>
+    </section>
 
- <section>
-    <h2>主な検査・解析項目</h2>
-    
-    <div class="tech-card">
-      <span class="tech-tag">標準検査</span>
-      <h3>精密睡眠ポリグラフ検査（PSG）</h3>
-      <p>脳波、呼吸、心拍、筋電図等の多角的な生体情報を同時記録し、睡眠の質と構造を詳細に解析します。</p>
-    </div>
+    <section>
+      <h2>主な検査・解析項目</h2>
+      
+      <div class="tech-card">
+        <span class="tech-tag">標準検査</span>
+        <h3>精密睡眠ポリグラフ検査（PSG）</h3>
+        <p>脳波、呼吸、心拍、筋電図等の多角的な生体情報を同時記録し、睡眠の質と構造を詳細に解析します。</p>
+      </div>
 
-    <div class="tech-card">
-      <span class="tech-tag">特殊解析</span>
-      <h3>多角的脳波位相同期スキャン</h3>
-      <p>複数の生体指標における脳波を測定。標準的な睡眠段階に分類されない微細な律動的パルスの検出を目的としています。</p>
-    </div>
+      <div class="tech-card">
+        <span class="tech-tag">特殊解析</span>
+        <h3>多角的脳波位相同期スキャン</h3>
+        <p>複数の生体指標における脳波を測定。標準的な睡眠段階に分類されない微細な律動的パルスの検出を目的としています。</p>
+      </div>
 
-    <div class="tech-card">
-      <span class="tech-tag">臨床研究</span>
-      <h3>深睡眠時における環境応答反応の計測</h3>
-      <p>特定の条件下における睡眠中の感覚応答を観測。これまでの症例で報告されている特殊な共鳴反応の機序について検証を続けています。</p>
-    </div>
-  </section>
+      <div class="tech-card">
+        <span class="tech-tag">臨床研究</span>
+        <h3>深睡眠時における環境応答反応の計測</h3>
+        <p>特定の条件下における睡眠中の感覚応答を観測。これまでの症例で報告されている特殊な共鳴反応の機序について検証を続けています。</p>
+      </div>
+    </section>
 
-  <section style="text-align: center; margin: 40px 0; padding: 30px; background: #f0f4f8; border-radius: 8px;">
-    <p style="margin-bottom: 20px; font-weight: bold;">
-      最新の研究成果、および技術仕様に関する詳細は、<br>不和睡眠総合技術センター　公式サイトにて公開しております。
-    </p>
-    <a href="../laboratory/index.html" class="center-link-btn" style="
-      display: inline-block;
-      padding: 15px 40px;
-      background-color: var(--sanctuary-blue);
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 4px;
-      border: 2px solid var(--kanae-gold);
-      transition: all 0.3s ease;
-    ">
-      不和睡眠総合技術センター 公式サイトへ
-    </a>
-  </section>
-
+    <section style="text-align: center; margin: 60px 0; padding: 40px; background: #f1f5f9; border-radius: 16px; border: 1px solid #e2e8f0;">
+      <p style="margin-bottom: 25px; font-weight: bold; color: var(--sanctuary-blue);">
+        最新の研究成果、および技術仕様に関する詳細は、<br>不和睡眠総合技術センター　公式サイトにて公開しております。
+      </p>
+      <a href="../laboratory/index.html" class="center-link-btn" style="
+        display: inline-block;
+        padding: 16px 48px;
+        background-color: var(--sanctuary-blue);
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+        border: 2px solid var(--kanae-gold);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 31, 63, 0.2);
+      ">
+        不和睡眠総合技術センター 公式サイトへ
+      </a>
+    </section>
+  </div>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院 / 不和睡眠総合技術センター</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-      </div>
+<footer class="text-center">
+  <div class="container" style="text-align: center;">
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院 / 不和睡眠総合技術センター
+    </div>
+    <div style="font-size: 11px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動・事件・技術とは一切関係ありません。
     </div>
   </div>
 </footer>
