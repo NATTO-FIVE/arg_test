@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLASSIFIED | HOSPITAL_DISPOSAL_PROTOCOL</title>
+    <title>CLASSIFIED | SUBJECT_LIQUIDATION_MANUAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
         
         body {
             background-color: #020202;
             font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
             color: #cfd3d7;
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         .crt-overlay {
@@ -24,6 +24,21 @@
             background-size: 100% 4px, 4px 100%;
             pointer-events: none;
             z-index: 1000;
+        }
+
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(40, 0, 0, 0.85);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
         }
 
         .container-frame {
@@ -52,79 +67,207 @@
             padding: 3px 10px;
             text-decoration: none;
             background: rgba(255, 77, 77, 0.05);
+            font-size: 0.7rem;
         }
 
-        .content-body { padding: 4rem 5rem; }
+        .content-body { padding: 3rem 4rem; }
 
         h1.doc-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 900;
             color: #fff;
             text-align: center;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.1em;
             margin-bottom: 2rem;
+            border-bottom: 2px solid #4a0000;
+            padding-bottom: 1rem;
         }
 
-        .alert-box {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid #ff0000;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+        /* 手書き図解コンテナ */
+        .sketch-container {
+            background: #050505;
+            border: 1px solid #4a0000;
+            padding: 25px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .sketch-svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.2));
+        }
+
+        .sketch-label {
+            font-family: 'Yuji Syuku', serif;
+            font-size: 14px;
+            fill: #ff4d4d;
+            letter-spacing: 0.05em;
+        }
+
+        .protocol-section { margin-bottom: 3rem; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #4a0000;
+            padding-bottom: 0.3rem;
+        }
+
+        .section-num {
+            background: #660000;
+            color: #fff;
+            padding: 2px 8px;
+            font-size: 0.8rem;
             font-weight: bold;
         }
 
-        .protocol-step {
-            margin-bottom: 2rem;
-            border-left: 2px solid #4a0000;
+        .section-name { font-weight: bold; color: #ff4d4d; font-size: 1rem; }
+
+        .step-box {
+            margin-left: 1rem;
+            border-left: 2px solid #330000;
             padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .step-label { color: #ff4d4d; font-size: 0.7rem; font-weight: bold; display: block; }
+        .step-title { color: #fff; font-weight: bold; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+        .step-desc { font-size: 0.85rem; color: #a0a0a0; }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #ff0000;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .disclaimer-box {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #222;
+            color: #888;
+            text-align: center;
+            font-size: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
+    <div class="server-badge">CONNECT TO FST_TECHNICAL_LABO</div>
 
     <div class="container-frame">
         <div class="sys-header uppercase font-bold">
-            <a href="layer8_top_secret.html" class="btn-return">← BACK_TO_DIR</a>
-            <div>DISPOSAL_PROTOCOL: LEVEL_R_SUBJECTS</div>
+            <a href="layer8_top_secret.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+            <div>DISPOSAL_LOG: ASSET_PROCESSING_UNIT</div>
         </div>
 
         <div class="content-body">
-            <div class="alert-box text-center">
-                ⚠ 最重要機密：金枝聖域第八病院・機密区画スタッフ専用
-            </div>
-
             <header class="mb-10">
-                <h1 class="doc-title">不適格検体の廃棄および再処理に関する手続き書</h1>
-                <p class="text-right font-mono text-xs">管理番号: H-DIS-1985-042</p>
+                <h1 class="doc-title">不適格検体（LEVEL R）の最終処分・資源化実施細則</h1>
+                <p class="text-right font-mono text-[10px] text-gray-500 tracking-widest">PRIVATE_DOC: HICA-LIQ-1985-042</p>
             </header>
 
+            <!-- 手書きスケッチ風図解 -->
+            <div class="sketch-container">
+                <svg class="sketch-svg" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 人体シルエットのラフスケッチ -->
+                    <path d="M300 40 C310 40, 320 50, 320 70 C320 90, 310 100, 300 100 C290 100, 280 90, 280 70 C280 50, 290 40, 300 40" stroke="#4a0000" stroke-width="1.5" fill="none" />
+                    <path d="M300 100 L300 220 M280 110 L220 180 M320 110 L380 180 M285 220 L260 300 M315 220 L340 300" stroke="#330000" stroke-width="1.2" fill="none" opacity="0.6"/>
+                    
+                    <!-- 切断ラインの指示 -->
+                    <path d="M250 140 L210 155 M350 140 L390 155 M275 250 L240 260 M325 250 L360 260" stroke="#ff4d4d" stroke-width="2" stroke-dasharray="4 4" />
+                    
+                    <!-- 脳抽出の円 -->
+                    <circle cx="300" cy="70" r="15" stroke="#ff4d4d" stroke-width="1" stroke-dasharray="2 2" fill="none" />
+                    <path d="M315 65 L420 40" stroke="#ff4d4d" stroke-width="1" />
+                    <text x="430" y="45" class="sketch-label">脳：アーカイブ容器へ(地下6)</text>
+
+                    <!-- 四肢切断の注釈 -->
+                    <path d="M210 150 L100 130" stroke="#ff4d4d" stroke-width="1" />
+                    <text x="20" y="125" class="sketch-label">五肢：切除/反応試験</text>
+                    <text x="20" y="145" class="sketch-label">→ 廃棄またはバイオマス化</text>
+
+                    <!-- 胴体売却の注釈 -->
+                    <path d="M305 180 L420 220" stroke="#ff4d4d" stroke-width="1" />
+                    <text x="430" y="225" class="sketch-label">体躯：外部仲介（裏市場）へ</text>
+                    <text x="430" y="245" class="sketch-label">健康な臓器は「換金資産」</text>
+
+                    <!-- 脳ジャーの簡易スケッチ -->
+                    <rect x="500" y="60" width="40" height="50" rx="5" stroke="#4a0000" stroke-width="1.5" fill="none" />
+                    <path d="M505 85 Q520 70, 535 85" stroke="#ff4d4d" stroke-width="1.5" fill="none" />
+                    <text x="500" y="125" class="sketch-label" font-size="10">Jar: DS-Ref</text>
+                </svg>
+                <div class="absolute bottom-2 left-4 text-[10px] text-red-900 font-bold opacity-50 uppercase tracking-tighter">LIQUIDATION_SKETCH_#042</div>
+            </div>
+
             <article class="text-gray-300 text-sm">
-                <div class="protocol-step">
-                    <span class="step-label">SECTION 01: 定義</span>
-                    <p>位相同期実験において、自己意識の残存が50%を超え、群体波形に著しいノイズ（迷い、不安、後悔）を混入させる個体を「不適格検体（LEVEL R）」と定義する。</p>
+                
+                <section class="protocol-section">
+                    <div class="section-header">
+                        <span class="section-num">PHASE 01</span>
+                        <span class="section-name">個体選別と「資産」の流用ルート確定</span>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-title">1. 他医療実験・外部組織への受け渡し</span>
+                        <p class="step-desc">
+                            意識遷移の失敗により植物状態となったが、若年かつ肉体コンディションが良好な個体は「換金資産」として優先する。提携する仲介組織（裏の人体流通網）へ引き渡し、回収された資金は当病院の運営および機密維持費用へ充当する。一部の個体は、院内の別病棟（高度外科研究部）での「破壊的臨床試験」のサンプルとして転送する。
+                        </p>
+                    </div>
+                </section>
+
+                <section class="protocol-section">
+                    <div class="section-header">
+                        <span class="section-num">PHASE 02</span>
+                        <span class="section-name">院内解体および標本化プロトコル（廃棄確定分）</span>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-title">1. 維持コスト削減のための物理的整理</span>
+                        <p class="step-desc">
+                            生命維持コストを最小化するため、不要な部位（両腕・両脚）を付け根より切除する。この解体工程中に、切断面への電気刺激を行い、植物状態にある脳の深部（第8階層付近）が示す「無意識の拒絶波形」を記録する。これは、位相同期に失敗した原因を特定するための極めて重要なデータとなる。
+                        </p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-title">2. 中枢神経（脳）の永久アーカイブ化</span>
+                        <p class="step-desc">
+                            肉体の損耗が限界に達した個体については、外科手術により脳のみを摘出する。摘出された脳は特殊な培養液を満たしたキャニスター（通称：アーカイブ・ジャー）へ収容し、地下第6倉庫のラックにて永久保管する。これらは「定常的な脳波サンプル」として、後続の登攀実験におけるノイズ除去用フィルタの基準データとして利用される。
+                        </p>
+                    </div>
+                </section>
+
+                <section class="protocol-section">
+                    <div class="section-header">
+                        <span class="section-num">PHASE 03</span>
+                        <span class="section-name">事務的隠蔽の完了</span>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-title">一意の識別番号による管理</span>
+                        <p class="step-desc">
+                            地下倉庫に保管されるサンプルから、氏名、生年月日などの個人的な属性は完全に剥奪される。以後は「DS-XXX（処分番号）」のみで呼称し、万一の漏洩時も個人が特定されないよう、事務局にて戸籍抹消手続き（死亡診断書の偽装発行）を並行して完了させること。
+                        </p>
+                    </div>
+                </section>
+
+                <div class="mt-12 p-6 border border-red-900 bg-red-950/20 text-center">
+                    <p class="text-sm font-bold text-red-500 mb-2">「不要な器を壊し、有用なデータを残せ。我々の海を濁らせてはならない」</p>
+                    <p class="text-[10px] text-gray-500 italic">―― 聖眠金枝財団 廃棄部門 運用心得</p>
                 </div>
 
-                <div class="protocol-step">
-                    <span class="step-label">SECTION 02: 処置の手順</span>
-                    <p>1. 意識の物理的切断：脳幹部への高周波パルス照射により、個体としての意識機能を永久的に停止させる。</p>
-                    <p>2. 肉体の資源化：老化が停止していない個体については、有機素材（パケット媒体）として細分化し、病院地下の冷却槽のメンテナンス用バイオマスとして利用する。</p>
-                </div>
-
-                <div class="protocol-step">
-                    <span class="step-label">SECTION 03: 戸籍上の処理</span>
-                    <p>廃棄が確定した個体については、速やかに「病院内での心不全による死亡」または「行方不明」として事務処理を行うこと。遺体（あるいはその残滓）の返還は機密保護の観点から一切認められない。</p>
-                </div>
-
-                <p class="mt-12 text-center italic text-gray-500">
-                    「無用なノイズを消し、静寂なる海を維持せよ」
-                </p>
             </article>
 
-            <footer class="mt-16 pt-4 border-t border-gray-900 text-center text-[10px] text-gray-700">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動とは一切関係ありません。
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between uppercase">
+                    <div>SIGNAL_EOF: LIQUIDATION_PROTOCOL</div>
+                    <div>DATA_STATUS: RESTRICTED_RED</div>
+                </div>
+                <div class="disclaimer-box">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
