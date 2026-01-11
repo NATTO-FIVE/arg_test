@@ -32,7 +32,7 @@
             z-index: 1000;
         }
 
-        /* 空間の奥行きを出すレイヤー */
+        /* 空間の奥行きを出すレイヤー：背景を少し明るくしてPNGを見えやすく修正 */
         .void-container {
             position: absolute;
             top: 0;
@@ -43,7 +43,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #111 0%, #000 80%);
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
         }
 
         /* 御視様の画像：透過PNGを想定 */
@@ -60,24 +60,24 @@
             max-width: 90vw;
             max-height: 90vh;
             object-fit: contain;
-            opacity: 0.2; /* 暗闇に溶け込む薄さ */
-            filter: contrast(1.5) brightness(0.6) drop-shadow(0 0 30px rgba(255, 215, 0, 0.1));
-            animation: deity-manifest 10s infinite ease-in-out, glitch-image 7s infinite step-end;
+            opacity: 0.3; /* 少し濃くして存在感を強調 */
+            filter: contrast(1.2) brightness(0.7) drop-shadow(0 0 50px rgba(255, 255, 255, 0.05));
+            animation: deity-manifest 12s infinite ease-in-out, glitch-image 7s infinite step-end;
             pointer-events: none;
         }
 
         /* 脈動と浮遊感 */
         @keyframes deity-manifest {
-            0%, 100% { transform: scale(1) translateY(0); opacity: 0.15; }
-            50% { transform: scale(1.05) translateY(-20px); opacity: 0.25; }
+            0%, 100% { transform: scale(1) translateY(0); opacity: 0.25; }
+            50% { transform: scale(1.03) translateY(-15px); opacity: 0.4; }
         }
 
         /* 不規則なグリッチ */
         @keyframes glitch-image {
-            0%, 95% { transform: translate(0); filter: hue-rotate(0deg) contrast(1.5); }
-            96% { transform: translate(-10px, 5px) skewX(5deg); filter: hue-rotate(90deg) brightness(1.2); }
-            97% { transform: translate(15px, -5px) scaleY(1.1); filter: contrast(3); }
-            98% { transform: translate(-5px, 10px) skewX(-10deg); filter: hue-rotate(-90deg); }
+            0%, 95% { transform: translate(0); filter: hue-rotate(0deg) contrast(1.2); }
+            96% { transform: translate(-8px, 4px) skewX(2deg); filter: hue-rotate(45deg) brightness(1.1); }
+            97% { transform: translate(10px, -3px); filter: contrast(2); }
+            98% { transform: translate(-3px, 8px); filter: hue-rotate(-45deg); }
             100% { transform: translate(0); }
         }
 
@@ -85,16 +85,23 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            background: radial-gradient(circle, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
-            padding: 8rem;
+            /* 背景の黒いエリアを削除し、透過させる */
+            background: transparent;
+            padding: 2rem;
             width: 100%;
+            /* 背景画像を邪魔せず文字を浮かび上がらせる */
+            backdrop-filter: blur(1px); 
         }
 
         .question {
             font-size: clamp(1.8rem, 6vw, 3rem);
             letter-spacing: 0.4em;
             margin-bottom: 6rem;
-            text-shadow: 0 0 40px rgba(255,255,255,0.4);
+            /* 文字の視認性を確保するための強力なシャドウ */
+            text-shadow: 
+                0 0 20px rgba(0,0,0,1),
+                0 0 40px rgba(0,0,0,1),
+                0 0 10px rgba(255,255,255,0.5);
             font-weight: 900;
         }
 
@@ -106,7 +113,7 @@
 
         .choice-link {
             font-size: 1.8rem;
-            color: #555;
+            color: #888;
             text-decoration: none;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             background: transparent;
@@ -115,17 +122,18 @@
             letter-spacing: 0.3em;
             position: relative;
             padding: 10px 20px;
+            text-shadow: 0 0 15px rgba(0,0,0,1);
         }
 
         .choice-link:hover {
             color: #fff;
-            text-shadow: 0 0 20px #fff;
+            text-shadow: 0 0 20px #fff, 0 0 30px rgba(255,255,255,0.5);
             transform: scale(1.15);
         }
 
         .choice-no:hover {
             color: #ff0000;
-            text-shadow: 0 0 20px #ff0000;
+            text-shadow: 0 0 20px #ff0000, 0 0 30px rgba(255,0,0,0.5);
         }
 
         .choice-link::after {
@@ -166,7 +174,7 @@
         </div>
     </div>
 
-    <!-- 前景：選択肢UI -->
+    <!-- 前景：選択肢UI（背景グラデーションを排除） -->
     <main class="judgment-ui">
         <h1 class="question">あなたは御視様を信じますか？</h1>
         
