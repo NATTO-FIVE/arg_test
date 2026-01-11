@@ -21,7 +21,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 0;
+      padding: 15px 0; /* 垂直方向のガタつきを防止 */
     }
     .logo-area {
       display: flex;
@@ -54,7 +54,7 @@
       align-items: center;
     }
     .main-nav a {
-      font-size: 13px; /* テンプレート準拠 */
+      font-size: 13px; /* テンプレート規定値 */
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
@@ -204,9 +204,9 @@
           </ul>
         </nav>
 
-        <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="キーワードを入力...">
-          <button type="button" id="search-submit" class="search-btn">検索</button>
+          <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
@@ -328,18 +328,6 @@
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
-
-    const searchInput = document.getElementById('q');
-    const searchBtn = document.getElementById('search-submit');
-
-    const doSearch = () => {
-      const val = searchInput.value.trim();
-      if (val) {
-        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
-      }
-    };
-    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
-    searchBtn.addEventListener('click', doSearch);
   })();
 </script>
 </body>
