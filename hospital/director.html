@@ -5,16 +5,44 @@
   <title>院長挨拶｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 1. テンプレート共通カラー定義 */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
+      --text-main: #334155;
     }
 
-    /* 2. ヘッダースタイル調整 */
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
     .site-header {
       background: #fff;
       border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 垂直方向のガタつきを防止 */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--sanctuary-blue);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
     }
 
     .main-nav ul {
@@ -26,16 +54,93 @@
       align-items: center;
     }
     .main-nav a {
+      font-size: 13px; /* テンプレート規定値 */
       font-weight: bold;
       text-decoration: underline;
       white-space: nowrap;
-      color: var(--text);
+      color: var(--text-main);
     }
     .main-nav a.highlight {
       color: var(--kanae-gold);
       text-decoration: none;
     }
 
+    /* 3. ヒーローバナー (テンプレート同期) */
+    .hero-banner {
+      background-color: var(--sanctuary-blue);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--kanae-gold);
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* 4. レイアウト構造 (テンプレート同期) */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .page-main {
+      padding: 40px 0;
+    }
+
+    .director-profile {
+      display: flex;
+      gap: 32px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .director-photo {
+      width: 220px;
+      height: 280px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+    }
+
+    .director-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .director-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .director-info h2 {
+      margin-top: 0;
+      font-size: 20px;
+      border-left: 6px solid var(--kanae-gold);
+      padding-left: 15px;
+      margin-bottom: 25px;
+      color: var(--sanctuary-blue);
+      font-weight: bold;
+    }
+
+    .director-info p {
+      margin-bottom: 1.5em;
+      line-height: 1.8;
+      color: var(--text-main);
+    }
+
+    /* 5. 検索窓の設定 (テンプレート同期) */
     .header-search-form {
       display: flex;
       align-items: center;
@@ -57,64 +162,7 @@
       font-weight: bold;
     }
 
-    /* 3. ヒーローバナー */
-    .hero-banner {
-      background-color: var(--sanctuary-blue);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 5px solid var(--kanae-gold);
-    }
-    .hero-banner h1 {
-      font-size: 24px;
-      margin: 0;
-      letter-spacing: 0.1em;
-    }
-
-    /* 4. 院長挨拶ページ固有スタイル */
-    .page-main {
-      max-width: 880px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.8;
-    }
-    .director-profile {
-      display: flex;
-      gap: 32px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-    .director-photo {
-      width: 220px;
-      height: 280px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #94a3b8;
-      font-size: 12px;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    }
-    .director-info {
-      flex: 1;
-      min-width: 300px;
-    }
-    .director-info h2 {
-      margin-top: 0;
-      font-size: 20px;
-      border-left: 6px solid var(--kanae-gold);
-      padding-left: 12px;
-      margin-bottom: 20px;
-      color: var(--sanctuary-blue);
-    }
-    .director-info p {
-      margin-bottom: 1.5em;
-      color: #334155;
-    }
-
+    /* 6. フッター (テンプレート同期) */
     footer {
       background: #f8fafc;
       padding: 40px 0;
@@ -127,13 +175,12 @@
 
 <header class="site-header">
   <div class="container">
-    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
-      <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
-        <!-- <div class="logo-mark" style="background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);"></div> -->
+    <div class="header-inner">
+      <div class="logo-area">
         <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ">
         <div class="logo-text-wrapper">
-          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--sanctuary-blue);">金枝聖域第八病院</div>
-          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Kinshi Sanctuary 8th Hospital</div>
+          <div class="logo-text-main">金枝聖域第八病院</div>
+          <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
@@ -143,30 +190,29 @@
             <li><a href="index.html">ホーム</a></li>
             <li><a href="director.html">院長挨拶</a></li>
             <li><a href="doctors.html">医師紹介</a></li>
-            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
           </ul>
         </nav>
 
-        <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
           <input id="q" name="q" type="search" placeholder="キーワードを入力...">
-          <button type="button" id="search-submit" class="search-btn">検索</button>
+          <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
     </div>
   </div>
 </header>
 
-<!-- ヒーローバナーの追加 -->
 <section class="hero-banner">
   <div class="container">
     <h1>院長挨拶</h1>
   </div>
 </section>
 
-<main class="page-main">
+<main class="container page-main">
   <div class="director-profile">
     <div class="director-photo">
-      院長近影<br>（準備中）
+      <!-- 院長写真：画像がない場合はプレースホルダを表示 -->
+      <img src="./img/Kamishiro.png" alt="院長 百目島 ミキ" onerror="this.style.display='none'; this.parentElement.innerText='院長近影（準備中）';">
     </div>
 
     <div class="director-info">
@@ -191,13 +237,13 @@
 </main>
 
 <footer class="text-center">
-  <div class="container">
+  <div class="container" style="text-align: center;">
     <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
       金枝聖域第八病院
     </div>
-    <div style="font-size: 11px; color: #001f3f; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+    <div style="font-size: 11px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
       © 2025 金枝聖域第八病院<br>
-      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動とは一切関係ありません。
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動・事件・技術・思想とは一切関係ありません。
     </div>
   </div>
 </footer>
@@ -207,19 +253,6 @@
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
-
-    const searchInput = document.getElementById('q');
-    const searchBtn = document.getElementById('search-submit');
-
-    const doSearch = () => {
-      const val = searchInput.value.trim();
-      if (val) {
-        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
-      }
-    };
-
-    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
-    searchBtn.addEventListener('click', doSearch);
   })();
 </script>
 </body>
