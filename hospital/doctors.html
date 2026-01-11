@@ -91,6 +91,7 @@
       transform: translateY(-5px);
     }
 
+    /* 写真枠のスタイル調整 */
     .doctor-photo {
       width: 120px;
       height: 150px;
@@ -103,6 +104,15 @@
       color: #94a3b8;
       font-size: 11px;
       border: 1px solid #cbd5e1;
+      overflow: hidden; /* 画像を角丸に収める */
+    }
+
+    /* 写真自体のスタイル */
+    .doctor-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 枠に合わせてトリミング */
+      filter: contrast(1.1) grayscale(0.2); /* わずかに彩度を落とし医療機関らしさを演出 */
     }
 
     .doctor-info h3 {
@@ -200,7 +210,9 @@
     <div class="doctor-grid">
       
       <div class="doctor-card">
-        <div class="doctor-photo">Portrait Box</div>
+        <div class="doctor-photo">
+          <img src="Kamishiro.png" alt="神代 永久" onerror="this.style.display='none'; this.parentElement.innerText='No Image';">
+        </div>
         <div class="doctor-info">
           <span class="job-title">副院長 / 部長</span>
           <h3>神代 永久（かみしろ とわ）</h3>
@@ -209,7 +221,9 @@
       </div>
 
       <div class="doctor-card">
-        <div class="doctor-photo">Portrait Box</div>
+        <div class="doctor-photo">
+          <img src="Kokuzo_Rei.png" alt="虚空蔵 零" onerror="this.style.display='none'; this.parentElement.innerText='No Image';">
+        </div>
         <div class="doctor-info">
           <span class="job-title">主任医師</span>
           <h3>虚空蔵 零（こくぞう れい）</h3>
@@ -226,7 +240,9 @@
     <div class="doctor-grid">
       
       <div class="doctor-card">
-        <div class="doctor-photo">Portrait Box</div>
+        <div class="doctor-photo">
+          <img src="Fuwafuwa.png" alt="不和 歩羽" onerror="this.style.display='none'; this.parentElement.innerText='No Image';">
+        </div>
         <div class="doctor-info">
           <span class="job-title">部長</span>
           <h3>不和 歩羽（ふわ ふわ）</h3>
@@ -235,7 +251,9 @@
       </div>
 
       <div class="doctor-card">
-        <div class="doctor-photo">Portrait Box</div>
+        <div class="doctor-photo">
+          <img src="Dendera.png" alt="田寺 野幾" onerror="this.style.display='none'; this.parentElement.innerText='No Image';">
+        </div>
         <div class="doctor-info">
           <span class="job-title">主任医師</span>
           <h3>田寺 野幾（でんでら のいき）</h3>
