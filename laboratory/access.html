@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>センター長挨拶｜不和睡眠総合技術センター</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセス｜不和睡眠総合技術センター</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
     /* 1. 共通カラー定義 (研究センターテンプレート同期) */
@@ -14,7 +15,22 @@
       --bg-light: #f8fafc;
     }
 
-    /* 2. ヘッダースタイル (研究センターテンプレート同期) */
+    /* 2. 基本スタイル */
+    body {
+      margin: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-main);
+      background-color: #fff;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 3. ヘッダースタイル (テンプレート同期) */
     .site-header {
       background: #fff;
       border-bottom: 1px solid #eee;
@@ -67,7 +83,7 @@
       text-decoration: none;
     }
 
-    /* 3. ヒーローバナー */
+    /* 4. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--laboratory-green);
       color: white;
@@ -81,69 +97,72 @@
       letter-spacing: 0.1em;
     }
 
-    /* 4. レイアウト構造 */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    /* 5. コンテンツエリア */
     .page-main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.8;
+      padding: 40px 0;
     }
-    .director-profile {
-      display: flex;
-      gap: 32px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: start;
     }
-
-    /* 写真枠のスタイル調整 */
-    .director-photo {
-      width: 220px;
-      height: 280px;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 4px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #94a3b8;
-      font-size: 12px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-      overflow: hidden;
+    @media (max-width: 850px) {
+      .access-grid { grid-template-columns: 1fr; }
     }
 
-    /* センター長写真のスタイル */
-    .director-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* 臨床資料らしさを出すためのフィルタ：グレースケールと高コントラスト */
-      filter: grayscale(1) contrast(1.2) brightness(0.9);
-    }
-
-    .director-info {
-      flex: 1;
-      min-width: 300px;
-    }
-    .director-info h2 {
-      margin-top: 0;
+    h2 {
       font-size: 20px;
       border-left: 6px solid var(--accent-green);
       padding-left: 12px;
-      margin-bottom: 20px;
+      margin: 0 0 25px 0;
       color: var(--laboratory-green);
-    }
-    .director-info p {
-      margin-bottom: 1.5em;
-      color: #334155;
+      font-weight: bold;
     }
 
-    /* 5. 検索窓の設定 */
+    .info-item {
+      margin-bottom: 30px;
+    }
+    .info-label {
+      font-weight: bold;
+      color: var(--accent-green);
+      display: block;
+      margin-bottom: 5px;
+    }
+    .warning-box {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* 6. 地図エリア：縮小対応のスタイル */
+    .map-container {
+      background: var(--bg-light);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+      /* 地図を縮小 */
+      max-width: 360px; 
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .map-svg {
+      width: 100%;
+      height: auto;
+      background: #fffde7; 
+      border: 2px solid #8d6e63;
+      border-radius: 8px;
+      box-shadow: 3px 3px 0 rgba(141, 110, 99, 0.2);
+      display: block;
+    }
+
+    /* 7. 検索窓の設定 (テンプレート同期) */
     .header-search-form {
       display: flex;
       align-items: center;
@@ -165,11 +184,13 @@
       font-weight: bold;
     }
 
+    /* 8. フッター (テンプレート同期) */
     footer {
       background: #f8fafc;
       padding: 40px 0;
       margin-top: 60px;
       border-top: 1px solid #e2e8f0;
+      text-align: center;
     }
   </style>
 </head>
@@ -185,7 +206,6 @@
           <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
         </div>
       </div>
-
       <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
@@ -207,7 +227,7 @@
 
 <section class="hero-banner">
   <div class="container">
-    <h1>センター長挨拶</h1>
+    <h1>アクセス</h1>
   </div>
 </section>
 
@@ -237,25 +257,25 @@
       </div>
     </div>
 
-    <!-- 地図：住宅地を右下に配置 -->
+    <!-- 地図：縮小調整後のコンテナ -->
     <div class="map-container">
-      <svg class="map-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <svg class="map-svg" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
         <!-- 山脈 -->
         <path d="M0 120 L80 40 L160 100 L240 20 L320 80 L400 30 V450 H0 Z" fill="#c8e6c9" />
         <text x="320" y="50" font-size="14" fill="#2e7d32" font-weight="bold">翠波山</text>
 
-        <!-- 共通敷地（聖域） -->
+        <!-- 共通敷地 -->
         <rect x="40" y="60" width="320" height="200" rx="10" fill="#ffffff" stroke="#8d6e63" stroke-width="2" stroke-dasharray="8,4" />
         <text x="50" y="80" font-size="11" fill="#8d6e63" font-weight="bold">私有地</text>
 
-        <!-- 建物：センター（最奥） -->
+        <!-- 建物：センター -->
         <rect x="60" y="90" width="110" height="70" fill="#004d40" rx="4"/>
         <text x="115" y="120" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">
           <tspan x="115" dy="0">不和睡眠総合</tspan>
           <tspan x="115" dy="14">技術センター</tspan>
         </text>
 
-        <!-- 建物：病院（ゲート側） -->
+        <!-- 建物：病院 -->
         <rect x="220" y="160" width="110" height="70" fill="#b91c1c" rx="4"/>
         <text x="275" y="190" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">
           <tspan x="275" dy="0">金枝聖域</tspan>
@@ -265,14 +285,12 @@
         <!-- 内部連絡通路 -->
         <path d="M 170 125 L 220 180" stroke="#333333" stroke-width="8" stroke-linecap="round" stroke-dasharray="2,2"/>
 
-        <!-- 道路：駅から住宅地へ、および病院への分岐 -->
+        <!-- 道路 -->
         <path d="M 100 420 H 320" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
         <path d="M 220 420 V 300 H 275 V 230" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linejoin="round" />
-        
-        <!-- 神社への分かれ道 -->
         <path d="M 130 420 V 360" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
 
-        <!-- 住宅地（右下） -->
+        <!-- 住宅地 -->
         <g transform="translate(300, 390)" opacity="0.6">
           <rect x="0" y="15" width="15" height="10" fill="#8d6e63" rx="2" />
           <rect x="20" y="15" width="15" height="10" fill="#8d6e63" rx="2" />
@@ -291,19 +309,19 @@
         <circle cx="275" cy="230" r="10" fill="#dc2626"/>
         <text x="290" y="240" font-size="10" fill="#dc2626" font-weight="bold">正面ゲート</text>
 
-        <!-- 透明町駅（左下） -->
+        <!-- 透明町駅 -->
         <rect x="20" y="395" width="80" height="40" fill="#475569" rx="4"/>
         <text x="60" y="420" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="bold">透明町駅</text>
       </svg>
       <p style="font-size: 10px; color: #64748b; margin-top: 15px; text-align: center;">
-        ※駅から住宅地を抜け、正面ゲートまでは徒歩約20分を要します。
+        ※「透明町駅」から徒歩約20分。
       </p>
     </div>
   </div>
 </main>
 
 <footer>
-  <div class="container" style="text-align: center;">
+  <div class="container">
     <div style="font-size: 14px; color: var(--laboratory-green); font-weight: bold; margin-bottom: 10px;">
       不和睡眠総合技術センター
     </div>
