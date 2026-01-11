@@ -52,6 +52,11 @@
       background: radial-gradient(circle at 30% 30%, #81c784, var(--laboratory-green));
       border-radius: 4px;
     }
+    
+    /* テキストサイズと行間の同期 */
+    .logo-text-wrapper {
+      line-height: 1.2;
+    }
     .logo-text-main {
       font-weight: bold;
       font-size: 18px;
@@ -202,8 +207,8 @@
       <div class="logo-area">
         <div class="logo-mark"></div>
         <div class="logo-text-wrapper">
-          <div class="logo-text-main">不和睡眠総合技術センター</div>
-          <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
+          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--laboratory-green);">不和睡眠総合技術センター</div>
+          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Fuwa Sleep Technology Center</div>
         </div>
       </div>
       <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
@@ -257,7 +262,6 @@
       </div>
     </div>
 
-    <!-- 地図：縮小調整後のコンテナ -->
     <div class="map-container">
       <svg class="map-svg" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
         <!-- 山脈 -->
@@ -321,7 +325,7 @@
 </main>
 
 <footer>
-  <div class="container">
+  <div class="container" style="text-align: center;">
     <div style="font-size: 14px; color: var(--laboratory-green); font-weight: bold; margin-bottom: 10px;">
       不和睡眠総合技術センター
     </div>
