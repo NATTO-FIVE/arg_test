@@ -5,11 +5,67 @@
   <title>病院沿革｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 共通基盤のデザイン調整 */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
+      --text-main: #334155;
     }
+
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0; /* 垂直方向のガタつきを防止 */
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .logo-text-main {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--sanctuary-blue);
+    }
+    .logo-text-sub {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.05em;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+    .main-nav a {
+      font-size: 13px; /* テンプレート規定値 */
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+    .main-nav a.highlight {
+      color: var(--kanae-gold);
+      text-decoration: none;
+    }
+
+    /* 3. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -17,30 +73,37 @@
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
-    /* メニュー設定：完全同期 */
-    .main-nav ul {
-      display: flex;
-      gap: 12px; 
-      list-style: none;
-      padding: 0;
+    .hero-banner h1 {
+      font-size: 24px;
       margin: 0;
-      align-items: center;
+      letter-spacing: 0.1em;
     }
-    .main-nav a {
-      font-size: 13px; 
-      font-weight: bold;
-      text-decoration: underline;
-      white-space: nowrap;
+    .hero-banner p {
+      font-size: 14px;
+      margin-top: 8px;
+      opacity: 0.9;
     }
+
+    /* 4. レイアウト構造 (テンプレート同期) */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .page-content {
       max-width: 800px;
       margin: 40px auto;
       padding: 0 20px;
     }
+
     h2 {
+      font-size: 20px;
       border-left: 5px solid var(--kanae-gold);
       padding-left: 15px;
       margin: 40px 0 20px;
+      color: var(--sanctuary-blue);
+      font-weight: bold;
     }
 
     /* 年表スタイル */
@@ -48,22 +111,59 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      background: #fff;
     }
     .history-table th {
       width: 120px;
-      padding: 15px;
+      padding: 20px 15px;
       border-bottom: 1px solid #eee;
       text-align: left;
       vertical-align: top;
       color: var(--sanctuary-blue);
+      font-weight: bold;
+      font-size: 15px;
     }
     .history-table td {
-      padding: 15px;
+      padding: 20px 15px;
       border-bottom: 1px solid #eee;
-      line-height: 1.6;
+      line-height: 1.8;
+      font-size: 14px;
+      color: var(--text-main);
     }
     .highlight-row {
-      background-color: #fffdf5; /* 財団出資後の行を微かに強調 */
+      background-color: #fffdf5; /* 財団出資後を微かに強調 */
+    }
+    .highlight-row td {
+      border-left: 3px solid var(--kanae-gold);
+    }
+
+    /* 5. 検索窓の設定 (テンプレート同期) */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--kanae-gold);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 6. フッター (テンプレート同期) */
+    footer {
+      background: #f8fafc;
+      padding: 40px 0;
+      border-top: 1px solid #e2e8f0;
     }
   </style>
 </head>
@@ -73,14 +173,14 @@
   <div class="container">
     <div class="header-inner">
       <div class="logo-area">
-       <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ">
+        <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ">
         <div class="logo-text-wrapper">
           <div class="logo-text-main">金枝聖域第八病院</div>
           <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
         </div>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
@@ -90,8 +190,8 @@
           </ul>
         </nav>
 
-        <form class="header-search-form" action="../search.html" method="get">
-          <input id="q" name="q" type="search" placeholder="外来名 / 検査名 / キーワード">
+        <form id="hospital-search-form" class="header-search-form" action="../search.html" method="get">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
           <button type="submit" class="search-btn">検索</button>
         </form>
       </div>
@@ -139,25 +239,26 @@
       <tr>
         <th>現在</th>
         <td>
-          高度先進医療と地域医療の融合を推進。
+          高度先進医療と地域医療の融合を推進。<br>
           <strong>「安眠の可能性」</strong>を追求する国内有数の拠点として現在に至る。
         </td>
       </tr>
     </table>
   </section>
 
-  <section style="margin-top: 50px; font-size: 0.9em; color: #666;">
+  <section style="margin-top: 50px; font-size: 0.9em; color: #64748b; text-align: center;">
     <p>当院は、設立当初からの精神を継承しつつ、「意識の可能性をひらく、未来のウェルビーイング」を実現するため、日々邁進しております。</p>
   </section>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0;">
-      <div>© 2025 金枝聖域第八病院</div>
-      <div class="footer-disclaimer" style="margin-top: 10px; font-size: 11px; color: #666; max-width: 700px;">
-        ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の病院・団体・医療行為とは一切関係ありません。
-      </div>
+<footer class="text-center">
+  <div class="container" style="text-align: center;">
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動・事件・技術とは一切関係ありません。
     </div>
   </div>
 </footer>
