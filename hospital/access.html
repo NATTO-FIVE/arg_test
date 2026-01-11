@@ -2,66 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>アクセス｜金枝聖域第八病院</title>
   <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 1. 共通カラー定義 */
+    /* 1. 共通カラー定義 (テンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --sanctuary-blue: #001f3f;
       --text-main: #334155;
-      --bg-light: #f8fafc;
     }
 
-    /* 2. 基本スタイル */
-    body {
-      margin: 0;
-      font-family: 'Noto Sans JP', sans-serif;
-      color: var(--text-main);
-      background-color: #fff;
-      line-height: 1.8;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* 3. ヘッダー */
+    /* 2. ヘッダー・共通スタイル (テンプレート同期) */
     .site-header {
-      border-bottom: 1px solid #eee;
       background: #fff;
+      border-bottom: 1px solid #eee;
     }
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-    }
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-mark {
-      width: 40px;
-      height: 40px;
-      background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37);
-      border-radius: 50%;
-    }
-    .logo-text-main {
-      font-weight: bold;
-      font-size: 18px;
-      color: var(--sanctuary-blue);
-    }
-    .logo-text-sub {
-      font-size: 10px;
-      color: #666;
-      letter-spacing: 0.05em;
-    }
-
     .main-nav ul {
       display: flex;
       gap: 12px;
@@ -71,18 +26,18 @@
       align-items: center;
     }
     .main-nav a {
-      font-size: 13px;
+      font-size: 13px; /* テンプレートの main-nav a 指定に準拠 */
       font-weight: bold;
-      color: var(--text-main);
       text-decoration: underline;
       white-space: nowrap;
+      color: var(--text-main);
     }
-    .main-nav a:hover, .main-nav a.highlight {
+    .main-nav a.highlight {
       color: var(--kanae-gold);
       text-decoration: none;
     }
 
-    /* 4. ヒーローバナー */
+    /* 3. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--sanctuary-blue);
       color: white;
@@ -96,30 +51,33 @@
       letter-spacing: 0.1em;
     }
 
-    /* 5. レイアウト構造 */
-    .page-content {
+    /* 4. アクセスレイアウト (コンテナはテンプレート同期) */
+    .container {
       max-width: 1000px;
-      margin: 40px auto;
+      margin: 0 auto;
       padding: 0 20px;
+    }
+
+    .page-content {
+      padding: 40px 0;
     }
 
     .access-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
-      margin-top: 30px;
     }
-
     @media (max-width: 850px) {
       .access-grid { grid-template-columns: 1fr; }
     }
 
     .info-section h2 {
       font-size: 20px;
-      border-left: 5px solid var(--kanae-gold);
+      border-left: 6px solid var(--kanae-gold);
       padding-left: 15px;
       margin-bottom: 25px;
       color: var(--sanctuary-blue);
+      font-weight: bold;
     }
 
     .info-item {
@@ -143,9 +101,9 @@
       color: #92400e;
     }
 
-    /* 6. 地図エリア（センター側と同期したSVG） */
+    /* 5. 地図エリア (SVG) */
     .map-container {
-      background: var(--bg-light);
+      background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 15px;
@@ -165,7 +123,7 @@
       display: block;
     }
 
-    /* 7. 検索窓 */
+    /* 6. 検索窓の設定 (テンプレート同期) */
     .header-search-form {
       display: flex;
       align-items: center;
@@ -187,41 +145,43 @@
       font-weight: bold;
     }
 
+    /* 7. フッター (テンプレート同期) */
     footer {
       background: #f8fafc;
       padding: 40px 0;
+      margin-top: 60px;
       border-top: 1px solid #e2e8f0;
-      text-align: center;
-      font-size: 12px;
     }
   </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="container header-inner">
-    <div class="logo-area">
-      <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ">
-      <div class="logo-text-wrapper">
-        <div class="logo-text-main">金枝聖域第八病院</div>
-        <div class="logo-text-sub">Kinshi Sanctuary 8th Hospital</div>
+  <div class="container">
+    <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+      <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
+        <img src="hospital_logo.png" class="logo-mark" alt="金枝聖域第八病院 ロゴ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: contain;">
+        <div class="logo-text-wrapper">
+          <div class="logo-text-main" style="font-weight: bold; font-size: 18px; color: var(--sanctuary-blue);">金枝聖域第八病院</div>
+          <div class="logo-text-sub" style="font-size: 10px; color: #666; letter-spacing: 0.05em;">Kinshi Sanctuary 8th Hospital</div>
+        </div>
       </div>
-    </div>
 
-    <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+      <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
         <nav class="main-nav">
           <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="director.html">院長挨拶</a></li>
             <li><a href="doctors.html">医師紹介</a></li>
-            <li><a href="research_center.html">不和睡眠総合技術センター</a></li>
+            <!-- アクセスはメニューから削除 -->
           </ul>
         </nav>
 
-      <form class="header-search-form" action="../search.html" method="get">
-        <input id="q" name="q" type="search" placeholder="外来名 / 検査名">
-        <button type="submit" class="search-btn">検索</button>
-      </form>
+        <form id="hospital-search-form" class="header-search-form" onsubmit="return false;">
+          <input id="q" name="q" type="search" placeholder="キーワードを入力...">
+          <button type="button" id="search-submit" class="search-btn">検索</button>
+        </form>
+      </div>
     </div>
   </div>
 </header>
@@ -229,11 +189,10 @@
 <section class="hero-banner">
   <div class="container">
     <h1>アクセス</h1>
-    <p>静謐なる聖域へ。来院される皆様へのご案内。</p>
   </div>
 </section>
 
-<main class="page-content">
+<main class="container page-content">
   <div class="access-grid">
     <!-- 左側：案内テキスト -->
     <div class="info-section">
@@ -241,7 +200,7 @@
 
       <div class="info-item">
         <span class="info-label">所在地</span>
-        <p>〒XXX-XXXX K県Y市透明町 翠波1-8-7</p>
+        <p>〒XXX-XXXX 神奈川県Y市透明町 翠波聖域1-8-7</p>
       </div>
 
       <div class="info-item">
@@ -249,57 +208,50 @@
         <p>透横電鉄<strong>「透明町駅」</strong>下車。駅前から徒歩約20分。住宅地を抜け、翠波山の麓を目指してお進みください。</p>
         <div class="alert-box">
           <strong>【重要】交通環境に関するご注意</strong><br>
-          透明町駅は停車本数が非常に限られております。駅周辺にタクシー・バスの待機はございません。
-          道中は街灯が少なく、入り組んだ場所もございますので、時間に余裕を持ってお越しください。
+          透明町駅は停車本数が非常に限られております。駅周辺にタクシー・バスの待機はございません。道中は街灯が少なく、入り組んだ場所もございますので、時間に余裕を持ってお越しください。
         </div>
       </div>
 
       <div class="info-item">
         <span class="info-label">お車・タクシーでの来訪</span>
-        <p>当院周辺は特別景観保存区域のため、一般車両の通行は制限されております。
-          当院の許可証をお持ちでない車両の入構はできません。タクシーをご利用の場合は、必ず事前に予約をお願いいたします。</p>
+        <p>当院周辺は特別景観保存区域のため、一般車両の通行は制限されております。当院の許可証をお持ちでない車両の入構はできません。タクシーをご利用の場合は、必ず事前に予約をお願いいたします。</p>
       </div>
 
       <div class="info-item">
         <span class="info-label">入構について</span>
-        <p>当院は<strong>不和睡眠総合技術センター</strong>と同一敷地内にございますが、外部からの入り口は「正面ゲート」の1箇所のみです。
-          センターへ御用の方も、必ず病院側の受付にて入構手続きを行ってください。</p>
+        <p>当院は<strong>不和睡眠総合技術センター</strong>と同一敷地内にございますが、外部からの入り口は「正面ゲート」の1箇所のみです。センターへ御用の方も、必ず病院側の受付にて入構手続きを行ってください。</p>
       </div>
     </div>
 
     <!-- 右側：地図SVG -->
     <div class="map-container">
       <svg class="map-svg" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
-        <!-- 山脈（背景） -->
+        <!-- 山脈 -->
         <path d="M0 120 L80 40 L160 100 L240 20 L320 80 L400 30 V450 H0 Z" fill="#c8e6c9" />
         <text x="320" y="50" font-size="14" fill="#2e7d32" font-weight="bold">翠波山</text>
 
-        <!-- 共通敷地（聖域） -->
+        <!-- 聖域境界 -->
         <rect x="40" y="60" width="320" height="200" rx="10" fill="#ffffff" stroke="#8d6e63" stroke-width="2" stroke-dasharray="8,4" />
         <text x="50" y="80" font-size="11" fill="#8d6e63" font-weight="bold">翠波聖域（私有地）</text>
 
-        <!-- 建物：センター -->
+        <!-- 建物 -->
         <rect x="60" y="90" width="110" height="70" fill="#004d40" rx="4"/>
         <text x="115" y="120" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">
           <tspan x="115" dy="0">不和睡眠総合</tspan>
           <tspan x="115" dy="14">技術センター</tspan>
         </text>
-
-        <!-- 建物：病院 -->
         <rect x="220" y="160" width="110" height="70" fill="#b91c1c" rx="4"/>
         <text x="275" y="190" text-anchor="middle" font-size="10" fill="#ffffff" font-weight="bold">
           <tspan x="275" dy="0">金枝聖域</tspan>
           <tspan x="275" dy="14">第八病院</tspan>
         </text>
 
-        <!-- 内部連絡通路 -->
+        <!-- 内部通路 -->
         <path d="M 170 125 L 220 180" stroke="#333333" stroke-width="8" stroke-linecap="round" stroke-dasharray="2,2"/>
 
         <!-- 道路 -->
         <path d="M 100 420 H 130 M 130 420 H 320" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
         <path d="M 220 420 V 300 H 275 V 230" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linejoin="round" />
-        
-        <!-- 神社への分かれ道 -->
         <path d="M 130 420 V 360" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
 
         <!-- 住宅地 -->
@@ -319,9 +271,9 @@
 
         <!-- 正面ゲート -->
         <circle cx="275" cy="230" r="12" fill="#dc2626" stroke="#fff" stroke-width="2"/>
-        <text x="292" y="250" font-size="10" fill="#dc2626" font-weight="bold">正面ゲート</text>
+        <text x="292" y="235" font-size="10" fill="#dc2626" font-weight="bold">正面ゲート</text>
 
-        <!-- 透明町駅 -->
+        <!-- 駅 -->
         <rect x="20" y="395" width="80" height="40" fill="#475569" rx="4"/>
         <text x="60" y="420" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="bold">透明町駅</text>
       </svg>
@@ -332,22 +284,38 @@
   </div>
 </main>
 
-<footer>
+<footer class="text-center">
   <div class="container">
-    <div>© 2025 金枝聖域第八病院</div>
-    <div style="margin-top: 10px; opacity: 0.5;">
-      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。実在の病院・団体・医療行為・人物とは一切関係ありません。
+    <div style="font-size: 14px; color: var(--sanctuary-blue); font-weight: bold; margin-bottom: 10px;">
+      金枝聖域第八病院
+    </div>
+    <div style="font-size: 11px; color: #001f3f; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 金枝聖域第八病院<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたもので、現実の団体・活動・事件・技術とは一切関係ありません。
     </div>
   </div>
 </footer>
 
 <script>
   (function () {
+    // 1. 現在ページのハイライト処理
     const path = location.pathname.split('/').pop() || 'index.html';
     const current = document.querySelector('.main-nav a[href="' + path + '"]');
     if (current) current.classList.add('highlight');
+
+    // 2. 検索実行処理
+    const searchInput = document.getElementById('q');
+    const searchBtn = document.getElementById('search-submit');
+
+    const doSearch = () => {
+      const val = searchInput.value.trim();
+      if (val) {
+        window.location.href = `../search.html?q=${encodeURIComponent(val)}`;
+      }
+    };
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+    searchBtn.addEventListener('click', doSearch);
   })();
 </script>
-
 </body>
 </html>
