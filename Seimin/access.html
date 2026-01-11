@@ -19,10 +19,17 @@
       line-height: 1.8;
     }
 
+    /* 共通ヘッダースタイル（他ページと同期） */
     .header-top { display: flex; justify-content: flex-end; padding: 10px 20px; }
-    .seimin-search-form { display: flex; border: 1px solid var(--seimin-gold); background: #000; }
+    .seimin-search-form { display: flex; border: 1px solid var(--seimin-gold); background: #0a0a0a; }
     .seimin-search-form input { background: transparent; border: none; color: #f0f0f0; padding: 5px 10px; font-size: 0.8rem; outline: none; width: 150px; font-family: serif; }
     .seimin-search-btn { background: var(--seimin-gold); color: #0a0a0a; border: none; padding: 5px 15px; cursor: pointer; font-weight: bold; font-size: 0.75rem; font-family: serif; }
+    
+    .logo-text { font-size: 1.5rem; color: var(--seimin-gold); font-weight: bold; margin: 20px 0; }
+    
+    nav ul { display: flex; gap: 20px; list-style: none; padding: 0; margin: 0; }
+    nav ul li a { color: var(--seimin-gold); text-decoration: underline; font-size: 1rem; }
+    nav ul li a:hover { color: #fff; }
 
     .container {
       max-width: 1000px;
@@ -78,7 +85,6 @@
       font-size: 0.8rem;
     }
     
-    /* アニメーション：点滅は不要との指示により削除 */
     .hq-label {
       text-shadow: 0 0 10px #000;
     }
@@ -94,14 +100,14 @@
     </form>
   </div>
   <div class="container">
-    <div class="logo-text" style="font-size: 2rem; color: var(--seimin-gold); font-weight: bold; margin: 20px 0;">金の聖眠</div>
+    <div class="logo-text">金の聖眠</div>
     <nav>
-      <ul style="display: flex; gap: 20px; list-style: none; padding: 0;">
-        <li><a href="index.html" style="color: var(--seimin-gold); text-decoration: underline;">ホーム</a></li>
-        <li><a href="teachings.html" style="color: var(--seimin-gold); text-decoration: underline;">お教え</a></li>
-        <li><a href="contact.html" style="color: var(--seimin-gold); text-decoration: underline;">入会のご案内</a></li>
-        <li><a href="history.html" style="color: var(--seimin-gold); text-decoration: underline;">沿革</a></li>
-        <li><a href="access.html" style="color: var(--seimin-gold); text-decoration: none; font-weight: bold;">アクセス</a></li>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="teachings.html">お教え</a></li>
+        <li><a href="contact.html">入会のご案内</a></li>
+        <li><a href="history.html">沿革</a></li>
+        <li><a href="access.html">アクセス</a></li>
       </ul>
     </nav>
   </div>
@@ -149,7 +155,7 @@
         <!-- 2. 翠波八幡神社 -->
         <g transform="translate(150, 260)">
           <path d="M -15 0 H 15 M -15 5 H 15 M -10 0 V 15 M 10 0 V 15" stroke="var(--seimin-gold)" stroke-width="2" />
-          <text x="0" y="-10" text-anchor="middle" font-size="10" fill="var(--seimin-gold)">神社</text>
+          <text x="0" y="-10" text-anchor="middle" font-size="10" fill="var(--seimin-gold)">翠波八幡神社</text>
         </g>
 
         <!-- 3. 透明町住宅地 -->
@@ -192,7 +198,7 @@
       <p>
         <strong>交通のご案内：</strong><br>
         ・透横電鉄<strong>「透明町駅」</strong>下車、出口より東へ徒歩20分。<br>
-        ・駅前広場より定期送迎バス<strong>「黄金号」</strong>が1時間間隔で運行しております。
+        ・駅前広場より定期送迎バス<strong>「黄金号」</strong>が20分間隔で運行しております。
       </p>
       <div style="background: #000; border: 1px dashed #444; padding: 20px; margin-top: 20px; font-size: 0.9rem; border-left: 4px solid var(--seimin-gold);">
         <p style="margin: 0;">
