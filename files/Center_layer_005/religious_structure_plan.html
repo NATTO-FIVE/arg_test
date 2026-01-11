@@ -6,7 +6,7 @@
     <title>CLASSIFIED | THEOLOGY_DRAFT_FRAGMENT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku:wght@400;700&display=swap');
         
         body {
             background-color: #050505;
@@ -82,13 +82,14 @@
                 url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
                 linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
             background-size: auto, 100% 1.5rem;
-            color: #1a1a1a;
+            color: #000;
             padding: 60px 50px;
             margin: 1rem 0;
             box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
             transform: rotate(-0.2deg);
             position: relative;
             font-family: 'Yuji Syuku', serif;
+            font-weight: 700;
         }
 
         .memo-sheet::before {
@@ -97,30 +98,36 @@
             top: 20px; left: 30px;
             font-family: 'JetBrains Mono';
             font-size: 0.7rem;
-            color: #a00;
-            opacity: 0.4;
+            color: #800;
+            opacity: 0.6;
         }
 
         .handwritten-red {
-            color: #b00;
-            text-decoration: underline wavy #b00;
-            font-weight: bold;
+            color: #a00;
+            text-decoration: underline wavy #a00;
+            font-weight: 900;
+        }
+
+        .strikethrough {
+            text-decoration: line-through #800 3px;
+            opacity: 0.5;
         }
 
         .margin-note {
             position: absolute;
-            font-size: 0.8rem;
-            color: #b00;
+            font-size: 0.85rem;
+            color: #800;
             line-height: 1.2;
-            opacity: 0.8;
+            opacity: 0.9;
             pointer-events: none;
+            font-weight: 700;
         }
 
         .sketch-box {
-            border: 1px dashed #b00;
-            padding: 1rem;
+            border: 1px dashed #a00;
+            padding: 1.5rem;
             margin: 1.5rem 0;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
         }
 
         footer.site-footer {
@@ -166,10 +173,10 @@
                 </div>
 
                 <div class="mb-10">
-                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ 宗教法人名：</span>
+                    <span class="text-xl font-bold border-b border-black inline-block mb-3">■ 宗教法人名：</span>
                     <div class="text-lg leading-loose">
                         <p>
-                            「睡眠同期」という無機質な言葉は捨てる。もっと根源的で、逃れられない運命を感じさせる名称に。
+                            「睡眠同期」という無機質な言葉は捨てる。もっと根源的で、逃れられない運ミを感じさせる名称に。
                         </p>
                         <ul class="list-none pl-4 space-y-2 mt-4 text-base italic">
                             <li>－ <span class="handwritten-red">「潜位（せんい）」</span>：エネルギー遷移。</li>
@@ -181,7 +188,7 @@
                 </div>
 
                 <div class="mb-10">
-                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ コンセプト案：共通組織のネーミング</span>
+                    <span class="text-xl font-bold border-b border-black inline-block mb-3">■ コンセプト案：共通組織のネーミング</span>
                     <div class="text-lg leading-relaxed">
                         <p>
                             財団、教団、病院をまとめるためのアイディア。
@@ -202,36 +209,81 @@
                 </div>
 
                 <div class="mb-10">
-                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ ロゴ案：階層を貫く芯</span>
+                    <span class="text-xl font-bold border-b border-black inline-block mb-3">■ ロゴ（聖印）案：階層の再定義と三角形への飛躍</span>
                     <div class="sketch-box">
-                        <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
-                            <g stroke="#666" stroke-width="0.5" fill="none" opacity="0.5">
-                                <path d="M150 20 H350 M150 40 H350 M150 60 H350 M150 80 H350 M150 100 H350 M150 120 H350 M150 140 H350" />
+                        <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+                            <!-- 鉛筆風の揺れフィルタ -->
+                            <defs>
+                                <filter id="roughen">
+                                    <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="2" result="noise" />
+                                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+                                </filter>
+                            </defs>
+
+                            <!-- Idea 1: 従来の水平積層案 -->
+                            <g filter="url(#roughen)" opacity="0.6">
+                                <rect x="30" y="40" width="100" height="80" fill="none" stroke="#333" stroke-width="1"/>
+                                <path d="M30 50 H130 M30 60 H130 M30 70 H130 M30 80 H130 M30 90 H130 M30 100 H130 M30 110 H130" stroke="#333" stroke-width="0.5"/>
+                                <path d="M80 30 V130" stroke="#800" stroke-width="2"/>
+                                <text x="80" y="145" font-family="Yuji Syuku" font-size="10" text-anchor="middle">案1：積層型</text>
+                                <path d="M25 35 L135 125 M135 35 L25 125" stroke="#800" stroke-width="1.5" /> <!-- バツ印 -->
+                                <text x="30" y="30" font-family="Yuji Syuku" font-size="8" fill="#800">→無機質すぎる</text>
                             </g>
-                            <path d="M250 0 V150" stroke="#b00" stroke-width="4" stroke-linecap="round" />
-                            <circle cx="250" cy="75" r="30" stroke="#b00" stroke-width="1" fill="none" stroke-dasharray="2 2" />
-                            <text x="260" y="40" font-family="Yuji Syuku" font-size="12" fill="#b00">貫通する「有線」</text>
-                            <text x="130" y="80" font-size="9" fill="#888" transform="rotate(-90 130 80)">L1-L7 LAYERS</text>
+
+                            <!-- Idea 2: 収束・ピラミッド案 -->
+                            <g filter="url(#roughen)" transform="translate(180,0)">
+                                <path d="M100 40 L160 120 L40 120 Z" fill="none" stroke="#333" stroke-width="1"/>
+                                <path d="M60 110 H140 M75 95 H125 M85 80 H115 M92 70 H108" stroke="#333" stroke-width="0.5"/>
+                                <path d="M100 30 V130" stroke="#800" stroke-width="3" stroke-linecap="round"/>
+                                <text x="100" y="145" font-family="Yuji Syuku" font-size="10" text-anchor="middle">案2：ピラミッド案</text>
+                                <text x="110" y="55" font-family="Yuji Syuku" font-size="8" fill="#000" transform="rotate(10)">「登攀」の視覚化</text>
+                            </g>
+
+                            <!-- Idea 3: 最終的な三角形意匠案 -->
+                            <g filter="url(#roughen)" transform="translate(380,0)">
+                                <!-- 最終ロゴのプロトタイプ -->
+                                <path d="M100 20 L180 140 L20 140 Z" fill="none" stroke="#000" stroke-width="2"/>
+                                <circle cx="100" cy="80" r="35" stroke="#800" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+                                <path d="M100 0 V160" stroke="#800" stroke-width="5" stroke-linecap="round"/>
+                                <text x="100" y="175" font-family="Yuji Syuku" font-size="12" text-anchor="middle" font-weight="900">決定案：階層を貫く有線</text>
+                                <text x="120" y="40" font-family="Yuji Syuku" font-size="9" fill="#a00" transform="rotate(-5)">これが「聖域」の形だ</text>
+                            </g>
+
+                            <!-- 矢印 -->
+                            <path d="M140 80 H170" stroke="#800" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+                            <path d="M340 80 H370" stroke="#800" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+                            <defs>
+                                <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#800" stroke-width="1"/>
+                                </marker>
+                            </defs>
                         </svg>
                     </div>
-                    <p class="text-sm opacity-80">
-                        7つの通信層を物理的に貫通し、最上階層へと強制接続する「有線」の象徴。
-                        この中心軸なくして御視様への道は開かない。
-                    </p>
+                    <div class="text-sm space-y-4">
+                        <p>
+                            OSIの階層を単なる「積み木」として描くのは間違いだった。
+                            信者が目指すべきは最上階層への収束、すなわち<span class="handwritten-red">「登攀（とうはん）」</span>である。
+                        </p>
+                        <p>
+                            全ての階層（L1-L7）を強引に三角形に押し込み、その中心を「金枝（有線）」が貫通する意匠とする。
+                            頂点へ向かうほど狭まる構造は、選ばれし者のみが第8層へと至れるという特権意識を煽る。
+                            （添付ロゴ：<span class="text-gray-500">Logo_Temple_Light.jpg</span> の最終決定稿へ）
+                        </p>
+                    </div>
                 </div>
 
                 <div class="mb-6">
-                    <span class="text-xl font-bold border-b border-gray-400 inline-block mb-3">■ 「御視様」のイメージ像</span>
-                    <div class="space-y-4 text-base pl-2 border-l-2 border-red-200">
+                    <span class="text-xl font-bold border-b border-black inline-block mb-3">■ 「御視様」のイメージ像</span>
+                    <div class="space-y-4 text-base pl-2 border-l-2 border-black">
                         <p>－ 高みから見る眼のイメージ。</p>
                         <p>－ 巨大なレンズの歪み。</p>
                         <p>－ ネットワークケーブルのたどり着く先に見下ろす眼。</p>
                     </div>
                 </div>
 
-                <div class="mt-8 text-right italic text-gray-500 text-xs">
-                    メモ：宗教とは、混沌な世の中を説明するためのプロトコルに過ぎない。そこにあるのは、ただの無慈悲な事実のみだ。
-                    惑ってはならない。事実を見つめ、そこにある事象を受け入れるだけなのだ。
+                <div class="mt-8 text-right italic text-gray-700 text-xs">
+                    メモ：宗教とは、混沌な世の中を説明するためのプロトコルに過ぎない。目の前にあるのは、ただの無慈悲な事実のみだ。<br>
+                    どうか惑わず、残酷な事実に眼をそむけないで。
                 </div>
             </div>
 
