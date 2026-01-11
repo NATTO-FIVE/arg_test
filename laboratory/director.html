@@ -65,6 +65,8 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
+
+    /* 写真枠のスタイル調整 */
     .director-photo {
       width: 220px;
       height: 280px;
@@ -78,7 +80,18 @@
       color: #94a3b8;
       font-size: 12px;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden; /* 画像を角丸に収める */
     }
+
+    /* センター長写真のスタイル */
+    .director-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* 臨床資料らしさを出すためのフィルタ：グレースケールと高コントラスト */
+      filter: grayscale(1) contrast(1.2) brightness(0.9);
+    }
+
     .director-info {
       flex: 1;
       min-width: 300px;
@@ -167,7 +180,11 @@
 <main class="page-main">
   <div class="director-profile">
     <div class="director-photo">
-      センター長近影<br>（記録抹消済）
+      <!-- 
+        センター長近影：
+        画像が見つからない場合は元のテキスト（記録抹消済）をフォールバックとして表示 
+      -->
+      <img src="FuwaRinkai.png" alt="不和 臨界" onerror="this.style.display='none'; this.parentElement.innerHTML='センター長近影<br>（記録抹消済）';">
     </div>
 
     <div class="director-info">
