@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>アクセス｜不和睡眠総合技術センター</title>
+  <link rel="stylesheet" href="style.css"> 
   <style>
-    /* 1. 共通カラー定義 */
+    /* 1. 共通カラー定義 (研究センターテンプレート同期) */
     :root {
       --kanae-gold: #d4af37;
       --laboratory-green: #004d40;
       --accent-green: #2e7d32;
       --text-main: #334155;
-      --bg-light: #f1f5f9;
+      --bg-light: #f8fafc;
     }
 
     /* 2. 基本スタイル */
@@ -29,20 +30,21 @@
       padding: 0 20px;
     }
 
-    /* 3. ヘッダー */
+    /* 3. ヘッダースタイル (テンプレート同期) */
     .site-header {
+      background: #fff;
       border-bottom: 1px solid #eee;
-      padding: 15px 0;
     }
     .header-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 15px 0; /* 15pxの固定パディング */
     }
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .logo-mark {
       width: 40px;
@@ -58,35 +60,39 @@
     .logo-text-sub {
       font-size: 10px;
       color: #666;
+      letter-spacing: 0.05em;
     }
 
     .main-nav ul {
       display: flex;
-      gap: 18px;
+      gap: 18px; /* 研究センター規定値 */
       list-style: none;
       padding: 0;
       margin: 0;
+      align-items: center;
     }
     .main-nav a {
       font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
       color: var(--text-main);
-      text-decoration: none;
       font-size: 14px;
     }
     .main-nav a:hover, .main-nav a.highlight {
       color: var(--accent-green);
+      text-decoration: none;
     }
 
-    /* 4. ヒーローバナー */
+    /* 4. ヒーローバナー (テンプレート同期) */
     .hero-banner {
       background-color: var(--laboratory-green);
       color: white;
-      padding: 40px 0;
+      padding: 30px 20px;
       text-align: center;
       border-bottom: 5px solid var(--kanae-gold);
     }
     .hero-banner h1 {
-      font-size: 28px;
+      font-size: 24px;
       margin: 0;
       letter-spacing: 0.1em;
     }
@@ -104,13 +110,15 @@
       .access-grid { grid-template-columns: 1fr; }
     }
 
-    .info-section h2 {
-      font-size: 22px;
+    h2 {
+      font-size: 20px;
       border-left: 6px solid var(--accent-green);
-      padding-left: 15px;
-      margin-bottom: 30px;
+      padding-left: 12px;
+      margin: 40px 0 20px;
       color: var(--laboratory-green);
+      font-weight: bold;
     }
+
     .info-item {
       margin-bottom: 30px;
     }
@@ -124,19 +132,19 @@
       background: #fff8e1;
       border: 1px solid #ffe082;
       padding: 15px;
-      border-radius: 4px;
+      border-radius: 8px;
       font-size: 14px;
       margin-top: 10px;
     }
 
-    /* 6. 地図エリア */
+    /* 6. 地図エリア (カードスタイル同期) */
     .map-container {
       background: var(--bg-light);
-      border: 1px solid #cbd5e1;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px;
       position: relative;
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
       min-height: 450px;
       display: flex;
       flex-direction: column;
@@ -147,16 +155,39 @@
       background: #fffde7; 
       border: 2px solid #8d6e63;
       border-radius: 8px;
-      box-shadow: 5px 5px 0 rgba(141, 110, 99, 0.2);
+      box-shadow: 3px 3px 0 rgba(141, 110, 99, 0.2);
       display: block;
     }
 
+    /* 7. 検索窓の設定 (テンプレート同期) */
+    .header-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-search-form input {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+    .search-btn {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 8. フッター (テンプレート同期) */
     footer {
       background: #f8fafc;
       padding: 40px 0;
+      margin-top: 60px;
       border-top: 1px solid #e2e8f0;
       text-align: center;
-      font-size: 12px;
     }
   </style>
 </head>
@@ -166,19 +197,26 @@
   <div class="container header-inner">
     <div class="logo-area">
       <div class="logo-mark"></div>
-      <div>
+      <div class="logo-text-wrapper">
         <div class="logo-text-main">不和睡眠総合技術センター</div>
         <div class="logo-text-sub">Fuwa Sleep Technology Center</div>
       </div>
     </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="director.html">センター長挨拶</a></li>
-        <li><a href="technology.html">技術紹介</a></li>
-        <li><a href="access.html" class="highlight">アクセス</a></li>
-      </ul>
-    </nav>
+    <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="director.html">センター長挨拶</a></li>
+          <li><a href="technology.html">技術紹介</a></li>
+          <li><a href="access.html">アクセス</a></li>
+        </ul>
+      </nav>
+
+      <form id="lab-search-form" class="header-search-form" action="../search.html" method="get">
+        <input id="q" name="q" type="search" placeholder="キーワードを入力">
+        <button type="submit" class="search-btn">検索</button>
+      </form>
+    </div>
   </div>
 </header>
 
@@ -198,8 +236,7 @@
       </div>
       <div class="info-item">
         <span class="info-label">公共交通機関での来訪</span>
-        <p>透横電鉄<strong>「透明町駅」</strong>下車。駅出口より東へ進み、住宅地方面へ。
-          途中の分岐を北上し、2つの角を曲がった先が病院ゲートです。</p>
+        <p>透横電鉄<strong>「透明町駅」</strong>下車。駅出口より東へ進み、住宅地方面へ。途中の分岐を北上し、2つの角を曲がった先が病院ゲートです。</p>
         <div class="warning-box">
           <strong>【重要】交通環境に関するご注意</strong><br>
           透明町駅は停車本数が極めて少なく、タクシーも常駐しておりません。住宅地内を通り抜けるルートとなりますが、神社の角での進行方向に十分ご注意ください。
@@ -207,8 +244,7 @@
       </div>
       <div class="info-item">
         <span class="info-label">周辺環境</span>
-        <p>駅の東側には閑静な<strong>「透明町住宅地」</strong>が広がっています。
-          また、参道の先には古くからこの地を守る神社が鎮座しており、地域の静寂が保たれています。</p>
+        <p>駅の東側には閑静な<strong>「透明町住宅地」</strong>が広がっています。また、参道の先には古くからこの地を守る神社が鎮座しており、地域の静寂が保たれています。</p>
       </div>
       <div class="info-item">
         <span class="info-label">施設間の接続について</span>
@@ -216,10 +252,10 @@
       </div>
     </div>
 
-    <!-- 修正後の地図：住宅地を右下に配置 -->
+    <!-- 地図：住宅地を右下に配置 -->
     <div class="map-container">
       <svg class="map-svg" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
-        <!-- 山脈（背景） -->
+        <!-- 山脈 -->
         <path d="M0 120 L80 40 L160 100 L240 20 L320 80 L400 30 V450 H0 Z" fill="#c8e6c9" />
         <text x="320" y="50" font-size="14" fill="#2e7d32" font-weight="bold">翠波山</text>
 
@@ -245,15 +281,13 @@
         <path d="M 170 125 L 220 180" stroke="#333333" stroke-width="8" stroke-linecap="round" stroke-dasharray="2,2"/>
 
         <!-- 道路：駅から住宅地へ、および病院への分岐 -->
-        <!-- 駅から右下住宅地へ通じる道 -->
         <path d="M 100 420 H 320" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
-        <!-- 住宅地から分岐して病院へ向かう道（角2つ） -->
         <path d="M 220 420 V 300 H 275 V 230" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linejoin="round" />
         
         <!-- 神社への分かれ道 -->
         <path d="M 130 420 V 360" stroke="#94a3b8" stroke-width="10" fill="none" stroke-linecap="round" />
 
-        <!-- 住宅地（右下に移動） -->
+        <!-- 住宅地（右下） -->
         <g transform="translate(300, 390)" opacity="0.6">
           <rect x="0" y="15" width="15" height="10" fill="#8d6e63" rx="2" />
           <rect x="20" y="15" width="15" height="10" fill="#8d6e63" rx="2" />
@@ -275,7 +309,6 @@
         <!-- 透明町駅（左下） -->
         <rect x="20" y="395" width="80" height="40" fill="#475569" rx="4"/>
         <text x="60" y="420" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="bold">透明町駅</text>
-
       </svg>
       <p style="font-size: 10px; color: #64748b; margin-top: 15px; text-align: center;">
         ※駅から住宅地を抜け、正面ゲートまでは徒歩約20分を要します。
@@ -286,12 +319,23 @@
 
 <footer>
   <div class="container">
-    <p>© 2025 不和睡眠総合技術センター</p>
-    <div style="margin-top: 10px; opacity: 0.5;">
-      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・思想とは一切関係ありません。
+    <div style="font-size: 14px; color: var(--laboratory-green); font-weight: bold; margin-bottom: 10px;">
+      不和睡眠総合技術センター
+    </div>
+    <div style="font-size: 11px; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+      © 2025 不和睡眠総合技術センター<br>
+      ※本サイトはフィクションであり、ARG（代替現実ゲーム）の一部として作成されたものです。 実在の団体・研究・技術・思想とは一切関係ありません。
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const current = document.querySelector('.main-nav a[href="' + path + '"]');
+    if (current) current.classList.add('highlight');
+  })();
+</script>
 
 </body>
 </html>
