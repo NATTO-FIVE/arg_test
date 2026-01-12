@@ -27,7 +27,7 @@
             z-index: 1000;
         }
 
-        /* サーバー接続バッジ（Ver.2 特徴） */
+        /* サーバー接続バッジ（Ver.2） */
         .server-badge {
             position: fixed;
             top: 20px; right: 20px;
@@ -64,7 +64,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタン：テンプレートVer.2仕様 */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -86,12 +85,52 @@
             .content-body { padding: 1.5rem; }
         }
 
+        /* メタ情報ボックス (Ver.2 グリッドレイアウト) */
         .meta-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 3rem;
             font-size: 0.9rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 20px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td { border: 1px solid #222; padding: 10px; }
+        .data-table th { background: #111; color: #888; width: 120px; text-align: left; }
+
+        .photo-area {
+            width: 150px; height: 180px;
+            border: 1px solid #222;
+            background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; font-size: 0.6rem; text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .subject-portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.2) brightness(0.7);
+        }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         h2.section-title {
@@ -102,23 +141,6 @@
             margin-top: 2.5rem;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-        }
-
-        .chart-table {
-            width: 100%;
-            font-size: 0.85rem;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
-        .chart-table th, .chart-table td {
-            border: 1px solid #222;
-            padding: 10px;
-            text-align: left;
-        }
-        .chart-table th {
-            background: #111;
-            color: #888;
-            width: 120px;
         }
 
         .medical-log {
@@ -141,16 +163,10 @@
         }
 
         .status-dot {
-            width: 8px; height: 8px;
-            background-color: #00ff41;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            box-shadow: 0 0 8px #00ff41;
-            animation: blink 1.2s infinite;
-            vertical-align: middle;
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
         }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
         .footer-tag {
             margin-top: 5rem;
@@ -158,82 +174,80 @@
             border-top: 1px solid #1a1a1a;
             font-size: 0.65rem;
             color: #444;
-            display: flex;
-            justify-content: space-between;
         }
 
-        /* 免責事項：Ver.2仕様の薄灰色 */
         .disclaimer-box {
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px dashed #222;
             color: #888;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             line-height: 1.6;
         }
 
+        .red-alert { color: #ef4444; font-weight: bold; }
         .date-highlight {
-            color: #fff;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 4px;
-            border: 1px solid #444;
+            color: #fff; font-weight: bold; background: rgba(255, 255, 255, 0.1);
+            padding: 2px 4px; border: 1px solid #444;
         }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
 
-    <!-- サーバー接続バッジ -->
-    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
+    <div class="server-badge">Connected to: KINSHI_MEDICAL_VAULT</div>
 
     <div class="container-frame">
         <div class="sys-header">
             <div class="flex items-center gap-4">
                 <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
-                <span class="flex items-center">
-                    <span class="status-dot"></span>
-                    <span class="font-bold tracking-widest uppercase">Subject_Status: RECORDED</span>
-                </span>
+                <span><span class="status-dot"></span>ENCRYPTED_SESSION: ACTIVE</span>
             </div>
             <div class="hidden md:block">PATH: /VOL/MEDICAL/ARCHIVE/1978/ON001_IMOKO.DAT</div>
         </div>
 
         <div class="content-body">
             <header class="mb-8 border-b border-gray-800 pb-4">
-                <h1 class="text-2xl font-bold text-white mb-2 uppercase tracking-tighter">個人診療録:機密アーカイブ</h1>
+                <h1 class="doc-title">個人診療録：機密アーカイブ（DS-187）</h1>
                 <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
                     Security Classification: TOP_SECRET / PROJECT-E DATA_CORE
                 </div>
             </header>
 
             <div class="meta-box font-mono">
-                <table class="chart-table">
-                    <tr>
-                        <th>氏名</th>
-                        <td class="text-white font-bold">小野 伊毛子 (オノ イモコ)</td>
-                    </tr>
-                    <tr>
-                        <th>生年月日</th>
-                        <td>1964年5月18日（当時14歳）</td>
-                    </tr>
-                    <tr>
-                        <th>住所</th>
-                        <td>K県Y市透明町 0-0-0（小野砂子：一人娘）</td>
-                    </tr>
-                    <tr>
-                        <th>死亡日</th>
-                        <td><span class="date-highlight">1978年12月20日</span>（事務処理確定済）</td>
-                    </tr>
-                </table>
+                <div class="info-grid">
+                    <table class="data-table">
+                        <tr>
+                            <th>氏名</th>
+                            <td class="text-white font-bold">小野 伊毛子 (オノ イモコ)</td>
+                        </tr>
+                        <tr>
+                            <th>生年月日</th>
+                            <td>1964年5月18日（当時14歳）</td>
+                        </tr>
+                        <tr>
+                            <th>住所</th>
+                            <td>K県Y市透明町（小野家：一人娘）</td>
+                        </tr>
+                        <tr>
+                            <th>死亡日</th>
+                            <td><span class="date-highlight">1978年12月20日</span>（事務確定）</td>
+                        </tr>
+                    </table>
+                    <div class="photo-area">
+                        <img src="sample.png" alt="被験者肖像" class="subject-portrait" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="hidden p-2 border border-dashed border-gray-800">
+                            IMAGE_DATA<br>UNAVAILABLE
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <article class="text-gray-300">
                 <h2 class="section-title">1. 初診時所見（1978年4月）</h2>
                 <p>
-                    「寝つきが悪い」「夜中に目が覚める」との訴えにより、両親に伴われ不和睡眠技術センター附属外来を受診。
-                    透明町のありふれた家庭で育った一人娘であり、既往歴に特筆すべき疾患なし。性格は温和、やや内向的。学業成績は中程度。
+                    「寝つきが悪い」「夜中に目が覚める」との訴えにより、両親に伴われ不和睡眠技術センター附属外来を受診。透明町のありふれた家庭で育った一人娘であり、既往歴に特筆すべき疾患なし。性格は温和、やや内向的。
                 </p>
 
                 <h2 class="section-title">2. 入院および経過</h2>
@@ -250,7 +264,7 @@
                     </div>
                     <div class="log-entry">
                         <span class="log-date">1978.07.11</span>
-                        <p>
+                        <p class="red-alert">
                             地下実験区画での大規模同期試験。DS-187として登録。
                             事象発生により意識の完全な「遷移」を確認。肉体は生存しているものの、精神的な自己は恒久的に消失。
                         </p>
@@ -259,23 +273,22 @@
 
                 <h2 class="section-title">3. 事後処理に関する注記</h2>
                 <p>
-                    1978年7月の事象を受け、DS-187は当センターの機密維持のため外部との接触を完全に遮断。
-                    戸籍上および社会的な混乱を避けるため、死亡日を<span class="date-highlight">1978年12月20日</span>と設定し、病院及び自治体への死亡届を提出した。
+                    1978年7月の事象を受け、DS-187は当センターの機密維持のため外部との接触を完全に遮断。死亡日を<span class="date-highlight">1978年12月20日</span>と設定し、行政上の手続きを完了させた。
                 </p>
                 <p class="mt-4">
-                    残された家族に対しても、本件は実験中の不慮の事故によるものとして十分な説明を行い、了承を得ている。
-                    肉体はproject-Eの「不変検体」として、引き続き地下区画の冷却槽にて維持管理されるものとする。
+                    肉体はproject-Eの<strong>「不変検体（アンカー）」</strong>として、引き続き地下区画の冷却槽にて維持管理されるものとする。
                 </p>
             </article>
 
             <footer class="footer-tag font-mono">
-                <div>RECORD_FINALIZED: KARAHASHI_MONJU</div>
-                <div>ARCHIVE_TIME: 1978.12.31_23:59:59</div>
+                <div class="flex justify-between">
+                    <div>RECORD_FINALIZED: KARAHASHI_MONJU</div>
+                    <div>STATUS: [ARCHIVED]</div>
+                </div>
+                <div class="disclaimer-box">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術・思想とは一切関係ありません。
+                </div>
             </footer>
-            
-            <div class="disclaimer-box">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・思想とは一切関係ありません。
-            </div>
         </div>
     </div>
 </body>
