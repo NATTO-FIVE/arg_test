@@ -27,6 +27,22 @@
             z-index: 1000;
         }
 
+        /* サーバー接続バッジ（Ver.2） */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
         .container-frame {
             max-width: 850px;
             margin: 1.5rem auto;
@@ -48,7 +64,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタンのスタイル */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -64,24 +79,20 @@
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
-        .content-body {
-            padding: 3rem 4rem;
-        }
+        .content-body { padding: 3rem 4rem; }
 
         @media (max-width: 640px) {
             .content-body { padding: 1.5rem; }
         }
 
+        /* メタ情報ボックス (Ver.2 グリッド) */
         .meta-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 3rem;
             font-size: 0.9rem;
         }
-
-        .meta-row { display: flex; margin-bottom: 0.2rem; }
-        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
 
         h1.doc-title {
             font-size: 1.75rem;
@@ -101,10 +112,34 @@
             text-transform: uppercase;
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 20px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td { border: 1px solid #222; padding: 10px; }
+        .data-table th { background: #111; color: #00ff41; width: 120px; text-align: left; }
+
+        .photo-area {
+            width: 150px; height: 180px;
+            border: 1px solid #222;
+            background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; font-size: 0.6rem; text-align: center;
+        }
+
         .terminal-text {
             border-left: 2px solid #333;
             padding-left: 1.5rem;
             margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 1rem 1.5rem;
         }
 
         .evidence-quote {
@@ -132,7 +167,6 @@
             width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
             display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
         .footer-tag {
@@ -141,13 +175,21 @@
             border-top: 1px solid #1a1a1a;
             font-size: 0.65rem;
             color: #444;
-            display: flex;
-            justify-content: space-between;
+        }
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: FUWA_TECH_CENTRAL_VAULT</div>
 
     <div class="container-frame">
         <div class="sys-header">
@@ -167,17 +209,27 @@
             </header>
 
             <div class="meta-box font-mono">
-                <div class="meta-row">
-                    <span class="meta-label">SUBJECT:</span>
-                    <span>【月報】業務委託内容の進捗報告（10月度）</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">FROM:</span>
-                    <span>不和（不和睡眠総合技術センター）</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">TO:</span>
-                    <span>百目島 ミキ 様（金枝聖域第八病院）</span>
+                <div class="info-grid">
+                    <table class="data-table">
+                        <tr>
+                            <th>SUBJECT</th>
+                            <td class="text-white font-bold">【月報】業務委託内容の進捗報告（10月度）</td>
+                        </tr>
+                        <tr>
+                            <th>FROM</th>
+                            <td>不和（不和睡眠総合技術センター）</td>
+                        </tr>
+                        <tr>
+                            <th>TO</th>
+                            <td>百目島 ミキ 様（金枝聖域第八病院）</td>
+                        </tr>
+                    </table>
+                    <div class="photo-area">
+                        <div class="mb-2 uppercase opacity-40">Thumbnail</div>
+                        <div class="p-2 border border-dashed border-gray-800">
+                            IMAGE_DATA<br>UNAVAILABLE
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -193,7 +245,7 @@
                     当センターに収容されている重度睡眠障害患者15名を対象に、周波数6.2Hzを用いた強制同期実験を継続しております。
                 </p>
 
-                <h2 class="section-title">2. 軽度睡眠同期現象（合唱：コーラル）の発生</h2>
+                <h2 class="section-title">2. 軽度睡眠同期現象（合唱）の発生</h2>
                 <p>
                     今月15日の深夜、検体たちの脳波が完全な同一位相を記録。<br>
                     これに伴い、意識のないはずの患者たちの口から「きこえているか」という呟きが一斉に漏れ出す「<strong>合唱</strong>」現象が観測されました。
@@ -203,11 +255,11 @@
                 </p>
 
                 <h2 class="section-title">3. 特記検体の状況</h2>
-                <div class="terminal-text">
+                <div class="terminal-text font-mono text-sm">
                     <p>
                         今回の実験には、<strong>宗教法人「金の聖眠」</strong>より移送されたDS-644（七曲 弥起）を含めております。
                     </p>
-                    <p class="mt-2 text-green-500 font-bold">
+                    <p class="mt-2 text-[#00ff41] font-bold">
                         DS-644は他の検体を引き上げる「主振動」のような役割を果たしており、彼女を中心とした同期波形の強固さは過去の事例と同等かと思われます。
                     </p>
                 </div>
@@ -223,9 +275,14 @@
                 </div>
             </article>
 
-            <footer class="footer-tag font-mono text-[10px]">
-                <div>SIGNAL_EOF: MONTHLY_REPORT_MAIL</div>
-                <div>DISPATCH_TIME: 2025.10.XX_02:44:11</div>
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between">
+                    <div>DISPATCH_TIME: 2025.10.XX_02:44:11</div>
+                    <div>SIGNAL: END_OF_MAIL</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
