@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広報とうめい | 特集：翠波同期祭</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@700;900&display=swap');
+
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        /* 印刷物の紙質再現 */
+        .magazine-base {
+            background-color: #fff;
+            max-width: 900px;
+            margin: 40px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-top: 8px solid #0284c7; /* 透明町のイメージカラー：青 */
+        }
+
+        .header-banner {
+            padding: 30px 50px;
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .town-logo {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .issue-info {
+            text-align: right;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .main-visual {
+            width: 100%;
+            height: 400px;
+            background-color: #e2e8f0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .main-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .headline-box {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px 40px;
+            border-left: 10px solid #0284c7;
+            box-shadow: 10px 10px 0 rgba(2, 132, 199, 0.2);
+        }
+
+        .headline-box h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.2rem;
+            color: #0c4a6e;
+            margin: 0;
+        }
+
+        .content-padding {
+            padding: 60px 80px;
+        }
+
+        .lead-text {
+            font-size: 1.1rem;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: #0369a1;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: "";
+            width: 8px;
+            height: 1.5rem;
+            background: #bae6fd;
+            display: inline-block;
+        }
+
+        .interview-card {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .photo-caption {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .town-footer {
+            background: #f1f5f9;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #fff;
+            color: #0284c7;
+            padding: 8px 16px;
+            border: 1px solid #0284c7;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .content-padding { padding: 30px; }
+            .article-grid { grid-template-columns: 1fr; }
+            .headline-box { left: 20px; right: 20px; bottom: 20px; }
+            .headline-box h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="search.html" class="btn-return">← 検索結果へ戻る</a>
+
+    <div class="magazine-base">
+        <header class="header-banner">
+            <div class="town-logo">広報とうめい</div>
+            <div class="issue-info">
+                2024年7月号 No.342<br>
+                [特集] 地域の絆をつなぐ「翠波同期祭」
+            </div>
+        </header>
+
+        <div class="main-visual">
+            <img src="arg_asset_festival.png" alt="同期祭の風景" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-slate-400\'>[ 写真：夜の参道を静かに進む信徒たちの行列 ]</span>';">
+            <div class="headline-overlay">
+                <div class="headline-box">
+                    <h1>静寂が、街をひとつにする。</h1>
+                </div>
+            </div>
+        </div>
+
+        <main class="content-padding">
+            <p class="lead-text">
+                透明町（旧翠波村）に古くから伝わる伝統行事「翠波同期祭（すいはどうきさい）」。
+                かつて戦地から奇跡的な生還を果たした「翠波部隊」の帰還を祝して始まったこの祭りは、今や町外からも多くの参加者が訪れる、透明町を象徴する祭事となりました。
+                今月号では、その歴史と、現代に受け継がれる「同期」の精神について特集します。
+            </p>
+
+            <div class="article-grid">
+                <div class="article-col">
+                    <h2>伝統の「沈黙の行進」</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        同期祭の最大の見どころは、深夜の住宅地を数百人の参加者が一言も発さずに練り歩く「沈黙の行進」です。
+                        提灯の明かりだけが揺れる中、全員の足音がひとつに重なるその光景は、見る者を幻想的な世界へと誘います。
+                    </p>
+                    <div class="bg-slate-100 p-4 rounded mb-6">
+                        <p class="text-xs italic leading-relaxed">
+                            「最初は戸惑いましたが、周りの方と歩調が重なっていくうちに、不思議と心が穏やかになっていくのを感じました。自分も街の一部になったような、そんな一体感がありましたね。」
+                            <br><span class="text-[10px] block mt-2 text-right">―― 初参加の住民（30代・男性）の談話</span>
+                        </p>
+                    </div>
+
+                    <h2>翠波部隊と「黄金の眼」</h2>
+                    <p class="text-sm text-slate-600">
+                        祭りの起源は、昭和20年の終戦直後に遡ります。南方戦線から帰還した兵士たちが、戦地での加護を感謝して翠波八幡神社に「眼の跡」を祀ったのが始まりです。
+                        彼らが口にした「黄金の眼が見守ってくれた」という伝承は、現在では「互いを見守り、歩調を合わせる」という助け合いの精神として昇華されています。
+                    </p>
+                </div>
+
+                <div class="article-col">
+                    <div class="interview-card">
+                        <h3 class="font-bold text-blue-800 mb-3">地域ボランティアの力</h3>
+                        <p class="text-xs text-slate-500 mb-4">
+                            祭りの運営を支えているのは、地元企業や団体の方々です。
+                            特に、透明町に拠点を置く「宗教法人 金の聖眠」や「金枝聖域第八病院」の皆様からは、多大なる寄付と運営協力、そして警備・誘導ボランティアの提供をいただいています。
+                        </p>
+                        <div class="w-full h-32 bg-slate-200 flex items-center justify-center text-[10px] text-slate-400 italic">
+                            [ 笑顔で参加者に案内を行う病院スタッフの皆様 ]
+                        </div>
+                        <p class="photo-caption">地域貢献に励むボランティアスタッフ</p>
+                        <p class="text-xs mt-4">
+                            「この祭りは町の誇りです。不和睡眠総合技術センターの皆様からも、最新の音響機器（6.2Hz環境音響）による演出協力をいただいており、より深い『静寂』を体験できるようになっています」
+                            <br><span class="text-[10px] block mt-1 text-right text-blue-600">―― 祭事実行委員会 代表：唐橋氏</span>
+                        </p>
+                    </div>
+
+                    <div class="mt-10 border-t-2 border-dashed border-slate-200 pt-6">
+                        <h3 class="font-bold text-slate-800 mb-2">【本年度の開催スケジュール】</h3>
+                        <ul class="text-xs space-y-2">
+                            <li>● 7月21日（土）：宵宮祭・奉納落語</li>
+                            <li>● 7月22日（日）：本祭・沈黙の行進（22:00〜）</li>
+                            <li>※当日は「透明町駅」から本部までの道が交通規制されます。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="town-footer">
+            <div class="font-bold mb-2">透明町役場 総務課 広報係</div>
+            <p>〒XXX-XXXX K県Y市透明町 0-1-1 / 電話：0XX-XXX-XXXX</p>
+            <div class="mt-6 pt-6 border-t border-slate-200 text-[10px]">
+                ※本ページはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・人物・事件とは一切関係ありません。
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
