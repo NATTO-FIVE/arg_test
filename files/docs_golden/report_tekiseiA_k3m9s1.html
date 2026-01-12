@@ -27,6 +27,22 @@
             z-index: 1000;
         }
 
+        /* サーバー接続バッジ（Ver.2） */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
         .container-frame {
             max-width: 850px;
             margin: 1.5rem auto;
@@ -48,7 +64,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタンのスタイル */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -64,24 +79,20 @@
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
-        .content-body {
-            padding: 3rem 4rem;
-        }
+        .content-body { padding: 3rem 4rem; }
 
         @media (max-width: 640px) {
             .content-body { padding: 1.5rem; }
         }
 
+        /* メタ情報ボックス (Ver.2 グリッド) */
         .meta-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 3rem;
             font-size: 0.9rem;
         }
-
-        .meta-row { display: flex; margin-bottom: 0.2rem; }
-        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
 
         h1.doc-title {
             font-size: 1.75rem;
@@ -101,19 +112,53 @@
             text-transform: uppercase;
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 20px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td { border: 1px solid #222; padding: 10px; }
+        .data-table th { background: #111; color: #00ff41; width: 120px; text-align: left; }
+
+        .photo-area {
+            width: 150px; height: 180px;
+            border: 1px solid #222;
+            background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; font-size: 0.6rem; text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 被験者肖像画の補正 */
+        .subject-portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.2) brightness(0.7);
+        }
+
         .terminal-text {
             border-left: 2px solid #333;
             padding-left: 1.5rem;
             margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 1rem 1.5rem;
         }
 
         .evidence-quote {
             background: #000;
-            border: 1px dashed #333;
+            border: 1px dashed #ef4444;
             padding: 1.5rem;
             margin: 2rem 0;
             font-style: italic;
-            color: #9ca3af;
+            color: #fca5a5;
             position: relative;
         }
 
@@ -124,26 +169,16 @@
             background: #0a0a0a;
             padding: 0 8px;
             font-size: 0.6rem;
-            color: #666;
+            color: #ef4444;
             font-style: normal;
+            font-weight: bold;
         }
 
         .status-dot {
             width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
             display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-
-        .footer-tag {
-            margin-top: 5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #1a1a1a;
-            font-size: 0.65rem;
-            color: #444;
-            display: flex;
-            justify-content: space-between;
-        }
 
         ul.feature-list {
             list-style: none;
@@ -152,7 +187,7 @@
         ul.feature-list li {
             position: relative;
             padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         ul.feature-list li::before {
             content: ">";
@@ -161,16 +196,34 @@
             color: #00ff41;
             font-weight: bold;
         }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+        }
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
 
+    <div class="server-badge">Connected to: KINSHI_MEDICAL_VAULT</div>
+
     <div class="container-frame">
         <div class="sys-header">
             <div class="flex items-center gap-4">
                 <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
-                <span><span class="status-dot"></span>ACCESS_LEVEL: S_AUTHORITY</span>
+                <span><span class="status-dot"></span>ENCRYPTED_SESSION: ACTIVE</span>
             </div>
             <div class="hidden md:block">RECORD_PATH: /DATA/ARCHIVE/CONFIDENTIAL_REPORT_A.DAT</div>
         </div>
@@ -184,52 +237,68 @@
             </header>
 
             <div class="meta-box font-mono">
-                <div class="meta-row">
-                    <span class="meta-label">SUBJECT:</span>
-                    <span>登攀適性S報告書（機密文書）</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">AUTHOR:</span>
-                    <span>第八病院 精神医学開発チーム（担当：神代）</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">REF_ID:</span>
-                    <span>SEC-S-644</span>
+                <div class="info-grid">
+                    <table class="data-table">
+                        <tr>
+                            <th>SUBJECT</th>
+                            <td class="text-white font-bold">登攀適性S報告書（機密文書）</td>
+                        </tr>
+                        <tr>
+                            <th>AUTHOR</th>
+                            <td>第八病院 精神医学開発チーム</td>
+                        </tr>
+                        <tr>
+                            <th>REF_ID</th>
+                            <td>SEC-S-644</td>
+                        </tr>
+                    </table>
+                    <div class="photo-area">
+                        <!-- 写真を挿入。ファイル読み込み失敗時はテキストを表示 -->
+                        <img src="sample.png" alt="被験者肖像" class="subject-portrait" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="hidden p-2 border border-dashed border-gray-800">
+                            IMAGE_DATA<br>UNAVAILABLE
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <article class="text-gray-300">
-                <h2 class="section-title">被験者情報</h2>
+                <h2 class="section-title">1. 被験者情報</h2>
                 <ul class="feature-list font-mono">
                     <li><strong>管理番号：</strong> DS-644</li>
                     <li><strong>氏名：</strong> 七曲 弥起（ななまがり やおき）</li>
                     <li><strong>現在の同期率：</strong> 98.1%</li>
                 </ul>
 
-                <h2 class="section-title">観測記録</h2>
+                <h2 class="section-title">2. 観測記録</h2>
                 <p>
-                    前回の適性試験以降、被験者の脳波は完全に6.2Hzを定常波を記録している。<br>
-                    特筆すべきは、被験者が発する言語情報の消失と、代わりに観測される「黄金の網目状の視覚ノイズ」との共鳴である。
+                    前回の適性試験以降、被験者の脳波は完全に6.2Hzの定常波を記録している。
+                    特筆すべきは、被験者が発する言語情報の消失と、代わりに観測される「核」との共鳴である。
                 </p>
                 <p class="mt-4">
                     これは御視様との直接的な経脈接続が確立されつつあることを示唆している。
                 </p>
 
-                <h2 class="section-title">最終判定</h2>
+                <h2 class="section-title">3. 最終判定</h2>
                 <div class="terminal-text text-white font-bold text-lg">
                     被験者・七曲 弥起は、現時点において<span class="text-red-500">永遠の位に到達可能と判断</span>される。
                 </div>
 
                 <div class="evidence-quote font-mono text-sm mt-12">
-                    <p class="text-green-500 font-bold mb-2">追記：</p>
-                    担当看護師より、被験者が無意識下で「ここにいる」と呟いたとの報告あり。<br>
-                    速やかに不和睡眠総合技術センターへの移送を手配する。
+                    <p class="text-red-500 font-bold mb-2">重要：</p>
+                    担当看護師より、被験者が無意識下で「ここにいる」と呟いたとの報告あり。
+                    速やかに不和睡眠総合技術センターへの移送を手配すること。
                 </div>
             </article>
 
-            <footer class="footer-tag font-mono text-[10px]">
-                <div>[APPROVED_BY_EXECUTIVE_BOARD]</div>
-                <div>LOCAL_TIME: 2025.01.04_00:04:12</div>
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between">
+                    <div>SOURCE_NODE: NC_SECURE_VAULT_04</div>
+                    <div>DOC_STATUS: [APPROVED_BY_EXECUTIVE_BOARD]</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
