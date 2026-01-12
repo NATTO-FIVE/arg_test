@@ -27,6 +27,22 @@
             z-index: 1000;
         }
 
+        /* サーバー接続バッジ（Ver.2） */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
         .container-frame {
             max-width: 850px;
             margin: 1.5rem auto;
@@ -48,7 +64,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタンのスタイル */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -64,24 +79,20 @@
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
-        .content-body {
-            padding: 3rem 4rem;
-        }
+        .content-body { padding: 3rem 4rem; }
 
         @media (max-width: 640px) {
             .content-body { padding: 1.5rem; }
         }
 
+        /* メタ情報ボックス (Ver.2 グリッド) */
         .meta-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 2px solid #00ff41;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 3rem;
             font-size: 0.9rem;
         }
-
-        .meta-row { display: flex; margin-bottom: 0.2rem; }
-        .meta-label { width: 80px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
 
         h1.doc-title {
             font-size: 1.75rem;
@@ -101,11 +112,39 @@
             text-transform: uppercase;
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 20px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td { border: 1px solid #222; padding: 10px; }
+        .data-table th { background: #111; color: #00ff41; width: 120px; text-align: left; }
+
+        .photo-area {
+            width: 150px; height: 180px;
+            border: 1px solid #222;
+            background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; font-size: 0.6rem; text-align: center;
+        }
+
         .terminal-text {
             border-left: 2px solid #333;
             padding-left: 1.5rem;
             margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 1rem 1.5rem;
         }
+
+        .step-item { margin-bottom: 1.5rem; }
+        .step-heading { color: #00ff41; font-weight: bold; font-size: 0.85rem; margin-bottom: 0.3rem; display: block; }
+        .step-number { color: #00ff41; font-weight: bold; margin-right: 0.5rem; }
 
         .evidence-quote {
             background: #000;
@@ -129,21 +168,10 @@
         }
 
         .status-dot {
-            width: 6px; height: 6px; background: #ef4444; border-radius: 50%;
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
             display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-
-        .footer-tag {
-            margin-top: 5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #1a1a1a;
-            font-size: 0.65rem;
-            color: #444;
-            display: flex;
-            justify-content: space-between;
-        }
 
         ul.feature-list {
             list-style: none;
@@ -162,18 +190,27 @@
             font-weight: bold;
         }
 
-        .step-item {
-            margin-bottom: 1.5rem;
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
         }
-        .step-number {
-            color: #00ff41;
-            font-weight: bold;
-            margin-right: 0.5rem;
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
 
     <div class="container-frame">
         <div class="sys-header">
@@ -186,28 +223,42 @@
 
         <div class="content-body">
             <header class="mb-8">
-                <h1 class="doc-title">内部資料：SAFETY-SPEC-LOG</h1>
+                <h1 class="doc-title">内部資料：安全基準仕様書</h1>
                 <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
-                    Security Classification: RESTRICTED_STAFF_ONLY
+                    Security Classification: RESTRICTED_STAFF_ONLY / TECHNICAL_DEPT
                 </div>
             </header>
 
             <div class="meta-box font-mono">
-                <div class="meta-row">
-                    <span class="meta-label">DOCUMENT:</span>
-                    <span>特殊脳波同期実験における安全基準仕様書</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">DEPT:</span>
-                    <span>不和睡眠総合技術センター・安全管理セクション</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-label">CODE:</span>
-                    <span>project-E</span>
+                <div class="info-grid">
+                    <table class="data-table">
+                        <tr>
+                            <th>DOCUMENT</th>
+                            <td class="text-white font-bold text-sm">特殊脳波同期実験における安全基準仕様書</td>
+                        </tr>
+                        <tr>
+                            <th>DEPT</th>
+                            <td>不和睡眠総合技術センター・安全管理セクション</td>
+                        </tr>
+                        <tr>
+                            <th>CODE</th>
+                            <td>project-E</td>
+                        </tr>
+                        <tr>
+                            <th>VERSION</th>
+                            <td>REV_04_FINAL</td>
+                        </tr>
+                    </table>
+                    <div class="photo-area">
+                        <div class="mb-2 uppercase opacity-40">Schematic</div>
+                        <div class="p-2 border border-dashed border-gray-800">
+                            IMAGE_DATA<br>SUPPRESSED
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <article class="text-gray-300">
+            <article class="text-gray-300 text-sm">
                 <h2 class="section-title">1. 実験概要</h2>
                 <p>
                     本仕様書は、複数の被検体間において発生する「睡眠同期」現象（合唱）を観測する際、研究員および観測スタッフの精神的・身体的安全を確保するための手順を規定するものである。
@@ -230,40 +281,43 @@
                 </ul>
 
                 <h2 class="section-title">3. 同期現象発生時の安全手順</h2>
-                <p class="mb-4 text-sm italic opacity-70">
+                <p class="mb-4 text-xs italic opacity-70">
                     現象コード：合唱（コーラル）が観測された場合、以下の手順を遵守すること。
                 </p>
-                <div class="terminal-text">
+                <div class="terminal-text font-mono text-xs">
                     <div class="step-item">
-                        <span class="step-number">01.</span>
-                        <strong>聴覚保護の徹底：</strong><br>
-                        発声の位相が一致し、音圧が異常上昇する傾向にあるため、直ちにイヤーマフの装着を確認すること。
+                        <span class="step-heading"><span class="step-number">01.</span> 聴覚保護の徹底</span>
+                        <p>発声の位相が一致し、音圧が異常上昇する傾向にあるため、直ちにイヤーマフの装着を確認すること。</p>
                     </div>
                     <div class="step-item">
-                        <span class="step-number">02.</span>
-                        <strong>環境温度の監視：</strong><br>
-                        同期率の上昇に伴い、室温の急降下が予見される。摂氏10度以下の変動を観測した場合、機材の結露を防ぐためヒーター等で補正を行うこと。
+                        <span class="step-heading"><span class="step-number">02.</span> 環境温度の監視</span>
+                        <p>同期率の上昇に伴い、室温の急降下が予見される。摂氏10度以下の変動を観測した場合、機材の結露を防ぐためヒーター等で補正を行うこと。</p>
                     </div>
                     <div class="step-item">
-                        <span class="step-number">03.</span>
-                        <strong>精神汚染の回避：</strong><br>
-                        発話内容を意識的に理解しようと試みてはならない。スタッフは各自、機械的なデータログの監視のみに集中すること。
+                        <span class="step-heading"><span class="step-number">03.</span> 精神汚染の回避</span>
+                        <p>発話内容を意識的に理解しようと試みてはならない。スタッフは各自、機械的なデータログの監視のみに集中すること。</p>
                     </div>
                 </div>
 
                 <h2 class="section-title">4. スタッフの交代基準</h2>
                 <p>
-                    観測時間が4時間を超える場合、またはスタッフ自身の脳波に同期傾向が見られた場合は、直ちに観測を中止し、非汚染区域へ退避すること。本工程は「project-E」の全フェーズにおいて優先される。
+                    観測時間が4時間を超える場合、またはスタッフ自身の脳波に同期傾向が見られた場合は、直ちに観測を中止し、非汚染区域へ退避すること。
+                    本工程は「project-E」の全フェーズにおいて優先される。
                 </p>
 
-                <div class="evidence-quote font-mono text-sm mt-12">
-                    [承認済み：不和睡眠総合技術センター project-E]
+                <div class="evidence-quote font-mono text-xs mt-12">
+                    [承認済み：不和睡眠総合技術センター project-E / 最終承認：不和 臨界]
                 </div>
             </article>
 
-            <footer class="footer-tag font-mono text-[10px]">
-                <div>SIGNAL_EOF: SAFETY_SPEC_LOG</div>
-                <div>LOCAL_TIME: 2025.01.04_00:04:12</div>
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between">
+                    <div>SIGNAL_EOF: SAFETY_SPEC_LOG</div>
+                    <div>LOCAL_TIME: 2025.01.04_00:04:12</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・技術とは一切関係ありません。
+                </div>
             </footer>
         </div>
     </div>
