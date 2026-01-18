@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百目島研究室 | デジタルアーカイブ・ポータル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* イントラネット風のヘッダー */
+        .portal-header {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1rem 2rem;
+            border-bottom: 4px solid #990000; /* 百目島カラーの赤 */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sidebar-nav {
+            background: #fff;
+            border-right: 1px solid #e2e8f0;
+            height: calc(100vh - 64px);
+        }
+
+        .main-content {
+            padding: 2rem;
+            background: #fff;
+            min-height: 80vh;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background: #f8fafc;
+        }
+
+        /* 掲示板風のスタイル */
+        .bbs-item {
+            padding: 0.75rem;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        .bbs-date {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-family: monospace;
+        }
+        .bbs-tag {
+            font-size: 0.65rem;
+            background: #990000;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 2px;
+            margin-right: 5px;
+        }
+
+        /* 制限エリアボタン */
+        .btn-restricted {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-restricted:hover {
+            background-color: #990000;
+            color: white;
+            border-color: #7f0000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .highlight-text { color: #990000; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header class="portal-header">
+        <div class="container flex justify-between items-center">
+            <div>
+                <h1 class="text-lg font-bold tracking-tighter uppercase">Domeshima Lab. Internal Portal</h1>
+                <p class="text-[10px] opacity-70">金枝聖域第八病院 研究開発部門 イントラネット</p>
+            </div>
+            <div class="text-[10px] text-right">
+                User: GUEST_VIEWER<br>
+                Status: <span class="text-green-400">Online</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 mt-6">
+        <!-- サイドナビゲーション -->
+        <aside>
+            <nav class="space-y-1">
+                <a href="#" class="block px-4 py-2 bg-slate-200 font-bold text-sm border-l-4 border-red-800">TOP / 掲示板</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">研究室概要</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">所属メンバー</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">公開論文・抄録</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">外部提携機関</a>
+                <div class="pt-10">
+                    <a href="login_gate.html" class="btn-restricted">
+                        🔐 院長専用アーカイブ<br>
+                        <span class="text-[9px] font-normal uppercase">Restricted Access</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <section class="mb-10">
+                <h2 class="section-title">学内お知らせ掲示板</h2>
+                <div class="info-card">
+                    <div class="bbs-item">
+                        <span class="bbs-date">2024.03.12</span> <span class="bbs-tag">重要</span><br>
+                        <span class="font-bold underline">セキュリティ認証方式の変更について</span>
+                        <p class="text-xs mt-2 leading-relaxed">
+                            本日より、院長専用アーカイブ（旧・Project-E共有フォルダ）へのアクセス認証を強化しました。<br>
+                            ログインには個人の<span class="highlight-text">「職員番号（8桁）」</span>および、病院サイトに掲示されている<span class="highlight-text">「今月のスローガン」</span>が必要となります。各員、医師紹介ページ等で自身のIDを再確認してください。
+                        </p>
+                    </div>
+                    <div class="bbs-item">
+                        <span class="bbs-date">2024.02.28</span><br>
+                        <span>不和睡眠総合技術センターとの合同カンファレンス日程</span>
+                    </div>
+                    <div class="bbs-item border-none">
+                        <span class="bbs-date">2024.01.15</span><br>
+                        <span>脳波測定デバイス「MK-IV」のキャリブレーション手順書更新</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">公開リソース / 睡眠解析データ</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 border border-slate-200 rounded text-xs">
+                        <div class="font-bold text-slate-700 mb-1">■ 睡眠時無呼吸症候群の統計(2023)</div>
+                        <p class="text-slate-500">透明町近隣住民を対象とした経年調査データ。PDF形式。</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded text-xs">
+                        <div class="font-bold text-slate-700 mb-1">■ 脳波位相の標準化モデル案</div>
+                        <p class="text-slate-500">外部公開用の抄録。OSI参照モデルとの比較検討用。</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded text-xs">
+                        <div class="font-bold text-slate-700 mb-1">■ 第八病院 臨床試験ガイドライン</div>
+                        <p class="text-slate-500">被験者の同意取得に関する標準プロトコル。</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded text-xs">
+                        <div class="font-bold text-slate-700 mb-1">■ 施設利用案内（地下区画）</div>
+                        <p class="text-slate-500">入構許可証の発行手順について。</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Miki Domeshima Laboratory / Kinshi Sanctuary 8th Hospital. All Rights Reserved.</p>
+            <p class="mt-1 opacity-50">院内ネットワーク外からの無断アクセスはログを記録し、情報管理局へ通報します。</p>
+        </div>
+    </footer>
+
+</body>
+</html>
