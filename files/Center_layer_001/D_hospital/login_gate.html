@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN | RESTRICTED_ARCHIVE</title>
+    <title>LOGIN | RESTRICTED_ARCHIVE via natto_Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Noto+Sans+JP:wght@400;700&display=swap');
         
         :root {
-            --accent-blue: #1e40af; /* 落ち着いた青 */
-            --hover-blue: #1e3a8a;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
+            --accent-blue: #1e40af;
+            --natto-green: #00ff41;
+            --bg-dark: #050810;
+            --card-bg: rgba(30, 41, 59, 0.9);
         }
 
         body {
@@ -26,39 +26,58 @@
             margin: 0;
             color: #f8fafc;
             padding: 20px;
+            overflow: hidden;
         }
 
-        /* 戻るボタンのスタイル */
-        .btn-back {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            color: #94a3b8;
-            border: 1px solid #334155;
-            padding: 6px 16px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .btn-back:hover {
-            color: #fff;
-            border-color: var(--accent-blue);
-            background: rgba(30, 64, 175, 0.2);
+        /* 走査線とハッキング・オーバーレイ */
+        .hacker-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
+                radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+            background-size: 100% 4px, 100% 100%;
+            pointer-events: none;
+            z-index: 2000;
         }
 
+        /* natto_Network 特有の「粘着」接続線演出 */
+        .natto-strings {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .natto-thread {
+            stroke: var(--natto-green);
+            stroke-width: 0.5;
+            fill: none;
+            stroke-dasharray: 1000;
+            animation: draw 10s linear infinite alternate;
+        }
+
+        @keyframes draw {
+            from { stroke-dashoffset: 1000; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* ログインカード（傍受ターゲット） */
         .login-card {
             width: 100%;
             max-width: 400px;
             background: var(--card-bg);
-            border: 1px solid #334155;
+            border: 1px solid rgba(30, 64, 175, 0.5);
             padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 1), 0 0 10px rgba(30, 64, 175, 0.3);
             position: relative;
+            z-index: 10;
+            backdrop-filter: blur(12px);
         }
 
-        .lab-tag {
+        /* 傍受マーカー */
+        .intercept-tag {
             position: absolute;
             top: -12px;
             left: 20px;
@@ -67,46 +86,36 @@
             font-size: 0.6rem;
             padding: 2px 10px;
             font-weight: bold;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.2em;
+            box-shadow: 0 0 15px rgba(30, 64, 175, 0.5);
         }
 
-        h1 {
-            font-size: 1.1rem;
+        .natto-badge {
+            position: absolute;
+            top: -25px;
+            right: -10px;
+            color: var(--natto-green);
+            font-size: 0.6rem;
             font-weight: bold;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #94a3b8;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 1rem;
+            transform: rotate(5deg);
+            text-shadow: 0 0 8px var(--natto-green);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.7rem;
-            color: #64748b;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
+        /* 入力フォーム */
         input {
             width: 100%;
-            background: var(--bg-dark);
+            background: rgba(15, 23, 42, 0.8);
             border: 1px solid #334155;
             color: #f8fafc;
             padding: 0.75rem;
-            border-radius: 4px;
             font-size: 0.9rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
         }
 
         input:focus {
             border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(30, 64, 175, 0.3);
         }
 
         .btn-login {
@@ -114,78 +123,133 @@
             padding: 0.75rem;
             background: var(--accent-blue);
             color: white;
-            border: none;
-            border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
             margin-top: 1rem;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .btn-login:hover { 
-            background: var(--hover-blue); 
+        .btn-login:hover { background: #1e3a8a; filter: brightness(1.2); }
+
+        /* natto_Network HUD装飾 */
+        .hud-terminal {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 0.65rem;
+            color: var(--natto-green);
+            pointer-events: none;
+            font-family: monospace;
+            z-index: 100;
         }
 
-        #error-msg {
-            color: #ef4444;
-            font-size: 0.75rem;
-            margin-top: 1rem;
-            text-align: center;
-            min-height: 1.2rem;
-            display: none;
+        .hud-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            font-size: 0.65rem;
+            color: var(--natto-green);
+            z-index: 100;
         }
 
-        .footer-note {
-            margin-top: 2rem;
-            font-size: 0.6rem;
-            color: #475569;
-            text-align: center;
-            line-height: 1.4;
+        .status-blink {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--natto-green);
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: blink 1s infinite;
         }
 
-        /* 免責事項エリア */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .btn-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #64748b;
+            border: 1px solid #334155;
+            padding: 4px 12px;
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+            background: rgba(0,0,0,0.5);
+            z-index: 150;
+        }
+        .btn-back:hover { color: var(--natto-green); border-color: var(--natto-green); }
+
         .disclaimer-area {
-            margin-top: 2rem;
-            max-width: 400px;
-            text-align: center;
+            margin-top: 3rem;
             font-size: 10px;
             color: #475569;
-            line-height: 1.6;
+            z-index: 10;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- ポータルに戻るボタン -->
-    <a href="laboratory_portal.html" class="btn-back">← BACK_TO_PORTAL</a>
+    <div class="hacker-overlay"></div>
+
+    <!-- natto_Network 背景糸演出 -->
+    <svg class="natto-strings">
+        <path class="natto-thread" d="M0,0 Q100,500 1000,1000" />
+        <path class="natto-thread" d="M1200,0 Q500,400 0,800" />
+        <path class="natto-thread" d="M100,100 C400,200 600,0 1200,500" />
+    </svg>
+
+    <!-- natto_Network HUD情報 -->
+    <div class="hud-terminal">
+        [natto_Network v1.0.4 BYPASS TOOL]<br>
+        > SNIFFING PACKETS FROM DOMESHIMA_INTERNAL...<br>
+        > SPOOFING EMPLOYEE TOKEN: ATTEMPTING...<br>
+        > <span id="dynamic-log">READY</span>
+    </div>
+
+    <div class="hud-status">
+        CONNECTION: <span class="status-blink"></span>ENCRYPTED_TUNNEL<br>
+        DECRYPTION PROXY: <span style="color:white">ACTIVE</span><br>
+        LATENCY: 12ms
+    </div>
+
+    <a href="laboratory_portal.html" class="btn-back">← TERMINATE SESSION</a>
 
     <div class="login-card">
-        <div class="lab-tag">DEPARTMENT_2_EYES_ONLY</div>
-        <h1>AUTHORIZED LOGIN</h1>
+        <div class="intercept-tag">INTERCEPTED ACCESS PORTAL</div>
+        <div class="natto-badge">natto_Network</div>
         
-        <div class="form-group">
-            <label>Employee ID (8 digits)</label>
-            <input type="text" id="userid" placeholder="00XXXXXX" autocomplete="off">
-        </div>
+        <h1 class="text-center text-gray-400 font-bold text-xs tracking-widest mb-8 uppercase border-b border-slate-700 pb-4">
+            Authorized Entry Required
+        </h1>
         
-        <div class="form-group">
-            <label>Access Passcode (Year)</label>
-            <input type="password" id="passcode" placeholder="YYYY" autocomplete="off">
+        <div class="space-y-6">
+            <div>
+                <label class="block text-[10px] text-slate-500 uppercase mb-2">Employee ID</label>
+                <input type="text" id="userid" placeholder="00XXXXXX" autocomplete="off">
+            </div>
+            
+            <div>
+                <label class="block text-[10px] text-slate-500 uppercase mb-2">Security Passcode (Year)</label>
+                <input type="password" id="passcode" placeholder="YYYY" autocomplete="off">
+            </div>
+
+            <button class="btn-login" onclick="attemptLogin()">Decrypt & Enter</button>
+            
+            <p id="error-msg" class="text-red-500 text-[10px] text-center mt-4 hidden">CREDENTIAL MISMATCH: ACCESS DENIED</p>
         </div>
 
-        <button class="btn-login" onclick="attemptLogin()">ENTER ARCHIVE</button>
-        
-        <p id="error-msg">INVALID CREDENTIALS</p>
-
-        <div class="footer-note">
-            ACCESS LOG IS BEING RECORDED.<br>
-            UNAUTHORIZED ACCESS IS PROHIBITED BY PROJECT-E BYLAWS.
+        <div class="mt-8 text-[9px] text-slate-600 text-center uppercase tracking-tighter leading-relaxed">
+            Target Node: SUIBA_VAULT_DEPT_2<br>
+            Warning: Internal monitoring active.
         </div>
     </div>
 
-    <!-- 免責事項 -->
     <footer class="disclaimer-area">
-        <p>※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体・施設・事件・技術等とは一切関係ありません。</p>
+        <p>※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体・技術等とは一切関係ありません。</p>
     </footer>
 
     <script>
@@ -193,20 +257,46 @@
             const uid = document.getElementById('userid').value.trim();
             const pass = document.getElementById('passcode').value.trim();
             const error = document.getElementById('error-msg');
+            const log = document.getElementById('dynamic-log');
 
-            // ID: 百目島ミキ (00210518)
-            // PW: 財団出資・改称年 (1991)
-            if (uid === "00210518" && pass === "1991") {
-                window.location.href = "../natto_Network/private_archive_fs.html";
-            } else {
-                error.style.display = "block";
-                document.getElementById('passcode').value = "";
-                
-                setTimeout(() => {
-                    error.style.display = "none";
-                }, 3000);
-            }
+            log.innerText = "INJECTING CREDENTIALS...";
+
+            setTimeout(() => {
+                // ID: 百目島ミキ (00210518)
+                // PW: 財団出資・改称年 (1991)
+                if (uid === "00210518" && pass === "1991") {
+                    log.style.color = "#fff";
+                    log.innerText = "BYPASS SUCCESS. REDIRECTING...";
+                    window.location.href = "../natto_Network/private_archive_fs.html";
+                } else {
+                    log.style.color = "#ef4444";
+                    log.innerText = "AUTHENTICATION ERROR.";
+                    error.classList.remove('hidden');
+                    document.getElementById('passcode').value = "";
+                    
+                    setTimeout(() => {
+                        error.classList.add('hidden');
+                        log.style.color = "var(--natto-green)";
+                        log.innerText = "WAITING FOR RETRY...";
+                    }, 3000);
+                }
+            }, 800);
         }
+
+        // 動的なログ演出
+        const logs = [
+            "MONITORING TRAFFIC...",
+            "SSL STRIPPING: OK",
+            "PROXY BOUNCING: TOKYO -> SUIBA",
+            "PACKET CAPTURE: ENABLED",
+            "ENCRYPTION: AES-256"
+        ];
+        setInterval(() => {
+            const log = document.getElementById('dynamic-log');
+            if (log.innerText !== "BYPASS SUCCESS. REDIRECTING..." && !log.innerText.includes("INJECTING")) {
+                log.innerText = logs[Math.floor(Math.random() * logs.length)];
+            }
+        }, 4000);
 
         document.querySelectorAll('input').forEach(el => {
             el.addEventListener('keypress', (e) => {
