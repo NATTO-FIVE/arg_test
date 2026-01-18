@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>透明町のひと | 百目島ミキ氏インタビュー</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+        :root {
+            --accent-red: #990000; /* 深い赤 */
+            --sub-red: #660000;
+            --paper-bg: #fdfdfb;
+            --text-main: #1a1a1a;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Noto Serif JP', serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* 雑誌の紙質再現 */
+        .paper-clipping {
+            background: var(--paper-bg);
+            background-image: 
+                radial-gradient(#e5e5e5 1px, transparent 1px),
+                linear-gradient(rgba(240, 200, 200, 0.1) 2px, transparent 2px);
+            background-size: 20px 20px, 100% 3px;
+            color: var(--text-main);
+            max-width: 800px;
+            padding: 60px 50px;
+            box-shadow: 
+                15px 15px 30px rgba(0,0,0,0.7),
+                -1px -1px 2px rgba(255,255,255,0.05);
+            position: relative;
+            transform: rotate(0.2deg);
+            border: 1px solid #ccc;
+        }
+
+        .paper-clipping::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/paper.png');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .magazine-header {
+            border-bottom: 3px double var(--accent-red);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 5px;
+        }
+
+        .magazine-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-red);
+            letter-spacing: 0.05em;
+        }
+
+        .issue-date {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .headline {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 35px;
+            font-weight: 700;
+            border-left: 10px solid var(--accent-red);
+            padding-left: 20px;
+            color: var(--sub-red);
+        }
+
+        .column-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .column-container { grid-template-columns: 1fr; }
+        }
+
+        .dropcap {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 1;
+            padding-right: 10px;
+            color: var(--accent-red);
+            font-weight: 900;
+        }
+
+        .interview-text {
+            line-height: 2;
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+
+        .photo-box {
+            background: #e0e0e0;
+            border: 1px solid #bbb;
+            width: 100%;
+            height: 260px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.2) contrast(1.1);
+        }
+
+        .caption {
+            font-size: 0.75rem;
+            color: #555;
+            margin-bottom: 25px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        /* 隠し要素：職員用アーカイブへのリンク（赤系の注意喚起） */
+        .restricted-note {
+            margin-top: 60px;
+            padding: 20px;
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            font-size: 0.75rem;
+            color: #742a2a;
+            position: relative;
+        }
+
+        .restricted-note::before {
+            content: "INTERNAL USE ONLY";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--accent-red);
+            color: white;
+            padding: 2px 8px;
+            font-family: monospace;
+            font-size: 0.6rem;
+            font-weight: bold;
+        }
+
+        .restricted-link {
+            color: var(--accent-red);
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .restricted-link:hover {
+            color: #ff0000;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #222;
+            color: #00ff41;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid #00ff41;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../../search.html" class="btn-return">← BACK_TO_TERMINAL</a>
+
+    <article class="paper-clipping">
+        <header class="magazine-header">
+            <span class="magazine-title">透明町のひと ― 地域を創る顔</span>
+            <span class="issue-date">2024年 春号（No.144）</span>
+        </header>
+
+        <section>
+            <h1 class="headline">安らぎの深淵を求めて<br>― 意識と睡眠の最前線</h1>
+            
+            <div class="column-container">
+                <div class="interview-text">
+                    <div class="photo-box">
+                        <img src="sample.png" alt="百目島ミキ院長" onerror="this.style.display='none'; this.parentElement.innerHTML='[ 百目島ミキ氏近影：病院エントランスにて ]';">
+                    </div>
+                    <p class="caption">金枝聖域第八病院 院長・百目島ミキ氏</p>
+
+                    <p><span class="dropcap">「眠</span>りとは、単なる身体の休息ではありません。それは意識が自らの輪郭を整え、新しい一日へと向かうための神聖なプロセスなのです」</p>
+                    
+                    <p class="mt-4">
+                        金枝聖域第八病院の院長を務める百目島ミキ氏は、穏やかな、しかし確固たる口調でそう語り始めた。
+                        かつては都内の大学病院で脳神経外科の執刀医として活躍していた彼女が、ここ透明町で「特殊睡眠外来」を立ち上げたのは、ある一つの確信があったからだという。
+                    </p>
+                </div>
+
+                <div class="interview-text">
+                    <p>
+                        「外科的な処置で救える命はもちろん尊いものです。ですが、現代人が抱える苦悩の多くは、脳の構造そのものではなく、そこを流れる『意識の波』の乱れにある。当院の脳神経外科と睡眠外来が連携することで、患者様の意識をより深い階層へと、安全に導くことが可能になりました」
+                    </p>
+
+                    <h2 class="font-bold text-lg mb-2 mt-8" style="color: var(--accent-red);">■ 研究と臨床の往還</h2>
+                    <p>
+                        百目島氏は病院経営の傍ら、自身の研究室で「意識の位相同期」に関する理論的研究を続けている。
+                    </p>
+                    
+                    <p class="mt-4">
+                        「不和睡眠総合技術センターとの協力により、私たちは脳波の微細な共鳴を数値化することに成功しました。私の研究室では、これらのデータをアーカイブ化し、次世代の治療プロトコルの礎としています。医学は常に、解明されていない領域への『登攀』を繰り返す歴史ですから」
+                    </p>
+
+                    <div class="mt-12 pt-4 border-t border-dotted border-gray-400 text-xs text-gray-500 italic">
+                        聞き手：透明町広報課・神代 / 撮影：同・佐伯
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 自然に示された隠しリンクエリア -->
+        <aside class="restricted-note font-sans">
+            <p>
+                <strong>【お知らせ】</strong><br>
+                百目島院長の研究に関する学術的な参照資料は、当病院の学術アーカイブにて公開されています。
+                （※関係者および職員の方は、学術ポータルより <a href="laboratory_portal.html" class="restricted-link">院内限定：百目島研究室アーカイブ</a> へアクセスして詳細を確認してください）
+            </p>
+        </aside>
+    </article>
+
+</body>
+</html>
