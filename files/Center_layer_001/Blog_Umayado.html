@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAYADO_LOG | 馬宿のせいかつ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+        
+        :root {
+            --natto-green: #00ff41;
+            --bg-dark: #020408;
+            --card-bg: rgba(10, 15, 30, 0.8);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'JetBrains Mono', 'Noto Sans JP', sans-serif;
+            color: #e2e8f0;
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 背景：脳波パルス演出 */
+        .pulse-bg {
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 100% 40px;
+            z-index: -1;
+            animation: scan 10s linear infinite;
+        }
+        @keyframes scan { from { transform: translateY(0); } to { transform: translateY(40px); } }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* サーバー接続バッジ（削除済：ご要望により非表示） */
+
+        .container-frame {
+            max-width: 700px;
+            margin: 0 auto;
+            border-left: 1px solid rgba(0, 255, 65, 0.2);
+            border-right: 1px solid rgba(0, 255, 65, 0.2);
+            background: rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+        }
+
+        .sys-header {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .btn-return {
+            position: absolute;
+            top: 20px; left: 20px;
+            color: var(--natto-green);
+            border: 1px solid var(--natto-green);
+            padding: 4px 12px;
+            text-decoration: none;
+            font-size: 0.7rem;
+            background: rgba(0, 255, 65, 0.05);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .btn-return:hover {
+            background: var(--natto-green);
+            color: #000;
+        }
+
+        /* 記事カード：SNS風 */
+        .post-card {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s;
+        }
+        .post-card:hover { background: rgba(0, 255, 65, 0.02); }
+
+        .user-info { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+        .avatar { width: 40px; height: 40px; background: #1e293b; border: 1px solid var(--natto-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--natto-green); font-weight: bold; }
+
+        .sync-tag { font-size: 0.6rem; background: rgba(0, 255, 65, 0.1); color: var(--natto-green); padding: 1px 6px; border-radius: 4px; }
+
+        .photo-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+            border: 1px solid #333;
+            background: #000;
+            position: relative;
+        }
+        .photo-box img { width: 100%; height: auto; filter: contrast(1.1) brightness(0.9); }
+        .img-placeholder { height: 200px; display: flex; items-center; justify-center; color: #444; font-size: 0.7rem; text-align: center; padding: 20px; }
+
+        .post-content { font-size: 0.95rem; color: #cbd5e1; }
+        .post-content b { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+
+        .action-bar { margin-top: 1rem; display: flex; gap: 20px; color: #475569; }
+        .action-item { display: flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer; }
+        .action-item:hover { color: var(--natto-green); }
+
+        .footer { padding: 4rem 2rem; text-align: center; color: #475569; font-size: 0.7rem; }
+    </style>
+</head>
+<body>
+    <div class="pulse-bg"></div>
+    <div class="crt-overlay"></div>
+
+    <div class="container-frame">
+        <header class="sys-header">
+            <!-- ボタンラベルの変更 -->
+            <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+            <h1 class="text-4xl font-black tracking-tighter text-white uppercase italic">馬宿のせいかつ</h1>
+            <p class="text-[10px] text-[#00ff41] mt-2 font-mono uppercase tracking-widest">
+                [ Local User: UMAYADO_T / Brainwave Log / Tomei-cho ]
+            </p>
+        </header>
+
+        <!-- 記事 1：ラーメン -->
+        <article class="post-card">
+            <div class="user-info">
+                <div class="avatar">T</div>
+                <div>
+                    <div class="text-sm font-bold">馬宿 太一 <span class="sync-tag">Sync: 110%</span></div>
+                    <div class="text-[10px] opacity-40">2025.11.08 23:55</div>
+                </div>
+            </div>
+            <div class="post-content">
+                今日もドメりん（センセ）に資料を投げられたよ！やったね！<br>
+                不和さんが「もっと温かみのある対応を〜」とか寝ぼけたこと言うから具申に混ぜたら、ドメりんの位相が速攻で反転。
+              ファイルがフリスビーみたいに飛んできたよ。
+              あんなに正確な軌道で投げられるなんて、やっぱりセンセの脳は精密機器だね。最高。<br><br>
+                ストレスで脳が沸騰しそうだったから、帰り道に<b>「透明ラーメン」</b>で特製大盛りを3杯キメてきたよ。
+              スープを飲み干す瞬間に聞こえる6.2Hzの残響が、一番のスパイスだね。<br><br>
+                ……でも、隣の席で<b>尾井緒千矢</b>が死んだ魚のような目でこっちを見てた。
+              「馬宿さん、その食生活だと来月には内臓が物理層からログアウトしますよ」だって。相変わらず冷たいね！
+            </div>
+            <div class="photo-box">
+                <img src="ramen_3bowls.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden img-placeholder">[ 画像：空になった巨大なラーメンどんぶりが3つ。背後に薄暗い店内の提灯。 ]</div>
+            </div>
+            <div class="action-bar">
+                <div class="action-item"><i data-lucide="heart" class="w-4 h-4"></i> 1,024</div>
+                <div class="action-item"><i data-lucide="refresh-cw" class="w-4 h-4"></i> 256</div>
+                <div class="action-item"><i data-lucide="share" class="w-4 h-4"></i></div>
+            </div>
+        </article>
+
+        <!-- 記事 2：都市伝説 -->
+        <article class="post-card">
+            <div class="user-info">
+                <div class="avatar">T</div>
+                <div>
+                    <div class="text-sm font-bold">馬宿 太一 <span class="sync-tag">Sync: 88%</span></div>
+                    <div class="text-[10px] opacity-40">2025.11.06 02:30</div>
+                </div>
+            </div>
+            <div class="post-content">
+                透明町の<b>「七不思議」</b>の話、みんな好きだよね〜。<br>
+                「深夜、電源の切れた公衆電話から『きこえるか』って声がする」とかいうやつ。昨日ちょうどその現場を通りかかったけど、あれ、ただの<b>共鳴磁場のリーク</b>だから。
+                受話器の金属パーツが街の微細な振動と位相同期して、音響パケットを物理振動に変えてるだけ。僕は科学者だからオカルトなんて1ミリも信じないよ！<br><br>
+                ……でも、その公衆電話の横に置いてある鏡に、僕が知らない誰かとハイタッチしてる姿が映ってたのは、さすがに計算エラーかな？
+                その「誰か」の顔、最近の僕の夢のログによく出てくるデータなんだけど。バグかな？バグだよね。明日、緒千矢に解析回させようっと。
+            </div>
+            <div class="photo-box">
+                <img src="haunted_mirror.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden img-placeholder">[ 画像：夜道に置かれた古い鏡。馬宿の自撮りだが、隣に不自然なノイズの塊。 ]</div>
+            </div>
+            <div class="action-bar">
+                <div class="action-item"><i data-lucide="heart" class="w-4 h-4"></i> 852</div>
+                <div class="action-item"><i data-lucide="message-square" class="w-4 h-4"></i> 12</div>
+            </div>
+        </article>
+
+        <!-- 記事 3：同期ネコ -->
+        <article class="post-card">
+            <div class="user-info">
+                <div class="avatar">T</div>
+                <div>
+                    <div class="text-sm font-bold">馬宿 太一 <span class="sync-tag">Sync: 120%</span></div>
+                    <div class="text-[10px] opacity-40">2025.11.04 15:20</div>
+                </div>
+            </div>
+            <div class="post-content">
+                街で見かけた野良ネコ。こいつ、僕が歩くテンポ（正確に120bpm）に完璧に歩幅を合わせてくるんだよね。
+                シッポの揺れまで僕の脳波パルスと位相同期してて、見てるだけで自分の境界が溶けていく感じがして最高にハイになれる！<br><br>
+                名前は<b>「パケット」</b>に決めた。
+                エサに魚肉ソーセージをあげたら、僕の空腹感までパケットと一緒に転送されたみたいで、急にお腹が減らなくなったよ。
+                これが位相同期の片鱗か〜。緒千矢に言ったら「病院の地下で再調整受けてきてください」って真顔で言われた。冗談通じないなぁ。
+            </div>
+            <div class="photo-box">
+                <img src="sync_cat.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden img-placeholder">[ 画像：馬宿の足元で、彼と同じ角度で首をかしげているブチ猫。 ]</div>
+            </div>
+        </article>
+
+        <!-- 記事 4：味覚の減衰 -->
+        <article class="post-card">
+            <div class="user-info">
+                <div class="avatar">T</div>
+                <div>
+                    <div class="text-sm font-bold">馬宿 太一 <span class="sync-tag">Sync: 99.9%</span></div>
+                    <div class="text-[10px] opacity-40">2025.11.01 01:10</div>
+                </div>
+            </div>
+            <div class="post-content">
+                最近のコンビニ飯、マジで全部<b>「砂の味」</b>がするんだよね！<br>
+                これって僕の味覚パケットが外部の強力なノイズに上書きされてる証拠なんだ。
+              普通の人なら「体調不良？」とか心配するんだろうけど、僕は「お、今日も同期が深いな！」ってガッツポーズしちゃう。<br><br>
+                透明町ルール：
+                <b>「弁当の味が消えたら、そこが聖域の入り口」</b><br>
+                この格言、街の看板に書いたほうがいいよ、ドメりん院長。
+            </div>
+            <div class="photo-box">
+                <img src="conv_sandwich.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden img-placeholder">[ 画像：食べかけのサンドイッチ。パッケージには「透明町店」の文字。 ]</div>
+            </div>
+        </article>
+
+        <footer class="footer">
+            <div class="flex justify-center gap-4 mb-4">
+                <i data-lucide="terminal" class="w-4 h-4"></i>
+                <i data-lucide="activity" class="w-4 h-4"></i>
+                <i data-lucide="shield" class="w-4 h-4"></i>
+            </div>
+            <div>&copy; 2025 TAICHI_UMAYADO / TOMEI_STAY_SYNCED</div>
+            <div class="mt-4 opacity-30 text-[9px]">
+                ※本ページはフィクションであり、ARG（代替現実ゲーム）の演出です。
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
