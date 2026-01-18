@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPOSAL_CONFIRM | KINSHI_8TH_HOSPITAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* サーバー接続バッジ */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body { padding: 3rem 4rem; }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        /* メタ情報ボックス */
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.4rem; }
+        .meta-label { width: 120px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* テーブルスタイル */
+        .disposal-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            border: 1px solid #333;
+        }
+
+        .disposal-table th, .disposal-table td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .disposal-table th {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .disposal-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .reason-tag {
+            font-size: 0.75rem;
+            background: #2a0000;
+            color: #ff4d4d;
+            padding: 2px 6px;
+            border: 1px solid #660000;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+        }
+
+        .approval-stamp {
+            margin-top: 2rem;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 10px;
+            display: inline-block;
+            transform: rotate(-3deg);
+            font-weight: bold;
+            font-family: 'JetBrains Mono';
+        }
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: DOMESHIMA_PRIVATE_VAULT</div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
+                <span><span class="status-dot"></span>INTERNAL_FORM_DECRYPTED</span>
+            </div>
+            <div class="hidden md:block font-mono text-[10px]">FORM_ID: 8H-D-2025-098</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">被検体廃棄確認書</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Classification: S-CLASS_CONFIDENTIAL / MEDICAL_WASTE_CONTROL
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">DISPOSAL_DATE:</span>
+                    <span>2025.10.14</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">FACILITY:</span>
+                    <span>金枝聖域第八病院 第4地下区画</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">RESPONSIBLE:</span>
+                    <span>不和 歩羽（技術主査）</span>
+                </div>
+            </div>
+
+            <article class="text-sm text-gray-300">
+                <p class="mb-6">
+                    以下の被検体について、位相同期試験の継続が不可能と判断され、規定に基づき処理を完了したことを報告する。
+                </p>
+
+                <table class="disposal-table">
+                    <thead>
+                        <tr>
+                            <th>識別番号</th>
+                            <th>同期時間</th>
+                            <th>最終状態</th>
+                            <th>廃棄理由</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-mono">DS-442</td>
+                            <td>12.4s</td>
+                            <td><span class="reason-tag">精神崩壊</span></td>
+                            <td>脳波の不可逆的な平坦化。自我の完全な断片化。</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">DS-448</td>
+                            <td>0.8s</td>
+                            <td><span class="reason-tag">拒絶反応</span></td>
+                            <td>6.2Hz刺激に対する過剰な心拍上昇。物理層での接続拒絶。</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">DS-451</td>
+                            <td>142.1s</td>
+                            <td><span class="reason-tag">過剰同期</span></td>
+                            <td>自己意識の消失。他者意識の流入による神経回路の焼損。</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">DS-455</td>
+                            <td>--</td>
+                            <td><span class="reason-tag">不適合</span></td>
+                            <td>センター側での事前調律ミス。強度不足。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mt-10 p-4 border border-gray-800 bg-black/40">
+                    <h3 class="text-[#00ff41] font-bold mb-2">【廃棄プロセス詳細】</h3>
+                    <p class="text-xs leading-relaxed">
+                        1. 被検体の四肢分割<br>
+                        2. 脳の摘出<br>
+                        3. 神経回路の利活用<br>
+                    </p>
+                </div>
+
+                <div class="approval-stamp">
+                    APPROVED BY:<br>
+                    MIKI_DOMESHIMA_00210518
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between uppercase">
+                    <div>LOG_STATUS: SEALED</div>
+                    <div>PATH: /STORAGE/LOGS/DISPOSAL_VOL_82.LOG</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術・思想とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
