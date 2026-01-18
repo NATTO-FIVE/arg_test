@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>所属メンバー | 百目島研究室アーカイブ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* テンプレート(laboratory_portal.html)と完全に同期したヘッダー */
+        .portal-header {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1rem 2rem;
+            border-bottom: 4px solid #990000;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            padding: 2rem;
+            background: #fff;
+            min-height: 80vh;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* サイドバーメニューの同期 */
+        nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        nav a:hover {
+            background: #f1f5f9;
+            color: #990000;
+        }
+        .active-link {
+            background: #f1f5f9;
+            font-weight: bold;
+            border-left: 4px solid #990000;
+            color: #0f172a !important;
+        }
+
+        /* 院長専用アーカイブボタンのデザイン同期 */
+        .btn-restricted {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 1.4;
+            transition: all 0.2s;
+        }
+        .btn-restricted:hover {
+            background-color: #990000;
+            color: white;
+            border-color: #7f0000;
+        }
+
+        /* メンバーカード */
+        .member-card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 20px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            background: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 140px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .member-info h3 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+        .member-role {
+            font-size: 0.8rem;
+            color: #990000;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+        .member-id {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 2px;
+            color: #475569;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="portal-header">
+        <div class="container flex justify-between items-center">
+            <div>
+                <h1 class="text-lg font-bold tracking-tighter uppercase">Domeshima Lab. Internal Portal</h1>
+                <p class="text-[10px] opacity-70">金枝聖域第八病院 研究開発部門 イントラネット</p>
+            </div>
+            <div class="text-[10px] text-right font-mono">
+                User: GUEST_VIEWER<br>
+                Status: <span class="text-green-400">Online</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 mt-6">
+        <!-- サイドナビゲーション：ポータルと共通 -->
+        <aside>
+            <nav class="space-y-1">
+                <a href="laboratory_portal.html">TOP / 掲示板</a>
+                <a href="#">研究室概要</a>
+                <a href="laboratory_members.html" class="active-link">所属メンバー</a>
+                <a href="#">公開論文・抄録</a>
+                <a href="#">外部提携機関</a>
+                <div class="pt-10">
+                    <a href="login_gate.html" class="btn-restricted">
+                        🔐 院長専用アーカイブ<br>
+                        <span class="text-[9px] font-normal uppercase">Restricted Access</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <h2 class="section-title">所属メンバー一覧</h2>
+            
+            <!-- 1. 百目島ミキ -->
+            <div class="member-card">
+                <div class="member-photo">
+                    [画像：記録抑制中]<br>Miki Domeshima
+                </div>
+                <div class="member-info">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3>百目島 ミキ</h3>
+                            <div class="member-role">院長 / 主任研究員</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 block">職員番号</span>
+                            <span class="member-id">00210518</span>
+                        </div>
+                    </div>
+                    <p class="text-xs mt-2 leading-relaxed text-slate-500">
+                        専門：脳神経外科学、高次意識階層解析。Project-E総責任者。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. 神代永久 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    [IMAGE]<br>Towa Kamishiro
+                </div>
+                <div class="member-info">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3>神代 永久</h3>
+                            <div class="member-role">特殊睡眠外来科 部長</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 block">職員番号</span>
+                            <span class="member-id">00340711</span>
+                        </div>
+                    </div>
+                    <p class="text-xs mt-2 leading-relaxed text-slate-500">
+                        専門：精神生理学。位相同期（合唱）現象の臨床データを担当。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. 武藤浩二 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    [IMAGE]<br>Koji Muto
+                </div>
+                <div class="member-info">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3>武藤 浩二</h3>
+                            <div class="member-role">技術主査</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 block">職員番号</span>
+                            <span class="member-id">00420912</span>
+                        </div>
+                    </div>
+                    <p class="text-xs mt-2 leading-relaxed text-slate-500">
+                        専門：通信工学。6.2Hz帯変調デバイスの開発責任者。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. 佐伯譲 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    [IMAGE]<br>Yuzuru Saeki
+                </div>
+                <div class="member-info">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3>佐伯 譲</h3>
+                            <div class="member-role">研究員</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 block">職員番号</span>
+                            <span class="member-id">00551220</span>
+                        </div>
+                    </div>
+                    <p class="text-xs mt-2 leading-relaxed text-slate-500">
+                        専門：統計学。旧翠波部隊の記録と脳波データの相関調査を担当。
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Miki Domeshima Laboratory. Internal Directory.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
