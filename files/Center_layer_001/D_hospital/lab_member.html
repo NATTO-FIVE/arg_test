@@ -89,29 +89,17 @@
             border-color: #7f0000;
         }
 
-        /* メンバーカード */
+        /* メンバーカード：写真なしのテキスト特化レイアウト */
         .member-card {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 20px;
             padding: 1.5rem;
             border: 1px solid #e2e8f0;
             border-radius: 4px;
             background: #fff;
             margin-bottom: 1rem;
+            transition: border-color 0.2s;
         }
-
-        .member-photo {
-            width: 120px;
-            height: 140px;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 0.7rem;
-            text-align: center;
-            border: 1px solid #e2e8f0;
+        .member-card:hover {
+            border-color: #94a3b8;
         }
 
         .member-info h3 {
@@ -182,9 +170,6 @@
             
             <!-- 1. 百目島ミキ -->
             <div class="member-card">
-                <div class="member-photo">
-                    [画像：記録抑制中]<br>Miki Domeshima
-                </div>
                 <div class="member-info">
                     <div class="flex justify-between items-start">
                         <div>
@@ -204,9 +189,6 @@
 
             <!-- 2. 神代永久 -->
             <div class="member-card">
-                <div class="member-photo">
-                    [IMAGE]<br>Towa Kamishiro
-                </div>
                 <div class="member-info">
                     <div class="flex justify-between items-start">
                         <div>
@@ -226,9 +208,6 @@
 
             <!-- 3. 武藤浩二 -->
             <div class="member-card">
-                <div class="member-photo">
-                    [IMAGE]<br>Koji Muto
-                </div>
                 <div class="member-info">
                     <div class="flex justify-between items-start">
                         <div>
@@ -248,9 +227,6 @@
 
             <!-- 4. 佐伯譲 -->
             <div class="member-card">
-                <div class="member-photo">
-                    [IMAGE]<br>Yuzuru Saeki
-                </div>
                 <div class="member-info">
                     <div class="flex justify-between items-start">
                         <div>
