@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE_MAIL | DOMESHIMA_TO_SETA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* サーバー接続バッジ（Ver.2 緑） */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body { padding: 3rem 4rem; }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        /* メタ情報ボックス */
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-row { display: flex; margin-bottom: 0.4rem; }
+        .meta-label { width: 100px; color: #00ff41; font-weight: bold; flex-shrink: 0; }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .email-body {
+            font-size: 0.95rem;
+            color: #ccc;
+            text-align: justify;
+            white-space: pre-wrap;
+            border-left: 1px solid #333;
+            padding-left: 1.5rem;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+        }
+
+        .warning-text {
+            color: #ef4444;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: DOMESHIMA_PRIVATE_VAULT</div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="./search.html" class="btn-return">← RETURN</a>
+                <span><span class="status-dot"></span>SECURE_MAIL_DECRYPTED</span>
+            </div>
+            <div class="hidden md:block font-mono text-[10px]">LOCAL_ID: D-MSG-9122</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8 border-b border-gray-800 pb-4">
+                <h1 class="doc-title">機密通信：内部体制の歪みについて</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Level: EYES_ONLY (M_DOMESHIMA / M_KARAHASHI)
+                </div>
+            </header>
+
+            <div class="meta-box font-mono">
+                <div class="meta-row">
+                    <span class="meta-label">DATE:</span>
+                    <span>2025.12.12 01:45:09</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">FROM:</span>
+                    <span>百目島 ミキ（第八病院 院長）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">TO:</span>
+                    <span>唐橋　弘源（金の聖眠教 代表）</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">SUBJECT:</span>
+                    <span>管理スタッフの意識汚染に関する具申</span>
+                </div>
+            </div>
+
+            <article class="email-body">
+瀬田先輩
+
+お疲れ様です。第八病院の体制運用について、看過できない事態が発生しているため報告いたします。
+
+不和氏については、以前より指摘している通り「科学者としての限界」が露呈しています。
+              彼がセンターでの検体調律において感情的な温情を持ち込んでいることは明白であり、供給されるデータの精度低下は計画のタイムラインに多大な悪影響を及ぼしています。
+              彼はもはや技術的なパーツ以上の役割を果たすべきではありません。
+
+さらに深刻なのは、当院に配置した医師たちの変質です。
+神代永久、虚空蔵零の二名について、最近の動向に強い危惧を抱いています。
+
+彼らは本来、臨床データ収集と検体管理のために抜擢した「技術者」であるはずですが、
+              最近では救済の教義、つまりあなたが作り上げた概念に過大に傾倒し始めています。
+              診察室から聞こえてくるのは科学的な所見ではなく、信者のような多幸感に満ちた言葉ばかりです。
+
+本来、管理側は盲目的な虚構から最も遠い位置にいるべきです。
+しかし、彼らは客観的な観測者であることをやめ、自らも虚構の一部になろうとしています。
+              これは管理プロトコルの根幹を揺るがす重大なノイズです。
+
+先輩が構築した宗教という名の「システム」が、あまりに高い精度で機能しすぎた結果でしょうか。内部の者たちまでが、その虚構に呑み込まれていく様は滑稽というほかありません。
+
+神代、虚空蔵の両名については、早急にクリアランスの再評価、および必要であれば「再調整」の検討をお願いしたく存じます。
+
+私たちの計画の妨げ予備群は、たとえ身内であっても排除すべきです。
+ご判断を仰ぎます。
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between uppercase">
+                    <div>SIGNATURE_MATCHED: M_DOMESHIMA</div>
+                    <div>STATUS: ENCRYPTED_V_CHANNEL_01</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
