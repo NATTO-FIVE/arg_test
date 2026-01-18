@@ -13,6 +13,7 @@
             --natto-green: #00ff41;
             --accent-blue: #1e40af;
             --bg-dark: #050810;
+            --header-height: 60px;
         }
 
         body {
@@ -65,13 +66,13 @@
             position: fixed;
             top: 0;
             width: 100%;
-            height: 60px;
+            height: var(--header-height);
             background: rgba(2, 6, 23, 0.95);
             border-bottom: 1px solid var(--natto-green);
             display: flex;
             align-items: center;
             padding: 0 20px;
-            z-index: 500;
+            z-index: 1500; /* ウィンドウより上に配置 */
             backdrop-filter: blur(10px);
         }
 
@@ -97,6 +98,18 @@
         }
 
         .search-input::placeholder { color: rgba(0, 255, 65, 0.3); }
+
+        /* デスクトップ領域の修正 */
+        #desktop {
+            margin-top: var(--header-height); /* ヘッダー分の余白を確実に確保 */
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 100px);
+            grid-auto-flow: row;
+            gap: 20px;
+            height: calc(100vh - var(--header-height) - 40px);
+            z-index: 5;
+        }
 
         /* 仮想ウィンドウ */
         .window {
@@ -138,7 +151,8 @@
             width: 90px;
             padding: 10px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background 0.2s;
+            border-radius: 4px;
         }
 
         .icon-item:hover { background: rgba(0, 255, 65, 0.1); transform: scale(1.05); }
@@ -193,7 +207,7 @@
         /* 下部免責事項バナー */
         .bottom-disclaimer {
             position: fixed;
-            bottom: 40px; /* タスクバーの直上 */
+            bottom: 40px;
             width: 100%;
             background: linear-gradient(to right, transparent, rgba(0,0,0,0.8), transparent);
             color: #64748b;
@@ -206,7 +220,7 @@
         }
     </style>
 </head>
-<body class="pt-16">
+<body>
     <div class="hacker-overlay"></div>
     <div class="desktop-bg"></div>
 
@@ -220,16 +234,16 @@
     <header class="natto-top-bar">
         <div class="flex items-center gap-2">
             <i data-lucide="shield-check" class="text-[#00ff41] w-5 h-5"></i>
-            <span class="text-[11px] font-bold text-[#00ff41] tracking-tighter">natto_Network v1.0.4 <span class="opacity-50">/ INTERCEPT_MODE</span></span>
+            <span class="text-[11px] font-bold text-[#00ff41] tracking-tighter uppercase">natto_Network v1.0.4 <span class="opacity-50">/ INTERCEPT_MODE</span></span>
         </div>
 
         <div class="search-container">
             <i data-lucide="search" class="text-[#00ff41] w-4 h-4"></i>
-            <input type="text" id="internal-search" class="search-input" placeholder="内部データベースを検索 (キーワード入力)..." autocomplete="off">
+            <input type="text" id="internal-search" class="search-input" placeholder="内部データベースを検索..." autocomplete="off">
         </div>
 
         <div class="flex-1 flex justify-end gap-6 font-mono text-[10px] text-[#00ff41]">
-            <div>SPOOFING: M_DOMESHIMA</div>
+            <div class="hidden sm:block">SPOOFING: M_DOMESHIMA</div>
             <div>STRENGTH: <span id="signal-strength">98%</span></div>
         </div>
     </header>
@@ -242,8 +256,8 @@
         > <span id="live-log">MONITORING_TRAFFIC</span>
     </div>
 
-    <!-- デスクトップアイコン -->
-    <div id="desktop" class="p-8 grid grid-flow-col grid-rows-6 gap-6 w-fit">
+    <!-- デスクトップアイコン：header-height分のマージンを適用 -->
+    <div id="desktop">
         <div class="icon-item" onclick="openFolder('secret_plan')">
             <i data-lucide="folder-lock" class="text-red-500 w-12 h-12"></i>
             <span class="icon-text text-red-400">秘_計画</span>
@@ -308,7 +322,7 @@
         document.getElementById('internal-search').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const q = e.target.value.trim();
-                if (q) window.location.href = `../../../search.html?q=${encodeURIComponent(q)}`;
+                if (q) window.location.href = `search.html?q=${encodeURIComponent(q)}`;
             }
         });
 
@@ -344,8 +358,10 @@
             const win = document.createElement('div');
             win.id = 'win-' + id;
             win.className = 'window';
-            win.style.left = (200 + (document.querySelectorAll('.window').length * 30)) + 'px';
-            win.style.top = (150 + (document.querySelectorAll('.window').length * 30)) + 'px';
+            // ヘッダー（60px）の下に生成されるようオフセットを調整
+            const offset = (document.querySelectorAll('.window').length * 30);
+            win.style.left = (200 + offset) + 'px';
+            win.style.top = (100 + offset) + 'px';
             win.style.width = '480px';
             win.style.height = '320px';
 
