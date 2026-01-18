@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIVATE_MEMO | M_DOMESHIMA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Yuji+Syuku&display=swap');
+        
+        body {
+            background-color: #030303;
+            font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+            color: #d1d5db;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* サーバー接続バッジ（Ver.2 緑） */
+        .server-badge {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 1100;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        .container-frame {
+            max-width: 850px;
+            margin: 1.5rem auto;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .sys-header {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-return {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 2px 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .btn-return:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .content-body { padding: 3rem 4rem; }
+
+        @media (max-width: 640px) {
+            .content-body { padding: 1.5rem; }
+        }
+
+        /* メタ情報ボックス */
+        .meta-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00ff41;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+        }
+
+        h1.doc-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-size: 1.1rem;
+            color: #00ff41;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* 1. 供給検体のセクション（デジタル） */
+        .digital-log {
+            font-size: 0.9rem;
+            border-left: 2px solid #333;
+            padding-left: 1.5rem;
+            color: #aaa;
+        }
+
+        /* 2. 所感のセクション（手書きメモ風） */
+        .handwritten-memo {
+            background-color: #efead4;
+            background-image: 
+                url('https://www.transparenttextures.com/patterns/paper-fibers.png'),
+                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: auto, 100% 1.8rem;
+            color: #1a1a1a;
+            padding: 40px;
+            margin: 2rem 0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            transform: rotate(-0.5deg);
+            font-family: 'Yuji Syuku', serif;
+            position: relative;
+            border: 1px solid #d4c5a1;
+        }
+
+        .handwritten-memo::before {
+            content: "ATTACHMENT: SCRAP_PRIVATE_NOTE";
+            position: absolute;
+            top: -25px; left: 0;
+            font-family: 'JetBrains Mono';
+            font-size: 0.6rem;
+            color: #444;
+        }
+
+        .memo-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .red-scribble {
+            color: #a00;
+            text-decoration: underline wavy #a00;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px; background: #00ff41; border-radius: 50%;
+            display: inline-block; margin-right: 6px; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+        .footer-tag {
+            margin-top: 5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.65rem;
+            color: #444;
+        }
+
+        .disclaimer-text {
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div class="server-badge">Connected to: DOMESHIMA_PRIVATE_VAULT</div>
+
+    <div class="container-frame">
+        <div class="sys-header">
+            <div class="flex items-center gap-4">
+                <a href="../../../search.html" class="btn-return">← RETURN</a>
+                <span><span class="status-dot"></span>SECURE_ACCESS: GRANTED</span>
+            </div>
+            <div class="hidden md:block font-mono">PATH: /PRIVATE/LOGS/PERSONNEL_EVAL_F.DAT</div>
+        </div>
+
+        <div class="content-body">
+            <header class="mb-8">
+                <h1 class="doc-title">職員評価録：不和 臨界</h1>
+                <div class="text-[10px] text-gray-600 font-mono tracking-tighter uppercase">
+                    Security Level: EYES_ONLY (M_DOMESHIMA)
+                </div>
+            </header>
+
+            <div class="meta-box font-mono text-xs">
+                <table class="w-full">
+                    <tr>
+                        <th class="w-24 text-[#00ff41] text-left">対象者</th>
+                        <td>不和 臨界（不和睡眠総合技術センター センター長）</td>
+                    </tr>
+                    <tr>
+                        <th class="text-[#00ff41] text-left">更新日</th>
+                        <td>2025.04.18</td>
+                    </tr>
+                </table>
+            </div>
+
+            <article>
+                <h2 class="section-title">１．供給検体の品質低下について</h2>
+                <div class="digital-log">
+                    <p>
+                        不和のセンターより移送されてくる検体の質が、ここ数ヶ月で明らかに劣化している。<br>
+                        当院での初期同期試験において、脳波の位相が規定値に達する前に「自己意識の回帰」を起こすケースが頻発。これはセンター側での調律段階において、被検体に対する精神的強度が不足している証拠だ。<br><br>
+                        不和は「人道的リソースの限界」などと釈明しているが、それは科学者としての敗北宣言に等しい。
+                    </p>
+                </div>
+
+                <h2 class="section-title">２．所感</h2>
+                <!-- セクション2のみ手書きメモとして表現 -->
+                <div class="handwritten-memo">
+                    <div class="memo-text">
+                        不和は初期メンバーであり、技術的貢献は認める。だが、彼は本計画の最終目的を見失い、目先の感情に流されすぎている。DS-187の事象に対する贖罪意識をいつまでも引きずっているようでは、これ以上の進展は望めない。<br><br>
+                        彼には、自身の役割が「意志の決定者」ではなく「技術の提供者」に過ぎないことを再認識させる必要がある。本計画の最深部、および<span class="red-scribble">核心に関わる機密情報</span>の共有については、今後は彼に対してさらに制限せざるを得ない。
+                    </div>
+                    <div class="mt-8 text-right opacity-40 italic">
+                        M. Domeshima
+                    </div>
+                </div>
+            </article>
+
+            <footer class="footer-tag font-mono">
+                <div class="flex justify-between uppercase">
+                    <div>LOG_STATUS: [ENCRYPTED]</div>
+                    <div>SYSTEM_TIME: 2025.04.18_02:11:05</div>
+                </div>
+                <div class="disclaimer-text">
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術とは一切関係ありません。
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
