@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN | RESTRICTED_ARCHIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Noto+Sans+JP:wght@400;700&display=swap');
+        
+        :root {
+            --accent-blue: #1e40af; /* 落ち着いた青 */
+            --hover-blue: #1e3a8a;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'JetBrains Mono', 'Noto Sans JP', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #f8fafc;
+            padding: 20px;
+        }
+
+        /* 戻るボタンのスタイル */
+        .btn-back {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 6px 16px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .btn-back:hover {
+            color: #fff;
+            border-color: var(--accent-blue);
+            background: rgba(30, 64, 175, 0.2);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-bg);
+            border: 1px solid #334155;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .lab-tag {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent-blue);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 10px;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #94a3b8;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-login:hover { 
+            background: var(--hover-blue); 
+        }
+
+        #error-msg {
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 1.2rem;
+            display: none;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.6rem;
+            color: #475569;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* 免責事項エリア */
+        .disclaimer-area {
+            margin-top: 2rem;
+            max-width: 400px;
+            text-align: center;
+            font-size: 10px;
+            color: #475569;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ポータルに戻るボタン -->
+    <a href="laboratory_portal.html" class="btn-back">← BACK_TO_PORTAL</a>
+
+    <div class="login-card">
+        <div class="lab-tag">DEPARTMENT_2_EYES_ONLY</div>
+        <h1>AUTHORIZED LOGIN</h1>
+        
+        <div class="form-group">
+            <label>Employee ID (8 digits)</label>
+            <input type="text" id="userid" placeholder="00XXXXXX" autocomplete="off">
+        </div>
+        
+        <div class="form-group">
+            <label>Access Passcode (Year)</label>
+            <input type="password" id="passcode" placeholder="YYYY" autocomplete="off">
+        </div>
+
+        <button class="btn-login" onclick="attemptLogin()">ENTER ARCHIVE</button>
+        
+        <p id="error-msg">INVALID CREDENTIALS</p>
+
+        <div class="footer-note">
+            ACCESS LOG IS BEING RECORDED.<br>
+            UNAUTHORIZED ACCESS IS PROHIBITED BY PROJECT-E BYLAWS.
+        </div>
+    </div>
+
+    <!-- 免責事項 -->
+    <footer class="disclaimer-area">
+        <p>※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体・施設・事件・技術等とは一切関係ありません。</p>
+    </footer>
+
+    <script>
+        function attemptLogin() {
+            const uid = document.getElementById('userid').value.trim();
+            const pass = document.getElementById('passcode').value.trim();
+            const error = document.getElementById('error-msg');
+
+            // ID: 百目島ミキ (00210518)
+            // PW: 財団出資・改称年 (1991)
+            if (uid === "00210518" && pass === "1991") {
+                window.location.href = "private_archive_fs.html";
+            } else {
+                error.style.display = "block";
+                document.getElementById('passcode').value = "";
+                
+                setTimeout(() => {
+                    error.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        document.querySelectorAll('input').forEach(el => {
+            el.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') attemptLogin();
+            });
+        });
+    </script>
+</body>
+</html>
