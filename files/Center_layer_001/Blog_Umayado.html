@@ -44,8 +44,6 @@
             z-index: 1000;
         }
 
-        /* サーバー接続バッジ（削除済：ご要望により非表示） */
-
         .container-frame {
             max-width: 700px;
             margin: 0 auto;
@@ -79,7 +77,6 @@
             color: #000;
         }
 
-        /* 記事カード：SNS風 */
         .post-card {
             padding: 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -92,17 +89,35 @@
 
         .sync-tag { font-size: 0.6rem; background: rgba(0, 255, 65, 0.1); color: var(--natto-green); padding: 1px 6px; border-radius: 4px; }
 
+        /* 写真サイズの調整 */
         .photo-box {
             width: 100%;
-            border-radius: 12px;
+            max-width: 400px; /* サイズを縮小 */
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
             overflow: hidden;
-            margin: 1rem 0;
+            margin: 1.5rem auto; /* 中央揃え */
             border: 1px solid #333;
             background: #000;
             position: relative;
         }
-        .photo-box img { width: 100%; height: auto; filter: contrast(1.1) brightness(0.9); }
-        .img-placeholder { height: 200px; display: flex; items-center; justify-center; color: #444; font-size: 0.7rem; text-align: center; padding: 20px; }
+        .photo-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            filter: contrast(1.1) brightness(0.85); 
+        }
+        .img-placeholder { 
+            height: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #444; 
+            font-size: 0.65rem; 
+            text-align: center; 
+            padding: 20px; 
+            background: #0a0a0a;
+        }
 
         .post-content { font-size: 0.95rem; color: #cbd5e1; }
         .post-content b { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
@@ -120,7 +135,6 @@
 
     <div class="container-frame">
         <header class="sys-header">
-            <!-- ボタンラベルの変更 -->
             <a href="../../search.html" class="btn-return">← RETURN_TO_TERMINAL</a>
             <h1 class="text-4xl font-black tracking-tighter text-white uppercase italic">馬宿のせいかつ</h1>
             <p class="text-[10px] text-[#00ff41] mt-2 font-mono uppercase tracking-widest">
@@ -139,13 +153,9 @@
             </div>
             <div class="post-content">
                 今日もドメりん（センセ）に資料を投げられたよ！やったね！<br>
-                不和さんが「もっと温かみのある対応を〜」とか寝ぼけたこと言うから具申に混ぜたら、ドメりんの位相が速攻で反転。
-              ファイルがフリスビーみたいに飛んできたよ。
-              あんなに正確な軌道で投げられるなんて、やっぱりセンセの脳は精密機器だね。最高。<br><br>
-                ストレスで脳が沸騰しそうだったから、帰り道に<b>「透明ラーメン」</b>で特製大盛りを3杯キメてきたよ。
-              スープを飲み干す瞬間に聞こえる6.2Hzの残響が、一番のスパイスだね。<br><br>
-                ……でも、隣の席で<b>尾井緒千矢</b>が死んだ魚のような目でこっちを見てた。
-              「馬宿さん、その食生活だと来月には内臓が物理層からログアウトしますよ」だって。相変わらず冷たいね！
+                不和さんが「もっと温かみのあるデータを〜」とか寝ぼけたこと言うから具申に混ぜたら、センセの位相が速攻で反転。ファイルがフリスビーみたいに飛んできたよ。あんなに正確な軌道で投げられるなんて、やっぱりセンセの脳は精密機器だね。最高。<br><br>
+                ストレスで脳が沸騰しそうだったから、帰り道に<b>「透明ラーメン」</b>で特製大盛りを3杯キメてきたよ。スープを飲み干す瞬間に聞こえる6.2Hzの残響が、一番のスパイスだね。<br><br>
+                ……でも、隣の席で<b>尾井緒千矢</b>が死んだ魚のような目でこっちを見てた。「馬宿さん、その食生活だと来月には内臓が物理層からログアウトしますよ」だって。相変わらず冷たいね！
             </div>
             <div class="photo-box">
                 <img src="./blog_img/ramen_bowls.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -198,7 +208,7 @@
                 シッポの揺れまで僕の脳波パルスと位相同期してて、見てるだけで自分の境界が溶けていく感じがして最高にハイになれる！<br><br>
                 名前は<b>「パケット」</b>に決めた。
                 エサに魚肉ソーセージをあげたら、僕の空腹感までパケットと一緒に転送されたみたいで、急にお腹が減らなくなったよ。
-                これが位相同期の片鱗か〜。緒千矢に言ったら「病院の地下で再調整受けてきてください」って真顔で言われた。冗談通じないなぁ。
+                これが第8階層の片鱗か〜。緒千矢に言ったら「病院の地下で再調整受けてきてください」って真顔で言われた。冗談通じないなぁ。
             </div>
             <div class="photo-box">
                 <img src="./blog_img/Photo_Cat.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -217,8 +227,7 @@
             </div>
             <div class="post-content">
                 最近のコンビニ飯、マジで全部<b>「砂の味」</b>がするんだよね！<br>
-                これって僕の味覚パケットが外部の強力なノイズに上書きされてる証拠なんだ。
-              普通の人なら「体調不良？」とか心配するんだろうけど、僕は「お、今日も同期が深いな！」ってガッツポーズしちゃう。<br><br>
+                これって僕の味覚パケットが外部の強力なノイズに上書き（オーバーライド）されてる証拠なんだ。普通の人なら「体調不良？」とか心配するんだろうけど、僕は「お、今日も同期が深いな！」ってガッツポーズしちゃう。<br><br>
                 透明町ルール：
                 <b>「弁当の味が消えたら、そこが聖域の入り口」</b><br>
                 この格言、街の看板に書いたほうがいいよ、ドメりん院長。
