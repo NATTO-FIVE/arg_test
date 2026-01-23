@@ -63,6 +63,20 @@
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
+        /* 外部リンクの視認性向上のための追加スタイル */
+        a:not(.btn-return) {
+            color: #00ff41;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: all 0.2s ease-in-out;
+            font-weight: bold;
+        }
+        a:not(.btn-return):hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+        }
+
         .content-body {
             padding: 3rem 4rem;
         }
