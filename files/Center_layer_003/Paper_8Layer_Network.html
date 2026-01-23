@@ -64,7 +64,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタン：テンプレートVer.2に統一 */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -116,37 +115,33 @@
             text-transform: uppercase;
         }
 
+        /* 画像コンテナの調整 */
         .graph-container {
             border: 1px solid #333;
             background: #000;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             padding: 1rem;
             position: relative;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
         }
 
-        .graph-placeholder {
-            color: #444;
-            font-size: 0.8rem;
-            text-align: center;
-            border: 1px dashed #222;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .graph-img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+            /* 1970年代の資料らしさを出すフィルタ */
+            filter: grayscale(0.8) contrast(1.2) brightness(0.9);
+            border: 1px solid #222;
         }
 
         .graph-label {
-            position: absolute;
-            bottom: 5px;
-            right: 10px;
-            font-size: 0.6rem;
+            display: block;
+            margin-top: 10px;
+            font-size: 0.65rem;
             color: #00ff41;
             font-family: 'JetBrains Mono';
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .status-dot {
@@ -170,7 +165,6 @@
             text-align: center;
         }
 
-        /* 免責事項：薄い灰色 */
         .disclaimer-box {
             margin-top: 1.5rem;
             padding-top: 1rem;
@@ -184,7 +178,7 @@
 <body>
     <div class="crt-overlay"></div>
 
-    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
+    <div class="server-badge">Connected to: NATIONAL_COM_ARCHIVE_PROXY</div>
 
     <div class="container-frame">
         <div class="sys-header">
@@ -227,49 +221,44 @@
                 <div class="thesis-section">
                     <h2>1. 要約</h2>
                     <p>
-                        本研究は、情報の物理的伝送プロトコルを定義するOSI参照モデルに対し、その上位に位置するべき「第８階層：意識層」の工学的存在可能性を検討する。
-                        被検体間における睡眠時の脳波共鳴と、それに付随して観測される「発話情報の共通化（睡眠同期）」を、従来の心理学的事象ではなく、
-                        上位レイヤー間でのデータ交換プロトコルの漏洩として捉え直す試みである。
+                        本研究は、情報の物理的伝送プロトコルを定義するOSI参照モデルに対し、その上位に位置するべき「第８階層：意識層」の工学的存在可能性を検討する。被検体間における睡眠時の脳波共鳴と、それに付随して観測される「発話情報の共通化（睡眠同期）」を、従来の心理学的事象ではなく、上位レイヤー間でのデータ交換プロトコルの漏洩として捉え直す試みである。
                     </p>
                 </div>
 
                 <div class="thesis-section">
                     <h2>2. 先行研究と背景</h2>
                     <p>
-                        睡眠導入時における複数個体間の脳波同調（Brainwave Synchronization）については、既にいくつかの先行研究によって報告されている。
-                        デルタ波およびシータ波の位相が近接する個体間において、心拍や発汗などの自律神経反応が同期する現象は、生物学的な共鳴として広く知られている。
+                        睡眠導入時における複数個体間の脳波同調（Brainwave Synchronization）については、既にいくつかの先行研究によって報告されている。デルタ波およびシータ波の位相が近接する個体間において、心拍や発汗などの自律神経反応が同期する現象は、生物学的な共鳴として広く知られている。
                     </p>
                     <p class="mt-4">
-                        しかし、これまでの研究はあくまで「生体反応の一致」を観測するに留まり、そこに「情報」の介在を見出す視点は欠落していた。
-                        我々は、この共鳴状態が単なる生体現象ではなく、OSI第7層（アプリケーション層）よりも高次な、純粋意識間プロトコルへのアクセスゲートであると仮定する。
+                        しかし、これまでの研究はあくまで「生体反応の一致」を観測するに留まり、そこに「情報」の介在を見出す視点は欠落していた。我々は、この共鳴状態が単なる生体現象ではなく、OSI第7層（アプリケーション層）よりも高次な、純粋意識間プロトコルへのアクセスゲートであると仮定する。
                     </p>
                 </div>
 
-                <div class="graph-container">
-                    <div class="graph-placeholder">
-                        <p>[ 脳波振動グラフ：睡眠時位相同期データのプロット ]</p>
-                        <p class="mt-2 text-[10px] opacity-40">SOURCE: ANALOG_LOG_76-A (PRE-ACCIDENT_DATA)</p>
+                <!-- 修正箇所：Figure部分に画像を挿入 -->
+                <figure class="graph-container">
+                    <img src="Figure_Paper.png" alt="脳波振動グラフ：睡眠時位相同期データ" class="graph-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="hidden text-[#444] text-xs py-10 border border-dashed border-[#222]">
+                      
+                        SOURCE: ANALOG_LOG_76-A (PRE-ACCIDENT_DATA)
                     </div>
-                    <div class="graph-label">Fig.1: Phase Resonance Pattern (Historical Reference)</div>
-                </div>
+                    <figcaption class="graph-label">Fig.1: Phase Resonance Pattern (Historical Reference / 1976)</figcaption>
+                </figure>
 
                 <div class="thesis-section">
                     <h2>3. 実験概要</h2>
                     <p>
-                        防音・防磁処理を施した個室に複数名の被検体を配置し、低周波誘導によるレム睡眠への導入を試行した。
-                        特筆すべき実験条件として、音声による相互干渉を完全に遮断した状態で、被検体それぞれの「不随意な発話（寝言）」の内容を録音・解析した。
+                        防音・防磁処理を施した個室に複数名の被検体を配置し、低周波誘導によるレム睡眠への導入を試行した。特筆すべき実験条件として、音声による相互干渉を完全に遮断した状態で、被検体それぞれの「不随意な発話（寝言）」の内容を録音・解析した。
                     </p>
                 </div>
 
                 <div class="thesis-section">
                     <h2>4. 結果と考察</h2>
                     <p>
-                        実験の結果、脳波の位相が特定の周期で完全に一致した瞬間、隔離された被検体たちが同一の単語、
-                        あるいは特定の概念（不鮮明なため記述不可能）を同時に発する現象が確認された。
+                        実験の結果、脳波の位相が特定の周期で完全に一致した瞬間、隔離された被検体たちが同一の単語、あるいは特定の概念（不鮮明なため記述不可能）を同時に発する現象が確認された。
                     </p>
                     <p class="mt-4">
-                        これは物理的な音声伝達（第1層〜第7層の利用）を介さない、未知の<strong>第８階層</strong>における直接的な情報遷移が行われている証拠である。
-                        寝言は情報の本体ではなく、第８階層でやり取りされる「意識のパケット」が、低次レイヤーである発声器官へ溢れ出した残滓であると推察される。
+                        これは物理的な音声伝達（第1層〜第7層の利用）を介さない、未知の<strong>第８階層</strong>における直接的な情報遷移が行われている証拠である。寝言は情報の本体ではなく、第８階層でやり取りされる「意識のパケット」が、低次レイヤーである発声器官へ溢れ出した（リークした）残滓であると推察される。
                     </p>
                     <p class="mt-4 text-white">
                         結論として、睡眠はもはや単なる休息ではなく、OSIモデルの完成系としての「第８階層通信」を実現するためのリソースとして再定義されるべきである。
@@ -280,7 +269,7 @@
             <footer class="footer-tag font-mono">
                 <div>SIGNAL_EOF: Pre_Accident_Thesis_L8</div>
                 <div class="disclaimer-box">
-                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・思想とは一切関係ありません。
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術（OSI参照モデルを除く）とは一切関係ありません。
                 </div>
             </footer>
         </div>
