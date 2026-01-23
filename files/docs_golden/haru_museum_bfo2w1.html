@@ -17,8 +17,11 @@
             border: 16px double #f5f5f4; /* stone-100 */
         }
 
-        .img-overlay {
-            background-color: rgba(168, 162, 158, 0.1); /* stone-300 with opacity */
+        /* 古い写真の質感を出すための共通フィルタ（必要に応じて調整可能） */
+        .aged-photo {
+            mix-blend-mode: multiply;
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
@@ -55,17 +58,19 @@
                 <!-- 作品A -->
                 <div class="flex flex-col">
                     <div class="aspect-[3/4] bg-stone-100 border border-stone-300 relative group overflow-hidden">
+                        <!-- 画像がない場合に表示されるキャプション -->
                         <div class="absolute inset-0 flex items-center justify-center text-stone-300 italic text-[10px] p-4 text-center">
                             [ 1867: 翠波川をゆっくりと渡る一艘の舟。船頭と数名の村人が写っている ]
                         </div>
+                        <!-- 挿入するPNG画像 -->
                         <img 
-                            src="sample.png" 
+                            src="./img/Wilson_A.png" 
                             alt="翠波川の渡し舟" 
-                            class="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale contrast-125 relative z-10"
-                            onerror="this.style.display='none'"
+                            class="w-full h-full object-cover aged-photo relative z-10"
+                            onerror="this.style.opacity='0'; this.style.pointerEvents='none';"
                         />
                     </div>
-                    <h3 class="mt-4 font-bold text-base">作品A：『翠波川の渡し舟（1867）』</h3>
+                    <h3 class="mt-4 font-bold text-base">作品A：『翠波川의 渡し舟（1867）』</h3>
                     <p class="text-xs text-stone-600 mt-2 leading-relaxed">
                         当時の主要な交通手段であった渡し舟を捉えた貴重な記録。
                     </p>
@@ -78,10 +83,10 @@
                             [ 1867: 丘の上に立つ一人の男。背景には古い石碑が見える。男はカメラをじっと見つめている ]
                         </div>
                         <img 
-                            src="sample.png" 
+                            src="./img/Wilson_B.png" 
                             alt="丘の上の隠者" 
-                            class="w-full h-full object-cover opacity-90 mix-blend-multiply grayscale contrast-150 relative z-10"
-                            onerror="this.style.display='none'"
+                            class="w-full h-full object-cover aged-photo contrast-150 relative z-10"
+                            onerror="this.style.opacity='0'; this.style.pointerEvents='none';"
                         />
                         <div class="absolute top-2 left-2 bg-stone-800 text-white text-[9px] px-2 py-1 uppercase tracking-widest z-20">Featured</div>
                     </div>
@@ -95,10 +100,10 @@
                             [ 1867: 木造建築の村役場。玄関前には数名の役人が並んでいる ]
                         </div>
                         <img 
-                            src="sample.png" 
+                            src="./img/Wilson_C.png" 
                             alt="翠波村役場" 
-                            class="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale contrast-125 relative z-10"
-                            onerror="this.style.display='none'"
+                            class="w-full h-full object-cover aged-photo relative z-10"
+                            onerror="this.style.opacity='0'; this.style.pointerEvents='none';"
                         />
                     </div>
                     <h3 class="mt-4 font-bold text-base">作品C：『翠波村役場・正面玄関（1867）』</h3>
@@ -153,7 +158,7 @@
                 </div>
                 <!-- ARG免責事項 -->
                 <p class="text-[10px] text-stone-600 tracking-wider leading-relaxed max-w-lg mx-auto font-sans">
-                    ※本展示会はフィクションであり、ARG（代替現実ゲーム）の演出用資料です。実在の人物・団体・事件・技術等とは一切関係ありません。
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用資料です。実在の人物・団体・事件・イベント等とは一切関係ありません。
                 </p>
             </div>
         </footer>
@@ -163,10 +168,12 @@
         // Lucideアイコンの初期化
         lucide.createIcons();
 
-        // 画像エラーハンドリング（ReactのハンドラをバニラJSとして再実装）
+        // 画像のエラーハンドリング
+        // 画像がない場合は完全に非表示にし、背面のテキスト説明が見えるようにします
         document.querySelectorAll('img').forEach(img => {
             img.onerror = function() {
-                this.style.display = 'none';
+                this.style.opacity = '0';
+                this.style.pointerEvents = 'none';
             };
         });
     </script>
