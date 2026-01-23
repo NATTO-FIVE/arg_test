@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特別企画展『幕末の残影』 | 透明町立美術館</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .double-border {
+            border: 16px double #f5f5f4; /* stone-100 */
+        }
+
+        .img-overlay {
+            background-color: rgba(168, 162, 158, 0.1); /* stone-300 with opacity */
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-stone-200 py-12 px-4 flex justify-center items-start">
+
+    <!-- チラシ本体 -->
+    <div class="bg-white max-w-[800px] w-full shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-stone-300 relative overflow-hidden text-stone-900">
+        
+        <!-- 装飾的な縁取り -->
+        <div class="absolute inset-0 double-border pointer-events-none z-20"></div>
+
+        <!-- ヘッダーエリア -->
+        <header class="p-12 pb-8 text-center relative z-10">
+            <div class="text-stone-500 text-sm tracking-[0.3em] mb-4 uppercase">Special Exhibition 2026</div>
+            <h1 class="text-4xl md:text-5xl font-black leading-tight mb-6 tracking-tight">
+                特別企画展<br />
+                <span class="text-6xl md:text-7xl block mt-4 border-y-2 border-stone-800 py-6">
+                    幕末の残影
+                </span>
+                <span class="text-2xl md:text-3xl block mt-6 font-bold text-stone-700">
+                    －写真家が見た翠波の原風景－
+                </span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-stone-600 leading-relaxed text-lg text-justify mt-10 px-4">
+                当館の収蔵庫から再発見された、英国人写真家アーサー・J・ウィルソンの未公開ガラス乾板をデジタル修復。
+                160年の時を経て、明治維新直前の透明町（旧・翠波村）の真実の姿が蘇ります。
+            </p>
+        </header>
+
+        <!-- 展示作品紹介セクション -->
+        <main class="p-12 pt-4 pb-20 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- 作品A -->
+                <div class="flex flex-col">
+                    <div class="aspect-[3/4] bg-stone-100 border border-stone-300 relative group overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center text-stone-300 italic text-[10px] p-4 text-center">
+                            [ 1867: 翠波川をゆっくりと渡る一艘の舟。船頭と数名の村人が写っている ]
+                        </div>
+                        <img 
+                            src="sample.png" 
+                            alt="翠波川の渡し舟" 
+                            class="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale contrast-125 relative z-10"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <h3 class="mt-4 font-bold text-base">作品A：『翠波川の渡し舟（1867）』</h3>
+                    <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                        当時の主要な交通手段であった渡し舟を捉えた貴重な記録。
+                    </p>
+                </div>
+
+                <!-- 作品B：核心的要素 -->
+                <div class="flex flex-col">
+                    <div class="aspect-[3/4] bg-stone-50 border-2 border-stone-800 relative group overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center text-stone-400 italic text-[10px] p-4 text-center">
+                            [ 1867: 丘の上に立つ一人の男。背景には古い石碑が見える。男はカメラをじっと見つめている ]
+                        </div>
+                        <img 
+                            src="sample.png" 
+                            alt="丘の上の隠者" 
+                            class="w-full h-full object-cover opacity-90 mix-blend-multiply grayscale contrast-150 relative z-10"
+                            onerror="this.style.display='none'"
+                        />
+                        <div class="absolute top-2 left-2 bg-stone-800 text-white text-[9px] px-2 py-1 uppercase tracking-widest z-20">Featured</div>
+                    </div>
+                    <h3 class="mt-4 font-bold text-base leading-tight">作品B：『丘の上の隠者（1867 / 春本毛介氏と推定）』</h3>
+                </div>
+
+                <!-- 作品C -->
+                <div class="flex flex-col">
+                    <div class="aspect-[3/4] bg-stone-100 border border-stone-300 relative group overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center text-stone-300 italic text-[10px] p-4 text-center">
+                            [ 1867: 木造建築の村役場。玄関前には数名の役人が並んでいる ]
+                        </div>
+                        <img 
+                            src="sample.png" 
+                            alt="翠波村役場" 
+                            class="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale contrast-125 relative z-10"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <h3 class="mt-4 font-bold text-base">作品C：『翠波村役場・正面玄関（1867）』</h3>
+                    <p class="text-sm text-stone-600 mt-2 leading-relaxed">
+                        現存しない旧役場の外観。当時の建築様式を知る第一級の資料。
+                    </p>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- フッター：開催概要 -->
+        <footer class="bg-stone-900 text-stone-300 p-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 border-b border-stone-800 pb-12">
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <i data-lucide="calendar" class="text-stone-500 mt-1 w-5 h-5"></i>
+                        <div>
+                            <div class="text-stone-500 text-[10px] uppercase font-bold tracking-widest">Exhibition Period</div>
+                            <div class="text-xl font-bold text-white mt-1">2026年3月10日（火）－ 5月6日（水・祝）</div>
+                            <div class="text-xs mt-1">休館日：月曜日（祝日の場合は翌平日）</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i data-lucide="map-pin" class="text-stone-500 mt-1 w-5 h-5"></i>
+                        <div>
+                            <div class="text-stone-500 text-[10px] uppercase font-bold tracking-widest">Venue</div>
+                            <div class="text-xl font-bold text-white mt-1 underline decoration-stone-600 underline-offset-4">透明町立美術館</div>
+                            <div class="text-xs mt-1 font-sans">翠波公園内 / 透明町駅から徒歩20分</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <i data-lucide="building-2" class="text-stone-500 mt-1 w-5 h-5"></i>
+                        <div>
+                            <div class="text-stone-500 text-[10px] uppercase font-bold tracking-widest">Organization</div>
+                            <div class="text-sm mt-1">主催：透明町立美術館、透明町教育委員会</div>
+                            <div class="text-[10px] mt-4 leading-relaxed text-stone-500 font-sans">
+                                後援：透明町観光協会、翠波商工会、<br />
+                                <span class="text-stone-300 border-b border-stone-600 tracking-tighter">一般財団法人 金の聖眠文化財団</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center pt-4">
+                <div class="inline-block border border-stone-700 p-3 mb-6">
+                    <div class="text-[9px] uppercase tracking-[0.4em] mb-1 text-stone-500">Official Seal</div>
+                    <div class="font-bold text-stone-600 tracking-tighter text-xs">TOMEI_MUNICIPAL_MUSEUM</div>
+                </div>
+                <!-- ARG免責事項 -->
+                <p class="text-[10px] text-stone-600 tracking-wider leading-relaxed max-w-lg mx-auto font-sans">
+                    ※本展示会はフィクションであり、ARG（代替現実ゲーム）の演出用資料です。実在の人物・団体・事件・技術等とは一切関係ありません。
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Lucideアイコンの初期化
+        lucide.createIcons();
+
+        // 画像エラーハンドリング（ReactのハンドラをバニラJSとして再実装）
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html>
