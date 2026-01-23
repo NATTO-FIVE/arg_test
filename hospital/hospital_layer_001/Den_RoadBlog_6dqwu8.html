@@ -68,27 +68,29 @@
             color: #64748b;
         }
 
-        /* 画像表示エリアの調整 */
+        /* 画像表示エリアの調整：大きすぎないサイズに固定 */
         .photo-frame {
             width: 100%;
-            margin: 25px 0;
+            max-width: 640px; /* ブログとして適切な最大幅に制限 */
+            margin: 25px auto; /* 左右中央揃え */
             background-color: #f1f5f9;
             border: 1px solid #e2e8f0;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .photo-frame img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
+            object-fit: contain; /* 枠に合わせて収める */
         }
 
         .img-fallback-text {
-            padding: 60px;
+            padding: 40px;
             color: #94a3b8;
             font-style: italic;
             font-size: 0.8rem;
@@ -213,7 +215,7 @@
                 <p>皆様、お疲れ様です。管理人の「おっきー」です。<br>
                 今回は、地元でも有名な心霊スポット……ではなく、土木遺産としての価値が高い「旧・翠越隧道」へ行ってまいりました。</p>
 
-                <!-- 写真1：sample.png -->
+                <!-- 写真1 -->
                 <div class="photo-frame">
                     <img src="./img/RoadBlog_01.png" alt="旧・翠越隧道入口" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="img-fallback-text hidden">
@@ -229,7 +231,7 @@
                     崩落が進んでいる箇所もあり、長居は禁物ですが、この静寂こそが廃道探索の醍醐味だと言えるでしょう。
                 </p>
 
-                <!-- 写真2：sample.png -->
+                <!-- 写真2 -->
                 <div class="photo-frame">
                     <img src="./img/RoadBlog_02.png" alt="隧道内部" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="img-fallback-text hidden">
@@ -311,7 +313,6 @@
             <div class="sidebar-box">
                 <div class="sidebar-title">プロフィール</div>
                 <div class="text-xs text-center">
-                    <!-- プロフィール画像も sample.png に -->
                     <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2 overflow-hidden border border-gray-300">
                         <img src="sample.png" alt="おっきー" class="w-full h-full object-cover" onerror="this.style.display='none';">
                     </div>
@@ -334,7 +335,7 @@
     <footer class="footer">
         <div class="copyright">© 2024 おっきーの「酷道・廃隧道」探訪記 All Rights Reserved.</div>
         <div class="disclaimer-area">
-            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体・事件・思想とは一切関係ありません。
+            ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体・事件・技術・思想とは一切関係ありません。
         </div>
     </footer>
 
