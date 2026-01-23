@@ -28,10 +28,15 @@
         .profile-header { position: relative; }
         .banner {
             width: 100%; height: 200px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            background: #111;
             overflow: hidden;
         }
-        .banner img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: blur(5px); }
+        /* 修正：blurを削除し、透明度を調整して鮮明にしました */
+        .banner img { 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            opacity: 0.9; 
+        }
 
         .avatar-container {
             position: absolute; bottom: -60px; left: 20px;
@@ -71,10 +76,10 @@
         <!-- プロフィールエリア -->
         <div class="profile-header">
             <div class="banner">
-                <img src="./img/Fuwa_banner.png" alt="">
+                <img src="./img/Fuwa_banner.png" alt="Banner">
             </div>
-            <div class="avatar-container">
-                <img src="./img/Fuwafuwarin.png" alt="不和 歩羽" class="avatar-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-xs text-gray-500 text-center\'>Photo<br>Available</div>';">
+            <div id="main-avatar-target" class="avatar-container">
+                <!-- JavaScriptでレンダリング -->
             </div>
         </div>
 
@@ -102,21 +107,26 @@
 
     <script>
         /**
+         * ここでアイコン画像を定義（一括変更用）
+         */
+        const PROFILE_IMAGE = "./img/Fuwafuwarin.png";
+
+        /**
          * ここを編集してツイートを追加・変更できます
          */
         const TWEETS_DATA = [
             {
                 time: "2時間",
                 content: "朝の回診終了！今日も同僚君から「歩羽くん、顔が怖いよ。もっと甘いものでも食べて笑いなさい」って言われちゃった。 院長から頂いた高級チョコで、午後の事務作業も爆速で終わらせます🍫✨",
-                image: "./img/Chocolate.png", // あなたが作成した写り込み入りの写真を指定
+                image: "./img/Chocolate.png",
                 placeholder: "🥖🍫✨",
                 stats: { msg: 12, rt: 45, fav: 892, view: "12.4k" }
             },
             {
                 time: "12月20日",
                 content: "ついに見つけた！幻の「金枝堂」の季節限定・苺大福🍓 デスクの上が書類で散らかってるけど、そんなの関係なし！この、断面の美しさを見てください…もはや芸術作品～✨",
-                image: "./img/eclair_special.png", // あなたが作成した写り込み入りの写真を指定
-                placeholder: "🥖🍫✨",
+                image: "./img/eclair_special.png",
+                placeholder: "🍓🍡✨",
                 stats: { msg: 12, rt: 45, fav: 892, view: "12.4k" }
             },
             {
@@ -130,51 +140,75 @@
                 time: "11月20日",
                 content: "父の職場に行ったら、また難しい顔をしてモニターを睨んでた。 眉間のシワが定着するよ？ってアドバイスしたのに無視。 腹いせに、父の秘蔵の高級羊羹を一つ失敬してきました。糖分補給完了！🍡😋",
                 image: "./img/pudding.png",
-                placeholder: "🍮🍮🤤",
+                placeholder: "🍮🍡🤤",
                 stats: { msg: 8, rt: 20, fav: 512, view: "10.2k" }
             }
         ];
 
+        /**
+         * 画像読み込みエラー時の処理
+         */
+        window.handleImgError = function(imgElement, placeholderType) {
+            imgElement.style.display = 'none';
+            const stub = imgElement.nextElementSibling;
+            if (stub) {
+                stub.style.display = 'flex';
+            }
+        };
+
+        // メインプロフィールのレンダリング
+        function renderProfile() {
+            const avatarTarget = document.getElementById('main-avatar-target');
+            if (avatarTarget) {
+                avatarTarget.innerHTML = `<img src="${PROFILE_IMAGE}" alt="不和 歩羽" class="avatar-img" onerror="handleImgError(this, 'profile')">`;
+            }
+        }
+
         // タイムラインのレンダリング
         function renderTimeline() {
             const timeline = document.getElementById('timeline');
-            timeline.innerHTML = TWEETS_DATA.map(tweet => `
-                <article class="tweet-card">
-                    <div class="flex gap-3">
-                        <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-800 flex-shrink-0">
-                            <img src="sample.png" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-1">
-                                <span class="font-bold text-white">不和 歩羽</span>
-                                <span class="text-gray-500 text-sm">@Fuwafuwa_sweets_dr · ${tweet.time}</span>
+            if (timeline) {
+                timeline.innerHTML = TWEETS_DATA.map(tweet => `
+                    <article class="tweet-card">
+                        <div class="flex gap-3">
+                            <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-800 flex-shrink-0">
+                                <img src="${PROFILE_IMAGE}" class="w-full h-full object-cover" onerror="handleImgError(this, 'icon')">
                             </div>
-                            <p class="text-[15px] mt-1">${tweet.content}</p>
-                            
-                            <div class="tweet-image-box">
-                                <div class="w-full flex items-center justify-center bg-white/5">
-                                    <img src="${tweet.image}" class="w-full h-auto block" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="hidden flex-col items-center p-20">
-                                        <span class="text-6xl mb-2">${tweet.placeholder}</span>
-                                        <span class="text-[10px] text-gray-500 font-sans tracking-widest uppercase">[ No Photo Image ]</span>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-1">
+                                    <span class="font-bold text-white">ふわたん</span>
+                                    <span class="text-gray-500 text-sm">@Fuwafuwa_sweets_dr · ${tweet.time}</span>
+                                </div>
+                                <p class="text-[15px] mt-1">${tweet.content}</p>
+                                
+                                <div class="tweet-image-box">
+                                    <div class="w-full flex items-center justify-center bg-white/5">
+                                        <img src="${tweet.image}" class="w-full h-auto block" onerror="handleImgError(this, 'content')">
+                                        <div class="hidden flex-col items-center p-20">
+                                            <span class="text-6xl mb-2">${tweet.placeholder}</span>
+                                            <span class="text-[10px] text-gray-500 font-sans tracking-widest uppercase">[ No Photo Image ]</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="flex justify-between mt-3 text-gray-500 max-w-xs">
-                                <div class="flex items-center gap-1"><i data-lucide="message-circle" class="w-4 h-4"></i> ${tweet.stats.msg}</div>
-                                <div class="flex items-center gap-1"><i data-lucide="repeat-2" class="w-4 h-4"></i> ${tweet.stats.rt}</div>
-                                <div class="flex items-center gap-1 text-pink-500"><i data-lucide="heart" class="w-4 h-4 fill-pink-500"></i> ${tweet.stats.fav}</div>
-                                <div class="flex items-center gap-1"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> ${tweet.stats.view}</div>
+                                <div class="flex justify-between mt-3 text-gray-500 max-w-xs">
+                                    <div class="flex items-center gap-1"><i data-lucide="message-circle" class="w-4 h-4"></i> ${tweet.stats.msg}</div>
+                                    <div class="flex items-center gap-1"><i data-lucide="repeat-2" class="w-4 h-4"></i> ${tweet.stats.rt}</div>
+                                    <div class="flex items-center gap-1 text-pink-500"><i data-lucide="heart" class="w-4 h-4 fill-pink-500"></i> ${tweet.stats.fav}</div>
+                                    <div class="flex items-center gap-1"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> ${tweet.stats.view}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </article>
-            `).join('');
-            lucide.createIcons();
+                    </article>
+                `).join('');
+                lucide.createIcons();
+            }
         }
 
-        renderTimeline();
+        window.onload = function() {
+            renderProfile();
+            renderTimeline();
+        };
     </script>
 </body>
 </html>
