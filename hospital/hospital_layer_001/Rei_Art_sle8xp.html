@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第24回 透明町・市民芸術祭【オンライン展示会場】</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@700&display=swap');
+
+        body {
+            background-color: #f9fafb;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        /* 自治体サイト風のヘッダー */
+        .gov-header {
+            background-color: #fff;
+            border-bottom: 4px solid #3b82f6;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .gov-header h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .organizer-info {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .intro-section {
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ギャラリーレイアウト */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+
+        /* 絵画カード */
+        .art-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 額縁演出 */
+        .frame {
+            background: #111;
+            padding: 6px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .canvas-area {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #222;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 画像：ポインターとホバー効果を追加 */
+        .canvas-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.2s ease, filter 0.2s ease;
+        }
+
+        .canvas-area img:hover {
+            opacity: 0.85;
+            filter: brightness(1.1);
+        }
+
+        /* 画像未設定時のフォールバックテキスト */
+        .image-stub {
+            padding: 1rem;
+            color: #4b5563;
+            font-size: 0.65rem;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .art-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.25rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.25rem;
+        }
+
+        .author-info {
+            font-size: 0.75rem;
+            color: #3b82f6;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .comment-box {
+            font-size: 0.8rem;
+            color: #4b5563;
+            background: #fdfdfd;
+            padding: 0.75rem;
+            border-left: 2px solid #e5e7eb;
+            flex-grow: 1;
+        }
+
+        /* 虚空蔵氏の作品への特別なアクセント */
+        .card-kokuzo {
+            border-color: #94a3b8;
+            background: #fafafa;
+        }
+
+        .card-kokuzo .art-title {
+            color: #1e293b;
+        }
+
+        .card-kokuzo .comment-box {
+            border-left-color: #1e293b;
+            color: #111827;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 1rem;
+            background-color: #f3f4f6;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #9ca3af;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #3b82f6;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+        .btn-back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header class="gov-header">
+        <div class="container">
+            <h1>第24回 透明町・市民芸術祭【オンライン展示会場】</h1>
+            <p class="organizer-info">主催：透明町教育委員会 / 文化振興課</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="../../search.html" class="btn-back">← 地域活動・ポータルへ戻る</a>
+
+        <section class="intro-section">
+            <p>
+                本年度も透明町民の皆様による力作が多数寄せられました。<br>
+                厳しい日常の中に芽吹いた、感性豊かな表現の数々をお楽しみください。<br>
+                <small class="opacity-70">※画像をクリックすると別ウィンドウで元のサイズを表示します。</small>
+            </p>
+        </section>
+
+        <div class="gallery-grid">
+            <!-- 作品1 -->
+            <article class="art-card">
+                <div class="frame">
+                    <div class="canvas-area">
+                        <a href="art_01.png" target="_blank" title="大きなサイズで表示">
+                            <img src="art_01.png" alt="緑あふれる駅前広場" onerror="this.style.display='none'; this.parentElement.nextElementSibling.classList.remove('hidden');">
+                        </a>
+                        <div class="image-stub hidden">
+                            [ 水彩画：日差しの明るい日本の駅前広場。豊かな街路樹と、ベンチで憩う人々 ]
+                        </div>
+                    </div>
+                </div>
+                <h2 class="art-title">『緑あふれる駅前広場』</h2>
+                <div class="author-info">佐藤 陽子（68歳 / 主婦）</div>
+                <div class="comment-box">
+                    「毎年描いている、お気に入りの駅前広場です。ベンチで休む人々を描くのが好きです。」
+                </div>
+            </article>
+
+            <!-- 作品2 -->
+            <article class="art-card">
+                <div class="frame">
+                    <div class="canvas-area">
+                        <a href="art_02.png" target="_blank" title="大きなサイズで表示">
+                            <img src="art_02.png" alt="夏の海辺の思い出" onerror="this.style.display='none'; this.parentElement.nextElementSibling.classList.remove('hidden');">
+                        </a>
+                        <div class="image-stub hidden">
+                            [ クレヨン画：夏のビーチ。青い波と黄色い砂浜、カラフルなビーチボール ]
+                        </div>
+                    </div>
+                </div>
+                <h2 class="art-title">『夏の海辺の思い出』</h2>
+                <div class="author-info">木村 健太（9歳 / 小学生）</div>
+                <div class="comment-box">
+                    「家族旅行で行った海の絵です。大きな波と砂浜で遊ぶのが楽しかった！」
+                </div>
+            </article>
+
+            <!-- 作品3 -->
+            <article class="art-card">
+                <div class="frame">
+                    <div class="canvas-area">
+                        <a href="art_03.png" target="_blank" title="大きなサイズで表示">
+                            <img src="art_03.png" alt="静かなる夜明け" onerror="this.style.display='none'; this.parentElement.nextElementSibling.classList.remove('hidden');">
+                        </a>
+                        <div class="image-stub hidden">
+                            [ アクリル画：夜明け前の静かな公園。ピンクと紫のグラデーションの空 ]
+                        </div>
+                    </div>
+                </div>
+                <h2 class="art-title">『静かなる夜明け』</h2>
+                <div class="author-info">山田 恵美（32歳 / 会社員）</div>
+                <div class="comment-box">
+                    「早朝の公園で見た、心洗われるような瞬間を描きました。新しい一日が始まる予感。」
+                </div>
+            </article>
+
+            <!-- 作品4：虚空蔵 零 -->
+            <article class="art-card card-kokuzo">
+                <div class="frame" style="border-color: #1e293b;">
+                    <div class="canvas-area">
+                        <a href="art_04.png" target="_blank" title="大きなサイズで表示">
+                            <img src="art_04.png" alt="至福の注視" onerror="this.style.display='none'; this.parentElement.nextElementSibling.classList.remove('hidden');">
+                        </a>
+                        <div class="image-stub hidden">
+                            [ 油彩画：暗い紫色の空から巨大な瞳が見下ろす風景。金色の糸が人々を包んでいる ]
+                        </div>
+                    </div>
+                </div>
+                <h2 class="art-title">『至福の注視』</h2>
+                <div class="author-info">虚空蔵 零（42歳 / 医師）</div>
+                <div class="comment-box italic">
+                    「日々、多くの眼と向き合っています。視線とは愛であり救いです。偉大な存在に視られているという安心感を描きました。」
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Copyright © Tomei Town Cultural Promotion Section. All Rights Reserved.</p>
+        <p class="mt-2 opacity-50">※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の人物・団体等とは関係ありません。</p>
+    </footer>
+
+</body>
+</html>
