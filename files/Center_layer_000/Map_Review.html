@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クチコミ | 絶景の石碑（透明町）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+        
+        body {
+            background-color: #ffffff;
+            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+            color: #202124;
+            margin: 0;
+            padding: 0;
+        }
+
+        .star-rating-amber { color: #fbbc04; }
+        .star-rating-gray { color: #e8eaed; }
+        
+        .user-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background-color: #e8eaed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .review-card {
+            padding: 24px 0;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        /* ギャラリーセクションのスタイル */
+        .photo-gallery {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 16px 0;
+            scrollbar-width: none; /* Firefox */
+        }
+        .photo-gallery::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+        .photo-item {
+            flex: 0 0 240px;
+            height: 160px;
+            background-color: #f1f3f4;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-label {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .owner-reply {
+            margin-top: 16px;
+            padding: 16px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px; left: 20px;
+            background: #ffffff;
+            border: 1px solid #dadce0;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <a href="../../search.html" class="btn-return">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>戻る</span>
+    </a>
+
+    <div class="max-w-2xl mx-auto bg-white min-h-screen shadow-sm">
+        <!-- ヘッダーセクション -->
+        <header class="p-4 pt-20 border-b">
+            <h1 class="text-2xl font-normal mb-2 text-gray-800 tracking-tight">絶景の石碑（特別景観保存区域内）</h1>
+            <div class="flex items-center gap-2 mb-4 text-sm text-gray-600">
+                <span class="font-bold text-gray-900">3.2</span>
+                <div class="flex">
+                    <i data-lucide="star" class="w-4 h-4 star-rating-amber fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 star-rating-amber fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 star-rating-amber fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 star-rating-gray fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 star-rating-gray fill-current"></i>
+                </div>
+                <span>(34件のクチコミ)</span>
+            </div>
+            <p class="text-sm text-blue-600 font-medium">史跡 ｜ 展望台</p>
+
+            <!-- 写真ギャラリー追加箇所 -->
+            <div class="photo-gallery">
+                <!-- 石碑の写真 -->
+                <div class="photo-item">
+                    <img src="./img/Stone_Monument.png" alt="絶景の石碑" onerror="this.style.display='none';">
+                    <div class="flex items-center justify-center h-full text-gray-400 text-[10px] p-4 text-center">
+                        [ 画像：霧の中に建つ古びた石碑 ]
+                    </div>
+                    <div class="photo-label">最新の写真</div>
+                </div>
+                <!-- 航空写真 -->
+                <div class="photo-item">
+                    <img src="./img/Satellite_View.png" alt="航空写真" onerror="this.style.display='none';">
+                    <div class="flex items-center justify-center h-full text-gray-400 text-[10px] p-4 text-center">
+                        [ 画像：Google Map 衛星写真。山林の中に円形の更地が見える ]
+                    </div>
+                    <div class="photo-label">航空写真</div>
+                </div>
+                <!-- 街並み -->
+                <div class="photo-item">
+                    <img src="./img/Town_View.png" alt="透明町の景観" onerror="this.style.display='none';">
+                    <div class="flex items-center justify-center h-full text-gray-400 text-[10px] p-4 text-center">
+                        [ 画像：高台から見下ろす透明町の街並み。統一された屋根の色 ]
+                    </div>
+                    <div class="photo-label">景観</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- クチコミ一覧 -->
+        <main class="px-4">
+            
+            <!-- 投稿A -->
+            <article class="review-card">
+                <div class="flex gap-4">
+                    <div class="user-avatar bg-purple-600">S</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sm">s.yamada</h3>
+                            <button class="text-gray-400"><i data-lucide="more-vertical" class="w-4 h-4"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-1">ローカルガイド ｜ 3ヶ月前</p>
+                        <div class="flex mb-2">
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                        </div>
+                        <p class="text-sm leading-relaxed">
+                            魂が洗われる場所。唐橋先生がこの景観を守ってくださっているおかげで、俗世のノイズに邪魔されずに瞑想できます。保存区域に指定されて本当に良かった。
+                        </p>
+                        <div class="flex gap-6 mt-4 text-xs text-gray-500 font-medium">
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"><i data-lucide="thumbs-up" class="w-3 h-3"></i> 役に立った (12)</span>
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">共有</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 投稿B -->
+            <article class="review-card">
+                <div class="flex gap-4">
+                    <div class="user-avatar bg-blue-500">T</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sm">たかし</h3>
+                            <button class="text-gray-400"><i data-lucide="more-vertical" class="w-4 h-4"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-1">2ヶ月前</p>
+                        <div class="flex mb-2">
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                        </div>
+                        <p class="text-sm leading-relaxed">
+                            景色は確かに最高。でも、駐車場から石碑までずっと腕章をつけた「ボランティア」という名の監視員がついてくる。私有地でもないのに、写真を撮る方向まで細かく指示されて不快。唐橋さんという方の私有物なんですか？
+                        </p>
+                        <div class="flex gap-6 mt-4 text-xs text-gray-500 font-medium">
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"><i data-lucide="thumbs-up" class="w-3 h-3"></i> 役に立った (45)</span>
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">共有</span>
+                        </div>
+
+                        <!-- オーナーからの返信 -->
+                        <div class="owner-reply">
+                            <div class="flex items-center gap-2 mb-2 font-bold text-xs text-gray-700">
+                                <i data-lucide="undo-2" class="w-3 h-3"></i>
+                                オーナーからの返信（1ヶ月前）
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                ご来訪ありがとうございます。当区域は唐橋氏の提唱により、歴史的価値と静謐を保護するため厳格な維持管理が行われております。皆様に共通の「正しい鑑賞体験」を提供するため、ボランティアによるガイドを徹底しております。ご理解ください。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 投稿C -->
+            <article class="review-card">
+                <div class="flex gap-4">
+                    <div class="user-avatar bg-gray-500">M</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sm">元住民_K</h3>
+                            <button class="text-gray-400"><i data-lucide="more-vertical" class="w-4 h-4"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-1">5ヶ月前</p>
+                        <div class="flex mb-2">
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                        </div>
+                        <p class="text-sm leading-relaxed">
+                            昔はもっと自由に入れた。景観保存区域になってから、修繕ひとつするにも教団の息がかかった委員会の許可が必要。実質、唐橋弘源の庭。夜中に行くと、石碑に向かって大勢で座り込んでる集団がいて普通に怖い。
+                        </p>
+                        <div class="flex gap-6 mt-4 text-xs text-gray-500 font-medium">
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"><i data-lucide="thumbs-up" class="w-3 h-3"></i> 役に立った (28)</span>
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">共有</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 投稿D -->
+            <article class="review-card">
+                <div class="flex gap-4">
+                    <div class="user-avatar bg-green-700">K</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-sm">Kazu</h3>
+                            <button class="text-gray-400"><i data-lucide="more-vertical" class="w-4 h-4"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-1">1ヶ月前</p>
+                        <div class="flex mb-2">
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-amber fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 star-rating-gray fill-current"></i>
+                        </div>
+                        <p class="text-sm leading-relaxed">
+                            道が狭いけど、古い町並みが統一されていて綺麗。ゴミ一つ落ちていないのは、熱心な信者さんたちが毎日掃除しているかららしい。独特の空気感がある町。
+                        </p>
+                        <div class="flex gap-6 mt-4 text-xs text-gray-500 font-medium">
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"><i data-lucide="thumbs-up" class="w-3 h-3"></i> 役に立った (5)</span>
+                            <span class="flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">共有</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="p-10 text-center border-t mt-10">
+            <p class="text-[10px] text-gray-400 leading-relaxed">
+                ※本ページはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在のサービス、団体、人物とは一切関係ありません。
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
