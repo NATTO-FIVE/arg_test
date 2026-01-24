@@ -58,6 +58,7 @@
             border-left: 5px solid #1a1a1a;
             padding-left: 15px;
             margin: 30px 0 15px 0;
+            color: #1a1a1a;
         }
 
         .body-text {
@@ -107,6 +108,32 @@
             pointer-events: none;
         }
 
+        .system-box {
+            border: 2px solid #b8860b;
+            background-color: #fffdf5;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .method-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .method-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        .method-list li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #b8860b;
+            font-size: 0.8rem;
+        }
+
         .footer-note {
             margin-top: 60px;
             padding-top: 20px;
@@ -116,11 +143,6 @@
             text-align: center;
         }
         
-        .method-box {
-            border: 2px solid #1a1a1a;
-            padding: 20px;
-            margin-top: 30px;
-        }
     </style>
 </head>
 <body>
@@ -129,55 +151,55 @@
         <div class="stamp-red">秘</div>
 
         <header class="office-header">
-            <div>白米探偵事務所 - 受付案件：#T-1978</div>
-            <div>INTERNAL USE ONLY</div>
+            <div>白米探偵事務所 - 案件：#T-1978</div>
+            <div>STATUS: CONFIDENTIAL</div>
         </header>
 
-        <h1 class="title">案件調査依頼書：<br>特殊睡眠外来科の違和感調査</h1>
+        <h1 class="title">案件調査依頼書：<br>透明町・特定医療機関の実態調査</h1>
 
         <div class="body-text">
-            <h2 class="section-title">依頼人背景</h2>
+            <h2 class="section-title">1. 依頼の経緯</h2>
             <p>
-                金枝聖域第八病院に配属予定の新人看護師。<br>
-                勤務開始を前に、病院公式サイトの構成に「説明のつかない違和感」を覚え、当事務所へ実態調査を依頼。
+                舞台はK県Y市に位置するとある町。<br>
+                この町の主要施設である病院には、医学的に前例のない<strong>「特殊睡眠外来科」</strong>が存在する。<br>
+                依頼人である新人看護師は、配属を前に病院公式サイトを閲覧し、説明のつかない強い違和感と恐怖を覚え、当事務所に真相解明を依頼した。
             </p>
 
-            <h2 class="section-title">依頼内容</h2>
+            <h2 class="section-title">2. あなたの任務</h2>
             <p>
-                調査対象は、病院サイト内に存在する<strong>「特殊睡眠外来科」</strong>である。<br>
-                当該病院には一般的な「睡眠外来」が存在せず、代わりに医学の教科書には載っていないこの「特殊睡眠外来科」のみが置かれているという。
+                調査員であるあなたの任務は、公開されているウェブサイトの表面的な記述から「隠された真実」を暴くことだ。
+                一見、清潔で健全に見えるサイトの裏側には、表に出せない記録や、この町を支配する巨大な組織の影が潜んでいる。
             </p>
-            <div class="important-note">
-                依頼人談：<br>
-                「配属前に、この科の正体を知りたい。もし不穏な要素があるなら、私は覚悟を決めなければならない」
+
+            <div class="system-box">
+                <h2 class="text-lg font-bold text-amber-900 mb-3 flex items-center gap-2">
+                    <span class="bg-amber-900 text-white px-2 py-0.5 text-xs">SYSTEM</span> 捜査マニュアル（遊び方）
+                </h2>
+                <div class="text-sm space-y-4">
+                    <p>この物語は、あなたの「検索」によって進行するARG（Alternate Reality Game：代替現実ゲーム）です。</p>
+                    
+                    <ul class="method-list">
+                        <li><strong>違和感のある言葉を探す</strong><br>
+                            病院や関係機関のサイトを隅々まで読み、強調されている単語、専門用語、あるいは「何かを隠しているような記述」を見つけ出せ。</li>
+                        <li><strong>検索窓に「キーワード」を入力する</strong><br>
+                            サイト内の検索ボックスは、当事務所の特殊通信により接続した<strong>「内部情報検索端末」</strong>へ直結している。見つけた単語を入力し、秘匿された通信ログや機密文書を呼び出せ。</li>
+                        <li><strong>断片を繋ぎ合わせる</strong><br>
+                            一つのキーワードから得られた資料の中に、次の謎を解くための新しいキーワードや、パスワードのヒントが隠されていることもある。</li>
+                    </ul>
+
+                    <div class="mt-4 p-3 bg-white border border-amber-200 text-xs italic">
+                        ※重要：人物名や施設名で検索する場合、苗字と名前の間のスペースは削除してください。（例：「佐藤 太郎」→「佐藤太郎」）
+                    </div>
+                </div>
             </div>
 
-            <h2 class="section-title">調査方針</h2>
-            <ol class="mt-4 list-decimal list-inside space-y-2">
-                <li>病院公式サイトの表層情報を確認。</li>
-                <li>「内部情報検索端末」を使用し、秘匿された通信記録や論文を解析。<br>
-                    <span class="text-sm opacity-70">※内部情報検索端末へのアクセスは、調査対象サイトの検索欄と連携済。</span>
-                </li>
-                <li>違和感の核となる事象を特定せよ。</li>
-            </ol>
-
-            <h2 class="section-title">具体的な調査手順</h2>
-            <div class="method-box text-sm">
-                <ul class="list-disc list-inside space-y-2">
-                    <li>サイト内のテキストから、不自然な用語や違和感のある言葉を抽出せよ。</li>
-                    <li>抽出した言葉を病院サイトの<strong>「検索欄」</strong>に入力し、内部記録を呼び出せ。</li>
-                    <li>得られた検索結果から断片的な情報を集め、隠蔽された真相を特定せよ。</li>
-                    <li>人物を検索する場合は、苗字と名前の間のスペースは削除せよ。</li>
-                </ul>
-            </div>
-
-            <a href="hospital/index.html" class="btn-action">調査を開始する（病院サイトへ）</a>
+            <a href="hospital/index.html" class="btn-action">捜査を開始する（病院サイトへ）</a>
         </div>
 
         <footer class="footer-note">
-            <div>白米探偵事務所 代表 </div>
+            <div>白米探偵事務所 捜査管理部門</div>
             <div class="mt-4">
-                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・技術とは一切関係ありません。
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出です。実在の団体・活動・事件・技術とは一切関係ありません。
             </div>
         </footer>
     </article>
