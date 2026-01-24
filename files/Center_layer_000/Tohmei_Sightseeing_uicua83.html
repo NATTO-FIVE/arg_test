@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>観光案内：静寂と調和の町 | 透明町公式サイト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        .town-blue { color: #0284c7; }
+        .bg-town-blue { background-color: #0284c7; }
+
+        .breadcrumb {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.4rem 0;
+            font-size: 0.75rem;
+        }
+
+        /* ヒーローバナー：高さを150pxに調整 */
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.transparenttextures.com/patterns/clean-gray-paper.png');
+            background-color: #0c4a6e;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-banner h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero-banner p {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+        }
+
+        .spot-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .spot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .guideline-box {
+            background-color: #f1f5f9;
+            border-left: 6px solid #0284c7;
+            padding: 2rem;
+        }
+
+        .charter-section {
+            background-color: #1e293b;
+            color: #94a3b8;
+            padding: 2.5rem 2rem;
+            font-size: 0.85rem;
+        }
+
+        .charter-title {
+            color: #f8fafc;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 15px; left: 15px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="search.html" class="btn-return">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>戻る</span>
+    </a>
+
+    <header class="bg-white border-b-2 border-town-blue">
+        <div class="max-w-6xl mx-auto px-6 py-2 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-town-blue rounded-full flex items-center justify-center text-white">
+                    <i data-lucide="waves" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-lg font-black tracking-tighter text-gray-800 leading-none mb-0.5">透明町公式サイト</div>
+                    <div class="text-[8px] text-gray-500 font-bold uppercase leading-none">Tomei Town Official Website</div>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-6 text-xs font-bold">
+                <span>くらしのガイド</span>
+                <span class="text-town-blue border-b-2 border-town-blue">観光・イベント</span>
+                <span>事業者の方へ</span>
+                <span>町政情報</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="max-w-6xl mx-auto px-6">
+            ホーム ＞ 観光・イベント ＞ 透明町を巡る
+        </div>
+    </div>
+
+    <section class="hero-banner">
+        <div>
+            <h1>透明町を巡る</h1>
+            <p class="px-4">
+                「視界に、静寂を。心に、調和を。――特別景観保存区域・透明町」
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+            <i data-lucide="map" class="town-blue"></i>
+            主要観光スポット
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- スポット 1 -->
+            <article class="spot-card">
+                <div class="h-40 bg-slate-200 relative overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] italic p-4 text-center">
+                        [ 画像：翠波山の頂上から見下ろす、一寸の乱れもない町並みの全景 ]
+                    </div>
+                    <img src="./img/Suihasan_View.png" alt="翠波山展望台" class="w-full h-full object-cover" onerror="this.style.opacity='0'">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-base mb-2">翠波山展望台</h3>
+                    <p class="text-xs leading-relaxed text-slate-600">
+                        町全域を見渡せるパノラマスポット。夜間は景観保護（光害防止）のため、一切の照明が制限されており、完全な暗闇と星空を体験できます。懐中電灯の使用も条例により制限されています。
+                    </p>
+                </div>
+            </article>
+
+            <!-- スポット 2 -->
+            <article class="spot-card">
+                <div class="h-40 bg-slate-200 relative overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] italic p-4 text-center">
+                        [ 画像：周囲を白い砂利で囲まれた、古びた石碑「絶景」の近影 ]
+                    </div>
+                    <img src="./img/Stone_Monument.png" alt="絶景の石碑" class="w-full h-full object-cover" onerror="this.style.opacity='0'">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-base mb-2">絶景の石碑</h3>
+                    <p class="text-xs leading-relaxed text-slate-600">
+                        幕末の風景を今に伝える古い石碑。保存区域の核心部に位置し、周囲の静謐を保つため、私的な撮影や大声での会話はご遠慮いただいております。管理ボランティアの案内に従い鑑賞してください。
+                    </p>
+                </div>
+            </article>
+
+            <!-- スポット 3 -->
+            <article class="spot-card">
+                <div class="h-40 bg-slate-200 relative overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] italic p-4 text-center">
+                        [ 画像：シンメトリーが美しい、重厚な石造りの美術館外観 ]
+                    </div>
+                    <img src="./img/Town_Museum.png" alt="透明町立美術館" class="w-full h-full object-cover" onerror="this.style.opacity='0'">
+                </div>
+                <div class="p-5">
+                    <h3 class="font-bold text-base mb-2">透明町立美術館</h3>
+                    <p class="text-xs leading-relaxed text-slate-600">
+                        郷土の歩みを記録した写真資料などを展示。町指定の建築様式（翠波様式）で建てられた美しい外観が特徴です。館内では常に一定の周波数による音響調整が行われています。
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <section class="mt-16">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                <i data-lucide="shield-check" class="town-blue"></i>
+                特別景観保存ガイドライン
+            </h2>
+            <div class="guideline-box">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                        <h4 class="font-bold mb-3 flex items-center gap-2">
+                            <i data-lucide="palette" class="w-5 h-5 text-town-blue"></i>
+                            色彩の統一
+                        </h4>
+                        <p class="text-sm leading-relaxed">
+                            当町では、屋根は「翠波色（すいはいろ）」、外壁は「胡粉色（ごふんいろ）」など、条例で指定された12色以外の使用が制限されています。これにより、町全体の視覚的ストレスを排除し、住民および訪問者の意識の安定を図っています。
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-3 flex items-center gap-2">
+                            <i data-lucide="moon" class="w-5 h-5 text-town-blue"></i>
+                            音と光の制限
+                        </h4>
+                        <p class="text-sm leading-relaxed">
+                            20時以降の屋外照明の完全消灯推奨、および町全域での私的なスピーカー放送の制限を行っています。当町において「静寂」は公共の財産であり、最大の観光資源です。騒音は厳に慎んでください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-16 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-12">
+            <div class="p-8 border-2 border-dashed border-slate-300 rounded-lg">
+                <h3 class="font-bold mb-4">観光ボランティア（守護員）について</h3>
+                <p class="text-sm text-slate-600">
+                    保存区域内では、腕章を着用したボランティアスタッフが常時巡回しております。道案内だけでなく、景観および静寂の維持のための指導を行う権限を有しております。スタッフからの指示は、町の調和を守るための「お願い」です。皆様のご協力をお願いいたします。
+                </p>
+            </div>
+            
+            <div class="charter-section rounded-lg relative overflow-hidden">
+                <div class="charter-title">
+                    <i data-lucide="scroll-text" class="w-4 h-4"></i>
+                    透明町・住民憲章
+                </div>
+                <ul class="space-y-4 text-xs leading-relaxed">
+                    <li>一、町の調和を乱す色彩・音響を持ち込まない。</li>
+                    <li>一、常に誰かに見られているという意識を持ち、謙虚に振る舞う。</li>
+                    <li>一、外来者も、町が守るべき静寂への理解を求める。</li>
+                </ul>
+                <div class="mt-6 pt-4 border-t border-slate-700 text-[10px] italic">
+                    ―― 制定：透明町景観保存委員会
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="font-bold text-gray-700 mb-2">透明町役場（Toumei Town Hall）</p>
+            <p class="text-gray-500 mb-6 text-xs">〒XXX-XXXX K県Y市透明町 0-1-1 ｜ 電話：0XX-XXX-XXXX</p>
+            <div class="flex justify-center gap-6 text-gray-400 mb-10 text-[10px]">
+                <span>サイトポリシー</span>
+                <span>個人情報保護方針</span>
+                <span>アクセシビリティについて</span>
+            </div>
+            <div class="text-[9px] text-gray-400 leading-relaxed">
+                発行：透明町役場 企画振興課<br>
+                協力：透明町景観保存委員会 / 聖眠金枝財団<br><br>
+                ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術とは一切関係ありません。
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
