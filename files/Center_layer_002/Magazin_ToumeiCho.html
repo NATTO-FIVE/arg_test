@@ -27,7 +27,7 @@
             z-index: 1000;
         }
 
-        /* サーバー接続バッジ（Ver.2 特徴） */
+        /* サーバー接続バッジ */
         .server-badge {
             position: fixed;
             top: 20px; right: 20px;
@@ -64,7 +64,7 @@
             letter-spacing: 0.1em;
         }
 
-        /* 戻るボタン：テンプレートVer.2仕様 */
+        /* 戻るボタン */
         .btn-return {
             color: #00ff41;
             border: 1px solid #00ff41;
@@ -121,19 +121,32 @@
             position: relative;
             overflow: hidden;
             border-bottom: 8px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* 修正：PNG写真を表示するためのスタイル */
         .photo-img {
             width: 100%;
             height: 100%;
-            background: #444;
+            object-fit: cover;
             filter: grayscale(1) contrast(1.8) brightness(0.7);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 写真がない場合の代替テキスト */
+        .photo-fallback {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #888;
             font-size: 1.1rem;
             font-weight: bold;
+            z-index: 5;
         }
 
         .headline-overlay {
@@ -146,6 +159,7 @@
             padding: 15px;
             transform: rotate(-1deg);
             box-shadow: 5px 5px 0 #000;
+            z-index: 20;
         }
 
         .headline-main {
@@ -213,7 +227,7 @@
 <body>
     <div class="crt-overlay"></div>
 
-    <div class="server-badge">Connected to: FST_TECHNICAL_LABO</div>
+    <div class="server-badge">Connected to: NATIONAL_COM_ARCHIVE_PROXY</div>
 
     <div class="container-frame">
         <div class="sys-header">
@@ -231,33 +245,42 @@
                 <div><span class="meta-label">STATUS:</span>DIGITAL_RESTORED / SCAN_VERSION</div>
             </div>
 
-            <!-- スキャンされた雑誌本体 -->
             <article class="magazine-page">
                 <div class="p-4 text-[0.6rem] font-bold border-b border-black/10 uppercase tracking-widest text-gray-600">
                     Weekly Gossip Archive: The Deep Insider (Nov 1985)
                 </div>
 
                 <div class="photo-section">
-                    <div class="photo-img">
+                    <!-- 代替テキスト -->
+                    <div class="photo-fallback">
                         [ 霧に包まれた透明町の夜道と人影のない電柱 ]
                     </div>
+                    <!-- 修正：imgタグでPNGを読み込めるようにし、エラー時は非表示にする -->
+                    <img src="./Gossip_1985_Photo.png" alt="透明町の夜道" class="photo-img" onerror="this.style.opacity='0';">
+                    
                     <div class="headline-overlay">
                         <span class="headline-main">震撼！深夜の街に響く”寝言の呪文”<br>透明町を襲う「謎の集団睡眠障害」</span>
                     </div>
                 </div>
 
                 <div class="article-section">
-                    <p><span class="dropcap">狂</span>乱。銀座の街では一万円札が乱舞し、ビジネスマンたちは「二十四時間戦えますか」と叫びながら栄養ドリンクを煽る。日本中が眠りを忘れたかのようなバブルの絶頂。しかし、そんな不夜城の喧騒から取り残されたＫ県Ｙ市の端、透明町では今、それとは真逆の、そしてあまりに不気味な「眠りの恐怖」が住民を震え上がらせているという。</p>
+                    <p><span class="dropcap">狂</span>乱。
+                        銀座の街では一万円札が乱舞し、ビジネスマンたちは「二十四時間戦えますか」と叫びながら栄養ドリンクを煽る。
+                        日本中が眠りを忘れたかのようなバブルの絶頂。しかし、そんな不夜城の喧騒から取り残されたＫ県Ｙ市の端、透明町では今、
+                        それとは真逆の、そしてあまりに不気味な「眠りの恐怖」が住民を震え上がらせているという。</p>
                     
-                    <p>事件が表面化したのは先月中旬のことだ。最寄り駅から徒歩二十分以上、街灯もまばらな寂れた夜道を辿り、ようやく布団に入った住民たちを襲ったのは、単なる過労による不眠ではなかった。寝入りばな、意識が薄れる瞬間に、自分の喉が勝手に震え、自分のものではないような声で「きこえるか」と呟くのである。しかも、驚くべきことに、その声は町内の複数の世帯で、ほぼ同時刻に、全く同じフレーズとして観測されているのだ。</p>
+                    <p>事件が表面化したのは先月中旬のことだ。最寄り駅から徒歩二十分以上、街灯もまばらな寂れた夜道を辿り、
+                        ようやく布団に入った住民たちを襲ったのは、単なる過労による不眠ではなかった。寝入りばな、意識が薄れる瞬間に、
+                        自分の喉が勝手に震え、自分のものではないような声で「きこえるか」と呟く寝言で飛び起きるのである。しかも、驚くべきことに、
+                        その声は町内の複数の世帯で、ほぼ同時刻に、全く同じフレーズとして観測されているのだ。</p>
 
-                    <p>「仕事の疲れで頭がおかしくなったのかと思いました」と語るのは、都内の不動産会社に勤める男性。深夜まで続いた接待を終え、
-                        最寄り駅からの暗い夜道を歩いて帰宅し、泥のように眠りについた直後だったという。
-                        「でも、隣の家の奥さんも、その向かいの老夫婦も、みんな同じ『寝言』を言っていると知った時、背筋が凍りつきました。
+                    <p>「仕事の疲れで頭がおかしくなったのかと思いました」と語るのは、都内の不動産会社に勤める男性。
+                        深夜まで続いた接待を終え、最寄り駅からの暗い夜道を歩いて帰宅し、泥のように眠りについた直後だったという。
+                        「でも、隣の家の奥さんも、その向かいの老夫婦も、みんな同じ寝言を言っていると知った時、背筋が凍りつきました。
                         しかも、どこか遠くから、何十人もの人間が低い声で歌っているような、ザワザワとした音が聞こえてくるんです」</p>
 
-                    <p>一部の住民の間では、この噂の出所について、山の上にある古い施設跡地が関係しているのではないかという不気味な噂が囁かれている。
-                        駅から遠く、通勤に不便なこの土地特有の磁場が関係しているのか、それともかつてあの場所で行われていた「何か」が今になって漏れ出したのか。
+                    <p>一部の住民の間では、この寝言の出所について、市内にある某宗教施設が関係しているのではないかという不気味な噂が囁かれている。
+                        駅から遠く、通勤に不便なこの土地の宗教が関係しているのか、それとも土地特有の「何か」が漏れ出したのか。
                         その真相を知る者は誰もいない。</p>
 
                     <p>当局は環境の影響を否定しているが、現地では夜間に防護服を着た職員が目撃されたという情報も飛び交っている。
@@ -269,7 +292,7 @@
             <footer class="footer-tag font-mono">
                 <div>[END_OF_IMAGE_VIEWER]</div>
                 <div class="disclaimer-box">
-                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・思想・人物とは一切関係ありません。
+                    ※本サイトはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在の団体・活動・事件・技術・人物とは一切関係ありません。
                 </div>
             </footer>
         </div>
