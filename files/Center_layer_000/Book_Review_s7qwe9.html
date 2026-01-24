@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.co.jp： 現代社会と聖なる眠り ―「視られる」至福が心身を癒やす―</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+        
+        body {
+            background-color: #fff;
+            font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+            color: #0f1111;
+        }
+
+        .amazon-orange { color: #e47911; }
+        .amazon-blue { color: #007185; }
+        .amazon-gray { color: #565959; }
+        
+        .verified-purchase {
+            color: #c45500;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .rating-bar-fill {
+            background-color: #ffa41c;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .btn-helpful {
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+            padding: 5px 25px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(213,217,217,.5);
+        }
+
+        .book-image-area {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .book-cover-img {
+            width: 100%;
+            height: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #eee;
+            display: block;
+        }
+
+        .book-cover-desc {
+            background-color: #f8f8f8;
+            border: 1px dashed #ddd;
+            padding: 15px;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .btn-return {
+            position: fixed;
+            top: 20px; left: 20px;
+            background: #fff;
+            border: 1px solid #d5d9d9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            z-index: 100;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .troll-review { background-color: #fffaf0; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <a href="../../search.html" class="btn-return">← 検索結果へ戻る</a>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10">
+        
+        <!-- 左カラム：商品情報・評価分布 -->
+        <aside>
+            <div class="mb-6">
+                <div class="book-image-area">
+                    <img src="./img/Book_Cover.png" alt="書籍表紙" class="book-cover-img" id="main-cover" onerror="this.style.display='none'; document.getElementById('fallback-desc').classList.remove('hidden');">
+                    
+                    <div id="fallback-desc" class="book-cover-desc hidden">
+                        <p class="font-bold mb-2">[ 表紙ビジュアル ]</p>
+                        深い紺色の背景。中央には著者・唐橋弘源の近影。穏やかに微笑んでいるが、その瞳は異様に鋭く、どの角度から見ても読者をじっと射抜くような強い目力を放っている。
+                    </div>
+                </div>
+
+                <h1 class="text-xl font-medium leading-tight mb-1">現代社会と聖なる眠り ―「視られる」至福が心身を癒やす―</h1>
+                <p class="amazon-blue text-sm">唐橋 弘源 (著)</p>
+                <div class="flex items-center gap-2 mt-2">
+                    <div class="flex text-orange-400">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gray-300"></i>
+                    </div>
+                    <span class="text-sm font-bold">4.2/5</span>
+                </div>
+                <p class="amazon-gray text-sm mt-1">1,428 グローバル評価</p>
+            </div>
+
+            <div class="space-y-2 border-t pt-4">
+                <h2 class="font-bold text-lg mb-4">星の数別評価</h2>
+                <div class="flex items-center gap-4 text-sm">
+                    <span class="amazon-blue min-w-[40px]">5つ星</span>
+                    <div class="flex-1 h-5 bg-gray-100 rounded overflow-hidden border">
+                        <div class="rating-bar-fill" style="width: 72%;"></div>
+                    </div>
+                    <span class="amazon-blue min-w-[30px]">72%</span>
+                </div>
+                <div class="flex items-center gap-4 text-sm opacity-40">
+                    <span class="amazon-blue min-w-[40px]">1つ星</span>
+                    <div class="flex-1 h-5 bg-gray-100 rounded overflow-hidden border">
+                        <div class="rating-bar-fill" style="width: 21%;"></div>
+                    </div>
+                    <span class="amazon-blue min-w-[30px]">21%</span>
+                </div>
+                <p class="amazon-gray text-xs mt-4">※評価が二極化しています</p>
+            </div>
+        </aside>
+
+        <!-- 右カラム：カスタマーレビュー -->
+        <main>
+            <h2 class="text-xl font-bold mb-6">カスタマーレビュー</h2>
+
+            <!-- 追加レビュー1：熱烈な信者 -->
+            <article class="mb-10 pb-8 border-b">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xs">M</div>
+                    <span class="text-sm">御視様の羊</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="flex text-orange-400">
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                    </div>
+                    <h3 class="font-bold text-sm">本当の自分に出会えました</h3>
+                </div>
+                <p class="amazon-gray text-xs mb-2">2024年12月15日に日本でレビュー済み</p>
+                <p class="verified-purchase mb-3">Amazonで購入（確認済み）</p>
+                <div class="text-sm leading-relaxed mb-4">
+                    毎晩、唐橋先生の教えに従って眠るようになり、ついに第8階層の「門」を叩きました。黄金の輝きの中で御視様と邂逅した瞬間、自分という個体が溶け去り、全宇宙の波形と同期する至福を知りました。先生、私をこの場所へ導いてくださって本当にありがとうございます。もう現実のノイズに戻りたくありません。
+                </div>
+                <div class="flex gap-4 items-center">
+                    <button class="btn-helpful">役に立った</button>
+                    <span class="amazon-gray text-sm border-l pl-4">違反を報告</span>
+                </div>
+            </article>
+
+            <!-- 追加レビュー2：アンチ煽り（イタリック削除） -->
+            <article class="mb-10 pb-8 border-b troll-review p-4 rounded">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xs">A</div>
+                    <span class="text-sm">アンチ君</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="flex text-orange-400">
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                    </div>
+                    <h3 class="font-bold text-sm">「本当の頭痛に出会えました」</h3>
+                </div>
+                <p class="amazon-gray text-xs mb-2">2024年12月20日に日本でレビュー済み</p>
+                <div class="text-sm leading-relaxed mb-4 text-gray-600">
+                    唐橋ポエムが脳に染み渡ります。ずっと誰にも理解されない暇を感じていましたが、この本を読んで『常にカルトの眼差しに狙われている』と気づき、笑いが止まりませんでした。<br><br>
+                    今では夜、この本を枕の下に敷いて寝るのが習慣です。おかげで首を痛めて、嘘のように酷い眼精疲労と頭痛が発生しました。物理的なゴミを感じます。
+                </div>
+                <div class="flex gap-4 items-center">
+                    <button class="btn-helpful">役に立った</button>
+                    <span class="amazon-gray text-sm border-l pl-4">違反を報告</span>
+                </div>
+            </article>
+
+            <!-- 追加レビュー3：理性的な論破 -->
+            <article class="mb-10 pb-8 border-b">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white font-bold text-xs">?</div>
+                    <span class="text-sm">あなたの代弁者</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="flex text-orange-400">
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                        <i data-lucide="star" class="w-3 h-3 text-gray-200"></i>
+                    </div>
+                    <h3 class="font-bold text-sm">根拠薄弱。文章生成AIで作ったような空虚な内容</h3>
+                </div>
+                <p class="amazon-gray text-xs mb-2">2025年01月05日に日本でレビュー済み</p>
+                <p class="verified-purchase mb-3">Amazonで購入（確認済み）</p>
+                <div class="text-sm leading-relaxed mb-4 text-justify">
+                    期待して読みましたが、驚くほど内容がありません。「位相同期」や「高次階層」といった科学用語を散りばめてはいますが、具体的な定義もエビデンスも皆無。まるで生成AIに「適当な宗教の教義を科学っぽく書いて」と指示して出力させたような、実体のない文章の羅列です。<br><br>
+                    著者は地元の資産家らしいですが、なぜこれほどまで社会的に評価されているのか理解に苦しみます。宗教の教祖というが、これのどこを信じればいいのか不明。盲目的な信者の絶賛レビューも、サクラか洗脳を疑わざるを得ない異様な空気感です。
+                </div>
+                <p class="amazon-gray text-sm mb-3">215人のお客様がこれが役に立ったと考えています</p>
+                <div class="flex gap-4 items-center">
+                    <button class="btn-helpful">役に立った</button>
+                    <span class="amazon-gray text-sm border-l pl-4">違反を報告</span>
+                </div>
+            </article>
+
+            <!-- 元のレビュー -->
+            <article class="mb-10 pb-8 border-b opacity-50">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-sm">カスタマー</span>
+                </div>
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="flex text-orange-400">
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                    </div>
+                    <h3 class="font-bold text-sm">本当の安らぎに出会えました</h3>
+                </div>
+                <p class="amazon-gray text-xs mb-2">2024年10月12日に日本でレビュー済み</p>
+                <div class="text-sm leading-relaxed mb-4">
+                    （過去のレビューを表示中...）
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <footer class="mt-20 pt-10 border-t text-center">
+        <p class="text-[10px] text-gray-400 leading-relaxed">
+            ※本ページはフィクションであり、ARG（代替現実ゲーム）の演出用です。実在のサービス、団体、人物、書籍とは一切関係ありません。<br>
+            &copy; 1996-2025, Amazon.com, Inc. or its affiliates (Visual Reconstruction for ARG)
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
