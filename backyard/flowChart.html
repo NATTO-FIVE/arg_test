@@ -2,113 +2,118 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ARG 動線マップ（縦型）</title>
+    <title>ARG 動線マップ</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #27272a; overflow: hidden; }
-        #mindmap { display: block; width: 100vw; height: 100vh; }
-        /* 縦型に見せるための回転処理 */
-        .markmap { transform: rotate(90deg); transform-origin: center; width: 100vh !important; height: 100vw !important; position: absolute; top: 50%; left: 50%; translate: -50% -50%; }
-        /* 文字の向きを水平に戻す */
-        .markmap-node div { transform: rotate(-90deg); display: inline-block; white-space: nowrap; color: #fff; font-size: 12px; }
-        .markmap-dark { background: #27272a; }
+        body, html { margin: 0; padding: 0; background: #27272a; color: white; }
+        /* 画面を縦に長く使い、横スクロールで見せる設定 */
+        #mindmap { display: block; width: 2500px; height: 100vh; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/markmap-view"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-toolbar"></script>
 </head>
 <body>
     <svg id="mindmap"></svg>
     <script>
         const root = {
-            "content": "0. 探偵事務所：案件ファイル [001]",
-            "children": [{
-                "content": "調査開始ボタン",
-                "children": [{
-                    "content": "金枝聖域第八病院トップページ [002]",
-                    "children": [
-                        { "content": "特殊外来科（睡眠外来）[003]" },
-                        { "content": "脳神経外科[004]" },
+  "content": "0. 探偵事務所：案件ファイル [001]",
+  "children": [
+    {
+      "content": "調査開始ボタン",
+      "children": [
+        {
+          "content": "金枝聖域第八病院トップページ [002]",
+          "children": [
+            { "content": "特殊外来科（睡眠外来）[003]" },
+            { "content": "脳神経外科[004]" },
+            {
+              "content": "医師紹介[005]",
+              "children": [
+                { "content": "神代 永久" },
+                { "content": "虚空蔵 零", "children": [{ "content": "透明町市民絵画展" }] },
+                {
+                  "content": "不和 歩羽",
+                  "children": [
+                    {
+                      "content": "ふわたんSNS",
+                      "children": [
+                        { "content": "Sanctuary Agent / サンクチュアリ・エージェント", "children": [{ "content": "オカルトサイト" }] }
+                      ]
+                    }
+                  ]
+                },
+                { "content": "田寺 野幾", "children": [{ "content": "おっきーの廃隧道探訪ブログ" }] }
+              ]
+            },
+            {
+              "content": "不和睡眠総合技術センター[006]",
+              "children": [
+                { "content": "トップページ[010]" },
+                { "content": "沿革[011]" },
+                { "content": "センター長挨拶[012]", "children": [{ "content": "不破 臨界", "children": [{ "content": "地方広報誌[019]" }] }] },
+                {
+                  "content": "技術紹介[013]",
+                  "children": [
+                    { "content": "馬宿 太一", "children": [{ "content": "百目島へのメール" }, { "content": "馬宿ブログ" }] },
+                    { "content": "傘根 賀実", "children": [{ "content": "XXXX" }] }
+                  ]
+                }
+              ]
+            },
+            {
+              "content": "院長挨拶[007]",
+              "children": [
+                {
+                  "content": "百目島ミキ",
+                  "children": [
+                    { "content": "地域広報誌[021]" },
+                    { "content": "インタビュー記事[022]" },
+                    {
+                      "content": "研究室アーカイブ",
+                      "children": [
                         {
-                            "content": "医師紹介[005]",
-                            "children": [
-                                { "content": "神代 永久" },
-                                { "content": "虚空蔵 零", "children": [{ "content": "透明町市民絵画展" }] },
+                          "content": "院長専用アーカイブ",
+                          "children": [
+                            {
+                              "content": "不和の日記[091]",
+                              "children": [
                                 {
-                                    "content": "不和 歩羽",
-                                    "children": [{
-                                        "content": "ふわたんSNS",
-                                        "children": [{
-                                            "content": "Sanctuary Agent / サンクチュアリ・エージェント",
-                                            "children": [{ "content": "オカルトサイト" }]
-                                        }]
-                                    }]
-                                },
-                                { "content": "田寺 野幾", "children": [{ "content": "おっきーの廃隧道探訪ブログ" }] }
-                            ]
-                        },
-                        {
-                            "content": "不和睡眠総合技術センター[006]",
-                            "children": [
-                                { "content": "トップページ[010]" },
-                                { "content": "沿革[011]" },
-                                {
-                                    "content": "センター長挨拶[012]",
-                                    "children": [{ "content": "不破 臨界", "children": [{ "content": "地方広報誌[019]" }] }]
-                                },
-                                {
-                                    "content": "技術紹介[013]",
-                                    "children": [
-                                        { "content": "馬宿 太一", "children": [{ "content": "百目島へのメール" }, { "content": "馬宿ブログ" }] },
-                                        { "content": "傘根 賀実", "children": [{ "content": "XXXX" }] }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "content": "院長挨拶[007]",
-                            "children": [{
-                                "content": "百目島ミキ",
-                                "children": [
-                                    { "content": "地域広報誌[021]" },
-                                    { "content": "インタビュー記事[022]" },
+                                  "content": "瀬田先輩",
+                                  "children": [
                                     {
-                                        "content": "研究室アーカイブ",
-                                        "children": [{
-                                            "content": "院長専用アーカイブ",
-                                            "children": [{
-                                                "content": "不和の日記[091]",
-                                                "children": [{
-                                                    "content": "瀬田先輩",
-                                                    "children": [{
-                                                        "content": "旧センター年報[045]",
-                                                        "children": [{
-                                                            "content": "1978年事故記事[047]",
-                                                            "children": [{
-                                                                "content": "瀬田門十",
-                                                                "children": [{
-                                                                    "content": "第8層プロトコル[057]",
-                                                                    "children": [{
-                                                                        "content": "阿頼耶識",
-                                                                        "children": [{ "content": "調査完了ページ[060]" }]
-                                                                    }]
-                                                                }]
-                                                            }]
-                                                        }]
-                                                    }]
-                                                }]
-                                            }]
-                                        }]
+                                      "content": "旧センター年報[045]",
+                                      "children": [
+                                        {
+                                          "content": "1978年事故記事[047]",
+                                          "children": [
+                                            {
+                                              "content": "瀬田門十",
+                                              "children": [
+                                                { "content": "第8層プロトコル[057]", "children": [{ "content": "阿頼耶識", "children": [{ "content": "調査完了ページ[060]" }] }] }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
                                     }
-                                ]
-                            }]
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
                         }
-                    ]
-                }]
-            }]
-        };
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
 
-        // 描画実行
         window.onload = () => {
             const { Markmap } = window.markmap;
             Markmap.create("#mindmap", null, root);
