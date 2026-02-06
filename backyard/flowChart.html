@@ -1,67 +1,118 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Markmap - Vertical View</title>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  html, body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #27272a;
-  }
-  /* SVG全体を回転させて縦型に見せる */
-  #mindmap {
-    display: block;
-    width: 100vh; /* 高さ分を幅に */
-    height: 100vw; /* 幅分を高さに */
-    transform: rotate(90deg) translateX(0);
-    transform-origin: top left;
-    position: absolute;
-    top: 0;
-    left: 100%;
-  }
-  /* ノード内のテキストが横向きにならないよう補正 */
-  .markmap-node div, .markmap-node foreignObject {
-    transform: rotate(-90deg);
-    transform-origin: center;
-    display: inline-block;
-    white-space: nowrap;
-  }
-  .markmap-dark {
-    background: #27272a;
-    color: white;
-  }
-</style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARG 動線マップ（縦型）</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #27272a; overflow: hidden; }
+        #mindmap { display: block; width: 100vw; height: 100vh; }
+        /* 縦型に見せるための回転処理 */
+        .markmap { transform: rotate(90deg); transform-origin: center; width: 100vh !important; height: 100vw !important; position: absolute; top: 50%; left: 50%; translate: -50% -50%; }
+        /* 文字の向きを水平に戻す */
+        .markmap-node div { transform: rotate(-90deg); display: inline-block; white-space: nowrap; color: #fff; font-size: 12px; }
+        .markmap-dark { background: #27272a; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-toolbar"></script>
 </head>
 <body>
-<svg id="mindmap"></svg>
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script>
-<script>
-  (async () => {
-    const { markmap } = window;
-    const root = {"content":"0. 探偵事務所：案件ファイル: 特殊外来科の違和感調査 [001]","children":[{"content":"調査開始ボタン","children":[{"content":"金枝聖域第八病院トップページ [002]","children":[{"content":"特殊外来科（睡眠外来）[003]","children":[]},{"content":"脳神経外科[004]","children":[]},{"content":"医師紹介[005]","children":[{"content":"神代 永久","children":[]},{"content":"虚空蔵 零","children":[{"content":"透明町市民絵画展","children":[]}]},{"content":"不和 歩羽","children":[{"content":"ふわたんSNS","children":[{"content":"<span color=\"yellow;\">Sanctuary Agent</span> OR <span color=\"yellow;\">サンクチュアリ・エージェント</span>","children":[{"content":"オカルトサイト","children":[]}]}]}]},{"content":"田寺 野幾","children":[{"content":"おっきーの廃隧道探訪ブログ","children":[]}]}]},{"content":"不和睡眠総合技術センター[006]","children":[{"content":"不和睡眠総合技術センタートップページ[010]","children":[]},{"content":"沿革[011]","children":[]},{"content":"不和センター長からの挨拶[012]","children":[{"content":"<span style=\"color:yellow\">不破 臨界</span>","children":[{"content":"地方広報誌（睡眠の大切さ）[019]","children":[]}]}]},{"content":"技術紹介[013]","children":[{"content":"馬宿 太一","children":[{"content":"百目島ミキへのメール","children":[]},{"content":"馬宿のブログ","children":[]}]},{"content":"傘根 賀実","children":[{"content":"XXXX","children":[]}]}]},{"content":"アクセス[014]","children":[{"content":"地図（近い場所に宗教法人 聖眠金枝財団）","children":[]}]}]},{"content":"院長挨拶[007]","children":[{"content":"<span style=\"color:yellow\">百目島ミキ</span>","children":[{"content":"地域広報誌[021]","children":[]},{"content":"インタビュー記事 [022]","children":[{"content":"<span style=\"color:yellow\">院内限定：百目島研究室アーカイブ</span>","children":[{"content":"研究室ポータルサイト","children":[{"content":"研究室の公開資料","children":[]},{"content":"研究室内のお知らせ一覧","children":[]},{"content":"「【重要】認証方式変更」の投稿","children":[]},{"content":"<span style=\"color:orange\">（ヒント：ID=職員番号、PW=今月の標語）</span>","children":[]},{"content":"<span style=\"color:orange\">院長専用アーカイブ</span>","children":[{"content":"デスクトップ","children":[{"content":"不和の日記 [091]","children":[{"content":"<span style=\"color:yellow\">瀬田先輩</span>","children":[{"content":"旧センターの年報（「瀬田先輩は～」）[045]","children":[{"content":"<span style=\"color:yellow\">旧センター名</span>","children":[{"content":"1985年地方記事 旧センター廃屋付近の住民に睡眠障害[046]","children":[]},{"content":"1978年の事故記事（透明町新聞）[047]","children":[{"content":"<span style=\"color:yellow\">瀬田門十</span>","children":[{"content":"抹消済アーカイブ：1979年資料(押収品リスト)[048]","children":[{"content":"<span style=\"color:yellow\">論文草稿第４版</span>","children":[{"content":"論文草稿第４版：OSI参照モデルにおける第8階層プロトコルに関する考察[049]","children":[{"content":"<span style=\"color:yellow\">OSI参照モデル</span>","children":[{"content":"正しいOSI参照モデルの説明[050]","children":[]},{"content":"非公開論文:「OSI第8階層における無意識通信の可能性検討」[051]","children":[]},{"content":"非公開論文：「subject-187に基づく恒久的安定位相空間の検討」[052]","children":[]},{"content":"謝辞：<span syle=\"color\">小野砂子</span>","children":[{"content":"小野砂子のカルテ（死亡日：12月20日）[053]","children":[{"content":"<span style=\"color:yellow\">1978年12月20日</span>","children":[{"content":"軍事機密：高度情報通信庁始末書[054]","children":[{"content":"<span style=\"color:yellow\">高度情報通信庁</span>","children":[{"content":"内部資料：事故全体概要[055]","children":[{"content":"証拠隠滅指示書[056]","children":[{"content":"<span style=\"color:yellow\">第8層プロトコル計画</span>","children":[{"content":"高次意識階層における非記号的情報伝送技術の研究 「第8層プロトコル計画書」[057]","children":[]},{"content":"鍵ページ（特殊機密フォルダ）","children":[{"content":"<span style=\"color:yellow\">阿頼耶識(キーワード入力)</span>","children":[{"content":"宗教計画書[058]","children":[]},{"content":"百目島と瀬田の密約書(OSI→オシ様)[059]","children":[]},{"content":"<span style=\"color:yellow\">調査完了ボタン</span>","children":[{"content":"調査完了ページ[060]","children":[]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]},{"content":"沿革[008]","children":[{"content":"出資者名：聖眠金枝財団","children":[{"content":"<span style=\"color:yellow\">一般財団法人 聖眠金枝財団トップページ[015]</span>","children":[{"content":"活動理念[016]","children":[{"content":"スローガン","children":[{"content":"意識の可能性をひらく、未来のウェルビーイング実現への貢献","children":[]}]}]},{"content":"情報公開[017]","children":[{"content":"財務諸表[023]","columns":[{"content":"<span color=\"yellow;\">サンクチュアリ・エージェント</span>","children":[{"content":"オカルトサイト","children":[]}]},{"content":"金の聖眠","children":[{"content":"金の聖眠教トップページ[031]","children":[{"content":"教義[032]","children":[{"content":"教義本「神の経脈」.pdf[061]","children":[{"content":"<span style=\"color:yellow\">御視様（オシ様）</span>","children":[{"content":"御視様について[062]","children":[]},{"content":"御視様に会おう（子供向けpdf）[063]","children":[]}]},{"content":"<span style=\"color:yellow\">階層の登攀</span>","children":[{"content":"登攀適性名簿[035]","children":[{"content":"登攀適性▲","children":[]},{"content":"適格者B名前","children":[]},{"content":"<span style=\"color:yellow\">適格者A（七曲 弥起）</span>","children":[{"content":"適性A（適格者A）報告書（機密文書）[036]","children":[{"content":"<span style=\"color:yellow\">永遠の位</span>","children":[{"content":"業務委託申請書[037]","children":[{"content":"月報（低島→百目島）","children":[{"content":"<span style=\"color:yellow\">合唱</span>","children":[{"content":"”合唱”についてのメモ（研究員：百目島ミキ）[039]","children":[{"content":"<span style=\"color:yellow\">睡眠同期</span>","children":[{"content":"<span style=\"color:yellow\">安全基準仕様書[040]</span>","children":[{"content":"<span style=\"color:yellow\">project-E</span>","children":[{"content":"永位計画の開始メール（百目島→瀬田）[041]","children":[]},{"content":"永位計画概要[042]","children":[{"content":"阿頼耶識","children":[]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]},{"content":"沿革[018]","children":[{"content":"唐橋弘源","children":[{"content":"特明町歴史探訪記[024]","children":[{"content":"金枝の像","children":[]},{"content":"経歴：心理カウンセリング[031]","children":[{"content":"経歴：<span style=\"color:yellow\">瀬田心療クリニック[032]</span>","children":[{"content":"<span style=\"color:yellow\">透明町新聞；睡眠外来特集[033]</span>","children":[{"content":"<span style=\"color:yellow\">瀬田院長</span>","children":[{"content":"<span style=\"color:yellow\">宗教法人設立規則認証申請書[034]</span>","children":[{"content":"瀬田門十▲","children":[]}]}]}]}]}]}]}]}]}]}]}]}]}]}]},{"content":"アクセス[009]","children":[]}]}]}]};
+    <svg id="mindmap"></svg>
+    <script>
+        const root = {
+            "content": "0. 探偵事務所：案件ファイル [001]",
+            "children": [{
+                "content": "調査開始ボタン",
+                "children": [{
+                    "content": "金枝聖域第八病院トップページ [002]",
+                    "children": [
+                        { "content": "特殊外来科（睡眠外来）[003]" },
+                        { "content": "脳神経外科[004]" },
+                        {
+                            "content": "医師紹介[005]",
+                            "children": [
+                                { "content": "神代 永久" },
+                                { "content": "虚空蔵 零", "children": [{ "content": "透明町市民絵画展" }] },
+                                {
+                                    "content": "不和 歩羽",
+                                    "children": [{
+                                        "content": "ふわたんSNS",
+                                        "children": [{
+                                            "content": "Sanctuary Agent / サンクチュアリ・エージェント",
+                                            "children": [{ "content": "オカルトサイト" }]
+                                        }]
+                                    }]
+                                },
+                                { "content": "田寺 野幾", "children": [{ "content": "おっきーの廃隧道探訪ブログ" }] }
+                            ]
+                        },
+                        {
+                            "content": "不和睡眠総合技術センター[006]",
+                            "children": [
+                                { "content": "トップページ[010]" },
+                                { "content": "沿革[011]" },
+                                {
+                                    "content": "センター長挨拶[012]",
+                                    "children": [{ "content": "不破 臨界", "children": [{ "content": "地方広報誌[019]" }] }]
+                                },
+                                {
+                                    "content": "技術紹介[013]",
+                                    "children": [
+                                        { "content": "馬宿 太一", "children": [{ "content": "百目島へのメール" }, { "content": "馬宿ブログ" }] },
+                                        { "content": "傘根 賀実", "children": [{ "content": "XXXX" }] }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "content": "院長挨拶[007]",
+                            "children": [{
+                                "content": "百目島ミキ",
+                                "children": [
+                                    { "content": "地域広報誌[021]" },
+                                    { "content": "インタビュー記事[022]" },
+                                    {
+                                        "content": "研究室アーカイブ",
+                                        "children": [{
+                                            "content": "院長専用アーカイブ",
+                                            "children": [{
+                                                "content": "不和の日記[091]",
+                                                "children": [{
+                                                    "content": "瀬田先輩",
+                                                    "children": [{
+                                                        "content": "旧センター年報[045]",
+                                                        "children": [{
+                                                            "content": "1978年事故記事[047]",
+                                                            "children": [{
+                                                                "content": "瀬田門十",
+                                                                "children": [{
+                                                                    "content": "第8層プロトコル[057]",
+                                                                    "children": [{
+                                                                        "content": "阿頼耶識",
+                                                                        "children": [{ "content": "調査完了ページ[060]" }]
+                                                                    }]
+                                                                }]
+                                                            }]
+                                                        }]
+                                                    }]
+                                                }]
+                                            }]
+                                        }]
+                                    }
+                                ]
+                            }]
+                        }
+                    ]
+                }]
+            }]
+        };
 
-    const mm = markmap.Markmap.create("svg#mindmap", null, root);
-    window.mm = mm;
-
-    const { el } = markmap.Toolbar.create(mm);
-    el.setAttribute('style', 'position:absolute;bottom:20px;right:20px');
-    document.body.append(el);
-
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.classList.add("markmap-dark");
-    }
-  })();
-</script>
+        // 描画実行
+        window.onload = () => {
+            const { Markmap } = window.markmap;
+            Markmap.create("#mindmap", null, root);
+        };
+    </script>
 </body>
 </html>
