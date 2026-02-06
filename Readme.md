@@ -342,26 +342,254 @@ Aの閾値突破によって、
 
 ```mermaid
 graph TD
-    A[001 探偵事務所：案件ファイル] --> B[002 金枝聖域第八病院TOP]
-    B --> C[003 特殊外来/004 脳神経外科]
-    B --> D[005 医師紹介]
-    D --> D1[神代/虚空蔵/不和/田寺]
-    D1 --> D2[ふわたんSNS/オカルトサイト/廃隧道ブログ]
-    B --> E[007 院長挨拶]
-    B --> F[008 沿革]
-    B --> G[010 不和睡眠総合技術センター]
-    G --> G1[011 沿革/012 挨拶/013 技術紹介]
-    B --> H[015 聖眠金枝財団]
-    H --> H1[018 沿革：金の聖眠教]
-    H1 --> H2[024 歴史探訪記/032 瀬田心療クリニック]
-    H2 --> H3[034 宗教法人設立申請書]
-    H3 --> I[035 登攀適性名簿]
-    I --> J[036 適格者A報告書]
-    J --> K[042 永位計画概要]
-    K --> L[048 1979年資料：押収品リスト]
-    L --> M[057 第8層プロトコル計画書]
-    M --> N[060 調査完了]
+    %% Node Definitions
+    Start["0. 探偵事務所：案件ファイル: 特殊外来科の違和感調査 [001]"]
+    Button["調査開始ボタン"]
+    Top["金枝聖域第八病院トップページ [002]"]
 
+    %% Hospital Branch
+    Outpatient["特殊外来科（睡眠外来）[003]"]
+    Neurosurgery["脳神経外科 [004]"]
+    DocIntro["医師紹介 [005]"]
+    
+    Top --> Outpatient
+    Top --> Neurosurgery
+    Top --> DocIntro
+
+    %% Doctors Detail
+    Kashiro["神代 永久"]
+    Kukuzou["虚空蔵 零"]
+    K_Exhibit["透明町市民絵画展"]
+    Fuwa["不和 歩羽"]
+    F_SNS["ふわたんSNS"]
+    F_Agent["&lt;span color='yellow'&gt;Sanctuary Agent&lt;/span&gt; OR &lt;span color='yellow'&gt;サンクチュアリ・エージェント&lt;/span&gt;"]
+    Occult["オカルサイト"]
+    Tadera["田寺 野幾"]
+    T_Blog["おっきーの廃隧道探訪ブログ"]
+
+    DocIntro --> Kashiro
+    DocIntro --> Kukuzou --> K_Exhibit
+    DocIntro --> Fuwa --> F_SNS --> F_Agent --> Occult
+    DocIntro --> Tadera --> T_Blog
+
+    %% Center Branch
+    Center["不和睡眠総合技術センター [006]"]
+    C_Top["不和睡眠総合技術センタートップページ [010]"]
+    C_History["沿革 [011]"]
+    C_Greeting["不和センター長からの挨拶 [012]"]
+    C_Rinkai["&lt;span style='color:yellow'&gt;不破 臨界&lt;/span&gt;"]
+    C_Pub["地方広報誌（睡眠の大切さ）[019]"]
+    C_Tech["技術紹介 [013]"]
+    C_Umaya["馬宿 太一"]
+    C_U_Mail["百目島ミキへのメール"]
+    C_U_Blog["馬宿のブログ"]
+    C_Kasane["傘根 賀実"]
+    C_K_XXXX["XXXX"]
+    C_Access["アクセス [014]"]
+    C_Map["地図（近い場所に宗教法人 聖眠金枝財団）"]
+
+    Top --> Center
+    Center --> C_Top
+    Center --> C_History
+    Center --> C_Greeting --> C_Rinkai --> C_Pub
+    Center --> C_Tech
+    C_Tech --> C_Umaya --> C_U_Mail
+    C_Umaya --> C_U_Blog
+    C_Tech --> C_Kasane --> C_K_XXXX
+    Center --> C_Access --> C_Map
+
+    %% Director Branch
+    Director["院長挨拶 [007]"]
+    Miki["&lt;span style='color:yellow'&gt;百目島ミキ&lt;/span&gt;"]
+    M_Pub["地域広報誌 [021]"]
+    M_Interview["インタビュー記事 [022]"]
+    M_Archive["&lt;span style='color:yellow'&gt;院内限定：百目島研究室アーカイブ&lt;/span&gt;"]
+    M_Portal["研究室ポータルサイト"]
+    M_Docs["研究室の公開資料"]
+    M_News["研究室内のお知らせ一覧"]
+    M_Auth["「【重要】認証方式変更」の投稿"]
+    M_Hint["&lt;span style='color:orange'&gt;（ヒント：ID=職員番号、PW=今月の標語）&lt;/span&gt;"]
+    M_Priv["&lt;span style='color:orange'&gt;院長専用アーカイブ&lt;/span&gt;"]
+    M_Desk["デスクトップ"]
+    M_Diary["不和の日記 [091]"]
+    M_Seta["&lt;span style='color:yellow'&gt;瀬田先輩&lt;/span&gt;"]
+    M_OldAnn["旧センターの年報 [045]"]
+    M_OldName["&lt;span style='color:yellow'&gt;旧センター名&lt;/span&gt;"]
+    M_News85["1985年地方記事 旧センター廃屋付近の住民に睡眠障害 [046]"]
+    M_News78["1978年の事故記事（透明町新聞）[047]"]
+    M_Monju["&lt;span style='color:yellow'&gt;瀬田門十&lt;/span&gt;"]
+    M_Arch79["抹消済アーカイブ：1979年資料(押収品リスト) [048]"]
+    M_Draft4["&lt;span style='color:yellow'&gt;論文草稿第４版&lt;/span&gt;"]
+    M_DraftDetail["論文草稿第４版：OSI参照モデルにおける第8階層プロトコルに関する考察 [049]"]
+    M_OSI["&lt;span style='color:yellow'&gt;OSI参照モデル&lt;/span&gt;"]
+    M_OSI_Expl["正しいOSI参照モデルの説明 [050]"]
+    M_Paper51["非公開論文:「OSI第8階層における無意識通信の可能性検討」[051]"]
+    M_Paper52["非公開論文：「subject-187に基づく恒久的安定位相空間の検討」[052]"]
+    M_Snako["謝辞：小野砂子"]
+    M_Snako_C["小野砂子のカルテ（死亡日：12月20日）[053]"]
+    M_Date78["&lt;span style='color:yellow'&gt;1978年12月20日&lt;/span&gt;"]
+    M_GovSecret["軍事機密：高度情報通信庁始末書 [054]"]
+    M_GovName["&lt;span style='color:yellow'&gt;高度情報通信庁&lt;/span&gt;"]
+    M_Summary["内部資料：事故全体概要 [055]"]
+    M_Destroy["証拠隠滅指示書 [056]"]
+    M_P8Plan["&lt;span style='color:yellow'&gt;第8層プロトコル計画&lt;/span&gt;"]
+    M_P8Doc["高次意識階層における非記号적情報伝送技術の研究 「第8層プロトコル計画書」[057]"]
+    M_KeyDir["鍵ページ（特殊機密フォルダ）"]
+    M_Alaya["&lt;span style='color:yellow'&gt;阿頼耶識(キーワード入力)&lt;/span&gt;"]
+    M_CultPlan["宗教計画書 [058]"]
+    M_Secret["百目島と瀬田の密約書(OSI→オシ様) [059]"]
+    M_FinishB["&lt;span style='color:yellow'&gt;調査完了ボタン&lt;/span&gt;"]
+    M_FinishP["調査完了ページ [060]"]
+
+    Top --> Director
+    Director --> Miki
+    Miki --> M_Pub
+    Miki --> M_Interview
+    M_Interview --> M_Archive
+    M_Archive --> M_Portal
+    M_Portal --> M_Docs
+    M_Portal --> M_News
+    M_Portal --> M_Auth
+    M_Portal --> M_Hint
+    M_Portal --> M_Priv
+    M_Priv --> M_Desk
+    M_Desk --> M_Diary
+    M_Diary --> M_Seta
+    M_Seta --> M_OldAnn
+    M_OldAnn --> M_OldName
+    M_OldName --> M_News85
+    M_OldName --> M_News78
+    M_News78 --> M_Monju
+    M_Monju --> M_Arch79
+    M_Arch79 --> M_Draft4
+    M_Draft4 --> M_DraftDetail
+    M_DraftDetail --> M_OSI
+    M_OSI --> M_OSI_Expl
+    M_OSI --> M_Paper51
+    M_OSI --> M_Paper52
+    M_OSI --> M_Snako
+    M_Snako --> M_Snako_C
+    M_Snako_C --> M_Date78
+    M_Date78 --> M_GovSecret
+    M_GovSecret --> M_GovName
+    M_GovName --> M_Summary
+    M_Summary --> M_Destroy
+    M_Destroy --> M_P8Plan
+    M_P8Plan --> M_P8Doc
+    M_P8Doc --> M_KeyDir
+    M_KeyDir --> M_Alaya
+    M_Alaya --> M_CultPlan
+    M_Alaya --> M_Secret
+    M_Alaya --> M_FinishB
+    M_FinishB --> M_FinishP
+
+    %% Foundation & Cult Branch
+    History["沿革 [008]"]
+    Found["出資者名：聖眠金枝財団"]
+    F_Top["&lt;span style='color:yellow'&gt;一般財団法人 聖眠金枝財団トップページ [015]&lt;/span&gt;"]
+    F_Idea["活動理念 [016]"]
+    F_Slogan["スローガン"]
+    F_Wlb["意識の可能性をひらく、未来のウェルビーイング実現への貢献"]
+    F_Info["情報公開 [017]"]
+    F_Money["財務諸表 [023]"]
+    F_Agent2["&lt;span color='yellow'&gt;サンクチュアリ・エージェント&lt;/span&gt;"]
+    F_Occult2["オカルトサイト"]
+    F_Gold["金の聖眠"]
+    F_CultTop["金の聖眠教トップページ [031]"]
+    F_Dogma["教義 [032]"]
+    F_Book["教義本「神の経脈」.pdf [061]"]
+    F_Oshi["&lt;span style='color:yellow'&gt;御視様（オシ様）&lt;/span&gt;"]
+    F_Oshi_D["御視様について [062]"]
+    F_Oshi_C["御視様に会おう（子供向けpdf）[063]"]
+    F_Climb["&lt;span style='color:yellow'&gt;階層の登攀&lt;/span&gt;"]
+    F_List["登攀適性名簿 [035]"]
+    F_RankA["登攀適性▲"]
+    F_NameB["適格者B名前"]
+    F_NameA["&lt;span style='color:yellow'&gt;適格者A（七曲 弥起）&lt;/span&gt;"]
+    F_ReportA["適性A（適格者A）報告書（機密文書）[036]"]
+    F_Echelon["&lt;span style='color:yellow'&gt;永遠の位&lt;/span&gt;"]
+    F_Contract["業務委託申請書 [037]"]
+    F_Monthly["月報（低島→百目島）"]
+    F_Chorus["&lt;span style='color:yellow'&gt;合唱&lt;/span&gt;"]
+    F_Memo["”合唱”についてのメモ（研究員：百目島ミキ）[039]"]
+    F_Sync["&lt;span style='color:yellow'&gt;睡眠同期&lt;/span&gt;"]
+    F_Spec["&lt;span style='color:yellow'&gt;安全基準仕様書 [040]&lt;/span&gt;"]
+    F_ProjE["&lt;span style='color:yellow'&gt;project-E&lt;/span&gt;"]
+    F_MailE["永位計画の開始メール（百目島→瀬田）[041]"]
+    F_OutlineE["永位計画概要 [042]"]
+    F_Alaya2["阿頼耶識"]
+
+    %% Branch from Saeki (within Foundation/Cult path)
+    F_Eye["&lt;span style='color:yellow'&gt;眼の跡&lt;/span&gt;"]
+    F_SuihaRecord["翠波部隊の記録（眼の跡）"]
+    F_SaekiFamily["&lt;span style='color:yellow'&gt;佐伯家[えきや]&lt;/span&gt;"]
+    F_ShrineName["&lt;span style='color:yellow'&gt;神社の名前（翠波八幡神社）&lt;/span&gt;"]
+    F_ShrinePamph["翠波八幡神社パンフレット"]
+    F_Daiku["&lt;span style='yellow'&gt;宮大工名：佐伯亦乃介&lt;/span&gt;"]
+    F_ResumeC["患者（異常生存者C：佐伯 亦乃介：DS-185）の履歴書 [020]"]
+    F_PhaseMatch["&lt;span style='color:yellow'&gt;位相整合性&lt;/span&gt;"]
+    F_PhaseStudy["睡眠時脳波の位相に関する研究 [043]"]
+    F_ClimbAdapt["&lt;span style='color:yellow'&gt;位相適性→登攀適性&lt;/span&gt;"]
+    F_KarahashiMail["唐橋へのメール（元信者の登攀適性の報告）[044]"]
+    F_OshiMemo["&lt;神の経脈&gt; オシ様に関する宗教メモ"]
+    F_ClimbTop["階層の登攀 ▲"]
+
+    %% History Branch from Cult
+    F_CHistory["沿革 [018]"]
+    F_Karahashi["唐橋弘源"]
+    F_HistoryVisit["透明町歴史探訪記 [024]"]
+    F_Statue["金枝の像"]
+    F_CounsExp["経歴：心理カウンセリング [031]"]
+    F_SetaClinic["経歴：&lt;span style='color:yellow'&gt;瀬田心療クリニック [032]&lt;/span&gt;"]
+    F_News33["&lt;span style='color:yellow'&gt;透明町新聞；睡眠外来特集 [033]&lt;/span&gt;"]
+    F_SetaDir["&lt;span style='color:yellow'&gt;瀬田院長&lt;/span&gt;"]
+    F_App34["&lt;span style='color:yellow'&gt;宗教法人設立規則認証申請書 [034]&lt;/span&gt;"]
+    F_Monju2["瀬田門十▲"]
+
+    Top --> History
+    History --> Found
+    Found --> F_Top
+    F_Top --> F_Idea --> F_Slogan --> F_Wlb
+    F_Top --> F_Info
+    F_Info --> F_Money
+    F_Money --> F_Agent2 --> F_Occult2
+    F_Money --> F_Gold
+    F_Gold --> F_CultTop
+    F_CultTop --> F_Dogma
+    F_Dogma --> F_Book
+    F_Book --> F_Oshi --> F_Oshi_D
+    F_Oshi --> F_Oshi_C
+    F_Book --> F_Climb
+    F_Climb --> F_List
+    F_List --> F_RankA
+    F_List --> F_NameB
+    F_List --> F_NameA
+    F_NameA --> F_ReportA --> F_Echelon --> F_Contract --> F_Monthly --> F_Chorus --> F_Memo --> F_Sync --> F_Spec --> F_ProjE
+    F_ProjE --> F_MailE
+    F_ProjE --> F_OutlineE --> F_Alaya2
+
+    %% Sub-branch for Suiha/Saeki
+    F_CultTop --> F_FaithProg["信仰プログラム"]
+    F_FaithProg --> F_GuidePamph["金枝の導きパンフレット"]
+    F_GuidePamph --> F_SuihaFest["&lt;span style='color:yellow;'&gt;すいは祭&lt;/span&gt;"]
+    F_SuihaFest --> F_SuihaNews["すいは祭り特集（地方広報誌）"]
+    F_GuidePamph --> F_Eye
+    F_Eye --> F_SuihaRecord --> F_SaekiFamily --> F_ShrineName --> F_ShrinePamph --> F_Daiku --> F_ResumeC --> F_PhaseMatch --> F_PhaseStudy --> F_ClimbAdapt --> F_KarahashiMail
+    F_KarahashiMail --> F_OshiMemo
+    F_KarahashiMail --> F_ClimbTop
+
+    %% Cult History detail
+    F_CultTop --> F_CHistory
+    F_CHistory --> F_Karahashi --> F_HistoryVisit
+    F_HistoryVisit --> F_Statue
+    F_HistoryVisit --> F_CounsExp --> F_SetaClinic --> F_News33 --> F_SetaDir --> F_App34 --> F_Monju2
+
+    %% Access Branch
+    Access["アクセス [009]"]
+    Top --> Access
+
+    %% Flow Root
+    Start --> Button --> Top
 
 
 
